@@ -1,0 +1,29 @@
+{
+    "id": "72f3c1f7-dcf0-424c-b973-f783aad5a7c9",
+    "subjectId": "bbba02a2-49b4-4bf6-9b4b-014fa555e3d6",
+    "name": "Mode = 3 Median − 2 Mean",
+    "description": "",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "bd0101b0-2017-4dfd-aab0-a8503bab337e",
+            "date": "2026-06-17",
+            "time": "2026-06-17 18:11",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "b53d9865-0989-441d-9d79-796a89bc9252",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-17 18:10",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

@@ -1,0 +1,36 @@
+{
+    "id": "f130b08f-817d-40ad-90a2-d3973d9f6f87",
+    "subjectId": "349b6112-ad37-421c-ac23-0cedcbf7e23b",
+    "name": "Unit & Measurement",
+    "description": "* Unit (मात्रक)\n\n1. Fundamental Unit\n   [मूलक इकाई]\n\n2. Derived Unit\n   [व्युत्पन्न मात्रक]\n\nS.I → 7 Fundamental SI Units\n\n1. Length      → metre (m)\n2. Mass        → kilogram (kg)\n3. Time        → second (s)\n4. Electric Current → ampere (A)\n5. Temperature → kelvin (K)\n6. Amount of Substance → mole (mol)\n7. Luminous Intensity → candela (cd)",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "createdAt": "2026-06-08 11:25",
+    "updatedAt": "2026-06-22 04:25:00",
+    "revisionHistory": [
+        {
+            "id": "59d9175f-6704-4595-a01c-da723be5cf91",
+            "date": "2026-06-15",
+            "time": "2026-06-15 10:07",
+            "note": "Auto: 7 din baad revision scheduled",
+            "type": "auto-revision"
+        },
+        {
+            "id": "359d702e-ee75-4f0c-be86-7a3e7fdb727a",
+            "date": "2026-06-17",
+            "time": "2026-06-17 08:40",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "fa0c9c75-27ca-42a7-be7c-0a4efe7ecf54",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "links": [],
+    "pdfs": []
+}

@@ -1,0 +1,8 @@
+# Contains a plaintext admin password generated at runtime - never commit
+json/passwords.json
+26/json/passwords.json
+25/json/passwords.json
+
+# OS junk
+.DS_Store
+Thumbs.db

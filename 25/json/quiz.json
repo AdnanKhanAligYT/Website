@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Quiz: Grammar Basics",
+    "icon": "fas fa-question",
+    "content": "<h3>Question 1</h3><p><strong>English:</strong> Choose the correct form: She _____ to school every day.</p><ul><li>a) go</li><li>b) goes</li><li>c) going</li><li>d) went</li></ul><div class='popup-answer'><strong>Answer:</strong> b) goes</div>"
+  },
+  {
+    "title": "Quiz: Vocabulary",
+    "icon": "fas fa-vocabulary",
+    "content": "<h3>Question 2</h3><p><strong>English:</strong> Which is a synonym of 'happy'?</p><ul><li>a) sad</li><li>b) glad</li><li>c) angry</li><li>d) tired</li></ul><div class='popup-answer'><strong>Answer:</strong> b) glad</div>"
+  },
+  {
+    "title": "Quiz: Prepositions",
+    "icon": "fas fa-map",
+    "content": "<h3>Question 3</h3><p><strong>English:</strong> Fill in the blank: She sat _____ the chair.</p><ul><li>a) in</li><li>b) on</li><li>c) at</li><li>d) by</li></ul><div class='popup-answer'><strong>Answer:</strong> b) on</div>"
+  },
+  {
+    "title": "Quiz: Tenses",
+    "icon": "fas fa-hourglass",
+    "content": "<h3>Question 4</h3><p><strong>English:</strong> Choose the correct tense: They _____ to the gym yesterday.</p><ul><li>a) go</li><li>b) went</li><li>c) goes</li><li>d) going</li></ul><div class='popup-answer'><strong>Answer:</strong> b) went</div>"
+  },
+  {
+    "title": "Quiz: Pronunciation",
+    "icon": "fas fa-volume-up",
+    "content": "<h3>Question 5</h3><p><strong>English:</strong> Choose the pair with the same stress pattern.</p><ul><li>a) record (verb) / record (noun)</li><li>b) record (noun) / record (noun)</li><li>c) object (verb) / object (noun)</li><li>d) all of the above</li></ul><div class='popup-answer'><strong>Answer:</strong> d) all of the above</div>"
+  }
+]

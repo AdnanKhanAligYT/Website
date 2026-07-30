@@ -1,0 +1,36 @@
+{
+    "id": "966adffe-a3bb-4e94-8ea7-5a5d2ed7ae54",
+    "subjectId": "594ab60f-da93-4cf7-91da-12a1ae3fb73e",
+    "name": "Convergent and Divergent thinking",
+    "description": "",
+    "status": "Revision",
+    "completeDate": "2026-06-18",
+    "images": [
+        {
+            "id": "6a00f102-ae08-4b28-a7fb-d88e49270ada",
+            "path": "data/images/966adffe-a3bb-4e94-8ea7-5a5d2ed7ae54/6a00f102-ae08-4b28-a7fb-d88e49270ada.png",
+            "mimeType": "image/png",
+            "addedAt": "2026-06-18 14:14"
+        }
+    ],
+    "revisionHistory": [
+        {
+            "id": "c8e98b88-5017-4e4a-8ad3-5d4158f9d57d",
+            "date": "2026-06-18",
+            "time": "2026-06-18 14:16",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "68e28670-491f-4900-ab97-bb047b68efbc",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-18 14:14",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

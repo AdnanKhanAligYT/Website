@@ -1,0 +1,29 @@
+{
+    "id": "90fa50e5-2e1e-4d28-88ce-49b3828699cd",
+    "subjectId": "349b6112-ad37-421c-ac23-0cedcbf7e23b",
+    "name": "PROJECTILE MOTION – ALL IMPORTANT FORMULAS",
+    "description": "🚀 \n\nGiven:\n\nu = Initial Velocity\nθ = Angle of Projection\ng = Acceleration due to Gravity\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n1. HORIZONTAL COMPONENT OF VELOCITY\n\nux = u cosθ\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n2. VERTICAL COMPONENT OF VELOCITY\n\nuy = u sinθ\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n3. VELOCITY AT ANY TIME t\n\nHorizontal Velocity\n\nvx = u cosθ\n\nVertical Velocity\n\nvy = u sinθ − gt\n\nResultant Velocity\n\nv = √[(u cosθ)² + (u sinθ − gt)²]\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n4. EQUATION OF TRAJECTORY\n\ny = x tanθ − (g x²)/(2u² cos²θ)\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n5. TIME OF FLIGHT (T)\n\nT = (2u sinθ)/g\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n6. MAXIMUM HEIGHT (H)\n\nH = (u² sin²θ)/(2g)\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n7. HORIZONTAL RANGE (R)\n\nR = (u² sin2θ)/g\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n8. RANGE ON HORIZONTAL PLANE\n\nRmax = u²/g\n\nWhen θ = 45°\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n9. TIME TO REACH MAXIMUM HEIGHT\n\nt = (u sinθ)/g\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n10. VELOCITY AT MAXIMUM HEIGHT\n\nv = u cosθ\n\nVertical Velocity = 0\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n11. MAXIMUM HEIGHT USING TIME\n\nH = ½gt²\n\n(where t = time to reach highest point)\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n12. RELATION BETWEEN HEIGHT & RANGE\n\nH = R tanθ /4\n\n(For θ = 45°)\n\nH = R/4\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n13. RANGE FOR COMPLEMENTARY ANGLES\n\nR(θ) = R(90° − θ)\n\nExample:\n\n30° and 60°\n20° and 70°\n\nhave same range.\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n14. SPECIAL VALUES\n\nθ = 45°\n\nRange = Maximum\n\nθ = 90°\n\nRange = 0\n\nθ = 0°\n\nRange = 0\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n15. IMPORTANT RATIOS\n\nTime Upward : Time Downward\n\n= 1 : 1\n\nVelocity at same height\n\n= Same magnitude\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n16. KINEMATIC EQUATIONS FOR VERTICAL MOTION\n\nv = u + at\n\nv² = u² + 2as\n\ns = ut + ½at²\n\nFor Projectile:\n\na = −g\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n17. MOST IMPORTANT EXAM FORMULAS\n\nTime of Flight\n\nT = 2u sinθ/g\n\nMaximum Height\n\nH = u²sin²θ/2g\n\nRange\n\nR = u²sin2θ/g\n\nTrajectory\n\ny = x tanθ − gx²/(2u²cos²θ)\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nTRICK TO REMEMBER\n\nT → 2sinθ\n\nH → sin²θ\n\nR → sin2θ\n\n\"T-H-R\"\n\nTime → 2sinθ\nHeight → sin²θ\nRange → sin2θ",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "168edc5f-a755-447f-89a1-2594d46bae7b",
+            "date": "2026-06-17",
+            "time": "2026-06-17 20:25",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "08200691-4132-4397-8471-0b531a862e75",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-17 20:24",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

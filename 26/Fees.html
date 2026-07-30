@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fees Status – Month Wise Analysis</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+<!-- jsPDF library for PDF generation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+/* Fees.css - Compact Mobile Friendly Design */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #a855f7;
+    --primary-dark: #7e22ce;
+    --primary-light: #c084fc;
+    --secondary: #06b6d4;
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --dark: #0f0a1a;
+    --dark-card: #1e1a2e;
+    --card-bg: rgba(22, 18, 36, 0.98);
+    --light: #faf5ff;
+    --light-muted: #cbd5e1;
+}
+
+body.fees-page {
+    background: linear-gradient(145deg, #0a0712 0%, #1a1128 100%);
+    color: var(--light);
+    min-height: 100vh;
+    padding: 8px;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+.fees-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header */
+.fees-header {
+    text-align: center;
+    padding: 12px 10px;
+    margin-bottom: 10px;
+    background: var(--card-bg);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 20px;
+}
+
+.fees-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid var(--primary);
+}
+
+.fees-header h1 {
+    font-size: 1.4rem;
+    background: linear-gradient(135deg, #c084fc, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 4px 0 2px;
+}
+
+.fees-header p {
+    font-size: 0.7rem;
+    color: var(--light-muted);
+}
+
+/* Stats Row - 4 in one line */
+.fees-stats-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    margin: 8px 0;
+}
+
+.fees-stat-box {
+    background: rgba(168, 85, 247, 0.15);
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    border-radius: 12px;
+    padding: 6px 2px;
+    text-align: center;
+}
+
+.fees-stat-value {
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1.2;
+}
+
+.fees-stat-label {
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    color: var(--light-muted);
+}
+
+/* Controls Row - 3 in one line */
+.fees-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.2fr;
+    gap: 4px;
+    margin: 8px 0;
+    padding: 6px;
+    background: rgba(16, 12, 26, 0.9);
+    border-radius: 16px;
+    border: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+.fees-controls select,
+.fees-controls input {
+    padding: 6px 8px;
+    border-radius: 30px;
+    border: 1px solid #3f2e5f;
+    background: #1b1429;
+    color: white;
+    font-size: 0.7rem;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23a855f7' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 8px center;
+    padding-right: 22px;
+}
+
+.fees-controls input {
+    background-image: none;
+    padding-right: 8px;
+}
+
+/* Month Filters */
+.month-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-bottom: 12px;
+    padding: 6px 4px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 30px;
+    justify-content: center;
+}
+
+.month-filter-btn {
+    padding: 4px 8px;
+    border: 1px solid rgba(168, 85, 247, 0.3);
+    background: rgba(168, 85, 247, 0.15);
+    color: white;
+    border-radius: 30px;
+    font-size: 0.65rem;
+    font-weight: 500;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.month-filter-btn.active {
+    background: var(--primary);
+    border-color: white;
+}
+
+/* Class Section Cards */
+.fees-mobile-section {
+    background: rgba(22, 18, 32, 0.95);
+    border-radius: 20px;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(168, 85, 247, 0.25);
+}
+
+.fees-class-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary-light);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed rgba(168, 85, 247, 0.4);
+    padding-bottom: 8px;
+    margin-bottom: 10px;
+}
+
+.amount-total {
+    background: rgba(0, 0, 0, 0.4);
+    padding: 4px 10px;
+    border-radius: 30px;
+    font-size: 0.7rem;
+    border: 1px solid var(--primary);
+}
+
+/* Class Stats - 4 in one line */
+.fees-class-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+    margin: 10px 0;
+}
+
+.fees-class-stat-box {
+    background: rgba(168, 85, 247, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 6px 2px;
+    text-align: center;
+}
+
+.fees-class-stat-value {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary-light);
+}
+
+.fees-class-stat-label {
+    font-size: 0.6rem;
+    color: var(--light-muted);
+}
+
+/* Table */
+.fees-table-container {
+    overflow-x: auto;
+    border-radius: 16px;
+    border: 1px solid #2d2440;
+    margin-top: 10px;
+    background: #130e1e;
+}
+
+.fees-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.7rem;
+}
+
+.fees-table th {
+    background: #2a1d3f;
+    color: #e9d5ff;
+    padding: 8px 4px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.fees-table td {
+    padding: 6px 4px;
+    border-bottom: 1px solid #2f2542;
+    color: #f1e7fe;
+}
+
+.fees-student-name {
+    color: var(--primary-light);
+    font-weight: 600;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: 20px;
+    background: rgba(168, 85, 247, 0.1);
+    display: inline-block;
+    font-size: 0.65rem;
+    white-space: nowrap;
+}
+
+/* Badges */
+.fees-badge {
+    padding: 2px 6px;
+    border-radius: 20px;
+    font-size: 0.6rem;
+    font-weight: 700;
+    display: inline-block;
+    border: 1px solid;
+    white-space: nowrap;
+}
+
+.fees-badge.paid { background: rgba(34, 197, 94, 0.2); color: #86efac; border-color: #22c55e; }
+.fees-badge.pending { background: rgba(245, 158, 11, 0.2); color: #fcd34d; border-color: #f59e0b; }
+.fees-badge.partial { background: rgba(59, 130, 246, 0.2); color: #93c5fd; border-color: #3b82f6; }
+.fees-badge.overdue { background: rgba(239, 68, 68, 0.2); color: #fca5a5; border-color: #ef4444; }
+
+.amount-display {
+    font-family: 'Courier New', monospace;
+    font-weight: 600;
+    font-size: 0.65rem;
+}
+
+.total-due-amount {
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 20px;
+    background: rgba(0, 0, 0, 0.3);
+    display: inline-block;
+    font-family: 'Courier New', monospace;
+    font-size: 0.65rem;
+    white-space: nowrap;
+}
+
+/* Download Buttons - side by side */
+.fees-download-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin: 15px 0 10px;
+}
+
+.fees-download-btn {
+    background: linear-gradient(145deg, #7e22ce, #a855f7);
+    border: none;
+    color: white;
+    padding: 10px 8px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.7rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.fees-download-btn.excel-report {
+    background: linear-gradient(145deg, #059669, #10b981);
+}
+
+/* Modal */
+.fees-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(5px);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+}
+
+.fees-modal.active {
+    display: flex;
+}
+
+.fees-modal-content {
+    background: #1c152b;
+    max-width: 400px;
+    width: 95%;
+    padding: 20px;
+    border-radius: 30px;
+    border: 2px solid var(--primary);
+    position: relative;
+}
+
+.close-fees-modal {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    font-size: 1.8rem;
+    color: var(--light-muted);
+    cursor: pointer;
+}
+
+.fees-modal-title {
+    color: var(--primary-light);
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid rgba(168, 85, 247, 0.3);
+}
+
+/* Empty State */
+.fees-empty {
+    text-align: center;
+    padding: 30px 10px;
+    color: var(--light-muted);
+    background: rgba(168, 85, 247, 0.05);
+    border-radius: 20px;
+    margin: 10px 0;
+}
+
+.fees-empty i {
+    font-size: 2.5rem;
+    color: var(--primary);
+}
+
+/* Mobile optimization */
+@media (max-width: 480px) {
+    .fees-header h1 { font-size: 1.2rem; }
+    .fees-stat-value { font-size: 0.8rem; }
+    .fees-stat-label { font-size: 0.5rem; }
+    .fees-controls select, .fees-controls input { font-size: 0.65rem; padding: 5px 6px; }
+    .month-filter-btn { font-size: 0.6rem; padding: 3px 6px; }
+    .fees-class-title { font-size: 1rem; }
+    .fees-table { font-size: 0.65rem; }
+    .fees-student-name { font-size: 0.6rem; }
+    .fees-badge { font-size: 0.55rem; padding: 2px 4px; }
+    .total-due-amount { font-size: 0.6rem; }
+    .fees-download-btn { font-size: 0.65rem; padding: 8px 5px; }
+}
+
+/* Print */
+@media print {
+    .fees-controls, .month-filters, .fees-download-buttons { display: none; }
+}
+</style>
+</head>
+
+<body class="fees-page">
+
+<div class="fees-container">
+    <!-- Header -->
+    <div class="fees-header">
+        <div class="fees-logo-container">
+            <img src="images/smps_logo.jpg" alt="SMPS Logo" class="fees-logo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'50\' height=\'50\' viewBox=\'0 0 100 100\'%3E%3Ccircle cx=\'50\' cy=\'50\' r=\'45\' fill=\'%23a855f7\' /%3E%3Ctext x=\'50\' y=\'70\' font-size=\'44\' text-anchor=\'middle\' fill=\'white\' font-family=\'Arial\'%3ESMPS%3C/text%3E%3C/svg%3E'">
+        </div>
+        <h1>📘 Fees Dashboard</h1>
+        <p>Month Wise Analysis</p>
+        
+        <!-- Stats Row -->
+        <div class="fees-stats-container">
+            <div class="fees-stat-box">
+                <div class="fees-stat-value" id="totalStudents">0</div>
+                <div class="fees-stat-label">Students</div>
+            </div>
+            <div class="fees-stat-box">
+                <div class="fees-stat-value" id="paidAmount">₹0</div>
+                <div class="fees-stat-label">Paid</div>
+            </div>
+            <div class="fees-stat-box">
+                <div class="fees-stat-value" id="pendingAmount">₹0</div>
+                <div class="fees-stat-label">Due</div>
+            </div>
+            <div class="fees-stat-box">
+                <div class="fees-stat-value" id="collectionRate">0%</div>
+                <div class="fees-stat-label">Rate</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls Row -->
+    <div class="fees-controls">
+        <select id="monthSelect">
+            <option value="">Month</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+        </select>
+
+        <select id="classSelect">
+            <option value="">Class</option>
+        </select>
+        
+        <input type="text" id="studentSearch" placeholder="Search name..." />
+    </div>
+    
+    <!-- Month Filters -->
+    <div class="month-filters" id="monthFilters"></div>
+
+    <!-- Output Area -->
+    <div id="output"></div>
+
+    <!-- Download Buttons -->
+    <div class="fees-download-buttons">
+        <button class="fees-download-btn" onclick="downloadFullReport()">
+            <i class="fas fa-file-pdf"></i> PDF
+        </button>
+        <button class="fees-download-btn excel-report" onclick="downloadExcelReport()">
+            <i class="fas fa-file-excel"></i> Excel
+        </button>
+    </div>
+</div>
+
+<!-- Fees Modal -->
+<div class="fees-modal" id="feesModal">
+    <div class="fees-modal-content">
+        <span class="close-fees-modal" onclick="closeFeesModal()">&times;</span>
+        <h2 class="fees-modal-title">Fee Details</h2>
+        <div id="feesModalContent"></div>
+    </div>
+</div>
+
+<script>
+// Google Sheets URLs
+const FEES_SHEET_URL = "https://opensheet.elk.sh/1KOl4unW-bZvghag-MCBQx36z_aaDlecWpUfIt2anQKE/Fees";
+const AMOUNT_SHEET_URL = "https://opensheet.elk.sh/1KOl4unW-bZvghag-MCBQx36z_aaDlecWpUfIt2anQKE/Amount";
+
+let feesData = [];
+let amountData = [];
+let headers = [];
+let classAmounts = {};
+let latestFeesDate = null;
+let currentMonth = "";
+
+const monthNames = ["January", "February", "March", "April", "May", "June", "July", 
+                   "August", "September", "October", "November", "December"];
+const monthMapping = {
+    "1": "January", "2": "February", "3": "March", "4": "April",
+    "5": "May", "6": "June", "7": "July", "8": "August",
+    "9": "September", "10": "October", "11": "November", "12": "December"
+};
+const academicMonthOrder = ["April", "May", "June", "July", "August", "September", 
+                           "October", "November", "December", "January", "February", "March"];
+
+// Fetch data
+Promise.all([
+    fetch(FEES_SHEET_URL).then(r => r.json()),
+    fetch(AMOUNT_SHEET_URL).then(r => r.json())
+])
+.then(([feesJson, amountJson]) => {
+    if (feesJson && feesJson.length > 2) {
+        headers = Object.keys(feesJson[0]);
+        feesData = feesJson.slice(2);
+    } else {
+        feesData = feesJson;
+        headers = Object.keys(feesJson[0] || {});
+    }
+    amountData = amountJson;
+    processAmountData();
+    
+    const dates = [...new Set(feesData.map(row => row.Date))].filter(d => d && d.trim() !== '');
+    dates.sort((a, b) => parseDate(b) - parseDate(a));
+    if (dates.length > 0) {
+        latestFeesDate = parseDate(dates[0]);
+        currentMonth = getMonthFromDate(dates[0]);
+        document.getElementById('monthSelect').value = currentMonth;
+    }
+    
+    const classes = amountData.map(r => r.Class).filter(c => c);
+    const classSelect = document.getElementById('classSelect');
+    classes.forEach(cls => {
+        const option = document.createElement('option');
+        option.value = cls;
+        option.textContent = cls;
+        classSelect.appendChild(option);
+    });
+    
+    createMonthFilters();
+    render();
+})
+.catch(error => {
+    console.error('Error:', error);
+    document.getElementById('output').innerHTML = '<div class="fees-empty"><i class="fas fa-exclamation-triangle"></i><p>Error loading data</p></div>';
+});
+
+function processAmountData() {
+    classAmounts = {};
+    amountData.forEach(row => {
+        const cls = row.Class;
+        if (!cls) return;
+        classAmounts[cls] = {
+            Total: parseFloat(row.Total) || 0,
+            April: parseFloat(row.April) || 0,
+            May: parseFloat(row.May) || 0,
+            June: parseFloat(row.June) || 0,
+            July: parseFloat(row.July) || 0,
+            August: parseFloat(row.August) || 0,
+            September: parseFloat(row.September) || 0,
+            October: (parseFloat(row.October) || 0) + (parseFloat(row.SA1) || 0),
+            November: parseFloat(row.November) || 0,
+            December: parseFloat(row.December) || 0,
+            January: parseFloat(row.January) || 0,
+            February: parseFloat(row.February) || 0,
+            March: parseFloat(row.March) || 0
+        };
+    });
+}
+
+function createMonthFilters() {
+    const mf = document.getElementById('monthFilters');
+    mf.innerHTML = '';
+    monthNames.forEach(m => {
+        const btn = document.createElement('button');
+        btn.className = 'month-filter-btn';
+        btn.textContent = m;
+        btn.setAttribute('data-month', m);
+        btn.onclick = () => {
+            document.querySelectorAll('.month-filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('monthSelect').value = m;
+            render();
+        };
+        mf.appendChild(btn);
+    });
+    if (currentMonth) {
+        const cb = document.querySelector(`.month-filter-btn[data-month="${currentMonth}"]`);
+        if (cb) cb.classList.add('active');
+    }
+}
+
+document.getElementById('monthSelect').addEventListener('change', function() {
+    const m = this.value;
+    document.querySelectorAll('.month-filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-month') === m) btn.classList.add('active');
+    });
+    render();
+});
+document.getElementById('classSelect').addEventListener('change', render);
+document.getElementById('studentSearch').addEventListener('input', render);
+
+function parseDate(ds) {
+    if (!ds) return new Date();
+    const p = ds.split('/');
+    if (p.length < 3) return new Date();
+    return new Date(parseInt(p[2]), parseInt(p[0])-1, parseInt(p[1]));
+}
+
+function getMonthFromDate(ds) {
+    if (!ds) return '';
+    return monthMapping[ds.split('/')[0]] || '';
+}
+
+function formatAmount(amt) {
+    return '₹' + amt.toLocaleString('en-IN');
+}
+
+function extractAmount(fs) {
+    if (!fs) return 0;
+    const m = fs.match(/\d+/g);
+    return m ? m.reduce((s, n) => s + parseInt(n), 0) : 0;
+}
+
+function getCumulativeRequiredAmount(cls, m) {
+    if (!classAmounts[cls]) return 0;
+    const idx = academicMonthOrder.indexOf(m);
+    if (idx === -1) return 0;
+    let total = 0;
+    for (let i = 0; i <= idx; i++) {
+        const mon = academicMonthOrder[i];
+        total += mon === 'October' ? (classAmounts[cls].October || 0) : (classAmounts[cls][mon] || 0);
+    }
+    return total;
+}
+
+function getTotalAnnualAmount(cls) {
+    return classAmounts[cls]?.Total || 0;
+}
+
+function getClassStudentCount(cls) {
+    if (!latestFeesDate) return 0;
+    const latestDateStr = feesData.find(r => r?.Date && parseDate(r.Date).getTime() === latestFeesDate.getTime())?.Date;
+    if (!latestDateStr) return 0;
+    const row = feesData.find(r => r?.Date === latestDateStr && r.Class === cls);
+    if (!row) return 0;
+    let cnt = 0;
+    Object.keys(row).forEach(h => {
+        if (h.includes(' - Fees') && !['Date','Class','Timestamp'].includes(h) && row[h]?.toString().trim() !== '') cnt++;
+    });
+    return cnt;
+}
+
+function getClassTotalPaid(cls) {
+    if (!latestFeesDate) return 0;
+    const latestDateStr = feesData.find(r => r?.Date && parseDate(r.Date).getTime() === latestFeesDate.getTime())?.Date;
+    if (!latestDateStr) return 0;
+    const row = feesData.find(r => r?.Date === latestDateStr && r.Class === cls);
+    if (!row) return 0;
+    let total = 0;
+    Object.keys(row).forEach(h => {
+        if (h.includes(' - Fees') && !['Date','Class','Timestamp'].includes(h) && row[h]?.toString().trim() !== '') {
+            total += extractAmount(row[h]);
+        }
+    });
+    return total;
+}
+
+function getTotalStudentsCount() {
+    if (!latestFeesDate) return 0;
+    const latestDateStr = feesData.find(r => r?.Date && parseDate(r.Date).getTime() === latestFeesDate.getTime())?.Date;
+    if (!latestDateStr) return 0;
+    let total = 0;
+    feesData.filter(r => r?.Date === latestDateStr).forEach(row => {
+        Object.keys(row).forEach(h => {
+            if (h.includes(' - Fees') && !['Date','Class','Timestamp'].includes(h) && row[h]?.toString().trim() !== '') total++;
+        });
+    });
+    return total;
+}
+
+function getTotalSchoolPaidAmount() {
+    if (!latestFeesDate) return 0;
+    const latestDateStr = feesData.find(r => r?.Date && parseDate(r.Date).getTime() === latestFeesDate.getTime())?.Date;
+    if (!latestDateStr) return 0;
+    let total = 0;
+    feesData.filter(r => r?.Date === latestDateStr).forEach(row => {
+        Object.keys(row).forEach(h => {
+            if (h.includes(' - Fees') && !['Date','Class','Timestamp'].includes(h) && row[h]?.toString().trim() !== '') {
+                total += extractAmount(row[h]);
+            }
+        });
+    });
+    return total;
+}
+
+function getTotalSchoolDueAmount() {
+    let totalAnnual = 0;
+    amountData.forEach(r => {
+        const cls = r.Class;
+        if (!cls) return;
+        const ct = parseFloat(r.Total) || 0;
+        const cnt = getClassStudentCount(cls);
+        totalAnnual += ct * cnt;
+    });
+    return Math.max(totalAnnual - getTotalSchoolPaidAmount(), 0);
+}
+
+function getClassDueAmount(cls) {
+    const total = getTotalAnnualAmount(cls);
+    const cnt = getClassStudentCount(cls);
+    const paid = getClassTotalPaid(cls);
+    return Math.max((total * cnt) - paid, 0);
+}
+
+function getStudentCumulativePaid(name, cls) {
+    if (!latestFeesDate) return 0;
+    const latestDateStr = feesData.find(r => r?.Date && parseDate(r.Date).getTime() === latestFeesDate.getTime())?.Date;
+    if (!latestDateStr) return 0;
+    const row = feesData.find(r => r?.Date === latestDateStr && r.Class === cls);
+    if (!row) return 0;
+    const col = Object.keys(row).find(h => h.includes(name + ' - Fees'));
+    return col ? extractAmount(row[col]) : 0;
+}
+
+function updateStats() {
+    const totalStudents = getTotalStudentsCount();
+    const totalPaid = getTotalSchoolPaidAmount();
+    const totalDue = getTotalSchoolDueAmount();
+    const totalAnnual = totalDue + totalPaid;
+    const rate = totalAnnual > 0 ? Math.round((totalPaid / totalAnnual) * 100) : 0;
+    document.getElementById('totalStudents').textContent = totalStudents;
+    document.getElementById('paidAmount').textContent = formatAmount(totalPaid);
+    document.getElementById('pendingAmount').textContent = formatAmount(totalDue);
+    document.getElementById('collectionRate').textContent = rate + '%';
+}
+
+function render() {
+    const month = document.getElementById('monthSelect').value;
+    const classFilter = document.getElementById('classSelect').value;
+    const search = document.getElementById('studentSearch').value.toLowerCase();
+    const out = document.getElementById('output');
+    out.innerHTML = '';
+    if (!month) {
+        out.innerHTML = '<div class="fees-empty"><i class="fas fa-calendar-alt"></i><p>Select month</p></div>';
+        updateStats();
+        return;
+    }
+    let rows = [];
+    if (latestFeesDate) {
+        const latestDateStr = feesData.find(r => r?.Date && parseDate(r.Date).getTime() === latestFeesDate.getTime())?.Date;
+        if (latestDateStr) rows = feesData.filter(r => r?.Date === latestDateStr);
+    }
+    if (classFilter) rows = rows.filter(r => r.Class === classFilter);
+    if (rows.length === 0) {
+        out.innerHTML = '<div class="fees-empty"><i class="fas fa-search"></i><p>No data</p></div>';
+        updateStats();
+        return;
+    }
+    const classes = [...new Set(rows.map(r => r.Class))].filter(c => c);
+    classes.forEach(cls => {
+        const classRow = rows.find(r => r.Class === cls);
+        if (!classRow) return;
+        const studentCount = getClassStudentCount(cls);
+        const classPaid = getClassTotalPaid(cls);
+        const classAnnual = getTotalAnnualAmount(cls);
+        const cumulativeReq = getCumulativeRequiredAmount(cls, month);
+        const classDue = getClassDueAmount(cls);
+        const totalClassAmount = classAnnual * studentCount;
+        const collRate = totalClassAmount > 0 ? Math.round((classPaid / totalClassAmount) * 100) : 0;
+        
+        const studentCols = headers.filter(h => h.includes(' - Fees') && !['Date','Class','Timestamp'].includes(h));
+        let filteredCols = studentCols;
+        if (search) filteredCols = studentCols.filter(c => c.toLowerCase().includes(search));
+        
+        let html = `<div class="fees-mobile-section">
+            <div class="fees-class-title">
+                <span>${cls}</span>
+                <span class="amount-total">Apr-${month}: ${formatAmount(cumulativeReq)}</span>
+            </div>
+            <div class="fees-class-stats">
+                <div class="fees-class-stat-box"><div class="fees-class-stat-value">${studentCount}</div><div class="fees-class-stat-label">Students</div></div>
+                <div class="fees-class-stat-box"><div class="fees-class-stat-value">${formatAmount(classPaid)}</div><div class="fees-class-stat-label">Paid</div></div>
+                <div class="fees-class-stat-box"><div class="fees-class-stat-value">${formatAmount(classDue)}</div><div class="fees-class-stat-label">Due</div></div>
+                <div class="fees-class-stat-box"><div class="fees-class-stat-value">${collRate}%</div><div class="fees-class-stat-label">Rate</div></div>
+            </div>
+            <div class="fees-table-container"><table class="fees-table"><thead><tr><th>Student</th><th>Status</th><th>Paid</th><th>Due</th></tr></thead><tbody>`;
+        
+        filteredCols.forEach(col => {
+            const val = classRow[col];
+            if (!val || val.toString().trim() === '') return;
+            const name = col.replace(' - Fees', '').trim();
+            const paid = getStudentCumulativePaid(name, cls);
+            const annual = classAnnual;
+            const due = Math.max(annual - paid, 0);
+            const cumDue = Math.max(cumulativeReq - paid, 0);
+            let status = 'pending', badgeClass = 'pending';
+            if (paid >= annual) { status = 'paid'; badgeClass = 'paid'; }
+            else if (paid >= cumulativeReq) { status = 'partial'; badgeClass = 'partial'; }
+            else if (paid > 0) { status = 'partial'; badgeClass = 'partial'; }
+            
+            html += `<tr>
+                <td><span class="fees-student-name" onclick="showStudentDetails('${name.replace(/'/g, "\\'")}','${cls}','${month}','${(val||'').replace(/'/g, "\\'")}',${paid},${cumulativeReq},${annual})">${name}</span></td>
+                <td><span class="fees-badge ${badgeClass}">${status}</span></td>
+                <td class="amount-display">${formatAmount(paid)}</td>
+                <td><span class="total-due-amount ${due === 0 ? 'paid' : (due === annual ? 'pending' : 'partial')}">${formatAmount(cumDue)}</span></td>
+            </tr>`;
+        });
+        if (filteredCols.length === 0) html += '<tr><td colspan="4" style="text-align:center;padding:15px;">No students</td></tr>';
+        html += '</tbody></table></div></div>';
+        out.innerHTML += html;
+    });
+    updateStats();
+}
+
+function showStudentDetails(name, cls, month, feeDet, paid, cumReq, annual) {
+    const modal = document.getElementById('feesModal');
+    const content = document.getElementById('feesModalContent');
+    const totalDue = Math.max(annual - paid, 0);
+    const cumDue = Math.max(cumReq - paid, 0);
+    const prog = annual > 0 ? Math.round((paid / annual) * 100) : 0;
+    const cumProg = cumReq > 0 ? Math.round((paid / cumReq) * 100) : 0;
+    content.innerHTML = `
+        <h3 style="color:var(--primary-light);margin-bottom:5px;">${name}</h3>
+        <p style="color:var(--light-muted);font-size:0.8rem;">Class: ${cls} | Apr-${month}</p>
+        <div style="background:rgba(168,85,247,0.1);padding:10px;border-radius:12px;margin:10px 0;">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:8px;">
+                <div><span style="font-size:0.7rem;">Paid</span><br><strong style="color:#22c55e;">${formatAmount(paid)}</strong></div>
+                <div><span style="font-size:0.7rem;">Due (Cum)</span><br><strong style="color:#f59e0b;">${formatAmount(cumDue)}</strong></div>
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;">
+                <div><span style="font-size:0.7rem;">Annual Total</span><br><strong>${formatAmount(annual)}</strong></div>
+                <div><span style="font-size:0.7rem;">Total Due</span><br><strong style="color:#ef4444;">${formatAmount(totalDue)}</strong></div>
+            </div>
+        </div>
+        <div style="background:rgba(6,182,212,0.1);padding:10px;border-radius:12px;">
+            <p style="font-size:0.7rem;">Cumulative Progress: ${cumProg}%</p>
+            <div style="height:6px;background:rgba(168,85,247,0.2);border-radius:3px;margin:3px 0 8px;"><div style="width:${cumProg}%;height:6px;background:linear-gradient(90deg,var(--primary),var(--primary-dark));border-radius:3px;"></div></div>
+            <p style="font-size:0.7rem;">Annual Progress: ${prog}%</p>
+            <div style="height:6px;background:rgba(6,182,212,0.2);border-radius:3px;margin:3px 0;"><div style="width:${prog}%;height:6px;background:linear-gradient(90deg,var(--secondary),#0ea5e9);border-radius:3px;"></div></div>
+        </div>
+        <p style="font-size:0.65rem;color:var(--light-muted);margin-top:10px;">Latest: ${feeDet}</p>`;
+    modal.classList.add('active');
+}
+
+function closeFeesModal() {
+    document.getElementById('feesModal').classList.remove('active');
+}
+
+// Stub functions for downloads
+function downloadFullReport() { alert('PDF download (full report)'); }
+function downloadExcelReport() { alert('Excel download'); }
+function downloadClassPDF(c,m) { alert('Class PDF: '+c+' '+m); }
+function downloadStudentPDF(n,c,m) { alert('Student PDF: '+n); }
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+{
+    "id": "514c2662-a12b-4ac4-bfac-08c10633e28d",
+    "subjectId": "bbba02a2-49b4-4bf6-9b4b-014fa555e3d6",
+    "name": "Question:  किसी चतुर्भुज के कोण 3 : 5 : 3 : 4 के अनुपात में हैं। सबसे बड़े कोण से 40° अधिक कोण कितना होगा?",
+    "description": "Trick:\n\nRatio = 3 : 5 : 3 : 4\n\nTotal Ratio = 3 + 5 + 3 + 4\n            = 15\n\nQuadrilateral ke angles ka sum = 360°\n\n1 Ratio = 360 ÷ 15\n        = 24°\n\nSabse bada angle = 5 × 24\n                  = 120°\n\n40° adhik = 120° + 40°\n          = 160°\n\nAnswer = 160° (Option B)",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "62cf561c-b00f-4634-9e7a-3059521255f6",
+            "date": "2026-06-17",
+            "time": "2026-06-17 18:23",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "7fd51a5b-0b9f-4d77-8891-1f414bcdd240",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-17 18:23",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

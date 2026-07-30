@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Mohammad Adnan | Mathematics Educator & Digital Content Developer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #1a0c0c 0%, #2c1111 100%);
+            font-family: 'Segoe UI', Roboto, 'Poppins', 'Inter', system-ui, -apple-system, 'Montserrat', sans-serif;
+            padding: 2rem 1.5rem;
+            color: #f5ede8;
+            line-height: 1.45;
+        }
+
+        /* main container with subtle black-red glow */
+        .resume-container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: #0b0505f2;
+            backdrop-filter: blur(0px);
+            border-radius: 2rem;
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(220, 38, 38, 0.2), 0 0 0 3px rgba(180, 30, 30, 0.1);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        /* 🔴 TOP FOCUS BUTTON SECTION — red & black with high visibility */
+        .top-button-section {
+            background: #1f0707;
+            padding: 1.25rem 2rem;
+            text-align: center;
+            border-bottom: 2px solid #c53030;
+            box-shadow: inset 0 -1px 0 #3b0f0f, 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .resource-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 14px;
+            background: linear-gradient(105deg, #b91c1c 0%, #7f1a1a 100%);
+            border: none;
+            padding: 1rem 2.2rem;
+            border-radius: 60px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: white;
+            text-decoration: none;
+            font-family: inherit;
+            transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            box-shadow: 0 8px 20px rgba(180, 30, 30, 0.4), 0 0 0 1px #ff6b6b40 inset;
+            cursor: pointer;
+            backdrop-filter: blur(2px);
+        }
+
+        .resource-button:hover {
+            transform: scale(1.02) translateY(-2px);
+            background: linear-gradient(105deg, #d32f2f 0%, #991b1b 100%);
+            box-shadow: 0 14px 28px rgba(185, 28, 28, 0.5), 0 0 0 1px #ff8888 inset;
+            letter-spacing: 0.8px;
+        }
+
+        .resource-button:active {
+            transform: scale(0.98);
+            transition: 0.05s;
+        }
+
+        .resource-button i {
+            font-size: 1.6rem;
+            font-weight: normal;
+            filter: drop-shadow(0 1px 1px black);
+        }
+
+        /* main content area */
+        .content-padding {
+            padding: 2rem 2.2rem 2.5rem 2.2rem;
+        }
+
+        /* header / name + title */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1.2rem;
+            margin-bottom: 2rem;
+            border-bottom: 1px solid #3e2121;
+            padding-bottom: 1.6rem;
+        }
+
+        .name-title h1 {
+            font-size: 2.6rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff1f0, #ffbcbc);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .name-title .tagline {
+            font-size: 1.15rem;
+            color: #e0a5a5;
+            margin-top: 0.5rem;
+            font-weight: 500;
+            border-left: 3px solid #c53030;
+            padding-left: 0.75rem;
+        }
+
+        .contact-links {
+            text-align: right;
+            background: #1f0f0faa;
+            padding: 0.7rem 1.2rem;
+            border-radius: 2rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .contact-links a {
+            color: #ffc9c9;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin: 0 5px;
+            transition: 0.2s;
+        }
+
+        .contact-links a:hover {
+            color: #ff6b6b;
+            text-decoration: underline;
+        }
+
+        /* grid for two columns */
+        .two-col-grid {
+            display: grid;
+            grid-template-columns: 1fr 0.9fr;
+            gap: 2rem;
+            margin: 1.8rem 0;
+        }
+
+        /* sections styling */
+        .section-card {
+            background: #0f0505cc;
+            backdrop-filter: blur(2px);
+            border-radius: 1.2rem;
+            padding: 1.3rem 1.6rem;
+            margin-bottom: 1.8rem;
+            border: 1px solid #411e1e;
+            transition: all 0.2s;
+            box-shadow: 0 6px 12px -8px black;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            border-left: 5px solid #e53e3e;
+            padding-left: 0.9rem;
+            color: #ffdddd;
+            letter-spacing: -0.3px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            font-size: 1.3rem;
+            color: #e66767;
+        }
+
+        .education-item, .exp-item {
+            margin-bottom: 1.4rem;
+        }
+
+        .edu-degree {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #ffc5c5;
+        }
+
+        .edu-meta {
+            font-size: 0.85rem;
+            color: #be8c8c;
+            margin: 0.2rem 0 0.4rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .percentage {
+            background: #2f1414;
+            padding: 0.15rem 0.5rem;
+            border-radius: 20px;
+            font-family: monospace;
+        }
+
+        .exp-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #f3c5c5;
+        }
+
+        .exp-date {
+            font-size: 0.75rem;
+            color: #c18686;
+            margin: 4px 0 8px 0;
+            font-family: monospace;
+        }
+
+        .exp-desc {
+            padding-left: 1rem;
+            list-style-type: none;
+        }
+
+        .exp-desc li {
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.2rem;
+            font-size: 0.92rem;
+            color: #f0dddd;
+        }
+
+        .exp-desc li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: #e66767;
+            font-weight: bold;
+        }
+
+        .skills-badge {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-top: 0.5rem;
+        }
+
+        .skill-tag {
+            background: #241010;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 0.5px solid #b54545;
+            color: #ffe1e1;
+            transition: 0.1s;
+        }
+
+        .skill-tag:hover {
+            background: #c53030;
+            color: white;
+            border-color: #ffa2a2;
+        }
+
+        .website-link {
+            margin-top: 1rem;
+            background: #00000033;
+            border-radius: 40px;
+            padding: 0.8rem 1rem;
+            text-align: center;
+            border: 1px dashed #b93c3c;
+        }
+
+        .website-link a {
+            color: #ffb4b4;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .website-link a:hover {
+            color: #ff8080;
+            text-decoration: underline;
+        }
+
+        hr {
+            border-color: #3a2020;
+            margin: 0.5rem 0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            color: #b77e7e;
+            border-top: 1px solid #331a1a;
+            padding-top: 1.2rem;
+        }
+
+        @media (max-width: 780px) {
+            .two-col-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .content-padding {
+                padding: 1.2rem;
+            }
+            .hero {
+                flex-direction: column;
+            }
+            .contact-links {
+                text-align: left;
+                width: fit-content;
+            }
+            .name-title h1 {
+                font-size: 2rem;
+            }
+            .resource-button {
+                padding: 0.7rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* subtle red accent on focus */
+        a:focus-visible, button:focus-visible, .resource-button:focus-visible {
+            outline: 3px solid #ff4d4d;
+            outline-offset: 3px;
+            border-radius: 60px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="resume-container">
+    <!-- 🔴 TOP BUTTON (clickable collection link) RED & BLACK focus -->
+    <div class="top-button-section">
+        <a href="https://script.google.com/macros/s/AKfycbzPwObOVdaREiiskhrmtJFeIJ1A4WOViqkXRP-Q16hfqQtKPJphSd7-4kygYXuXRqYy6w/exec" 
+           class="resource-button" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           aria-label="Open educational links collection by Mohammad Adnan">
+            <i>📚</i> 
+            <span>📌 ACCESS MY LINKS COLLECTION →</span>
+            <i>🔗</i>
+        </a>
+        <p style="font-size: 0.7rem; margin-top: 8px; color: #b77a7a; letter-spacing: 0.3px;">✦ curated teaching resources | exam papers | digital tools ✦</p>
+    </div>
+
+    <div class="content-padding">
+        <!-- header with name, objective -->
+        <div class="hero">
+            <div class="name-title">
+                <h1>Mohammad Adnan</h1>
+                <div class="tagline">Mathematics Educator & Digital Content Developer</div>
+                <div style="margin-top: 0.7rem; font-size: 0.9rem; color: #e2b3b3; max-width: 550px;">
+                    🧮 Dedicated mathematics educator with a passion for making complex concepts accessible. 
+                    Blending traditional methods with modern digital tools to create engaging learning experiences.
+                </div>
+            </div>
+            <div class="contact-links">
+                <div>📧 <a href="mailto:mohammadadnan7275@gmail.com">mohammadadnan7275@gmail.com</a></div>
+                <div>📞 <a href="tel:+917275126421">7275126421</a></div>
+                <div>📍 Gola Gokarannath, Uttar Pradesh</div>
+                <div>🌐 <a href="https://adnansmps.free.nf" target="_blank" rel="noopener">adnansmps.free.nf</a></div>
+            </div>
+        </div>
+
+        <!-- Two column layout: left = education + experience, right = skills, website, etc -->
+        <div class="two-col-grid">
+            <!-- LEFT COLUMN -->
+            <div>
+                <!-- Education Section -->
+                <div class="section-card">
+                    <div class="section-title">
+                        <i>🎓</i> Education
+                    </div>
+                    <div class="education-item">
+                        <div class="edu-degree">M.Sc. Mathematics</div>
+                        <div class="edu-meta">Aligarh Muslim University <span class="percentage">62%</span> | 2021</div>
+                    </div>
+                    <div class="education-item">
+                        <div class="edu-degree">B.Sc. (Hons) Mathematics</div>
+                        <div class="edu-meta">Aligarh Muslim University <span class="percentage">62%</span> | 2018</div>
+                    </div>
+                    <div class="education-item">
+                        <div class="edu-degree">B.Ed. (Pursuing)</div>
+                        <div class="edu-meta">Specializing in Mathematics Education | Current</div>
+                    </div>
+                    <div class="education-item">
+                        <div class="edu-degree">Intermediate (12th) - UP Board</div>
+                        <div class="edu-meta"><span class="percentage">80%</span> | 2015</div>
+                    </div>
+                    <div class="education-item">
+                        <div class="edu-degree">High School (10th) - UP Board</div>
+                        <div class="edu-meta"><span class="percentage">72%</span> | 2013</div>
+                    </div>
+                </div>
+
+                <!-- Work Experience -->
+                <div class="section-card">
+                    <div class="section-title">
+                        <i>💼</i> Work Experience
+                    </div>
+                    <div class="exp-item">
+                        <div class="exp-title">Mathematics Teacher (PGT)</div>
+                        <div class="exp-date">April 2023 – Present · Saiema Mansoor Public School, Parsara Hathras</div>
+                        <ul class="exp-desc">
+                            <li>Teach Mathematics to students across various grade levels</li>
+                            <li>Develop comprehensive lesson plans and assessment materials</li>
+                            <li>Participate in school programs, meetings, and curriculum development</li>
+                            <li>Integrate technology and AI tools to enhance learning experiences</li>
+                            <li>Create digital learning resources and interactive content</li>
+                        </ul>
+                    </div>
+                    <div class="exp-item">
+                        <div class="exp-title">Helping Teacher</div>
+                        <div class="exp-date">April 2021 – March 2023 · T.K' Board School, Gola Gokarananth</div>
+                        <ul class="exp-desc">
+                            <li>Provided academic support to students in Mathematics classes</li>
+                            <li>Assisted teachers with classwork and homework management</li>
+                            <li>Developed tailored practice materials for students requiring additional support</li>
+                            <li>Implemented innovative teaching aids to enhance conceptual understanding</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Skills, Website & digital expertise -->
+            <div>
+                <!-- Skills & Expertise (red black style) -->
+                <div class="section-card">
+                    <div class="section-title">
+                        <i>⚡</i> Skills & Expertise
+                    </div>
+                    <div class="skills-badge">
+                        <span class="skill-tag">Educational Technology Integration</span>
+                        <span class="skill-tag">AI Tools for Education</span>
+                        <span class="skill-tag">Basic Web Development</span>
+                        <span class="skill-tag">Website Creation & Management</span>
+                        <span class="skill-tag">Multilingual Exam Paper Preparation</span>
+                        <span class="skill-tag">Clear Communication</span>
+                        <span class="skill-tag">Student Engagement Strategies</span>
+                        <span class="skill-tag">Creative Problem Solving</span>
+                        <span class="skill-tag">Individualized Instruction</span>
+                        <span class="skill-tag">Data-Driven Instruction</span>
+                        <span class="skill-tag">Multilingual Content Creation</span>
+                        <span class="skill-tag">Curriculum Development</span>
+                    </div>
+                </div>
+
+                <!-- Digital / website section with clickable personal website -->
+                <div class="section-card">
+                    <div class="section-title">
+                        <i>🌐</i> Digital Presence
+                    </div>
+                    <div class="website-link">
+                        <a href="https://adnansmps.free.nf" target="_blank" rel="noopener noreferrer">
+                            🌍 www.adnansmps.free.nf
+                        </a>
+                        <div style="font-size: 0.8rem; margin-top: 6px; color:#b18585;">Educational website featuring teaching resources & materials</div>
+                    </div>
+                    <hr style="margin: 1rem 0;">
+                    <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: space-between;">
+                        <span style="background:#1c0909; padding: 0.3rem 0.8rem; border-radius: 30px;">📁 AI-enhanced lessons</span>
+                        <span style="background:#1c0909; padding: 0.3rem 0.8rem; border-radius: 30px;">📊 Interactive content</span>
+                        <span style="background:#1c0909; padding: 0.3rem 0.8rem; border-radius: 30px;">📝 Multilingual exams</span>
+                    </div>
+                </div>
+
+                <!-- Address & additional info (red-black theme) -->
+                <div class="section-card">
+                    <div class="section-title">
+                        <i>📍</i> Address
+                    </div>
+                    <p style="line-height: 1.5;">Mohalla Eidgaah, Ward No. 2, Gola Gokarananth, Lakhimpur Kheri, Uttar Pradesh - 262802</p>
+                    <div style="margin-top: 1rem; background:#1c0a0a; border-radius: 20px; padding: 0.5rem 1rem;">
+                        <span style="display: flex; gap: 8px; align-items: center;">📘 <strong>Professional Objective:</strong> Empower students with problem-solving skills and mathematical thinking that extends beyond the classroom.</span>
+                    </div>
+                </div>
+                <!-- additional highlights -->
+                <div class="section-card">
+                    <div class="section-title">
+                        <i>✨</i> Highlights
+                    </div>
+                    <ul class="exp-desc" style="margin:0; padding-left: 1rem;">
+                        <li>✓ Blended traditional & digital pedagogies</li>
+                        <li>✓ Expert in exam paper creation for multilingual setups</li>
+                        <li>✓ Developed interactive learning resources & AI integration in math</li>
+                        <li>✓ Website management & content creation for students</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- tiny footer with name and emphasis on the resource collection (reminder) -->
+        <footer>
+            🟥⬛ Mohammad Adnan — Mathematics Educator | Digital content developer | Click the top button to access complete links collection (worksheets, tools, exam resources) 🟥⬛
+        </footer>
+    </div>
+</div>
+
+<!-- optional smooth micro interaction: ensuring any external link behavior -->
+</body>
+</html>

@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Saiema Mansoor Public School · Marks Viewer</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Roboto, system-ui, sans-serif; }
+        body { background: #f0f4f8; min-height: 100vh; padding: 16px; }
+        .container { max-width: 1400px; margin: 0 auto; }
+
+        .header {
+            background: linear-gradient(145deg, #1e3c72, #2a5298);
+            border-radius: 24px; padding: 28px 24px; margin-bottom: 24px; color: white;
+            box-shadow: 0 15px 30px rgba(0,20,50,0.25);
+        }
+        .header h1 { font-size: 30px; margin-bottom: 6px; display: flex; align-items: center; gap: 12px; }
+        .header h1 i { font-size: 36px; color: #ffd966; }
+        .header .subtitle { font-size: 18px; opacity: 0.95; margin-bottom: 18px; font-weight: 300; letter-spacing: 0.3px; }
+
+        .header-buttons { display: flex; gap: 15px; flex-wrap: wrap; }
+        .btn {
+            padding: 12px 28px; border: none; border-radius: 50px; font-weight: 600; font-size: 16px;
+            cursor: pointer; transition: 0.2s; display: inline-flex; align-items: center; gap: 8px;
+            background: white; color: #1e3c72; box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            border: 2px solid transparent;
+        }
+        .btn:hover { transform: translateY(-3px); background: #f0f9ff; box-shadow: 0 12px 25px rgba(0,30,70,0.25); }
+        .btn i { font-size: 18px; }
+
+        .main-link {
+            background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); border-radius: 16px;
+            padding: 15px 22px; margin-top: 20px; display: flex; align-items: center;
+            justify-content: space-between; flex-wrap: wrap; gap: 15px; border: 1px solid rgba(255,255,255,0.25);
+        }
+        .main-link span { font-size: 15px; opacity: 0.9; }
+        .main-link a {
+            color: white; text-decoration: none; font-weight: 600; background: rgba(255,255,255,0.2);
+            padding: 8px 20px; border-radius: 40px; display: inline-flex; align-items: center; gap: 8px;
+        }
+        .main-link a:hover { background: rgba(255,255,255,0.35); }
+
+        .tabs { display: flex; gap: 14px; margin-bottom: 24px; flex-wrap: wrap; }
+        .tab {
+            padding: 16px 32px; background: white; border-radius: 60px; font-weight: 600; font-size: 18px;
+            cursor: pointer; transition: 0.2s; box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+            border: 2px solid transparent; display: flex; align-items: center; gap: 12px; flex: 1 1 auto;
+            justify-content: center; color: #2d3748;
+        }
+        .tab.active {
+            background: linear-gradient(145deg, #1e3c72, #2a5298); color: white;
+            transform: scale(1.02); box-shadow: 0 12px 25px rgba(30,60,114,0.4);
+        }
+        .tab i { font-size: 22px; }
+
+        .filters {
+            background: white; border-radius: 24px; padding: 22px; margin-bottom: 24px;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.05); display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px;
+        }
+        .filter-group { display: flex; flex-direction: column; gap: 8px; }
+        .filter-group label { font-weight: 700; color: #1e3c72; font-size: 14px; display: flex; align-items: center; gap: 6px; }
+        .filter-group label i { color: #2a5298; }
+        .filter-select {
+            padding: 14px 16px; border: 2px solid #e0e7ef; border-radius: 16px; font-size: 14px;
+            background: white; cursor: pointer; transition: 0.2s;
+        }
+        .filter-select:hover, .filter-select:focus { border-color: #2a5298; outline: none; box-shadow: 0 0 0 4px rgba(42,82,152,0.1); }
+        .clear-filters {
+            background: #edf2f7; border: 2px solid #cbd5e0; color: #1e3c72; border-radius: 40px;
+            font-weight: 600; cursor: pointer; transition: 0.2s; display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .clear-filters:hover { background: #e2e8f0; border-color: #2a5298; color: #2a5298; }
+
+        .sheet-info {
+            background: white; border-radius: 20px; padding: 16px 22px; margin-bottom: 20px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03); display: flex; justify-content: space-between;
+            align-items: center; flex-wrap: wrap; gap: 15px;
+        }
+        .sheet-info h3 { color: #1e3c72; font-size: 22px; display: flex; align-items: center; gap: 10px; }
+        .badge {
+            background: #2a5298; color: white; padding: 8px 20px; border-radius: 40px;
+            font-size: 15px; font-weight: 600; letter-spacing: 0.3px;
+        }
+
+        .loading { text-align: center; padding: 70px 20px; background: white; border-radius: 28px; box-shadow: 0 8px 20px rgba(0,0,0,0.05); }
+        .loading i { font-size: 56px; color: #1e3c72; margin-bottom: 15px; }
+        .error-box { background: #fee2e2; color: #991b1b; padding: 28px; border-radius: 28px; text-align: center; }
+
+        .table-container {
+            background: white; border-radius: 28px; padding: 22px; box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+            overflow-x: auto; margin-bottom: 30px;
+        }
+        table { width: 100%; border-collapse: collapse; font-size: 14px; }
+        th {
+            background: linear-gradient(145deg, #1e3c72, #2a5298); color: white;
+            padding: 16px 12px; font-weight: 600; white-space: nowrap; border-radius: 16px 16px 0 0;
+        }
+        td { padding: 14px 12px; border-bottom: 1px solid #e9edf4; color: #1e293b; vertical-align: middle; }
+        tr:hover { background: #f8fafd; }
+
+        .student-name { font-weight: 700; color: #0b2a4a; display: flex; align-items: center; gap: 8px; font-size: 15px; }
+        .student-name i { color: #2a5298; }
+        .clickable-name {
+            cursor: pointer; color: #1e3c72; text-decoration: underline dotted;
+            transition: 0.1s; border-bottom: 2px solid transparent; display: inline-flex; align-items: center; gap: 5px;
+        }
+        .clickable-name:hover { color: #2563eb; background: #e6f0ff; border-radius: 30px; padding: 0 6px; }
+
+        .marks-badge {
+            background: #e6f0ff; color: #1e3c72; padding: 6px 14px; border-radius: 40px;
+            font-weight: 600; font-size: 14px; display: inline-block; white-space: nowrap;
+        }
+        .total-badge { background: #1e3c72; color: white; font-weight: 700; }
+        .percentage-badge { background: #22c55e; color: white; font-weight: 700; }
+
+        .file-url-btn {
+            display: inline-flex; align-items: center; gap: 6px; padding: 8px 18px;
+            background: linear-gradient(145deg, #1e3c72, #2a5298); color: white; border-radius: 40px;
+            font-size: 12px; font-weight: 500; text-decoration: none; transition: 0.2s;
+            box-shadow: 0 4px 10px rgba(30,60,114,0.3);
+        }
+        .file-url-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 18px rgba(30,60,114,0.4); }
+
+        .row-count { background: #edf2f7; padding: 12px 20px; border-radius: 40px; margin-top: 20px; font-weight: 600; color: #1e3c72; }
+
+        @media (max-width: 700px) {
+            .header h1 { font-size: 24px; }
+            .tab { font-size: 16px; padding: 12px 18px; }
+            td { font-size: 13px; padding: 10px 6px; }
+        }
+
+        /* simple password overlay */
+        #passwordOverlay {
+            position: fixed; top:0; left:0; width:100%; height:100%;
+            background: rgba(0,0,0,0.7); backdrop-filter: blur(5px);
+            display: flex; align-items: center; justify-content: center; z-index: 9999;
+        }
+        .password-box {
+            background: white; padding: 40px; border-radius: 50px; text-align: center;
+            box-shadow: 0 30px 50px #00000050; max-width: 350px; width: 90%;
+        }
+        .password-box h3 { color: #1e3c72; margin-bottom: 20px; font-size: 24px; }
+        .password-box input {
+            width: 100%; padding: 18px 20px; font-size: 20px; border: 3px solid #cbd5e0;
+            border-radius: 60px; text-align: center; letter-spacing: 4px; outline: none;
+        }
+        .password-box input:focus { border-color: #2a5298; }
+        .password-box button {
+            margin-top: 25px; background: #1e3c72; color: white; border: none;
+            padding: 14px 35px; border-radius: 60px; font-size: 18px; font-weight: bold;
+            cursor: pointer; width: 100%; transition: 0.2s;
+        }
+        .password-box button:hover { background: #2a5298; transform: scale(1.02); }
+        .error-pw { color: #b91c1c; margin-top: 15px; font-weight: 500; }
+    </style>
+</head>
+<body>
+<div id="passwordOverlay">
+    <div class="password-box">
+        <h3><i class="fas fa-lock" style="color:#1e3c72;"></i> Enter Access Code</h3>
+        <input type="password" id="passwordInput" placeholder="****" maxlength="4" inputmode="numeric">
+        <button onclick="checkPassword()">Unlock</button>
+        <div id="pwError" class="error-pw"></div>
+    </div>
+</div>
+
+<div class="container" id="mainApp" style="display:none;">
+    <!-- HEADER with school name -->
+    <div class="header">
+        <h1><i class="fas fa-school"></i> Saiema Mansoor Public School</h1>
+        <div class="subtitle"><i class="fas fa-chart-line"></i>  RawMarks · consolidated view (PT1, SA1, PT2, SA2, Oral, Test)</div>
+        <div class="header-buttons">
+            <button class="btn" onclick="downloadMarksExcel()"><i class="fas fa-file-excel"></i> Download Marks Excel</button>
+            <button class="btn" onclick="downloadFilesExcel()"><i class="fas fa-file-excel"></i> Download Files Excel</button>
+        </div>
+        <div class="main-link">
+            <span><i class="fas fa-link"></i> Main Entry: </span>
+            <a href="https://script.google.com/macros/s/AKfycbzhTIfxHiOU3Wo4V8VoQryJz66FT1z3NgH_-DBEQUTnF3FwfKRYMrBj4sfVz5feJt0C/exec" target="_blank"><i class="fas fa-arrow-up-right-from-square"></i> Open Marks Entry</a>
+        </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="tabs">
+        <div class="tab active" onclick="switchTab('marks')" id="tabMarks"><i class="fas fa-edit"></i> RawMarks (consolidated)</div>
+        <div class="tab" onclick="switchTab('files')" id="tabFiles"><i class="fas fa-file-alt"></i> Raw.Files</div>
+    </div>
+
+    <!-- MARKS FILTERS (simple) -->
+    <div id="marksFilters" class="filters">
+        <div class="filter-group"><label><i class="fas fa-calendar"></i> Date</label><select id="marksDateFilter" class="filter-select" onchange="applyMarksFilters()"><option value="">All Dates</option></select></div>
+        <div class="filter-group"><label><i class="fas fa-school"></i> Class</label><select id="marksClassFilter" class="filter-select" onchange="applyMarksFilters()"><option value="">All Classes</option></select></div>
+        <div class="filter-group"><label><i class="fas fa-book"></i> Subject</label><select id="marksSubjectFilter" class="filter-select" onchange="applyMarksFilters()"><option value="">All Subjects</option></select></div>
+        <div class="filter-group"><label><i class="fas fa-tasks"></i> Exam Category</label><select id="marksExamFilter" class="filter-select" onchange="applyMarksFilters()"><option value="">All Exams</option></select></div>
+        <button class="clear-filters" onclick="clearMarksFilters()"><i class="fas fa-times-circle"></i> Clear Filters</button>
+    </div>
+
+    <!-- FILES FILTERS -->
+    <div id="filesFilters" class="filters" style="display:none;">
+        <div class="filter-group"><label><i class="fas fa-school"></i> Class</label><select id="filesClassFilter" class="filter-select" onchange="applyFilesFilters()"><option value="">All Classes</option></select></div>
+        <button class="clear-filters" onclick="clearFilesFilters()"><i class="fas fa-times-circle"></i> Clear</button>
+    </div>
+
+    <!-- INFO BARS -->
+    <div id="marksInfo" class="sheet-info"><h3><i class="fas fa-table"></i> RawMarks (PT1, SA1, PT2, SA2, Oral, Test)</h3><span class="badge" id="marksCount">0 rows</span></div>
+    <div id="filesInfo" class="sheet-info" style="display:none;"><h3><i class="fas fa-table"></i> Raw.Files</h3><span class="badge" id="filesCount">0 rows</span></div>
+
+    <!-- LOADING / ERROR -->
+    <div id="loading" class="loading"><i class="fas fa-spinner fa-spin"></i><p>Loading from Google Sheets ...</p></div>
+    <div id="errorMsg" class="error-box" style="display:none;"><i class="fas fa-exclamation-triangle"></i><h3 id="errorText">Error</h3></div>
+
+    <!-- MARKS TABLE (consolidated) -->
+    <div id="marksTableContainer" class="table-container" style="display:none;"></div>
+    <!-- FILES TABLE -->
+    <div id="filesTableContainer" class="table-container" style="display:none;"></div>
+
+    <div class="footer" style="text-align:center; margin-top:30px; color:#4b5563;"><i class="fas fa-code-branch"></i> Data via opensheet.elk.sh · <a href="#" onclick="refreshData(); return false;"><i class="fas fa-sync-alt"></i> refresh</a></div>
+</div>
+
+<script>
+    // ---------- PASSWORD PROTECTION ----------
+    function checkPassword() {
+        const pw = document.getElementById('passwordInput').value;
+        if(pw === '8982') {
+            document.getElementById('passwordOverlay').style.display = 'none';
+            document.getElementById('mainApp').style.display = 'block';
+            // load data after password
+            loadAllData();
+        } else {
+            document.getElementById('pwError').innerText = 'Incorrect code';
+        }
+    }
+    // allow enter key
+    document.getElementById('passwordInput')?.addEventListener('keypress', (e) => {
+        if(e.key === 'Enter') checkPassword();
+    });
+
+    // ---------- CONFIG ----------
+    const SPREADSHEET_ID = '1KOl4unW-bZvghag-MCBQx36z_aaDlecWpUfIt2anQKE';
+    const OPENSHEET_URL = 'https://opensheet.elk.sh/' + SPREADSHEET_ID;
+    const SCHOOL_NAME = 'Saiema Mansoor Public School';
+    let marksRaw = [];           // all RawMarks rows (no status filter)
+    let filesData = [];
+    let filteredMarks = [];
+    let filteredFiles = [];
+    let currentTab = 'marks';
+    let marksFilters = { date:'', class:'', subject:'', exam:'' };
+    let filesFilter = { class:'' };
+
+    // Fixed exam categories we want as columns (order matters)
+    const EXAM_ORDER = ['PT1','SA1','PT2','SA2','Oral','Test'];
+
+    // Data loads only after password
+    async function loadAllData() {
+        showLoading(true);
+        try {
+            await loadSheet('RawMarks','marks');
+            await loadSheet('Raw.Files','files');
+            showLoading(false);
+            populateFilterDropdowns();
+            updateDisplay();
+        } catch(e) { showError('Failed: '+e.message); }
+    }
+
+    async function loadSheet(sheetName, type) {
+        const resp = await fetch(`${OPENSHEET_URL}/${sheetName}`);
+        if(!resp.ok) throw new Error(`HTTP ${resp.status}`);
+        const data = await resp.json();
+        if(type==='marks') {
+            // NO status filter: take all rows
+            marksRaw = data;   // keep all rows
+            filteredMarks = marksRaw.slice();
+            document.getElementById('marksCount').innerText = marksRaw.length + ' rows';
+        } else {
+            filesData = data;
+            filteredFiles = filesData.slice();
+            document.getElementById('filesCount').innerText = filesData.length + ' rows';
+        }
+    }
+
+    function populateFilterDropdowns() {
+        if(marksRaw.length) {
+            const dates = [...new Set(marksRaw.map(r=>r.Date).filter(Boolean))].sort((a,b)=>new Date(b)-new Date(a));
+            fillSelect('marksDateFilter', dates);
+            const classes = [...new Set(marksRaw.map(r=>r.Class).filter(Boolean))].sort();
+            fillSelect('marksClassFilter', classes);
+            const subjects = [...new Set(marksRaw.map(r=>r.Subject).filter(Boolean))].sort();
+            fillSelect('marksSubjectFilter', subjects);
+            const exams = [...new Set(marksRaw.map(r=>r['Exam Category']).filter(Boolean))].sort();
+            fillSelect('marksExamFilter', exams);
+        }
+        if(filesData.length) {
+            const fclasses = [...new Set(filesData.map(r=>r.Class).filter(Boolean))].sort();
+            fillSelect('filesClassFilter', fclasses);
+        }
+    }
+    function fillSelect(id, arr) {
+        const sel = document.getElementById(id);
+        sel.innerHTML = '<option value="">All</option>' + arr.map(v=>`<option value="${v}">${v}</option>`).join('');
+    }
+
+    // Marks filter apply
+    window.applyMarksFilters = function() {
+        marksFilters.date = document.getElementById('marksDateFilter').value;
+        marksFilters.class = document.getElementById('marksClassFilter').value;
+        marksFilters.subject = document.getElementById('marksSubjectFilter').value;
+        marksFilters.exam = document.getElementById('marksExamFilter').value;
+        filteredMarks = marksRaw.filter(r => {
+            if(marksFilters.date && r.Date !== marksFilters.date) return false;
+            if(marksFilters.class && r.Class !== marksFilters.class) return false;
+            if(marksFilters.subject && r.Subject !== marksFilters.subject) return false;
+            if(marksFilters.exam && r['Exam Category'] !== marksFilters.exam) return false;
+            return true;
+        });
+        displayMarksConsolidated();
+        document.getElementById('marksCount').innerText = filteredMarks.length + ' filtered';
+    };
+
+    window.clearMarksFilters = function() {
+        document.getElementById('marksDateFilter').value = '';
+        document.getElementById('marksClassFilter').value = '';
+        document.getElementById('marksSubjectFilter').value = '';
+        document.getElementById('marksExamFilter').value = '';
+        marksFilters = {date:'',class:'',subject:'',exam:''};
+        filteredMarks = marksRaw.slice();
+        displayMarksConsolidated();
+        document.getElementById('marksCount').innerText = filteredMarks.length + ' rows';
+    };
+
+    window.applyFilesFilters = function() {
+        filesFilter.class = document.getElementById('filesClassFilter').value;
+        filteredFiles = filesData.filter(r => !filesFilter.class || r.Class === filesFilter.class);
+        displayFilesTable();
+        document.getElementById('filesCount').innerText = filteredFiles.length + ' filtered';
+    };
+    window.clearFilesFilters = function() {
+        document.getElementById('filesClassFilter').value = '';
+        filesFilter.class = '';
+        filteredFiles = filesData.slice();
+        displayFilesTable();
+        document.getElementById('filesCount').innerText = filteredFiles.length + ' rows';
+    };
+
+    // ---------- CONSOLIDATED MARKS TABLE (student-wise) ----------
+    function displayMarksConsolidated() {
+        const container = document.getElementById('marksTableContainer');
+        if(!filteredMarks.length) {
+            container.innerHTML = '<div style="padding:50px; text-align:center; color:#888;"><i class="fas fa-database fa-3x"></i><p>No marks after filter.</p></div>';
+            container.style.display = 'block';
+            document.getElementById('filesTableContainer').style.display = 'none';
+            return;
+        }
+
+        // Group by Admission No (unique) + Student Name
+        const groups = new Map(); // key: admissionNo
+        filteredMarks.forEach(row => {
+            let adm = row['Admission No'] || row['AdmissionNo'] || `unknown-${Math.random()}`;
+            if(!adm) adm = 'unknown';
+            if(!groups.has(adm)) {
+                groups.set(adm, {
+                    admissionNo: adm,
+                    studentName: row['Student Name'] || row['Student'] || '-',
+                    class: row['Class'] || '',
+                    subject: row['Subject'] || '',
+                    exams: new Map()   // examCategory -> { marks, maxMarks }
+                });
+            }
+            const grp = groups.get(adm);
+            const examCat = row['Exam Category'] || '';
+            if(examCat) {
+                const marks = row['Marks'] || '0';
+                const maxMarks = row['MaxMarks'] || '0';
+                grp.exams.set(examCat, { marks, maxMarks });
+            }
+        });
+
+        // Determine which exam columns actually appear in this filtered set (only non-empty)
+        let activeExams = EXAM_ORDER.filter(ex => {
+            for(let grp of groups.values()) {
+                if(grp.exams.has(ex)) return true;
+            }
+            return false;
+        });
+
+        // Build table
+        let html = '<table><thead><tr><th>Student Name (click for PDF report)</th>';
+        activeExams.forEach(ex => { html += `<th>${ex}</th>`; });
+        html += '<th>Total</th><th>Percentage</th></tr></thead><tbody>';
+
+        for(let [adm, grp] of groups.entries()) {
+            let totalMarks = 0, totalMax = 0;
+            let examCells = activeExams.map(ex => {
+                if(grp.exams.has(ex)) {
+                    let m = parseFloat(grp.exams.get(ex).marks) || 0;
+                    let max = parseFloat(grp.exams.get(ex).maxMarks) || 0;
+                    totalMarks += m;
+                    totalMax += max;
+                    return `<td><span class="marks-badge">${m}/${max}</span></td>`;
+                } else {
+                    return `<td><span style="color:#aaa;">—</span></td>`;
+                }
+            }).join('');
+
+            let percentage = totalMax > 0 ? ((totalMarks / totalMax) * 100).toFixed(2) : '0.00';
+            let totalDisplay = `${totalMarks}/${totalMax}`;
+
+            // Student name clickable : generate PDF with full details (FIXED: pass all data)
+            // Convert exams Map to plain object for JSON
+            const examsObj = {};
+            for(let [k,v] of grp.exams.entries()) { examsObj[k] = v; }
+            const studentPayload = {
+                admissionNo: grp.admissionNo,
+                studentName: grp.studentName,
+                class: grp.class,
+                subject: grp.subject,
+                exams: examsObj
+            };
+
+            html += `<tr>
+                <td>
+                    <div class="student-name">
+                        <i class="fas fa-user-graduate"></i>
+                        <span class="clickable-name" onclick='generateStudentPDF(${JSON.stringify(studentPayload).replace(/'/g, "&apos;")})'>
+                            ${grp.studentName} <i class="fas fa-download" style="font-size:12px;"></i>
+                        </span>
+                    </div>
+                </td>
+                ${examCells}
+                <td><span class="marks-badge total-badge">${totalDisplay}</span></td>
+                <td><span class="marks-badge percentage-badge">${percentage}%</span></td>
+            </tr>`;
+        }
+
+        html += '</tbody></table><div class="row-count"><i class="fas fa-layer-group"></i> Total students: '+groups.size+'</div>';
+        container.innerHTML = html;
+        container.style.display = 'block';
+        document.getElementById('filesTableContainer').style.display = 'none';
+    }
+
+    // ---------- GENERATE ATTRACTIVE PDF FOR ONE STUDENT (FIXED: data shows correctly) ----------
+    window.generateStudentPDF = function(studentPayload) {
+        // studentPayload: { admissionNo, studentName, class, subject, exams: { PT1:{marks,maxMarks}, ... } }
+        const { admissionNo, studentName, class: cls, subject, exams } = studentPayload;
+        
+        // Build exam entries from exams object
+        let examEntries = Object.entries(exams).map(([examName, obj]) => ({
+            exam: examName,
+            marks: obj.marks,
+            max: obj.maxMarks
+        }));
+
+        // Build HTML for new window
+        const win = window.open('', '_blank');
+        if(!win) { alert('Allow popups to download PDF'); return; }
+        const doc = win.document;
+        doc.write(`
+            <html><head><title>${studentName} - marks report</title>
+            <style>
+                body { font-family: 'Segoe UI',Roboto; background:#f4f7fc; padding:30px; }
+                .report-card { max-width:700px; margin:auto; background:white; border-radius:30px; padding:30px; box-shadow:0 25px 40px -10px #1e3c7250; }
+                .school { font-size:26px; font-weight:800; color:#1e3c72; border-bottom:3px solid #ffd966; padding-bottom:10px; margin-bottom:20px; display:flex; gap:15px; align-items:center; }
+                .details { background:#eef4ff; padding:20px; border-radius:24px; margin:20px 0; }
+                .details p { margin:8px 0; font-size:18px; }
+                table { width:100%; border-collapse:collapse; margin-top:20px; }
+                th { background:#1e3c72; color:white; padding:12px; }
+                td { padding:12px; border-bottom:1px solid #ccc; }
+                .total-row { background:#ffd966; font-weight:bold; }
+                .footer { margin-top:30px; text-align:center; color:#2a5298; }
+            </style></head>
+            <body>
+            <div class="report-card">
+                <div class="school"><i class="fas fa-school" style="color:#ffd966;"></i> Saiema Mansoor Public School</div>
+                <div class="details">
+                    <p><strong>Student:</strong> ${studentName} (Adm: ${admissionNo})</p>
+                    <p><strong>Class:</strong> ${cls || '-'}  |  <strong>Subject:</strong> ${subject || '-'}</p>
+                </div>
+                <h3>📋 Exam-wise performance</h3>
+                <table>
+                    <tr><th>Exam</th><th>Obtained</th><th>Max Marks</th></tr>
+        `);
+        let totalObt=0, totalMax=0;
+        examEntries.forEach(e => {
+            doc.write(`<tr><td>${e.exam}</td><td>${e.marks}</td><td>${e.max}</td></tr>`);
+            totalObt += parseFloat(e.marks)||0;
+            totalMax += parseFloat(e.max)||0;
+        });
+        let perc = totalMax>0 ? (totalObt/totalMax*100).toFixed(2) : '0';
+        doc.write(`
+            <tr class="total-row"><td><strong>TOTAL</strong></td><td><strong>${totalObt}</strong></td><td><strong>${totalMax}</strong></td></tr>
+            </table>
+            <h2 style="text-align:right; color:#1e3c72;">Percentage: ${perc}%</h2>
+            <div class="footer">📅 Generated on ${new Date().toLocaleDateString()}</div>
+            </div>
+            <script>window.print();<\\/script>
+        `);
+        doc.close();
+    };
+
+    // ---------- FILES TABLE ----------
+    function displayFilesTable() {
+        const cont = document.getElementById('filesTableContainer');
+        if(!filteredFiles.length) {
+            cont.innerHTML = '<div style="padding:50px; text-align:center;">No files</div>';
+            cont.style.display = 'block'; document.getElementById('marksTableContainer').style.display='none'; return;
+        }
+        let h = '<table><thead><tr><th>Topic</th><th>File URLs</th></tr></thead><tbody>';
+        filteredFiles.forEach(r => {
+            let topic = r['Topic'] || r['Description'] || '-';
+            h += '<tr><td><i class="fas fa-tag"></i> '+topic+'</td><td class="file-urls-container">';
+            if(r['File URL']) h += fileBtn(r['File URL'], r['File Name']||'file');
+            if(r['File URLs']) {
+                let urls = r['File URLs'].split(',').map(s=>s.trim());
+                let names = r['File Names'] ? r['File Names'].split(',').map(s=>s.trim()) : [];
+                urls.forEach((u,i)=> { h += fileBtn(u, names[i]||`file${i+1}`); });
+            }
+            if(!r['File URL'] && !r['File URLs']) h += '<span style="color:#aaa;">no files</span>';
+            h += '</td></tr>';
+        });
+        h += '</tbody></table><div class="row-count">'+filteredFiles.length+' entries</div>';
+        cont.innerHTML = h;
+        cont.style.display = 'block';
+        document.getElementById('marksTableContainer').style.display='none';
+    }
+    function fileBtn(url,name) {
+        let ext = name.split('.').pop().toLowerCase();
+        let cls = (ext==='pdf')?'pdf': (['jpg','jpeg','png'].includes(ext)?'image':'');
+        return `<a href="${url}" class="file-url-btn ${cls}" target="_blank"><i class="fas fa-file"></i> ${name.substring(0,15)}</a> `;
+    }
+
+    // DOWNLOAD EXCEL (full filtered marks)
+    window.downloadMarksExcel = function() {
+        let data = filteredMarks.length ? filteredMarks : marksRaw;
+        if(!data.length) return alert('No marks');
+        const headers = Object.keys(data[0]);
+        let csv = headers.join(',')+'\n';
+        data.forEach(r=> {
+            let row = headers.map(h => {
+                let val = r[h] || '';
+                if(typeof val==='string' && (val.includes(',')||val.includes('"'))) val = `"${val.replace(/"/g,'""')}"`;
+                return val;
+            }).join(',');
+            csv += row + '\n';
+        });
+        const blob = new Blob(["\uFEFF"+csv], {type:'text/csv'});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `RawMarks_${new Date().toISOString().slice(0,10)}.csv`;
+        a.click();
+    };
+    window.downloadFilesExcel = function() {
+        let data = filteredFiles.length ? filteredFiles : filesData;
+        if(!data.length) return alert('No files');
+        const headers = Object.keys(data[0]);
+        let csv = headers.join(',')+'\n';
+        data.forEach(r=> {
+            let row = headers.map(h => {
+                let val = r[h] || '';
+                if(typeof val==='string' && (val.includes(',')||val.includes('"'))) val = `"${val.replace(/"/g,'""')}"`;
+                return val;
+            }).join(',');
+            csv += row + '\n';
+        });
+        const blob = new Blob(["\uFEFF"+csv], {type:'text/csv'});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = `RawFiles_${new Date().toISOString().slice(0,10)}.csv`;
+        a.click();
+    };
+
+    // UI helpers
+    function switchTab(tab) {
+        currentTab = tab;
+        document.getElementById('tabMarks').classList.toggle('active',tab==='marks');
+        document.getElementById('tabFiles').classList.toggle('active',tab==='files');
+        document.getElementById('marksFilters').style.display = tab==='marks' ? 'grid' : 'none';
+        document.getElementById('filesFilters').style.display = tab==='files' ? 'grid' : 'none';
+        document.getElementById('marksInfo').style.display = tab==='marks' ? 'flex' : 'none';
+        document.getElementById('filesInfo').style.display = tab==='files' ? 'flex' : 'none';
+        if(tab==='marks') displayMarksConsolidated(); else displayFilesTable();
+    }
+    window.switchTab = switchTab;
+
+    function showLoading(show) {
+        document.getElementById('loading').style.display = show ? 'block' : 'none';
+        document.getElementById('errorMsg').style.display = 'none';
+    }
+    function showError(msg) {
+        document.getElementById('loading').style.display = 'none';
+        document.getElementById('errorMsg').style.display = 'block';
+        document.getElementById('errorText').innerText = msg;
+    }
+    window.refreshData = function() { 
+        showLoading(true);
+        loadAllData(); 
+    };
+
+    // update display
+    function updateDisplay() {
+        if(currentTab==='marks') displayMarksConsolidated(); else displayFilesTable();
+    }
+</script>
+</body>
+</html>

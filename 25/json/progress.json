@@ -1,0 +1,37 @@
+[
+  {
+    "title": "English Learning Progress Tracker",
+    "icon": "fas fa-tasks",
+    "content": "<h3>Purpose</h3><p><strong>English:</strong> Track your progress in vocabulary, grammar, reading, writing, speaking, and listening skills.<br><strong>Hindi:</strong> Apni shabdawali, vyaakaran, paath, lekhan, bol chal, aur sunne ki kshamata ko anukramit tarike se maapen.</p>"
+  },
+  {
+    "title": "Set Learning Goals",
+    "icon": "fas fa-bullseye",
+    "content": "<h3>Steps</h3><p><strong>English:</strong> Identify weekly or monthly goals such as learning new words, completing exercises, or writing paragraphs.<br><strong>Hindi:</strong> Saptahik ya mashik lakshya tayaar karen, jaise naye shabd seekhna, abhyas karna, ya nibandh likhna.</p>"
+  },
+  {
+    "title": "Daily Practice Log",
+    "icon": "fas fa-calendar-alt",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Maintain a daily log of exercises done, new words learned, and speaking practice.<br><strong>Hindi:</strong> Rozana kiye gaye abhyas, seekhe gaye shabd, aur bolne ki abhyas ki suci banayen.</p>"
+  },
+  {
+    "title": "Self-Assessment",
+    "icon": "fas fa-clipboard-check",
+    "content": "<h3>After Each Session</h3><p><strong>English:</strong> Rate your confidence in each skill area (grammar, vocabulary, etc.) from 1 to 5.<br><strong>Hindi:</strong> Har abhyas ke baad apne vishwas ko 1 se 5 ke beech ank dein, jaise vyaakaran, shabdawali, aadi.</p>"
+  },
+  {
+    "title": "Weekly Review",
+    "icon": "fas fa-sync-alt",
+    "content": "<h3>Summary and Adjustments</h3><p><strong>English:</strong> At the end of the week, review your log and identify strengths and areas for improvement.<br><strong>Hindi:</strong> Saptah ke antim mein apni suchi dekhen aur majbooti evam sudhar ke kshetra nirdharit karen.</p>"
+  },
+  {
+    "title": "Sample Progress Table",
+    "icon": "fas fa-table",
+    "content": "<table><tr><th>Skill</th><th>Goal</th><th>Practice Done</th><th>Confidence (1-5)</th><th>Comments</th></tr><tr><td>Vocabulary</td><td>Learn 20 new words</td><td>15 words</td><td>4</td><td>Need to revise meanings</td></tr><tr><td>Grammar</td><td>Complete 3 exercises</td><td>3 exercises</td><td>5</td><td>Improved tense usage</td></tr><tr><td>Reading</td><td>Read 2 passages</td><td>2 passages</td><td>3</td><td>Difficulty with vocabulary</td></tr></table>"
+  },
+  {
+    "title": "Tips for Effective Tracking",
+    "icon": "fas fa-lightbulb",
+    "content": "<ul><li>Be consistent and honest in recording.</li><li>Use colors to highlight progress or difficulty.</li><li>Set realistic, achievable goals.</li><li>Reflect regularly to motivate yourself.</li></ul>"
+  }
+]

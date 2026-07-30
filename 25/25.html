@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>SMPS Official Website - Rainbow Theme</title>
+  <link rel="icon" href="images/smps_logo.jpg">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS Files -->
+  <link id="themeStylesheet" rel="stylesheet" href="css/s_dark.css">
+  
+  <style>
+  /* ===== COMPACT THEME OVERRIDES ===== */
+
+  /* Theme Toggle Button */
+  .theme-toggle-btn {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    z-index: 1000;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--glow);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text);
+    font-size: 20px;
+    transition: all 0.3s;
+  }
+
+  .theme-toggle-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px var(--primary);
+  }
+  </style>
+</head>
+<body>
+
+  <!-- Theme Toggle Button -->
+  <div class="theme-toggle-btn" id="themeToggle" onclick="toggleTheme()">
+    <i class="fas fa-moon" id="themeIcon"></i>
+  </div>
+
+  <div class="floating-particles"></div>
+  
+  <div class="preloader">
+    <div class="preloader-content">
+      <div class="preloader-spinner"></div>
+      
+      <div class="arabic">إِنَّ اللَّهَ مَعَ الصَّابِرِينَ</div>
+      <div class="translation">"Indeed, Allah is with those who are patient."</div>
+      
+      <p><i class="fas fa-school"></i> Loading SMPS Rainbow Theme</p>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Assembly Info Banner will be inserted here by JavaScript -->
+    
+    <header>
+      <div class="logo-container">
+        <img src="images/smps_logo.jpg" alt="SMPS Logo">
+      </div>
+      <div class="school-info">
+        <h1><i class="fas fa-graduation-cap"></i> SAIEMA MANSOOR PUBLIC SCHOOL</h1>
+        <div class="school-location">
+          <i class="fas fa-map-marker-alt"></i> Parsara, Hathras
+        </div>
+      </div>
+      <a href="#" class="notice-btn" onclick="openPopup('notices-popup')"><i class="fas fa-bullhorn"></i> Notice Board</a>
+    </header>
+
+    <section class="birthday-section">
+      <div class="birthday-header">
+        <i class="fas fa-birthday-cake birthday-icon"></i>
+        <h2>Today's Birthday</h2>
+      </div>
+      <div id="birthday-list" class="birthday-list">Loading birthdays...</div>
+    </section>
+
+    <section class="classes-section">
+      <h2><i class="fas fa-school"></i> Classes</h2>
+      <div id="classes-list" class="classes-list">
+        Loading classes...
+      </div>
+    </section>
+
+    <!-- Resources Section -->
+    <section class="resources-section">
+      <h2><i class="fas fa-rocket"></i> Quick Resources</h2>
+      <div id="quick-resources" class="resources-grid">
+        Loading resources...
+      </div>
+    </section>
+
+    <section class="math-quote-section">
+      <h2><i class="fas fa-square-root-alt"></i> Mathematics Wisdom</h2>
+      <div class="math-quote">
+        <p>"Mathematics is not about numbers, equations, computations, or algorithms: it is about understanding."</p>
+        <p class="quote-author">- William Paul Thurston</p>
+      </div>
+    </section>
+
+    <div class="math-section">
+      <h2 class="math-title"><i class="fas fa-square-root-alt"></i> CSIR NET(Mathematics Resources)</h2>
+      <p style="text-align: center; margin-bottom: 12px; font-weight: 600; font-size: 0.8rem; color: var(--light-muted);">Select a topic from the dropdown to view YouTube resources</p>
+      <select id="math-dropdown">
+        <option value="">-- Select Topic --</option>
+        <option value="algebra">1. Algebra</option>
+        <option value="real-analysis">2. Real Analysis</option>
+        <option value="complex-analysis">3. Complex Analysis</option>
+        <option value="odes">4. Ordinary Differential Equations (ODEs)</option>
+        <option value="pdes">5. Partial Differential Equations (PDEs)</option>
+        <option value="linear-programming">6. Linear Programming & Operations Research</option>
+        <option value="multivariable-calculus">7. Calculus of Several Variables</option>
+        <option value="numerical-analysis">8. Numerical Analysis</option>
+        <option value="topology">9. Topology / Metric Spaces</option>
+        <option value="mechanics">10. Mechanics / Classical Mechanics</option>
+        <option value="probability">11. Probability & Statistics</option>
+        <option value="special-functions">12. Special Functions / Miscellaneous</option>
+      </select>
+    </div>
+
+    <section class="motivation-section">
+      <h2><i class="fas fa-quote-left"></i> Daily Motivation</h2>
+      <div class="motivation-content">
+        <p id="daily-quote">"Education is the most powerful weapon which you can use to change the world."</p>
+        <p class="quote-author" id="quote-author">- Nelson Mandela</p>
+      </div>
+    </section>
+
+    <div class="social-icons">
+      <a href="https://facebook.com/luvussk786" target="_blank" class="social-icon facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+      <a href="https://instagram.com/adnanalig775/" target="_blank" class="social-icon instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://x.com/adnanrazaalig" target="_blank" class="social-icon x-twitter">
+        <svg class="x-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+      <a href="https://youtube.com/@AdnanKhanAligYT" target="_blank" class="social-icon youtube">
+        <i class="fab fa-youtube"></i>
+      </a>
+      <a href="https://wa.me/7275126421" target="_blank" class="social-icon whatsapp">
+        <i class="fab fa-whatsapp"></i>
+      </a>
+    </div>
+
+    <footer>
+      <i class="fas fa-copyright"></i> 2025 AdnanAlig | Saiema Mansoor Public School, Parsara, Hathras
+    </footer>
+  </div>
+
+  <!-- Popups (same as before but compact) -->
+  <div class="popup" id="notices-popup">
+    <div class="popup-content">
+      <span class="close-popup" onclick="closePopup('notices-popup')">&times;</span>
+      <h3><i class="fas fa-bullhorn"></i> Notice Board</h3>
+      <div id="notices-content">Loading notices...</div>
+    </div>
+  </div>
+
+  <div class="popup" id="birthday-popup">
+    <div class="popup-content">
+      <span class="close-popup" onclick="closePopup('birthday-popup')">&times;</span>
+      <h3><i class="fas fa-birthday-cake"></i> Current Month Birthdays</h3>
+      <div id="month-birthdays-content">Loading...</div>
+    </div>
+  </div>
+
+  <div class="popup" id="students-popup">
+    <div class="popup-content">
+      <span class="close-popup" onclick="closePopup('students-popup')">&times;</span>
+      <h3 id="students-popup-title"><i class="fas fa-users"></i> Class Students</h3>
+      <div id="students-list-content">Loading...</div>
+    </div>
+  </div>
+
+  <div class="modal" id="mathModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeMathModal()">&times;</span>
+      <h2 class="modal-title" id="mathModalTitle">Mathematics Topics</h2>
+      <div id="mathModalContent">
+        <div class="loading">
+          <i class="fas fa-spinner"></i> Loading YouTube links from Google Sheets...
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button id="back-to-top" class="back-to-top-btn">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <!-- Remove the old theme-toggle button since we have a new one -->
+  <!-- <button id="theme-toggle"></button> -->
+
+  <script>
+    // Theme Management
+    const THEMES = {
+        LIGHT: 'light',
+        DARK: 'dark'
+    };
+
+    // Get current hour
+    function getCurrentHour() {
+        return new Date().getHours();
+    }
+
+    // Check if it's daytime (6 AM to 6 PM)
+    function isDaytime() {
+        const hour = getCurrentHour();
+        return hour >= 6 && hour < 18;
+    }
+
+    // Set theme based on time or user preference
+    function setTheme(theme) {
+        const themeStylesheet = document.getElementById('themeStylesheet');
+        const themeIcon = document.getElementById('themeIcon');
+        
+        if (theme === THEMES.LIGHT) {
+            themeStylesheet.href = 'css/s_light.css';
+            themeIcon.className = 'fas fa-sun';
+            localStorage.setItem('selectedTheme', THEMES.LIGHT);
+        } else {
+            themeStylesheet.href = 'css/s_dark.css';
+            themeIcon.className = 'fas fa-moon';
+            localStorage.setItem('selectedTheme', THEMES.DARK);
+        }
+    }
+
+    // Toggle theme manually
+    function toggleTheme() {
+        const currentTheme = document.getElementById('themeStylesheet').href.includes('s_light.css') 
+            ? THEMES.LIGHT 
+            : THEMES.DARK;
+        
+        if (currentTheme === THEMES.LIGHT) {
+            setTheme(THEMES.DARK);
+        } else {
+            setTheme(THEMES.LIGHT);
+        }
+        
+        // Set manual override
+        localStorage.setItem('manualTheme', 'true');
+    }
+
+    // Initialize theme on page load
+    function initializeTheme() {
+        const manualTheme = localStorage.getItem('manualTheme');
+        const selectedTheme = localStorage.getItem('selectedTheme');
+        
+        // If user has manually selected a theme, use it
+        if (manualTheme === 'true' && selectedTheme) {
+            setTheme(selectedTheme);
+            return;
+        }
+        
+        // Otherwise, use time-based theme
+        if (isDaytime()) {
+            setTheme(THEMES.LIGHT);
+        } else {
+            setTheme(THEMES.DARK);
+        }
+    }
+
+    // Check theme periodically (every minute) for time-based changes
+    // Only if user hasn't manually selected a theme
+    function checkThemePeriodically() {
+        setInterval(() => {
+            const manualTheme = localStorage.getItem('manualTheme');
+            if (manualTheme !== 'true') {
+                if (isDaytime()) {
+                    setTheme(THEMES.LIGHT);
+                } else {
+                    setTheme(THEMES.DARK);
+                }
+            }
+        }, 60000); // Check every minute
+    }
+
+    // Google Sheets configuration
+    const MATH_SHEET_URL = 'https://opensheet.elk.sh/1FUpqRyVWcQZGK8bPuXEd12f-4xU7h6M9VUHlG4rMlnw/NET';
+    const RESOURCE_SHEET_URL = 'https://opensheet.elk.sh/1FUpqRyVWcQZGK8bPuXEd12f-4xU7h6M9VUHlG4rMlnw/index2';
+    const NOTICES_SHEET_URL = 'https://opensheet.elk.sh/1FUpqRyVWcQZGK8bPuXEd12f-4xU7h6M9VUHlG4rMlnw/Notices';
+    const BIRTHDAY_SHEET_URL = 'https://opensheet.elk.sh/1FUpqRyVWcQZGK8bPuXEd12f-4xU7h6M9VUHlG4rMlnw/Birthdays';
+    const CLASS_TEACHER_SHEET_URL = 'https://opensheet.elk.sh/1FUpqRyVWcQZGK8bPuXEd12f-4xU7h6M9VUHlG4rMlnw/Class%20Teacher';
+    const ASSEMBLY_SHEET_URL = 'https://opensheet.elk.sh/1FUpqRyVWcQZGK8bPuXEd12f-4xU7h6M9VUHlG4rMlnw/Housewise_Assembly';
+
+    // Data storage
+    let mathYoutubeLinks = {};
+    let allBirthdaysData = [];
+    let classBirthdayCounts = {};
+    let currentAssemblyTheme = '';
+    let assemblyInfo = null;
+
+    // Topic structure
+    const mathTopics = {
+      'algebra': { title: 'Algebra' },
+      'real-analysis': { title: 'Real Analysis' },
+      'complex-analysis': { title: 'Complex Analysis' },
+      'odes': { title: 'Ordinary Differential Equations (ODEs)' },
+      'pdes': { title: 'Partial Differential Equations (PDEs)' },
+      'linear-programming': { title: 'Linear Programming & Operations Research' },
+      'multivariable-calculus': { title: 'Calculus of Several Variables' },
+      'numerical-analysis': { title: 'Numerical Analysis' },
+      'topology': { title: 'Topology / Metric Spaces' },
+      'mechanics': { title: 'Mechanics / Classical Mechanics' },
+      'probability': { title: 'Probability & Statistics' },
+      'special-functions': { title: 'Special Functions / Miscellaneous' }
+    };
+
+    // Motivation quotes
+    const motivationQuotes = [
+      {
+        quote: "Education is the most powerful weapon which you can use to change the world.",
+        author: "Nelson Mandela"
+      },
+      {
+        quote: "The beautiful thing about learning is that no one can take it away from you.",
+        author: "B.B. King"
+      },
+      {
+        quote: "The mind is not a vessel to be filled, but a fire to be kindled.",
+        author: "Plutarch"
+      },
+      {
+        quote: "An investment in knowledge pays the best interest.",
+        author: "Benjamin Franklin"
+      },
+      {
+        quote: "The function of education is to teach one to think intensively and to think critically.",
+        author: "Martin Luther King Jr."
+      }
+    ];
+
+    // Helper functions
+    function getClassGroup(className) {
+      if (!className) return '';
+      const classLower = className.toLowerCase().trim();
+      if (classLower.includes('playway')) return 'playway';
+      if (classLower.includes('lkg')) return 'lkg';
+      if (classLower.includes('ukg')) return 'ukg';
+      const classNumber = className.replace(/\D/g, '');
+      if (classNumber >= 1 && classNumber <= 12) return classNumber;
+      return '';
+    }
+
+    function formatDate(dateString) {
+      if (!dateString) return 'Date not specified';
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) return dateString;
+      return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+    }
+
+    function formatShortDate(dateString) {
+      if (!dateString) return 'N/A';
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) return dateString;
+      return date.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric'
+      });
+    }
+
+    // Assembly Theme Sync
+    async function checkAndApplyAssemblyTheme() {
+      try {
+        const today = new Date();
+        const todayFormatted = `${today.getMonth() + 1}/${today.getDate()}/${today.getFullYear()}`;
+        
+        const response = await fetch(ASSEMBLY_SHEET_URL);
+        const assemblyData = await response.json();
+        
+        const todayAssembly = assemblyData.find(row => row.Date === todayFormatted);
+        
+        if (todayAssembly && todayAssembly['Select House']) {
+          const houseName = todayAssembly['Select House'];
+          const themeClass = `theme-${houseName.replace(/\s/g, '-')}`;
+          
+          assemblyInfo = {
+            house: houseName,
+            date: todayFormatted,
+            theme: themeClass
+          };
+          
+          document.body.classList.add(themeClass);
+          currentAssemblyTheme = themeClass;
+          
+          showAssemblyInfoBanner(houseName, todayFormatted);
+        } else {
+          removeAssemblyTheme();
+        }
+      } catch (error) {
+        console.error("Error checking assembly theme:", error);
+        removeAssemblyTheme();
+      }
+    }
+
+    function showAssemblyInfoBanner(houseName, date) {
+      if (document.getElementById('assembly-info-banner')) return;
+      
+      const banner = document.createElement('div');
+      banner.id = 'assembly-info-banner';
+      banner.className = 'assembly-info-banner';
+      
+      const formattedDate = formatDate(date);
+      
+      banner.innerHTML = `
+        <div class="assembly-info-content">
+          <i class="fas fa-calendar-day"></i>
+          <div class="assembly-info-text">
+            <h4>Today's Assembly: ${houseName} House</h4>
+            <p>Date: ${formattedDate}</p>
+          </div>
+        </div>
+        <button class="assembly-close-btn" onclick="closeAssemblyBanner()">
+          <i class="fas fa-times"></i>
+        </button>
+      `;
+      
+      const container = document.querySelector('.container');
+      container.insertBefore(banner, container.firstChild);
+    }
+
+    function closeAssemblyBanner() {
+      const banner = document.getElementById('assembly-info-banner');
+      if (banner) {
+        banner.style.animation = 'slideDown 0.5s ease reverse';
+        setTimeout(() => banner.remove(), 500);
+      }
+    }
+
+    function removeAssemblyTheme() {
+      document.body.classList.remove('theme-Al-Hamrah', 'theme-Azhar', 'theme-Nizamia', 'theme-Qurtaba',
+        'theme-PlayWay', 'theme-LKG', 'theme-UKG', 'theme-1st', 'theme-2nd', 'theme-3rd',
+        'theme-4th', 'theme-5th', 'theme-6th', 'theme-7th', 'theme-8th', 'theme-9th',
+        'theme-10th', 'theme-11th', 'theme-12th');
+      
+      const banner = document.getElementById('assembly-info-banner');
+      if (banner) banner.remove();
+    }
+
+    // Back to Top Button
+    const backToTopBtn = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+      backToTopBtn.classList.toggle('show', window.pageYOffset > 300);
+    });
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Floating Particles
+    function createFloatingParticles() {
+      const particlesContainer = document.querySelector('.floating-particles');
+      for (let i = 0; i < 20; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        const size = Math.random() * 15 + 5;
+        const posX = Math.random() * 100;
+        const posY = Math.random() * 100;
+        const animationDuration = Math.random() * 20 + 15;
+        const colors = ['#a855f7', '#06b6d4', '#f59e0b', '#ef4444'];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${posX}%`;
+        particle.style.top = `${posY}%`;
+        particle.style.animationDuration = `${animationDuration}s`;
+        particle.style.background = color;
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Preloader
+    window.addEventListener('load', function() {
+      const preloader = document.querySelector('.preloader');
+      setTimeout(() => {
+        preloader.style.opacity = '0';
+        setTimeout(() => preloader.style.display = 'none', 500);
+      }, 1000);
+    });
+
+    // Birthday Counts
+    async function loadBirthdayCounts() {
+      try {
+        const res = await fetch(BIRTHDAY_SHEET_URL);
+        const data = await res.json();
+        allBirthdaysData = data;
+        classBirthdayCounts = {};
+        
+        data.forEach(row => {
+          if (row.class) {
+            const className = row.class.trim().toLowerCase();
+            classBirthdayCounts[className] = (classBirthdayCounts[className] || 0) + 1;
+          }
+        });
+      } catch (error) {
+        console.error("Error loading birthday counts:", error);
+      }
+    }
+
+    // Load Classes
+    async function loadClasses() {
+      try {
+        const res = await fetch(CLASS_TEACHER_SHEET_URL);
+        const data = await res.json();
+        const container = document.getElementById("classes-list");
+        let html = '';
+        
+        data.forEach(classData => {
+          if (!classData.Class || !classData["Teacher's name"]) return;
+          
+          const className = classData.Class;
+          const teacherName = classData["Teacher's name"];
+          const dob = classData.dob;
+          const classUrl = classData.url || '#';
+          const classNumber = className.replace(/\D/g, '');
+          const imagePath = `images/${classNumber}.jpg`;
+          const classNameLower = className.toLowerCase().trim();
+          const studentCount = classBirthdayCounts[classNameLower] || 0;
+          const classGroup = getClassGroup(className);
+          
+          // Birthday countdown
+          let countdownText = 'No DOB';
+          let dobDisplay = '';
+          if (dob) {
+            const today = new Date();
+            const birthDate = new Date(dob);
+            const nextBirthday = new Date(today.getFullYear(), birthDate.getMonth(), birthDate.getDate());
+            
+            if (today > nextBirthday) {
+              nextBirthday.setFullYear(nextBirthday.getFullYear() + 1);
+            }
+            
+            const diffTime = nextBirthday - today;
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            countdownText = diffDays === 365 || diffDays === 366 ? 'Today! 🎉' : `${diffDays} days`;
+            dobDisplay = formatShortDate(dob);
+          }
+          
+          // Teacher initials
+          const initials = teacherName.split(' ').map(n => n.charAt(0)).join('').toUpperCase();
+          
+          html += `
+            <div class="class-item class-${classGroup}" data-class="${className}" data-url="${classUrl}">
+              <div class="class-link">
+                <div class="class-header">
+                  <div class="teacher-image-container">
+                    <img src="${imagePath}" alt="${teacherName}" class="teacher-image" 
+                         onerror="this.onerror=null; this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2232%22 height=%2232%22 viewBox=%220 0 32 32%22%3E%3Ccircle cx=%2216%22 cy=%2216%22 r=%2216%22 fill=%22a855f7%22/%3E%3Ctext x=%2216%22 y=%2220%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2210%22 font-weight=%22bold%22 fill=%22white%22%3E${initials}%3C/text%3E%3C/svg%3E'">
+                  </div>
+                  <h3 class="class-title">Class ${className}</h3>
+                </div>
+                
+                <div class="teacher-details">
+                  <div class="teacher-name">
+                    <i class="fas fa-user-tie"></i>
+                    ${teacherName}
+                  </div>
+                  <div class="teacher-subject">Class Teacher</div>
+                  
+                  ${dobDisplay ? `
+                    <div class="teacher-dob">
+                      <i class="fas fa-birthday-cake"></i>
+                      ${dobDisplay}
+                    </div>
+                  ` : ''}
+                </div>
+                
+                <div class="class-stats">
+                  <div class="students-count">
+                    <i class="fas fa-users"></i>
+                    <div class="stats-content">
+                      <div class="stats-number">${studentCount}</div>
+                      <div class="stats-label">Students</div>
+                    </div>
+                  </div>
+                  <div class="birthday-countdown">
+                    <i class="fas fa-birthday-cake"></i>
+                    <div class="stats-content">
+                      <div class="stats-number">${countdownText.split(' ')[0]}</div>
+                      <div class="stats-label">${countdownText.includes('days') ? 'Days' : ''}</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <button class="visit-class-btn">
+                  <i class="fas fa-external-link-alt"></i>
+                  Visit
+                </button>
+              </div>
+              <div class="hold-indicator">Hold for 3s to view students</div>
+            </div>
+          `;
+        });
+        
+        container.innerHTML = html || '<div class="no-classes"><i class="fas fa-exclamation-triangle"></i><p>No class data found.</p></div>';
+        addClassItemEventListeners();
+      } catch (error) {
+        console.error("Error loading classes:", error);
+        document.getElementById("classes-list").innerHTML = '<div class="no-classes"><i class="fas fa-exclamation-triangle"></i><p>Unable to load class data.</p></div>';
+      }
+    }
+
+    // Add event listeners to class items
+    function addClassItemEventListeners() {
+      const classItems = document.querySelectorAll('.class-item');
+      const isTouchDevice = 'ontouchstart' in window;
+      
+      classItems.forEach(item => {
+        const className = item.dataset.class;
+        const classUrl = item.dataset.url;
+        
+        if (!isTouchDevice) {
+          let clickCount = 0;
+          let clickTimer;
+          
+          item.addEventListener('click', function(e) {
+            clickCount++;
+            if (clickCount === 1) {
+              clickTimer = setTimeout(function() {
+                if (classUrl && classUrl !== '#') window.open(classUrl, '_blank');
+                clickCount = 0;
+              }, 300);
+            } else if (clickCount === 2) {
+              clearTimeout(clickTimer);
+              showStudentsPopup(className);
+              clickCount = 0;
+            }
+          });
+        } else {
+          let holdTimer;
+          
+          item.addEventListener('touchstart', function(e) {
+            holdTimer = setTimeout(() => showStudentsPopup(className), 3000);
+          });
+          
+          item.addEventListener('touchend', function(e) {
+            clearTimeout(holdTimer);
+          });
+          
+          item.addEventListener('touchmove', function(e) {
+            clearTimeout(holdTimer);
+          });
+          
+          item.addEventListener('click', function(e) {
+            if (classUrl && classUrl !== '#') window.open(classUrl, '_blank');
+          });
+        }
+      });
+    }
+
+    // Load Birthdays
+    async function loadBirthdays() {
+      try {
+        const res = await fetch(BIRTHDAY_SHEET_URL);
+        const data = await res.json();
+        
+        const today = new Date();
+        const currentMonth = today.getMonth() + 1;
+        const currentDate = today.getDate();
+        const todayList = [];
+        const upcoming = [];
+
+        data.forEach(row => {
+          if (!row.dob) return;
+          
+          let mm, dd;
+          if (row.dob.includes('-')) {
+            const parts = row.dob.split('-');
+            if (parts[0].length === 2) {
+              mm = parseInt(parts[0]);
+              dd = parseInt(parts[1]);
+            } else if (parts[1].length === 2) {
+              dd = parseInt(parts[0]);
+              mm = parseInt(parts[1]);
+            }
+          }
+
+          if (!mm || !dd) return;
+          
+          const dob = new Date(today.getFullYear(), mm - 1, dd);
+          const showDate = `${String(dd).padStart(2, '0')}-${dob.toLocaleString('default', { month: 'short' })}`;
+
+          if (dd === currentDate && mm === currentMonth) {
+            const classGroup = getClassGroup(row.class);
+            todayList.push({
+              admission: row.admission,
+              name: row.name,
+              class: row.class,
+              father: row.father,
+              mother: row.mother,
+              showDate: showDate,
+              classGroup: classGroup
+            });
+          } else {
+            const diff = (dob - today) / (1000 * 60 * 60 * 24);
+            if (diff > 0 && diff <= 7) {
+              const classGroup = getClassGroup(row.class);
+              upcoming.push({
+                admission: row.admission,
+                name: row.name,
+                class: row.class,
+                father: row.father,
+                mother: row.mother,
+                showDate: showDate,
+                classGroup: classGroup
+              });
+            }
+          }
+        });
+
+        const listDiv = document.getElementById("birthday-list");
+        
+        if (todayList.length) {
+          let html = '';
+          todayList.forEach(birthday => {
+            const className = `class-${birthday.classGroup}`;
+            const imageUrl = `images/${birthday.admission}.jpg`;
+            
+            html += `
+              <div class="birthday-card ${className} today">
+                <div class="birthday-badge"><i class="fas fa-birthday-cake"></i></div>
+                <img src="${imageUrl}" alt="${birthday.name}" class="student-image" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22%3E%3Ccircle cx=%2230%22 cy=%2230%22 r=%2230%22 fill=%22%23a855f7%22/%3E%3Ctext x=%2230%22 y=%2235%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2210%22 fill=%22white%22%3EPhoto%3C/text%3E%3C/svg%3E'">
+                <div class="student-name">${birthday.name}</div>
+                <div class="student-class">Class ${birthday.class}</div>
+                <div class="parent-info">
+                  <div><i class="fas fa-user"></i> ${birthday.father || 'N/A'}</div>
+                  <div><i class="fas fa-user"></i> ${birthday.mother || 'N/A'}</div>
+                </div>
+                <div class="birthday-date">🎂 ${birthday.showDate}</div>
+              </div>
+            `;
+          });
+          listDiv.innerHTML = html;
+        } else if (upcoming.length) {
+          let html = '<div class="no-birthdays"><i class="fas fa-calendar-day"></i><p>No birthdays today</p></div>';
+          
+          html += '<div style="margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--card-border);">';
+          html += '<h4 style="font-size: 0.9rem; margin-bottom: 8px; color: var(--primary-light);">Upcoming This Week:</h4>';
+          
+          upcoming.forEach(birthday => {
+            const className = `class-${birthday.classGroup}`;
+            const imageUrl = `images/${birthday.admission}.jpg`;
+            
+            html += `
+              <div class="birthday-card ${className}" style="margin-bottom: 8px;">
+                <img src="${imageUrl}" alt="${birthday.name}" class="student-image" onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22%3E%3Ccircle cx=%2230%22 cy=%2230%22 r=%2230%22 fill=%22%23a855f7%22/%3E%3Ctext x=%2230%22 y=%2235%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2210%22 fill=%22white%22%3EPhoto%3C/text%3E%3C/svg%3E'">
+                <div class="student-name">${birthday.name}</div>
+                <div class="student-class">Class ${birthday.class}</div>
+                <div class="birthday-date">📅 ${birthday.showDate}</div>
+              </div>
+            `;
+          });
+          
+          html += '</div>';
+          listDiv.innerHTML = html;
+        } else {
+          listDiv.innerHTML = '<div class="no-birthdays"><i class="fas fa-calendar-times"></i><p>No birthdays today or this week.</p></div>';
+        }
+        
+        // Add click event to birthday cards
+        document.querySelectorAll('.birthday-card').forEach(card => {
+          card.addEventListener('click', function(e) {
+            if (!e.target.closest('a')) {
+              showCurrentMonthBirthdays();
+            }
+          });
+        });
+      } catch (error) {
+        console.error("Error loading birthdays:", error);
+        document.getElementById("birthday-list").innerHTML = 
+          '<div class="no-birthdays"><i class="fas fa-exclamation-triangle"></i><p>Unable to load birthday data.</p></div>';
+      }
+    }
+
+    // Load Quick Resources
+    async function loadQuickResources() {
+      try {
+        const res = await fetch(RESOURCE_SHEET_URL);
+        const data = await res.json();
+        const container = document.getElementById("quick-resources");
+        
+        container.innerHTML = data.map(r => {
+          const isCode = r.codes && r.codes.trim() !== '';
+          const action = isCode ? `runCode('${r.button.replace(/'/g, "\\'")}', '${r.codes.replace(/'/g, "\\'")}')` : `window.open('${r.link}', '_blank')`;
+          const icon = r.logo ? `<i class="${r.logo}"></i>` : (isCode ? '<i class="fas fa-code"></i>' : '<i class="fas fa-link"></i>');
+          const cssClasses = r.css ? 'resource-item ' + r.css.split(' ').map(c => c.trim()).join(' ') : 'resource-item';
+          
+          return `
+            <a href="#" class="${cssClasses}" onclick="event.preventDefault(); ${action}">
+              ${icon}
+              <span>${r.button || 'Resource'}</span>
+            </a>
+          `;
+        }).join('');
+      } catch (error) {
+        console.error("Error loading quick resources:", error);
+        document.getElementById("quick-resources").innerHTML = '<div class="error-message"><i class="fas fa-exclamation-triangle"></i><p>Unable to load resources.</p></div>';
+      }
+    }
+
+    // Code Runner
+    function runCode(title, code) {
+      const modal = document.createElement('div');
+      modal.style.cssText = `
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+        background: var(--darker); z-index: 2000; display: flex; flex-direction: column;
+      `;
+      
+      const header = document.createElement('div');
+      header.style.cssText = `
+        background: var(--card-bg); padding: 10px 15px; 
+        border-bottom: 1px solid var(--card-border); display: flex; align-items: center; gap: 10px;
+      `;
+      
+      const backBtn = document.createElement('button');
+      backBtn.innerHTML = '<i class="fas fa-arrow-left"></i> Back';
+      backBtn.style.cssText = `
+        background: var(--gradient-primary); color: white; border: none; 
+        padding: 8px 12px; border-radius: 6px; font-weight: 600; cursor: pointer;
+        display: flex; align-items: center; gap: 5px; font-size: 0.9rem;
+      `;
+      backBtn.onclick = () => document.body.removeChild(modal);
+      
+      const titleEl = document.createElement('h3');
+      titleEl.textContent = title;
+      titleEl.style.cssText = 'margin: 0; color: var(--light); font-size: 1rem;';
+      
+      const iframe = document.createElement('iframe');
+      iframe.style.cssText = 'flex: 1; width: 100%; border: none; background: white;';
+      
+      header.appendChild(backBtn);
+      header.appendChild(titleEl);
+      modal.appendChild(header);
+      modal.appendChild(iframe);
+      document.body.appendChild(modal);
+      
+      setTimeout(() => {
+        iframe.contentWindow.document.open();
+        iframe.contentWindow.document.write(code);
+        iframe.contentWindow.document.close();
+      }, 100);
+    }
+
+    // Math Functions
+    async function loadMathDataFromGoogleSheets() {
+      try {
+        const response = await fetch(MATH_SHEET_URL);
+        const data = await response.json();
+        mathYoutubeLinks = {};
+        
+        data.forEach(row => {
+          const topicId = row['Topic ID'];
+          const subtopicName = row['Subtopic Name'];
+          const videoTitle = row['Video Title'];
+          const youtubeUrl = row['YouTube URL'];
+          
+          if (topicId && subtopicName && videoTitle && youtubeUrl) {
+            if (!mathYoutubeLinks[topicId]) mathYoutubeLinks[topicId] = {};
+            if (!mathYoutubeLinks[topicId][subtopicName]) mathYoutubeLinks[topicId][subtopicName] = [];
+            
+            mathYoutubeLinks[topicId][subtopicName].push({
+              title: videoTitle,
+              url: youtubeUrl
+            });
+          }
+        });
+      } catch (error) {
+        console.error('Error loading math data:', error);
+        throw error;
+      }
+    }
+
+    async function openMathModal(topicId) {
+      const modal = document.getElementById('mathModal');
+      const modalTitle = document.getElementById('mathModalTitle');
+      const modalContent = document.getElementById('mathModalContent');
+      
+      if (mathTopics[topicId]) {
+        modalTitle.textContent = mathTopics[topicId].title;
+        modalContent.innerHTML = '<div class="loading"><i class="fas fa-spinner"></i> Loading...</div>';
+        modal.style.display = 'flex';
+        
+        try {
+          if (Object.keys(mathYoutubeLinks).length === 0) {
+            await loadMathDataFromGoogleSheets();
+          }
+          displayMathModalContent(topicId, modalContent);
+        } catch (error) {
+          modalContent.innerHTML = `
+            <div class="error-message">
+              <i class="fas fa-exclamation-triangle"></i>
+              <p>Error loading data: ${error.message}</p>
+            </div>
+          `;
+        }
+      }
+    }
+
+    function displayMathModalContent(topicId, modalContent) {
+      let contentHTML = '';
+      
+      if (mathYoutubeLinks[topicId] && Object.keys(mathYoutubeLinks[topicId]).length > 0) {
+        contentHTML = '<div style="display: flex; flex-direction: column; gap: 10px;">';
+        
+        Object.keys(mathYoutubeLinks[topicId]).forEach(subtopic => {
+          contentHTML += `
+            <div style="background: rgba(168, 85, 247, 0.1); padding: 12px; border-radius: 8px; border-left: 3px solid var(--primary);">
+              <h4 style="margin: 0 0 10px 0; color: var(--light); font-size: 1rem;">
+                <i class="fas fa-book"></i> ${subtopic}
+              </h4>
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+          `;
+          
+          mathYoutubeLinks[topicId][subtopic].forEach(link => {
+            contentHTML += `
+              <a href="${link.url}" target="_blank" style="
+                color: var(--primary-light); text-decoration: none; font-size: 0.9rem;
+                display: flex; align-items: center; gap: 8px; padding: 8px 10px;
+                border-radius: 6px; background: rgba(168, 85, 247, 0.1);
+                border: 1px solid var(--card-border); transition: all 0.3s ease;
+              " onmouseover="this.style.background='rgba(168, 85, 247, 0.2)';" 
+              onmouseout="this.style.background='rgba(168, 85, 247, 0.1)';">
+                <i class="fab fa-youtube" style="color: #ff0000;"></i>
+                ${link.title}
+              </a>
+            `;
+          });
+          
+          contentHTML += '</div></div>';
+        });
+        
+        contentHTML += '</div>';
+      } else {
+        contentHTML = `
+          <div class="error-message">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>No YouTube links found for "${mathTopics[topicId].title}"</p>
+          </div>
+        `;
+      }
+      
+      modalContent.innerHTML = contentHTML;
+    }
+
+    function closeMathModal() {
+      document.getElementById('mathModal').style.display = 'none';
+    }
+
+    // Daily Motivation
+    function setDailyMotivation() {
+      const today = new Date();
+      const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 1000 / 60 / 60 / 24);
+      const quoteIndex = dayOfYear % motivationQuotes.length;
+      
+      document.getElementById('daily-quote').textContent = `"${motivationQuotes[quoteIndex].quote}"`;
+      document.getElementById('quote-author').textContent = `- ${motivationQuotes[quoteIndex].author}`;
+    }
+
+    // Popup Functions
+    function openPopup(id) {
+      document.getElementById(id).style.display = "flex";
+    }
+
+    function closePopup(id) {
+      document.getElementById(id).style.display = "none";
+    }
+
+    // Students Popup
+    function showStudentsPopup(className) {
+      const students = allBirthdaysData.filter(row => 
+        row.class && row.class.trim().toLowerCase() === className.toLowerCase()
+      );
+      
+      document.getElementById('students-popup-title').innerHTML = 
+        `<i class="fas fa-users"></i> Class ${className} Students`;
+      
+      let studentsHTML = '';
+      
+      if (students.length > 0) {
+        students.forEach(student => {
+          const imageUrl = `images/${student.admission || ''}.jpg`;
+          const classGroup = getClassGroup(student.class);
+          
+          studentsHTML += `
+            <div style="background: rgba(168, 85, 247, 0.1); border-radius: 8px; padding: 12px; border: 1px solid var(--card-border);">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                <img src="${imageUrl}" alt="${student.name}" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary);"
+                     onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22 viewBox=%220 0 40 40%22%3E%3Ccircle cx=%2220%22 cy=%2220%22 r=%2220%22 fill=%22%23a855f7%22/%3E%3Ctext x=%2220%22 y=%2224%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2210%22 fill=%22white%22%3EPhoto%3C/text%3E%3C/svg%3E'">
+                <div>
+                  <div style="font-weight: 700; color: var(--light); font-size: 0.9rem;">${student.name || 'Unknown'}</div>
+                  <div style="font-size: 0.8rem; color: var(--light-muted);">Admission: ${student.admission || 'N/A'}</div>
+                </div>
+              </div>
+              <div style="background: rgba(168, 85, 247, 0.2); color: var(--primary-light); padding: 4px 8px; border-radius: 15px; font-size: 0.8rem; font-weight: 600; display: inline-block;">
+                Class ${student.class}
+              </div>
+            </div>
+          `;
+        });
+      } else {
+        studentsHTML = `
+          <div style="text-align: center; padding: 20px; color: var(--light-muted);">
+            <i class="fas fa-user-slash" style="font-size: 2rem; margin-bottom: 10px;"></i>
+            <p>No students found for Class ${className}.</p>
+          </div>
+        `;
+      }
+      
+      document.getElementById('students-list-content').innerHTML = studentsHTML;
+      openPopup('students-popup');
+    }
+
+    // Current Month Birthdays
+    function showCurrentMonthBirthdays() {
+      const today = new Date();
+      const currentMonth = today.getMonth() + 1;
+      
+      const monthBirthdays = allBirthdaysData.filter(row => {
+        if (!row.dob) return false;
+        
+        let mm;
+        if (row.dob.includes('-')) {
+          const parts = row.dob.split('-');
+          if (parts[0].length === 2) {
+            mm = parseInt(parts[0]);
+          } else if (parts[1].length === 2) {
+            mm = parseInt(parts[1]);
+          }
+        }
+        
+        return mm === currentMonth;
+      });
+      
+      let birthdaysHTML = '';
+      
+      if (monthBirthdays.length > 0) {
+        monthBirthdays.forEach(birthday => {
+          const imageUrl = `images/${birthday.admission || ''}.jpg`;
+          const classGroup = getClassGroup(birthday.class);
+          const dob = new Date(birthday.dob);
+          const showDate = `${String(dob.getDate()).padStart(2, '0')}-${dob.toLocaleString('default', { month: 'short' })}`;
+          
+          birthdaysHTML += `
+            <div style="background: rgba(168, 85, 247, 0.1); border-radius: 8px; padding: 12px; border: 1px solid var(--card-border);">
+              <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+                <img src="${imageUrl}" alt="${birthday.name}" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid var(--primary);"
+                     onerror="this.src='data:image/svg+xml;charset=UTF-8,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2240%22 height=%2240%22 viewBox=%220 0 40 40%22%3E%3Ccircle cx=%2220%22 cy=%2220%22 r=%2220%22 fill=%22%23a855f7%22/%3E%3Ctext x=%2220%22 y=%2224%22 text-anchor=%22middle%22 font-family=%22Arial%22 font-size=%2210%22 fill=%22white%22%3EPhoto%3C/text%3E%3C/svg%3E'">
+                <div>
+                  <div style="font-weight: 700; color: var(--light); font-size: 0.9rem;">${birthday.name || 'Unknown'}</div>
+                  <div style="font-size: 0.8rem; color: var(--light-muted);">Class: ${birthday.class || 'N/A'}</div>
+                </div>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 8px;">
+                <div style="background: rgba(168, 85, 247, 0.2); color: var(--primary-light); padding: 4px 8px; border-radius: 15px; font-size: 0.8rem; font-weight: 600;">
+                  ${showDate}
+                </div>
+                <div style="font-size: 0.8rem; color: var(--light-muted);">${birthday.father ? birthday.father.split(' ')[0] : ''}</div>
+              </div>
+            </div>
+          `;
+        });
+      } else {
+        birthdaysHTML = `
+          <div style="text-align: center; padding: 20px; color: var(--light-muted);">
+            <i class="fas fa-calendar-times" style="font-size: 2rem; margin-bottom: 10px;"></i>
+            <p>No birthdays this month.</p>
+          </div>
+        `;
+      }
+      
+      document.getElementById('month-birthdays-content').innerHTML = birthdaysHTML;
+      openPopup('birthday-popup');
+    }
+
+    // Notices Popup (simplified)
+    async function loadNotices() {
+      try {
+        const response = await fetch(NOTICES_SHEET_URL);
+        const data = await response.json();
+        
+        let noticesHTML = '';
+        data.forEach(notice => {
+          const isToday = new Date(notice.Date).toDateString() === new Date().toDateString();
+          
+          noticesHTML += `
+            <div style="background: var(--card-bg); border-radius: 8px; padding: 12px; margin-bottom: 10px; border: 1px solid var(--card-border);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                <h4 style="margin: 0; color: var(--light); font-size: 0.95rem;">${notice.Title || 'Untitled Notice'}</h4>
+                ${isToday ? '<span style="background: var(--accent); color: white; padding: 2px 6px; border-radius: 10px; font-size: 0.7rem; font-weight: 600;">TODAY</span>' : ''}
+              </div>
+              <div style="font-size: 0.8rem; color: var(--light-muted); margin-bottom: 8px;">
+                <i class="fas fa-calendar"></i> ${formatDate(notice.Date)}
+                ${notice.Class ? ` | <i class="fas fa-school"></i> ${notice.Class}` : ''}
+              </div>
+              <div style="font-size: 0.85rem; color: var(--light); margin-bottom: 10px; line-height: 1.4;">
+                ${notice.Content || 'No content available.'}
+              </div>
+              ${notice['File Link (Optional)'] || notice['Image Link (Fixed)'] ? `
+                <div style="display: flex; gap: 8px; margin-top: 10px;">
+                  ${notice['File Link (Optional)'] ? `
+                    <a href="${notice['File Link (Optional)']}" target="_blank" style="
+                      background: var(--success); color: white; padding: 6px 10px; 
+                      border-radius: 6px; text-decoration: none; font-size: 0.8rem; font-weight: 600;
+                      display: flex; align-items: center; gap: 5px;">
+                      <i class="fas fa-file-download"></i> File
+                    </a>
+                  ` : ''}
+                  ${notice['Image Link (Fixed)'] ? `
+                    <a href="${notice['Image Link (Fixed)']}" target="_blank" style="
+                      background: var(--primary); color: white; padding: 6px 10px; 
+                      border-radius: 6px; text-decoration: none; font-size: 0.8rem; font-weight: 600;
+                      display: flex; align-items: center; gap: 5px;">
+                      <i class="fas fa-image"></i> Image
+                    </a>
+                  ` : ''}
+                </div>
+              ` : ''}
+            </div>
+          `;
+        });
+        
+        document.getElementById('notices-content').innerHTML = noticesHTML || '<div style="text-align: center; padding: 20px; color: var(--light-muted);">No notices available.</div>';
+      } catch (error) {
+        console.error('Error loading notices:', error);
+        document.getElementById('notices-content').innerHTML = '<div style="text-align: center; padding: 20px; color: var(--danger);">Failed to load notices.</div>';
+      }
+    }
+
+    // Math dropdown
+    document.getElementById('math-dropdown').onchange = (e) => {
+      if (e.target.value) openMathModal(e.target.value);
+      e.target.selectedIndex = 0;
+    };
+
+    // Notice button
+    document.querySelector('.notice-btn').addEventListener('click', function(e) {
+      e.preventDefault();
+      openPopup('notices-popup');
+      loadNotices();
+    });
+
+    // Close popups when clicking outside
+    document.addEventListener('click', (event) => {
+      if (event.target.classList.contains('popup') || event.target.classList.contains('modal')) {
+        event.target.style.display = 'none';
+      }
+    });
+
+    // Escape key to close popups
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeMathModal();
+        document.querySelectorAll('.popup, .modal').forEach(el => {
+          el.style.display = 'none';
+        });
+      }
+    });
+
+    // Initialize everything
+    document.addEventListener('DOMContentLoaded', async () => {
+      // Initialize theme first
+      initializeTheme();
+      checkThemePeriodically();
+      
+      createFloatingParticles();
+      
+      await checkAndApplyAssemblyTheme();
+      await loadBirthdayCounts();
+      
+      loadClasses();
+      loadBirthdays();
+      loadQuickResources();
+      setDailyMotivation();
+    });
+  </script>
+</body>
+</html>

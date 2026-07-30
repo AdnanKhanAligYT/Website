@@ -1,0 +1,49 @@
+{
+    "id": "7d9cd00c-3633-43ac-9faa-dc9e9a654a64",
+    "subjectId": "349b6112-ad37-421c-ac23-0cedcbf7e23b",
+    "name": "Units",
+    "description": "",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [
+        {
+            "id": "79c3f61b-30c4-4786-b599-9c70c13a2ea2",
+            "path": "data/images/7d9cd00c-3633-43ac-9faa-dc9e9a654a64/79c3f61b-30c4-4786-b599-9c70c13a2ea2.png",
+            "mimeType": "image/png",
+            "addedAt": "2026-06-08 11:52"
+        },
+        {
+            "id": "183b3987-cde8-4a10-b0fb-75b145522622",
+            "path": "data/images/7d9cd00c-3633-43ac-9faa-dc9e9a654a64/183b3987-cde8-4a10-b0fb-75b145522622.png",
+            "mimeType": "image/png",
+            "addedAt": "2026-06-08 11:53"
+        }
+    ],
+    "createdAt": "2026-06-08 11:49",
+    "updatedAt": "2026-06-22 04:25:00",
+    "revisionHistory": [
+        {
+            "id": "736525e7-b73e-47cb-95cc-0ea479e07b82",
+            "date": "2026-06-15",
+            "time": "2026-06-15 10:07",
+            "note": "Auto: 7 din baad revision scheduled",
+            "type": "auto-revision"
+        },
+        {
+            "id": "d027eae7-d9f5-4cbe-930d-04dd30882cb1",
+            "date": "2026-06-17",
+            "time": "2026-06-17 08:50",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "4045e5ec-7633-4b68-b7e3-91dc419b78db",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "links": [],
+    "pdfs": []
+}

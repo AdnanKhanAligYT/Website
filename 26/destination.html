@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adnan की नवीनतम लोकेशन</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f7fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 16px;
+            box-sizing: border-box;
+        }
+        .card {
+            background: white;
+            max-width: 550px;
+            width: 100%;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -8px rgba(0,20,40,0.25);
+            padding: 24px 24px 32px 24px;
+            transition: all 0.2s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            border-bottom: 2px solid #eef2f6;
+            padding-bottom: 16px;
+        }
+        .header-icon {
+            background: #d0e2ff;
+            width: 48px;
+            height: 48px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: #1e293b;
+            letter-spacing: -0.02em;
+        }
+        .badge {
+            background: #e6f0ff;
+            color: #004e9e;
+            padding: 6px 12px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 20px;
+            border: 1px solid #b9d6ff;
+        }
+        .info-panel {
+            background: #f8fafc;
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 24px;
+            border: 1px solid #e9edf2;
+        }
+        .meta-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 16px;
+            color: #334155;
+            font-size: 0.95rem;
+        }
+        .date-time {
+            display: flex;
+            gap: 15px;
+            background: white;
+            padding: 10px 16px;
+            border-radius: 40px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.02);
+        }
+        .date-time span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .teacher-name {
+            background: #eaf9ed;
+            color: #1e7b48;
+            padding: 6px 16px;
+            border-radius: 40px;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+        .coords-box {
+            background: white;
+            border-radius: 20px;
+            padding: 14px 18px;
+            margin: 20px 0 18px 0;
+            border: 1px dashed #b9c7d9;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .coords-text {
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #0b2b4a;
+            word-break: break-word;
+        }
+        .copy-btn {
+            background: #eef2f6;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #1e293b;
+            cursor: pointer;
+            transition: 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid #ccd8e4;
+        }
+        .copy-btn:hover {
+            background: #e2e8f0;
+            border-color: #94a3b8;
+        }
+        .copy-btn.copied {
+            background: #ddf3e4;
+            color: #1e7b48;
+            border-color: #54b983;
+        }
+        .map-link {
+            display: block;
+            background: #1e293b;
+            text-decoration: none;
+            color: white;
+            padding: 18px 22px;
+            border-radius: 50px;
+            font-weight: 550;
+            font-size: 1.2rem;
+            text-align: center;
+            transition: 0.15s;
+            border: 2px solid #1e293b;
+            box-shadow: 0 4px 10px rgba(0,40,80,0.2);
+        }
+        .map-link:hover {
+            background: #0f172a;
+            border-color: #2563eb;
+            transform: scale(1.01);
+        }
+        .map-link span {
+            font-size: 1.5rem;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        .footer-note {
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-top: 22px;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 16px;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px 20px;
+            color: #475569;
+            font-size: 1.1rem;
+        }
+        .error-message {
+            background: #fee9e7;
+            border: 1px solid #f3b5ab;
+            color: #a12b1a;
+            padding: 18px;
+            border-radius: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="card" id="mainCard">
+        <div class="header">
+            <div class="header-icon">📍</div>
+            <h1>Adnan की लोकेशन</h1>
+        </div>
+
+        <!-- यहाँ डेटा डायनेमिक रूप से दिखेगा -->
+        <div id="contentArea">
+            <div class="loading">
+                <span style="font-size:20px;">⏳</span><br>
+                Google Sheet से नवीनतम डेटा लोड हो रहा है...
+            </div>
+        </div>
+
+        <div class="footer-note">
+            ⚡ सबसे नया डेटा अपने आप दिखेगा • कोऑर्डिनेट कॉपी करने के लिए क्लिक करें
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // 📌 Google Sheet की सेटिंग (हमेशा public रहेगी)
+            const SHEET_ID = '1X4w0sjsLjVpYbfepXcDi4cVvDLzm1alYvyND8TwyPwo';
+            const SHEET_NAME = 'Location';  // शीट का नाम 'Location' कर दिया गया है
+            // हम sheet को CSV के रूप में fetch करेंगे (CORS के लिए सबसे सरल)
+            const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${encodeURIComponent(SHEET_NAME)}`;
+
+            const contentDiv = document.getElementById('contentArea');
+
+            // 📋 कॉपी करने का फंक्शन
+            function copyCoordinates(lat, lng, buttonElement) {
+                const textToCopy = `${lat}, ${lng}`;
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        // बटन की स्टाइल बदलें
+                        const originalText = buttonElement.innerText;
+                        buttonElement.innerText = '✅ कॉपी हुआ!';
+                        buttonElement.classList.add('copied');
+                        setTimeout(() => {
+                            buttonElement.innerText = originalText;
+                            buttonElement.classList.remove('copied');
+                        }, 2000);
+                    }).catch(() => {
+                        alert('कॉपी नहीं हो सका, मैन्युअली कॉपी करें: ' + textToCopy);
+                    });
+                } else {
+                    // पुराने ब्राउज़र के लिए
+                    const textArea = document.createElement('textarea');
+                    textArea.value = textToCopy;
+                    document.body.appendChild(textArea);
+                    textArea.select();
+                    try {
+                        document.execCommand('copy');
+                        buttonElement.innerText = '✅ कॉपी हुआ!';
+                        buttonElement.classList.add('copied');
+                        setTimeout(() => {
+                            buttonElement.innerText = '📋 कॉपी करें';
+                            buttonElement.classList.remove('copied');
+                        }, 2000);
+                    } catch (err) {
+                        alert('कॉपी नहीं हो सका: ' + textToCopy);
+                    }
+                    document.body.removeChild(textArea);
+                }
+            }
+
+            // 📥 डेटा फ़ेच और पार्स करना
+            async function fetchLatestAdnan() {
+                try {
+                    const response = await fetch(CSV_URL);
+                    
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    
+                    const csvText = await response.text();
+                    
+                    // CSV को पार्स करें
+                    const rows = csvText.split('\n').filter(row => row.trim() !== '');
+                    if (rows.length < 2) {
+                        throw new Error('Sheet में कोई डेटा नहीं मिला');
+                    }
+
+                    // हेडर (पहली पंक्ति) को पार्स करें — CSV में कोट्स हो सकते हैं
+                    const header = rows[0].split(',').map(h => h.replace(/^"|"$/g, '').trim());
+                    
+                    // हेडर इंडेक्स खोजें — बिल्कुल सही मैच करने के लिए (केस-इनसेंसिटिव)
+                    const findIndex = (name) => {
+                        return header.findIndex(h => h.trim().toLowerCase() === name.toLowerCase());
+                    };
+
+                    const dateIdx = findIndex('Date');
+                    const timeIdx = findIndex('Time');
+                    const teacherIdx = findIndex('Teacher');
+                    const latIdx = findIndex('Lat');
+                    const lngIdx = findIndex('Lng');
+
+                    if (dateIdx === -1 || timeIdx === -1 || teacherIdx === -1 || latIdx === -1 || lngIdx === -1) {
+                        console.error('हेडर पार्सिंग:', header);
+                        throw new Error('आवश्यक कॉलम (Date, Time, Teacher, Lat, Lng) नहीं मिले');
+                    }
+
+                    // डेटा पंक्तियों को पार्स करें, और Adnan की सारी एंट्री इकट्ठा करें
+                    let adnanEntries = [];
+                    
+                    for (let i = 1; i < rows.length; i++) {
+                        // सही CSV पार्सिंग के लिए: लाइन को पूरा पढ़ें, लेकिन कोट्स को हटाएं
+                        // नोट: अगर वैल्यू में कॉमा है तो यह साधारण तरीका फेल हो सकता है, पर हमारे डेटा में ऐसा नहीं है
+                        const cols = rows[i].split(',').map(c => c.replace(/^"|"$/g, '').trim());
+                        
+                        // सुनिश्चित करें कि सभी आवश्यक कॉलम मौजूद हैं
+                        if (cols.length <= Math.max(dateIdx, timeIdx, teacherIdx, latIdx, lngIdx)) continue;
+
+                        const teacher = cols[teacherIdx]?.toLowerCase().trim() || '';
+                        
+                        // सिर्फ 'adnan' वाली पंक्तियाँ (case insensitive) - पूरा नाम या आंशिक
+                        if (teacher.includes('adnan')) {
+                            const dateRaw = cols[dateIdx] || '';
+                            const timeRaw = cols[timeIdx] || '';
+                            
+                            // अगर डेट या टाइम खाली है तो छोड़ें
+                            if (!dateRaw || !timeRaw) continue;
+
+                            // हम पूरा टाइमस्टैम्प बनाते हैं जिससे सॉर्ट कर सकें (मानते हैं डेट dd/mm/yyyy है)
+                            const dateParts = dateRaw.split('/');
+                            
+                            // अलग-अलग डेट फॉर्मेट को हैंडल करें (dd/mm/yyyy या mm/dd/yyyy या yyyy-mm-dd)
+                            let sortable;
+                            if (dateParts.length === 3) {
+                                if (dateParts[0].length === 4) { // yyyy-mm-dd format
+                                    sortable = `${dateParts[0]}-${dateParts[1]}-${dateParts[2]}T${timeRaw}`;
+                                } else if (dateParts[2].length === 4) { // dd/mm/yyyy
+                                    sortable = `${dateParts[2]}-${dateParts[1]}-${dateParts[0]}T${timeRaw}`;
+                                } else { // mm/dd/yyyy
+                                    sortable = `${dateParts[2]}-${dateParts[0]}-${dateParts[1]}T${timeRaw}`;
+                                }
+                            } else {
+                                // अगर पार्स नहीं हो सका तो जैसे है वैसे रखें
+                                sortable = dateRaw + 'T' + timeRaw;
+                            }
+
+                            adnanEntries.push({
+                                raw: cols,
+                                date: dateRaw,
+                                time: timeRaw,
+                                sortKey: sortable,
+                                lat: cols[latIdx],
+                                lng: cols[lngIdx]
+                            });
+                        }
+                    }
+
+                    if (adnanEntries.length === 0) {
+                        throw new Error('Adnan के लिए कोई एंट्री नहीं मिली');
+                    }
+
+                    // सबसे नया डेटा पाने के लिए sortKey के हिसाब से घटते क्रम में सॉर्ट करें
+                    adnanEntries.sort((a, b) => {
+                        // अगर sortKey वैलिड ISO नहीं है तो localeCompare काम करेगा
+                        return b.sortKey.localeCompare(a.sortKey);
+                    });
+                    
+                    const latest = adnanEntries[0]; // सबसे नया
+
+                    return {
+                        date: latest.date,
+                        time: latest.time,
+                        lat: latest.lat,
+                        lng: latest.lng
+                    };
+
+                } catch (error) {
+                    console.error('Fetch error:', error);
+                    throw error;
+                }
+            }
+
+            // 🖼️ UI रेंडर करें
+            function renderData(data) {
+                if (!data) {
+                    contentDiv.innerHTML = `<div class="error-message">
+                        ❌ कोई डेटा उपलब्ध नहीं है।<br>
+                        <small>शीट "${SHEET_NAME}" में Adnan की एंट्री चेक करें</small>
+                    </div>`;
+                    return;
+                }
+
+                const { date, time, lat, lng } = data;
+                
+                // कोऑर्डिनेट्स को वैलिडेट करें - अगर संख्या नहीं है तो भी दिखाएँ
+                const mapsUrl = `https://www.google.com/maps?q=${encodeURIComponent(lat)},${encodeURIComponent(lng)}`;
+
+                // ह्यूमन रीडेबल फॉर्मेट में दिखाएँ
+                const html = `
+                    <div class="badge">
+                        <span>📍 सबसे नया रिकॉर्ड (नवीनतम समय)</span>
+                    </div>
+                    <div class="info-panel">
+                        <div class="meta-row">
+                            <div class="date-time">
+                                <span>📅 ${date}</span>
+                                <span>⏱️ ${time}</span>
+                            </div>
+                            <div class="teacher-name">
+                                👤 Adnan
+                            </div>
+                        </div>
+                        
+                        <div class="coords-box">
+                            <span class="coords-text">${lat}, ${lng}</span>
+                            <button class="copy-btn" id="copyCoordsBtn">📋 कॉपी करें</button>
+                        </div>
+
+                        <a href="${mapsUrl}" target="_blank" class="map-link">
+                            <span>🗺️</span> Google Maps पर देखें
+                        </a>
+                    </div>
+                `;
+
+                contentDiv.innerHTML = html;
+
+                // कॉपी बटन का इवेंट हैंडलर
+                document.getElementById('copyCoordsBtn').addEventListener('click', (e) => {
+                    copyCoordinates(lat, lng, e.currentTarget);
+                });
+            }
+
+            // ⚡ मेन फंक्शन: लोड और रेंडर
+            function loadAndDisplay() {
+                fetchLatestAdnan()
+                    .then(data => renderData(data))
+                    .catch(err => {
+                        contentDiv.innerHTML = `<div class="error-message">
+                            ⚠️ डेटा लोड नहीं हो सका<br>
+                            <small>${err.message || 'शीट का लिंक या नाम चेक करें'}</small><br>
+                            <small style="display:block; margin-top:8px;">शीट का नाम: "${SHEET_NAME}" होना चाहिए</small>
+                        </div>`;
+                    });
+            }
+
+            // पेज लोड होते ही फ़ेच करें
+            loadAndDisplay();
+
+        })();
+    </script>
+</body>
+</html>

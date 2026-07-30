@@ -1,0 +1,29 @@
+{
+    "id": "4c595cbc-97af-4c3c-9bb1-7a893b0bd0f1",
+    "subjectId": "594ab60f-da93-4cf7-91da-12a1ae3fb73e",
+    "name": "मूल प्रवृत्तियाँ (Instincts) – विलियम मैकडूगल (William McDougall)",
+    "description": "1. पलायन (Flight) → भय (Fear)\n2. युयुत्सा (Combat) → क्रोध (Anger)\n3. जिज्ञासा (Curiosity) → आश्चर्य (Wonder)\n4. निवृत्ति (Repulsion) → घृणा (Disgust)\n5. आत्मगौरव (Self-Assertion) → गर्व (Pride)\n6. आत्महीनता (Self-Abasement) → लज्जा (Shame)\n7. पितृत्व/मातृत्व (Parental) → वात्सल्य (Tenderness)\n8. संघ प्रवृत्ति (Gregariousness) → अकेलेपन से बचना\n9. संग्रह प्रवृत्ति (Acquisitiveness) → स्वामित्व भावना\n10. रचनात्मकता (Constructiveness) → सृजन का आनंद\n11. भोजनान्वेषण (Food-Seeking) → भूख\n12. काम प्रवृत्ति (Sex) → प्रेम/आकर्षण\n13. शरणागति (Submission) → विनम्रता\n14. अनुकरण (Imitation) → सीखना",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "5db3fb87-6aa1-429b-b902-be78abb0b318",
+            "date": "2026-06-17",
+            "time": "2026-06-17 12:36",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "fd7796cf-ba9a-4d9c-b7d7-0ce662446f3f",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-17 12:34",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

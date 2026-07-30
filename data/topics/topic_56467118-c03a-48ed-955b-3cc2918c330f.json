@@ -1,0 +1,36 @@
+{
+    "id": "56467118-c03a-48ed-955b-3cc2918c330f",
+    "subjectId": "38fe1eb2-f38f-4dc6-9e65-8711d6af8f11",
+    "name": "जाति के आधार पर स्वर-वर्गीकरण",
+    "description": "सजातीय स्वर = \"एक ही परिवार\"\n\nअ-आ\nइ-ई\nउ-ऊ\nऋ-ॠ\n\nट्रिक:\n\"छोटा और बड़ा भाई = सजातीय\"\n(इ-ई, उ-ऊ, अ-आ)\n\nविजातीय स्वर = \"अलग परिवार\"\n\nअ-इ\nअ-उ\nइ-उ\nए-ओ\n\nट्रिक:\n\"जो जोड़ी ऊपर वाली सूची में नहीं है, वह विजातीय है।\"",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "createdAt": "2026-06-07",
+    "updatedAt": "2026-06-22 04:25:00",
+    "revisionHistory": [
+        {
+            "id": "85fdfb3d-00be-497d-ac18-b9407fd6c31d",
+            "date": "2026-06-15",
+            "time": "2026-06-15 10:07",
+            "note": "Auto: 7 din baad revision scheduled",
+            "type": "auto-revision"
+        },
+        {
+            "id": "edc5ec0c-56ca-4747-a654-fd13543f7425",
+            "date": "2026-06-17",
+            "time": "2026-06-17 08:28",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "4f388b11-7ebb-49fb-97a1-c2264ed30a69",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "images": [],
+    "links": [],
+    "pdfs": []
+}

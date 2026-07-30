@@ -1,0 +1,29 @@
+{
+    "id": "33e5d9c7-efa7-4df7-abb0-3e4ea879f6c3",
+    "subjectId": "594ab60f-da93-4cf7-91da-12a1ae3fb73e",
+    "name": "टर्नर सिंड्रोम (Turner Syndrome)",
+    "description": "<h2>📚 Topic : टर्नर सिंड्रोम (Turner Syndrome)</h2>\n\n<p><strong>❓ Question (English) (प्रश्न - अंग्रेजी):</strong><br>\nTurner's syndrome is characterized by chromosomes.<br>\n(1) 46<br>\n(2) 45<br>\n(3) 47<br>\n(4) 48\n</p>\n\n<p><strong>❓ प्रश्न (हिंदी):</strong><br>\nटर्नर सिंड्रोम में गुणसूत्रों (Chromosomes) की संख्या कितनी होती है?<br>\n(1) 46<br>\n(2) 45<br>\n(3) 47<br>\n(4) 48\n</p>\n\n<hr>\n\n<h3>✅ Correct Answer (सही उत्तर) : (2) 45</h3>\n\n<p><strong>Explanation (English) (व्याख्या - अंग्रेजी):</strong><br>\nTurner Syndrome is caused by <b>Monosomy X (45, X)</b>, where one X chromosome is missing. Instead of the normal 46 chromosomes, affected individuals have only <b>45 chromosomes</b>. It occurs only in females and is associated with short stature, infertility, webbed neck, and underdeveloped ovaries.\n</p>\n\n<p><strong>व्याख्या (हिंदी):</strong><br>\nटर्नर सिंड्रोम <b>Monosomy X (45, X)</b> के कारण होता है, जिसमें एक X गुणसूत्र अनुपस्थित होता है। सामान्य 46 गुणसूत्रों के स्थान पर केवल <b>45 गुणसूत्र</b> होते हैं। यह केवल महिलाओं में पाया जाता है तथा इसमें कम लंबाई, बांझपन, गर्दन पर त्वचा की झिल्ली (Webbed Neck) तथा अविकसित अंडाशय जैसी विशेषताएँ होती हैं।\n</p>\n\n<hr>\n\n<h3>📌 Other Options (अन्य विकल्प)</h3>\n\n<p><strong>Option 1 : 46</strong><br>\n✘ यह सामान्य मानव में गुणसूत्रों की संख्या होती है।</p>\n\n<p><strong>Option 3 : 47</strong><br>\n✘ यह टर्नर सिंड्रोम नहीं है। 47 गुणसूत्र अन्य गुणसूत्रीय विकारों जैसे Down Syndrome (Trisomy 21) या Klinefelter Syndrome (47, XXY) में पाए जाते हैं।</p>\n\n<p><strong>Option 4 : 48</strong><br>\n✘ यह टर्नर सिंड्रोम से संबंधित नहीं है।</p>\n\n<hr>\n\n<h3>👨‍🏫 Concept : Turner Syndrome (अवधारणा : टर्नर सिंड्रोम)</h3>\n\n<ul>\n<li>✔ Chromosome Formula (गुणसूत्र सूत्र) → <b>45, X (Monosomy X)</b></li>\n<li>✔ Found only in Females (केवल महिलाओं में पाया जाता है)</li>\n<li>✔ One X chromosome is missing (एक X गुणसूत्र अनुपस्थित होता है)</li>\n<li>✔ Short Stature (कम लंबाई)</li>\n<li>✔ Webbed Neck (गर्दन पर झिल्ली)</li>\n<li>✔ Underdeveloped Ovaries & Infertility (अविकसित अंडाशय एवं बांझपन)</li>\n<li>✔ Intelligence is usually normal (बुद्धि सामान्य हो सकती है)</li>\n<li>✔ Frequently asked in CTET, UPTET, SUPER TET, KVS & DSSSB.</li>\n</ul>\n\n<hr>\n\n<h3>🎯 Quick Revision (त्वरित पुनरीक्षण)</h3>\n\n<ul>\n<li>✅ Turner Syndrome → <b>45, X</b></li>\n<li>✅ Monosomy X</li>\n<li>✅ Only Females</li>\n<li>✅ Short Height + Webbed Neck + Infertility</li>\n<li>✅ Chromosomes = <b>45</b></li>\n</ul>\n\n<hr>\n\n<h3>💡 One-Liner Trick (एक-लाइनर ट्रिक)</h3>\n\n<p><b>👧 Turner = One X Less = 45 Chromosomes (टर्नर = एक X कम = 45 गुणसूत्र)</b></p>\n\n<p><b>🧬 Turner → Female + 45,X + Monosomy X</b></p>",
+    "status": "Revision",
+    "completeDate": "2026-06-19",
+    "images": [],
+    "links": [],
+    "pdfs": [],
+    "revisionHistory": [
+        {
+            "id": "f11beac8-16aa-4437-9980-2a1cc83a9710",
+            "date": "2026-06-19",
+            "time": "2026-06-19 13:46",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "b9a0d6e9-dff2-494f-8112-6e34d0521cb4",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-19 13:42",
+    "updatedAt": "2026-06-22 04:25:00"
+}

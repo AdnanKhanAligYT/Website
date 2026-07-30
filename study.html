@@ -1,0 +1,3143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Topic Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ── Variables ──────────────────────────────────────── */
+        :root {
+            --bg: #0a0707;
+            --surface: #160d0d;
+            --surface2: #1f1212;
+            --surface3: #2a1616;
+            --border: #3d1a1a;
+            --accent: #e63946;
+            --accent2: #ff5c5c;
+            --accent3: #34d399;
+            --warn: #fb923c;
+            --danger: #ff4d4d;
+            --text: #f3e8e8;
+            --text2: #b08a8a;
+            --text3: #6b4f4f;
+            --pending: #fb923c;
+            --complete: #34d399;
+            --revision: #a78bfa;
+            --radius: 14px;
+            --radius-sm: 8px;
+            --shadow: 0 4px 24px rgba(0,0,0,.6);
+            --transition: .22s cubic-bezier(.4,0,.2,1);
+            --handwriting: 'Caveat', cursive;
+            --urdu: 'Noto Nastaliq Urdu', serif;
+            --highlight: rgba(255,220,0,0.32);
+            --highlight-border: rgba(255,200,0,0.6);
+            --notepad-bg: #fffdf5;
+            --notepad-text: #2a2a2a;
+            --notepad-line: rgba(220,80,80,.25);
+        }
+        [data-theme="light"] {
+            --bg: #f0f2f8;
+            --surface: #ffffff;
+            --surface2: #f5f7fc;
+            --surface3: #e8ecf5;
+            --border: #d0d5e8;
+            --text: #1a1d2e;
+            --text2: #4a5070;
+            --text3: #9098b8;
+            --shadow: 0 4px 24px rgba(0,0,0,.12);
+            --highlight: rgba(255,200,0,0.38);
+            --highlight-border: rgba(200,150,0,0.5);
+            --notepad-bg: #fefcf5;
+            --notepad-text: #1e1e2a;
+            --notepad-line: rgba(160, 120, 100, .25);
+        }
+        *,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+        html { font-size:16px; }
+        body {
+            font-family:'DM Sans', sans-serif;
+            background:var(--bg); color:var(--text);
+            min-height:100vh; overflow-x:hidden;
+            transition:background var(--transition), color var(--transition);
+        }
+        h1,h2,h3,h4,h5 { font-family:'Syne', sans-serif; }
+        button { cursor:pointer; border:none; background:none; font-family:inherit; }
+        input,textarea,select { font-family:inherit; }
+        a { color:inherit; text-decoration:none; }
+        ::-webkit-scrollbar { width:5px; height:5px; }
+        ::-webkit-scrollbar-track { background:transparent; }
+        ::-webkit-scrollbar-thumb { background:var(--border); border-radius:99px; }
+
+        /* ── Loading ─────────────────────────────────────────────── */
+        #loading-screen {
+            position:fixed; inset:0; background:var(--bg);
+            display:flex; flex-direction:column; align-items:center; justify-content:center;
+            z-index:9999; gap:20px; transition:opacity .4s ease;
+        }
+        #loading-screen.hidden { opacity:0; pointer-events:none; }
+        .loader-ring {
+            width:52px; height:52px;
+            border:3px solid var(--border); border-top-color:var(--accent);
+            border-radius:50%; animation:spin .8s linear infinite;
+        }
+        @keyframes spin { to { transform:rotate(360deg); } }
+        .loader-text { font-family:'Syne', sans-serif; font-size:.85rem; color:var(--text2); letter-spacing:.1em; }
+
+        /* ── App ─────────────────────────────────────────────────── */
+        #app { display:none; flex-direction:column; min-height:100vh; }
+        #app.ready { display:flex; }
+
+        /* ── Header ─────────────────────────────────────────────── */
+        header {
+            position:sticky; top:0; z-index:200;
+            background:var(--surface); border-bottom:1px solid var(--border);
+            padding:0 14px; height:60px;
+            display:flex; align-items:center; gap:10px;
+            backdrop-filter:blur(12px);
+        }
+        .header-back {
+            width:36px; height:36px; border-radius:var(--radius-sm);
+            background:var(--surface2); border:1px solid var(--border);
+            display:none; align-items:center; justify-content:center;
+            font-size:1.1rem; transition:all var(--transition);
+        }
+        .header-back:hover { background:var(--surface3); }
+        .header-back.visible { display:flex; }
+        .breadcrumb {
+            flex:1; font-family:'Syne', sans-serif;
+            font-size:.9rem; font-weight:600; color:var(--text);
+            display:flex; align-items:center; gap:6px;
+            overflow:hidden; white-space:nowrap;
+        }
+        .breadcrumb span { color:var(--text2); font-weight:400; }
+        .breadcrumb .sep { color:var(--text3); }
+        .header-actions { display:flex; align-items:center; gap:6px; }
+        .icon-btn {
+            width:36px; height:36px; border-radius:var(--radius-sm);
+            background:var(--surface2); border:1px solid var(--border);
+            display:flex; align-items:center; justify-content:center;
+            font-size:1rem; color:var(--text2); transition:all var(--transition); position:relative;
+        }
+        .icon-btn:hover { background:var(--surface3); color:var(--text); }
+        .icon-btn.search-active { background:var(--accent); color:#fff; border-color:var(--accent); }
+
+        /* ── Stats Bar ──────────────────────────────────────────── */
+        #stats-bar {
+            display:flex; gap:8px; padding:12px 14px 0;
+            overflow-x:auto; scrollbar-width:none;
+        }
+        #stats-bar::-webkit-scrollbar { display:none; }
+        .stat-chip {
+            flex-shrink:0; background:var(--surface); border:1px solid var(--border);
+            border-radius:99px; padding:6px 12px;
+            display:flex; align-items:center; gap:6px;
+            font-size:.78rem; color:var(--text2);
+            cursor:pointer; transition:all var(--transition); user-select:none;
+        }
+        .stat-chip:hover { border-color:var(--accent); transform:translateY(-1px); }
+        .stat-chip.active-filter { background:var(--surface3); border-color:var(--accent); }
+        .stat-chip .dot { width:8px; height:8px; border-radius:50%; }
+        .stat-chip .val { font-family:'Syne', sans-serif; font-weight:700; font-size:.92rem; color:var(--text); }
+        .stat-chip.total   .dot { background:var(--accent); }
+        .stat-chip.pending .dot { background:var(--pending); }
+        .stat-chip.complete .dot { background:var(--complete); }
+        .stat-chip.revision .dot { background:var(--revision); }
+
+        /* ── Search ──────────────────────────────────────────────── */
+        #search-wrap { padding:10px 14px 0; display:none; }
+        #search-wrap.visible { display:block; }
+        .search-box { position:relative; }
+        #search-input {
+            width:100%; background:var(--surface); border:1px solid var(--accent);
+            border-radius:var(--radius); padding:10px 16px 10px 42px;
+            color:var(--text); font-size:.9rem; transition:border-color var(--transition); outline:none;
+            background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23e63946' stroke-width='2'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cpath d='m21 21-4.35-4.35'/%3E%3C/svg%3E");
+            background-repeat:no-repeat; background-position:14px center;
+        }
+        #search-input:focus { border-color:var(--accent2); box-shadow:0 0 0 3px rgba(230,57,70,.15); }
+        #search-input::placeholder { color:var(--text3); }
+
+        mark.sh {
+            background:var(--highlight);
+            border-bottom:2px solid var(--highlight-border);
+            color:inherit; border-radius:3px;
+            padding:0 2px; font-style:normal;
+        }
+        .search-active-banner {
+            display:flex; align-items:center; gap:8px;
+            padding:7px 12px; margin-bottom:10px;
+            background:rgba(230,57,70,.08); border:1px solid rgba(230,57,70,.25);
+            border-radius:var(--radius-sm); font-size:.8rem; color:var(--text2);
+        }
+        .search-active-banner strong { color:var(--accent); }
+        .search-clear-btn { margin-left:auto; font-size:.75rem; color:var(--accent); cursor:pointer; }
+        .search-clear-btn:hover { text-decoration:underline; }
+
+        /* ── Main ────────────────────────────────────────────────── */
+        main {
+            flex:1; padding:14px 14px 100px;
+            animation:fadeUp .3s ease both;
+        }
+        @keyframes fadeUp {
+            from { opacity:0; transform:translateY(10px); }
+            to   { opacity:1; transform:translateY(0); }
+        }
+        .section-title {
+            font-family:'Syne', sans-serif; font-size:1.05rem; font-weight:700;
+            color:var(--text); margin-bottom:12px;
+            display:flex; align-items:center; justify-content:space-between;
+        }
+        .section-title small { font-size:.73rem; font-weight:400; color:var(--text3); font-family:'DM Sans', sans-serif; }
+
+        /* ── Cards ───────────────────────────────────────────────── */
+        .card-grid {
+            display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:10px;
+        }
+        .entity-card {
+            background:var(--surface); border:1px solid var(--border);
+            border-radius:var(--radius); padding:16px;
+            display:flex; flex-direction:column; gap:10px;
+            transition:all var(--transition); animation:fadeUp .25s ease both;
+            cursor:pointer; position:relative; overflow:hidden;
+        }
+        .entity-card::before {
+            content:''; position:absolute; top:0; left:0;
+            width:3px; height:100%; background:var(--accent);
+            opacity:0; transition:opacity var(--transition);
+        }
+        .entity-card:hover { border-color:var(--accent); transform:translateY(-2px); box-shadow:var(--shadow); }
+        .entity-card:hover::before { opacity:1; }
+        .entity-card-top { display:flex; align-items:flex-start; gap:10px; }
+        .entity-icon {
+            width:40px; height:40px; border-radius:10px;
+            background:var(--surface2); border:1px solid var(--border);
+            display:flex; align-items:center; justify-content:center;
+            font-size:1.15rem; flex-shrink:0;
+        }
+        .entity-info { flex:1; min-width:0; }
+        .entity-name {
+            font-family:'Syne', sans-serif; font-weight:700; font-size:.95rem;
+            color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+        }
+        .entity-meta { font-size:.76rem; color:var(--text3); margin-top:3px; }
+        .entity-date { font-size:.72rem; color:var(--text3); margin-top:2px; }
+        .entity-card-actions { display:flex; gap:6px; }
+        .action-btn {
+            flex:1; padding:7px; border-radius:var(--radius-sm);
+            font-size:.77rem; font-weight:500;
+            display:flex; align-items:center; justify-content:center; gap:4px;
+            transition:all var(--transition); border:1px solid var(--border); color:var(--text2);
+        }
+        .action-btn:hover { background:var(--surface2); color:var(--text); }
+        .action-btn.open { background:var(--accent); color:#fff; border-color:transparent; }
+        .action-btn.open:hover { background:#c4303c; }
+        .action-btn.danger:hover { background:rgba(248,113,113,.15); border-color:var(--danger); color:var(--danger); }
+
+        /* ── Empty State ─────────────────────────────────────────── */
+        .empty-state { text-align:center; padding:60px 20px; color:var(--text3); }
+        .empty-state .empty-icon { font-size:3rem; margin-bottom:14px; }
+        .empty-state h3 { font-family:'Syne', sans-serif; font-size:1rem; color:var(--text2); margin-bottom:6px; }
+        .empty-state p { font-size:.85rem; }
+
+        /* ── Topics List ─────────────────────────────────────────── */
+        .topics-list { display:flex; flex-direction:column; gap:6px; }
+        .topic-card {
+            background:var(--surface); border:1px solid var(--border);
+            border-radius:var(--radius); overflow:hidden;
+            transition:border-color var(--transition); animation:fadeUp .2s ease both;
+        }
+        .topic-card:hover { border-color:var(--surface3); }
+        .topic-card.search-match { border-color:rgba(255,200,0,0.45); }
+
+        /* ── Revision Urgency Gradient ──────────────────────────── */
+        /* Applied via JS inline styles based on overdue days */
+        .topic-card.rev-urgent-0 {
+            background: linear-gradient(135deg, rgba(167,139,250,0.08) 0%, var(--surface) 100%);
+            border-color: rgba(167,139,250,0.35);
+        }
+        .topic-card.rev-urgent-1 {
+            background: linear-gradient(135deg, rgba(167,139,250,0.18) 0%, rgba(120,80,220,0.06) 100%);
+            border-color: rgba(167,139,250,0.55);
+        }
+        .topic-card.rev-urgent-2 {
+            background: linear-gradient(135deg, rgba(230,57,70,0.12) 0%, rgba(167,139,250,0.12) 100%);
+            border-color: rgba(230,57,70,0.45);
+        }
+        .topic-card.rev-urgent-3 {
+            background: linear-gradient(135deg, rgba(230,57,70,0.22) 0%, rgba(150,50,60,0.1) 100%);
+            border-color: rgba(230,57,70,0.65);
+        }
+        .topic-card.rev-urgent-4 {
+            background: linear-gradient(135deg, rgba(230,57,70,0.32) 0%, rgba(120,20,30,0.18) 100%);
+            border-color: rgba(230,57,70,0.8);
+            box-shadow: 0 0 16px rgba(230,57,70,0.18);
+        }
+        .topic-card.rev-urgent-5 {
+            background: linear-gradient(135deg, rgba(200,30,40,0.42) 0%, rgba(100,10,20,0.28) 100%);
+            border-color: #e63946;
+            box-shadow: 0 0 24px rgba(230,57,70,0.28);
+        }
+        /* Overdue badge shown inside card */
+        .rev-overdue-badge {
+            display:inline-flex; align-items:center; gap:4px;
+            font-size:.68rem; font-weight:700; padding:2px 8px;
+            border-radius:99px; flex-shrink:0;
+            animation: rev-pulse 2s ease-in-out infinite;
+        }
+        @keyframes rev-pulse {
+            0%,100% { opacity:1; }
+            50% { opacity:.6; }
+        }
+        .rev-overdue-badge.fresh   { background:rgba(167,139,250,.18); color:#a78bfa; }
+        .rev-overdue-badge.mild    { background:rgba(200,100,250,.18); color:#c084fc; }
+        .rev-overdue-badge.warm    { background:rgba(230,57,70,.18);   color:#f87171; }
+        .rev-overdue-badge.hot     { background:rgba(230,57,70,.28);   color:#ef4444; border:1px solid rgba(230,57,70,.4); }
+        .rev-overdue-badge.urgent  { background:rgba(200,20,30,.38);   color:#fca5a5; border:1px solid #e63946; }
+        .rev-overdue-badge.critical{ background:#e63946;               color:#fff;    border:1px solid #ff5c5c; }
+        .topic-row {
+            display:flex; align-items:center; gap:10px; padding:13px 14px;
+            cursor:pointer; transition:background var(--transition);
+        }
+        .topic-row:hover { background:var(--surface2); }
+        .topic-status-dot { width:10px; height:10px; border-radius:50%; flex-shrink:0; }
+        .status-Pending  { background:var(--pending);  box-shadow:0 0 0 3px rgba(251,146,60,.2); }
+        .status-Complete { background:var(--complete); box-shadow:0 0 0 3px rgba(52,211,153,.2); }
+        .status-Revision { background:var(--revision); box-shadow:0 0 0 3px rgba(167,139,250,.2); }
+        .topic-name {
+            flex:1; font-size:.9rem; font-weight:500; color:var(--text);
+            word-break:break-word; line-height:1.4;
+        }
+        .topic-status-badge {
+            font-size:.7rem; padding:3px 9px; border-radius:99px; font-weight:600; flex-shrink:0;
+        }
+        .badge-Pending  { background:rgba(251,146,60,.15);  color:var(--pending); }
+        .badge-Complete { background:rgba(52,211,153,.15);  color:var(--complete); }
+        .badge-Revision { background:rgba(167,139,250,.15); color:var(--revision); }
+        .topic-chevron { color:var(--text3); font-size:.7rem; transition:transform var(--transition); flex-shrink:0; }
+        .topic-card.expanded .topic-chevron { transform:rotate(180deg); }
+
+        /* ── Expanded Topic ─────────────────────────────────────── */
+        .topic-expand {
+            max-height:0; overflow:hidden;
+            transition:max-height .38s cubic-bezier(.4,0,.2,1);
+            border-top:0 solid var(--border);
+        }
+        .topic-card.expanded .topic-expand { max-height:6000px; border-top-width:1px; }
+        .topic-expand-inner { padding:14px; display:flex; flex-direction:column; gap:12px; }
+
+        /* ── Description ─────────────────────────────────────────── */
+        .topic-desc-wrap {
+            position:relative;
+            background:var(--surface2);
+            border-radius:var(--radius-sm);
+            padding:12px 14px;
+            min-height:48px;
+            max-height:320px;
+            overflow-y:auto;
+        }
+        .topic-desc-wrap .desc-expand-btn {
+            position:absolute; top:8px; right:8px;
+            width:30px; height:30px; border-radius:50%;
+            background:rgba(0,0,0,0.4); color:#fff;
+            border:none; font-size:1rem;
+            display:flex; align-items:center; justify-content:center;
+            cursor:pointer; transition:background var(--transition);
+            z-index:5; backdrop-filter:blur(4px);
+        }
+        .topic-desc-wrap .desc-expand-btn:hover { background:rgba(0,0,0,0.65); }
+        .topic-desc {
+            font-family:var(--handwriting);
+            font-size:1.05rem; font-weight:600;
+            color:var(--text); line-height:1.7;
+            word-break:break-word;
+        }
+        .topic-desc.empty {
+            font-family:'DM Sans', sans-serif; font-style:italic;
+            font-size:.85rem; font-weight:400; color:var(--text3);
+        }
+        .topic-desc b { font-weight:800; color:var(--accent2); font-style:normal; }
+        .topic-desc i { color:var(--warn); font-style:italic; }
+
+        /* ── HTML desc (inline) ─────────────────────────────────── */
+        .topic-desc-html {
+            background:var(--surface2);
+            border-radius:var(--radius-sm);
+            border:1px solid var(--border);
+            overflow:hidden;
+            min-height:80px;
+        }
+        .topic-desc-html-label {
+            display:flex; align-items:center; gap:6px;
+            padding:6px 12px;
+            font-size:.72rem; color:var(--text3);
+            border-bottom:1px solid var(--border);
+            background:var(--surface3);
+        }
+        .topic-desc-html-label .html-badge {
+            background:rgba(52,211,153,.15); color:var(--complete);
+            padding:1px 7px; border-radius:99px; font-size:.68rem; font-weight:600;
+        }
+        .topic-desc-iframe {
+            width:100%; border:none; display:block;
+            min-height:80px; max-height:400px;
+            background:#fff; border-radius:0 0 var(--radius-sm) var(--radius-sm);
+        }
+
+        /* ── Date Grid ────────────────────────────────────────────── */
+        .topic-dates-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+        .topic-date-cell {
+            background:var(--surface2); border-radius:var(--radius-sm); padding:8px 10px; font-size:.75rem;
+        }
+        .topic-date-cell .dc-label { color:var(--text3); margin-bottom:2px; }
+        .topic-date-cell .dc-val { color:var(--text); font-weight:500; }
+        .topic-date-cell .dc-pending-days { color:var(--pending); font-weight:700; font-size:.85rem; }
+
+        /* ── Topic Actions Row ───────────────────────────────────── */
+        .topic-actions-row { display:flex; gap:8px; flex-wrap:wrap; }
+        .status-select {
+            flex:1; min-width:130px; background:var(--surface2); border:1px solid var(--border);
+            border-radius:var(--radius-sm); color:var(--text); padding:8px 10px;
+            font-size:.82rem; outline:none; cursor:pointer; transition:border-color var(--transition);
+        }
+        .status-select:focus { border-color:var(--accent); }
+
+        /* ── Media Section ───────────────────────────────────────── */
+        .media-section { display:flex; flex-direction:column; gap:8px; }
+        .media-section .media-label { font-size:.78rem; color:var(--text3); font-weight:500; }
+        .media-grid { display:flex; gap:8px; flex-wrap:wrap; }
+
+        .img-thumb-wrap {
+            position:relative; border-radius:10px; overflow:hidden;
+            border:1px solid var(--border); cursor:pointer; flex-shrink:0;
+            transition:all var(--transition); width:100%; max-width:100%;
+        }
+        .img-thumb-wrap:hover { border-color:var(--accent); }
+        .img-thumb { width:100%; height:auto; display:block; object-fit:contain; max-height:400px; }
+        .img-del-btn {
+            position:absolute; top:6px; right:6px; width:28px; height:28px; border-radius:50%;
+            background:rgba(0,0,0,.75); color:#fff; font-size:.8rem;
+            display:flex; align-items:center; justify-content:center;
+            opacity:0; transition:opacity var(--transition); z-index:2;
+        }
+        .img-thumb-wrap:hover .img-del-btn { opacity:1; }
+        .img-open-tab-btn {
+            position:absolute; top:6px; left:6px; width:28px; height:28px; border-radius:50%;
+            background:rgba(0,0,0,.75); color:#fff; font-size:.75rem;
+            display:flex; align-items:center; justify-content:center;
+            opacity:0; transition:opacity var(--transition); z-index:2; text-decoration:none;
+        }
+        .img-thumb-wrap:hover .img-open-tab-btn { opacity:1; }
+
+        .media-add-btn {
+            width:100%; min-height:60px; border-radius:10px;
+            background:var(--surface2); border:2px dashed var(--border);
+            color:var(--text3); display:flex; flex-direction:row;
+            align-items:center; justify-content:center;
+            gap:8px; font-size:.85rem; cursor:pointer; flex-shrink:0;
+            transition:all var(--transition); padding:10px;
+        }
+        .media-add-btn:hover { border-color:var(--accent); color:var(--accent); background:rgba(230,57,70,.08); }
+        .media-add-btn .cam-icon { font-size:1.3rem; }
+        .hidden-file { display:none; }
+
+        /* ── YouTube Links ──────────────────────────────────────── */
+        .youtube-link-input-row { display:flex; gap:8px; flex-wrap:wrap; }
+        .youtube-link-input-row input {
+            flex:1; min-width:180px; background:var(--surface2); border:1px solid var(--border);
+            border-radius:var(--radius-sm); padding:8px 12px; color:var(--text); font-size:.82rem;
+            outline:none; transition:border-color var(--transition);
+        }
+        .youtube-link-input-row input:focus { border-color:var(--accent); }
+        .youtube-link-input-row button {
+            padding:8px 16px; border-radius:var(--radius-sm);
+            background:var(--accent); color:#fff; font-size:.8rem; font-weight:600;
+            transition:background var(--transition); border:none; white-space:nowrap;
+        }
+        .youtube-link-input-row button:hover { background:#c4303c; }
+        .youtube-link-item {
+            display:inline-flex; align-items:center; gap:6px;
+            background:var(--surface3); border-radius:99px;
+            padding:4px 10px 4px 6px; border:1px solid var(--border);
+            font-size:.82rem; transition:all var(--transition); cursor:default;
+        }
+        .youtube-link-item:hover { border-color:var(--accent); }
+        .youtube-link-item .yt-icon { font-size:1.2rem; flex-shrink:0; }
+        .youtube-link-item .yt-del {
+            margin-left:2px; color:var(--text3); cursor:pointer; font-size:.7rem;
+            transition:color var(--transition);
+        }
+        .youtube-link-item .yt-del:hover { color:var(--danger); }
+
+        /* ── PDF Items ──────────────────────────────────────────── */
+        .pdf-item {
+            display:inline-flex; align-items:center; gap:6px;
+            background:var(--surface3); border-radius:99px;
+            padding:4px 10px 4px 6px; border:1px solid var(--border);
+            font-size:.82rem; transition:all var(--transition); cursor:default;
+        }
+        .pdf-item:hover { border-color:var(--accent); }
+        .pdf-item .pdf-icon { font-size:1.1rem; flex-shrink:0; }
+        .pdf-item .pdf-del {
+            margin-left:2px; color:var(--text3); cursor:pointer; font-size:.7rem;
+            transition:color var(--transition);
+        }
+        .pdf-item .pdf-del:hover { color:var(--danger); }
+
+        /* ── Revision History ───────────────────────────────────── */
+        .revision-history-section { display:flex; flex-direction:column; gap:8px; }
+        .revision-history-header {
+            display:flex; align-items:center; justify-content:space-between;
+        }
+        .revision-history-label {
+            font-size:.78rem; color:var(--text3); font-weight:500;
+            display:flex; align-items:center; gap:6px;
+        }
+        .revision-history-label .rh-count {
+            background:var(--surface3); border-radius:99px;
+            padding:2px 7px; font-size:.7rem; color:var(--text2);
+        }
+        .add-revision-btn {
+            padding:5px 12px; border-radius:99px;
+            background:rgba(167,139,250,.12); color:var(--revision);
+            font-size:.75rem; font-weight:600;
+            border:1px solid rgba(167,139,250,.3);
+            transition:all var(--transition);
+        }
+        .add-revision-btn:hover { background:rgba(167,139,250,.22); }
+        .revision-timeline {
+            position:relative; display:flex; flex-direction:column; gap:0;
+            padding-left:20px;
+        }
+        .revision-timeline::before {
+            content:''; position:absolute; left:7px; top:8px; bottom:8px;
+            width:2px; background:var(--border); border-radius:99px;
+        }
+        .revision-entry {
+            position:relative; display:flex; flex-direction:column; gap:3px;
+            padding:8px 0 8px 18px; animation:fadeUp .2s ease both;
+        }
+        .revision-entry::before {
+            content:''; position:absolute; left:-13px; top:12px;
+            width:10px; height:10px; border-radius:50%;
+            background:var(--surface2); border:2px solid var(--border);
+            transition:border-color var(--transition);
+        }
+        .revision-entry.type-complete::before   { border-color:var(--complete); background:rgba(52,211,153,.15); }
+        .revision-entry.type-revision::before   { border-color:var(--revision); background:rgba(167,139,250,.15); }
+        .revision-entry.type-manual::before     { border-color:var(--accent);   background:rgba(230,57,70,.15); }
+        .revision-entry.type-auto-revision::before { border-color:var(--warn);  background:rgba(251,146,60,.15); }
+        .revision-entry.type-status-change::before { border-color:var(--text3); background:var(--surface3); }
+        .revision-entry-row {
+            display:flex; align-items:flex-start; justify-content:space-between; gap:8px;
+        }
+        .revision-entry-note {
+            font-size:.83rem; color:var(--text); flex:1; line-height:1.5; word-break:break-word;
+        }
+        .revision-entry-note.editing {
+            background:var(--surface2); border:1px solid var(--accent);
+            border-radius:var(--radius-sm); padding:4px 8px; outline:none; width:100%;
+            font-family:inherit; font-size:.83rem; color:var(--text); resize:none;
+        }
+        .revision-entry-actions { display:flex; gap:4px; flex-shrink:0; }
+        .rev-action-btn {
+            width:22px; height:22px; border-radius:50%; font-size:.65rem;
+            display:flex; align-items:center; justify-content:center;
+            background:var(--surface3); color:var(--text3);
+            transition:all var(--transition); border:1px solid var(--border);
+        }
+        .rev-action-btn:hover { background:var(--surface2); color:var(--text); }
+        .rev-action-btn.del:hover { background:rgba(248,113,113,.15); border-color:var(--danger); color:var(--danger); }
+        .revision-entry-date {
+            font-size:.7rem; color:var(--text3); display:flex; align-items:center; gap:4px;
+        }
+        .revision-entry-date .type-badge {
+            padding:1px 6px; border-radius:99px; font-size:.65rem; font-weight:600;
+        }
+        .type-badge-complete      { background:rgba(52,211,153,.12);  color:var(--complete); }
+        .type-badge-revision      { background:rgba(167,139,250,.12); color:var(--revision); }
+        .type-badge-manual        { background:rgba(230,57,70,.12);  color:var(--accent); }
+        .type-badge-auto-revision { background:rgba(251,146,60,.12);  color:var(--warn); }
+        .type-badge-status-change { background:var(--surface3); color:var(--text3); }
+        .revision-empty {
+            font-size:.8rem; color:var(--text3); font-style:italic;
+            text-align:center; padding:12px 0;
+        }
+
+        /* ── FAB ─────────────────────────────────────────────────── */
+        .fab {
+            position:fixed; bottom:28px; right:20px;
+            width:54px; height:54px; border-radius:50%;
+            background:var(--accent); color:#fff; font-size:1.5rem;
+            display:flex; align-items:center; justify-content:center;
+            box-shadow:0 6px 24px rgba(230,57,70,.45);
+            transition:all var(--transition); z-index:100;
+        }
+        .fab:hover { transform:scale(1.08) rotate(90deg); background:#c4303c; }
+
+        /* ── Modal ───────────────────────────────────────────────── */
+        .modal-overlay {
+            position:fixed; inset:0; background:rgba(0,0,0,.65);
+            backdrop-filter:blur(4px); z-index:2000;
+            display:flex; align-items:flex-end; justify-content:center;
+            opacity:0; pointer-events:none; transition:opacity .25s ease;
+        }
+        .modal-overlay.open { opacity:1; pointer-events:all; }
+        .modal {
+            background:var(--surface); border:1px solid var(--border);
+            border-radius:var(--radius) var(--radius) 0 0;
+            width:100%; max-width:520px; padding:22px 22px 36px;
+            display:flex; flex-direction:column; gap:14px;
+            transform:translateY(60px); transition:transform .3s cubic-bezier(.4,0,.2,1);
+        }
+        .modal-overlay.open .modal { transform:translateY(0); }
+        .modal-title { font-family:'Syne', sans-serif; font-size:1.05rem; font-weight:700; }
+        .modal-field { display:flex; flex-direction:column; gap:5px; }
+        .modal-label { font-size:.78rem; color:var(--text2); font-weight:500; }
+        .modal-input, .modal-textarea {
+            background:var(--surface2); border:1px solid var(--border);
+            border-radius:var(--radius-sm); color:var(--text);
+            padding:10px 12px; font-size:.88rem; outline:none;
+            transition:border-color var(--transition); width:100%;
+        }
+        .modal-input:focus, .modal-textarea:focus { border-color:var(--accent); }
+        .modal-textarea { resize:vertical; min-height:80px; white-space:pre-wrap; }
+        .modal-actions { display:flex; gap:8px; }
+        .btn {
+            flex:1; padding:11px; border-radius:var(--radius-sm);
+            font-size:.88rem; font-weight:600; font-family:'Syne', sans-serif;
+            transition:all var(--transition);
+        }
+        .btn-primary { background:var(--accent); color:#fff; }
+        .btn-primary:hover { background:#c4303c; }
+        .btn-ghost { background:var(--surface2); color:var(--text2); border:1px solid var(--border); }
+        .btn-ghost:hover { background:var(--surface3); color:var(--text); }
+
+        /* ── Toast ─────────────────────────────────────────────── */
+        #toast {
+            position:fixed; bottom:88px; left:50%;
+            transform:translateX(-50%) translateY(20px);
+            background:var(--surface2); border:1px solid var(--border);
+            border-radius:99px; padding:9px 18px;
+            font-size:.83rem; font-weight:500; color:var(--text);
+            box-shadow:var(--shadow); z-index:9000;
+            opacity:0; transition:all .3s ease; white-space:nowrap;
+        }
+        #toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+        #toast.success { border-color:var(--complete); color:var(--complete); }
+        #toast.error   { border-color:var(--danger);   color:var(--danger); }
+
+        /* ── View Tabs ─────────────────────────────────────────── */
+        .view-tabs {
+            display:flex; gap:0; background:var(--surface); border:1px solid var(--border);
+            border-radius:var(--radius); padding:4px; margin-bottom:14px;
+            flex-wrap:wrap;
+        }
+        .view-tab {
+            flex:1; padding:7px; border-radius:var(--radius-sm);
+            font-size:.8rem; font-weight:600; font-family:'Syne', sans-serif;
+            color:var(--text3); transition:all var(--transition); text-align:center;
+        }
+        .view-tab.active { background:var(--accent); color:#fff; }
+
+        /* ── Progress Bar ─────────────────────────────────────── */
+        .progress-bar { height:3px; background:var(--border); border-radius:99px; overflow:hidden; margin-bottom:2px; }
+        .progress-fill {
+            height:100%; background:linear-gradient(90deg, var(--accent), var(--accent2));
+            border-radius:99px; transition:width .6s cubic-bezier(.4,0,.2,1);
+        }
+
+        /* ── Sort Bar ─────────────────────────────────────────── */
+        .sort-bar { display:flex; align-items:center; gap:8px; margin-bottom:10px; font-size:.78rem; color:var(--text3); }
+        .sort-select {
+            background:var(--surface); border:1px solid var(--border);
+            border-radius:var(--radius-sm); color:var(--text2); padding:5px 10px; font-size:.78rem; outline:none;
+        }
+
+        /* ── Trash ────────────────────────────────────────────── */
+        .trash-item {
+            background:var(--surface); border:1px solid var(--border);
+            border-radius:var(--radius); padding:12px 14px;
+            display:flex; align-items:center; gap:10px; animation:fadeUp .2s ease both;
+        }
+        .trash-icon { font-size:1.2rem; flex-shrink:0; }
+        .trash-info { flex:1; min-width:0; }
+        .trash-name { font-weight:600; font-size:.88rem; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+        .trash-path { font-size:.73rem; color:var(--text3); margin-top:2px; }
+        .trash-date { font-size:.7rem; color:var(--text3); margin-top:2px; }
+        .recover-btn {
+            padding:6px 12px; border-radius:var(--radius-sm);
+            background:rgba(52,211,153,.12); color:var(--complete);
+            font-size:.78rem; font-weight:600; border:1px solid rgba(52,211,153,.3);
+            transition:all var(--transition); flex-shrink:0;
+        }
+        .recover-btn:hover { background:rgba(52,211,153,.22); }
+
+        /* ── Backup ───────────────────────────────────────────── */
+        .backup-panel {
+            background:var(--surface); border:1px solid var(--border);
+            border-radius:var(--radius); padding:16px;
+            display:flex; flex-direction:column; gap:10px; margin-top:6px;
+        }
+        .backup-panel h4 { font-family:'Syne', sans-serif; font-size:.93rem; color:var(--text); }
+        .backup-panel p  { font-size:.8rem; color:var(--text2); }
+        .backup-row { display:flex; gap:8px; }
+
+        /* ── Filter Banner ─────────────────────────────────────── */
+        .filter-banner {
+            display:flex; align-items:center; gap:8px; padding:8px 12px;
+            background:var(--surface2); border:1px solid var(--border);
+            border-radius:var(--radius-sm); margin-bottom:12px;
+            font-size:.82rem; color:var(--text2);
+        }
+        .filter-banner .fb-dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+        .filter-clear { margin-left:auto; font-size:.76rem; color:var(--accent); cursor:pointer; }
+        .filter-clear:hover { text-decoration:underline; }
+
+        /* ══════════════════════════════════════════════
+           NOTEPAD — Completely Redesigned
+        ══════════════════════════════════════════════ */
+        #notepad-overlay {
+            position:fixed; inset:0; background:rgba(0,0,0,.8);
+            backdrop-filter:blur(12px); z-index:1500;
+            display:none; align-items:center; justify-content:center; padding:10px;
+        }
+        #notepad-overlay.open { display:flex; }
+        .notepad-paper {
+            background:var(--notepad-bg);
+            width:100%; max-width:780px;
+            height:92vh; max-height:1000px;
+            border-radius:16px;
+            box-shadow:0 30px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.06);
+            display:flex; flex-direction:column; overflow:hidden; position:relative;
+            transition:background .3s;
+        }
+        /* Notebook line pattern */
+        .notepad-paper::after {
+            content:''; position:absolute; inset:0; pointer-events:none;
+            background-image:repeating-linear-gradient(
+                transparent, transparent 31px,
+                var(--notepad-line) 31px, var(--notepad-line) 32px
+            );
+            background-size:100% 32px;
+            opacity:0.5;
+            z-index:0;
+        }
+        .notepad-header {
+            background:linear-gradient(135deg, #5b8af0, #7c6ff0);
+            padding:0; display:flex; flex-direction:column; z-index:2; flex-shrink:0;
+            position:relative;
+        }
+        .notepad-header::after {
+            content:''; position:absolute; bottom:0; left:0; right:0;
+            height:2px; background:rgba(255,255,255,.15);
+        }
+        .notepad-books-bar {
+            display:flex; align-items:center; gap:6px; padding:10px 14px 0;
+            overflow-x:auto; scrollbar-width:none; flex-shrink:0;
+        }
+        .notepad-books-bar::-webkit-scrollbar { display:none; }
+        .book-tab {
+            padding:5px 16px; border-radius:20px 20px 0 0;
+            background:rgba(255,255,255,.12); color:rgba(255,255,255,.7);
+            font-family:var(--handwriting); font-size:1rem;
+            cursor:pointer; white-space:nowrap; border:none;
+            transition:all .25s; flex-shrink:0;
+        }
+        .book-tab.active {
+            background:rgba(255,255,255,.95); color:#3a4a8a; font-weight:700;
+            box-shadow:0 -2px 12px rgba(0,0,0,.08);
+        }
+        .book-tab:hover:not(.active) { background:rgba(255,255,255,.25); }
+        .book-tab-add {
+            padding:5px 12px; border-radius:20px 20px 0 0;
+            background:rgba(255,255,255,.1); color:rgba(255,255,255,.85);
+            font-size:1.2rem; cursor:pointer; border:none; transition:all .2s; flex-shrink:0;
+        }
+        .book-tab-add:hover { background:rgba(255,255,255,.3); transform:scale(1.05); }
+        .notepad-title-bar {
+            display:flex; align-items:center; justify-content:space-between; padding:8px 16px 12px;
+        }
+        .notepad-title-bar h3 {
+            font-family:var(--handwriting); font-size:1.4rem; font-weight:700;
+            color:#fff; text-shadow:0 1px 4px rgba(0,0,0,.15);
+        }
+        .notepad-header-btns { display:flex; gap:6px; align-items:center; }
+        .notepad-icon-btn {
+            width:32px; height:32px; border-radius:50%;
+            background:rgba(255,255,255,.15); color:#fff; font-size:.85rem;
+            display:flex; align-items:center; justify-content:center;
+            cursor:pointer; transition:all .2s; border:none;
+        }
+        .notepad-icon-btn:hover { background:rgba(255,255,255,.3); transform:scale(1.08); }
+        .notepad-close {
+            width:34px; height:34px; border-radius:50%;
+            background:rgba(255,255,255,.18); color:#fff; font-size:1.1rem;
+            display:flex; align-items:center; justify-content:center;
+            cursor:pointer; transition:all .2s; border:none;
+        }
+        .notepad-close:hover { background:rgba(255,70,70,.5); transform:rotate(90deg); }
+
+        /* Rich Toolbar */
+        .notepad-toolbar {
+            display:flex; align-items:center; gap:2px;
+            padding:6px 12px;
+            background:rgba(255,255,255,.08);
+            border-bottom:1px solid rgba(255,255,255,.1);
+            flex-wrap:wrap; flex-shrink:0; z-index:2;
+            backdrop-filter:blur(4px);
+        }
+        .np-tool-btn {
+            min-width:30px; height:30px; border-radius:6px; font-size:.8rem;
+            background:rgba(255,255,255,.1); color:rgba(255,255,255,.9);
+            border:none; display:flex; align-items:center; justify-content:center;
+            cursor:pointer; transition:all .15s; padding:0 6px; white-space:nowrap;
+            font-family:'DM Sans',sans-serif; font-weight:600;
+        }
+        .np-tool-btn:hover { background:rgba(255,255,255,.25); transform:scale(1.05); }
+        .np-tool-btn.active { background:rgba(255,255,255,.85); color:#3a4a8a; }
+        .np-tool-sep { width:1px; height:22px; background:rgba(255,255,255,.15); margin:0 3px; flex-shrink:0; }
+        .np-color-dot {
+            width:18px; height:18px; border-radius:50%;
+            border:2px solid rgba(255,255,255,.4);
+            display:inline-block; cursor:pointer; transition:all .2s;
+        }
+        .np-color-dot:hover { border-color:#fff; transform:scale(1.15); }
+        #np-font-size {
+            background:rgba(255,255,255,.12); color:#fff; border:none;
+            border-radius:6px; padding:2px 6px; font-size:.75rem; outline:none;
+            cursor:pointer; height:30px;
+        }
+        #np-font-size option { background:#2a2a3a; color:#fff; }
+
+        /* Editor area — lines overlay */
+        .notepad-body {
+            flex:1; overflow-y:auto; position:relative; z-index:1;
+            background:transparent;
+        }
+        .notepad-lines-wrap {
+            position:absolute; inset:0; display:flex; overflow:hidden; z-index:1;
+            pointer-events:none;
+        }
+        .notepad-line-nums {
+            width:44px; flex-shrink:0;
+            padding:8px 0 18px 0;
+            display:flex; flex-direction:column;
+            user-select:none;
+            background:rgba(240,235,220,0.3);
+            border-right:1px solid var(--notepad-line);
+            z-index:3;
+            overflow:hidden;
+            pointer-events:none;
+        }
+        .line-num {
+            font-family:'DM Sans',sans-serif;
+            font-size:.7rem; color:rgba(160,140,130,0.5);
+            line-height:32px; height:32px;
+            text-align:right; padding-right:8px;
+            flex-shrink:0;
+        }
+        #notepad-editor {
+            position:relative; z-index:2;
+            padding:8px 18px 18px 52px;
+            font-family:var(--handwriting);
+            font-size:1.2rem; line-height:32px;
+            color:var(--notepad-text);
+            outline:none; min-height:200px;
+            word-break:break-word;
+            background:transparent;
+            height:100%;
+            overflow-y:auto;
+        }
+        #notepad-editor:empty::before {
+            content:attr(data-placeholder);
+            color:rgba(160,140,130,0.5);
+            pointer-events:none;
+        }
+        .notepad-body.urdu-mode #notepad-editor {
+            font-family:var(--urdu); direction:rtl; text-align:right;
+            font-size:1.3rem; line-height:38px; padding-left:18px; padding-right:54px;
+        }
+        .notepad-body.urdu-mode .notepad-line-nums {
+            left:auto; right:0; border-right:none; border-left:1px solid var(--notepad-line);
+        }
+        /* Footer */
+        .notepad-footer {
+            padding:8px 16px; display:flex; justify-content:space-between; align-items:center;
+            background:rgba(240,235,220,.5);
+            border-top:1px solid rgba(0,0,0,.06);
+            font-size:.75rem; color:rgba(160,140,130,0.8);
+            font-family:'DM Sans', sans-serif;
+            flex-shrink:0; gap:8px; flex-wrap:wrap;
+            z-index:2;
+            backdrop-filter:blur(4px);
+        }
+        .notepad-font-toggle { display:flex; gap:4px; }
+        .font-btn {
+            padding:3px 12px; border-radius:99px; font-size:.72rem;
+            background:rgba(0,0,0,.06); color:rgba(100,80,70,0.8);
+            border:1px solid rgba(0,0,0,.08);
+            cursor:pointer; transition:all .2s;
+        }
+        .font-btn.active { background:#5b8af0; color:#fff; border-color:transparent; }
+        .save-status { display:flex; align-items:center; gap:6px; }
+        .save-dot {
+            width:8px; height:8px; border-radius:50%; background:#34d399;
+            animation:pulse-save 2s infinite;
+        }
+        @keyframes pulse-save { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+
+        /* ── Fullscreen Description Overlay ─────────────────────── */
+        #desc-fullscreen-overlay {
+            position:fixed; inset:0; z-index:5000;
+            background:var(--bg);
+            display:none; flex-direction:column;
+        }
+        #desc-fullscreen-overlay.open { display:flex; }
+        .desc-fs-header {
+            display:flex; align-items:center; gap:12px;
+            padding:14px 18px; background:var(--surface);
+            border-bottom:2px solid var(--accent); flex-shrink:0;
+        }
+        .desc-fs-title {
+            flex:1; font-family:'Syne',sans-serif; font-size:1rem;
+            font-weight:700; color:var(--text); overflow:hidden;
+            white-space:nowrap; text-overflow:ellipsis;
+        }
+        .desc-fs-close {
+            width:36px; height:36px; border-radius:50%;
+            background:var(--surface2); border:1px solid var(--border);
+            color:var(--text); font-size:1.2rem;
+            display:flex; align-items:center; justify-content:center;
+            cursor:pointer; transition:all var(--transition); flex-shrink:0;
+        }
+        .desc-fs-close:hover { background:var(--danger); color:#fff; border-color:var(--danger); }
+        .desc-fs-body {
+            flex:1; overflow-y:auto; padding:24px 20px;
+            background:var(--bg); color:var(--text);
+            font-family:var(--handwriting); font-size:1.3rem;
+            font-weight:500; line-height:1.85;
+            word-break:break-word;
+        }
+        .desc-fs-body .content { color:var(--text) !important; }
+        .desc-fs-body .content b  { font-weight:800; color:var(--accent2); }
+        .desc-fs-body .content i  { color:var(--warn); font-style:italic; }
+        .desc-fs-body .empty-desc {
+            font-family:'DM Sans',sans-serif; font-style:italic;
+            color:var(--text3); font-size:1rem;
+        }
+        .desc-fs-body iframe {
+            width:100%; min-height:80vh; border:none;
+            border-radius:var(--radius-sm); background:#fff;
+        }
+
+        /* ── FAB Type Selector ──────────────────────────────────── */
+        .fab-type-btn {
+            display:flex; align-items:center; gap:12px;
+            width:100%; padding:13px 14px;
+            background:var(--surface2); border:1px solid var(--border);
+            border-radius:var(--radius); cursor:pointer;
+            transition:all var(--transition); text-align:left;
+        }
+        .fab-type-btn:hover { border-color:var(--accent); background:var(--surface3); transform:translateX(3px); }
+        .fab-type-icon { font-size:1.5rem; flex-shrink:0; }
+        .fab-type-title { font-family:'Syne',sans-serif; font-weight:700; font-size:.92rem; color:var(--text); }
+        .fab-type-desc { font-size:.75rem; color:var(--text3); margin-top:2px; }
+
+        .topic-details-toggle {
+            background:var(--surface2); border:1px solid var(--border);
+            border-radius:var(--radius-sm); padding:0;
+            overflow:hidden;
+        }
+        .topic-details-toggle-btn {
+            width:100%; display:flex; align-items:center; justify-content:space-between;
+            padding:10px 14px; cursor:pointer; font-size:.82rem;
+            color:var(--text2); font-family:'Syne',sans-serif; font-weight:600;
+            background:none; border:none; transition:background var(--transition);
+        }
+        .topic-details-toggle-btn:hover { background:var(--surface3); }
+        .topic-details-chevron { font-size:.7rem; transition:transform var(--transition); }
+        .topic-details-toggle.open .topic-details-chevron { transform:rotate(180deg); }
+        .topic-details-body {
+            max-height:0; overflow:hidden;
+            transition:max-height .35s cubic-bezier(.4,0,.2,1);
+            border-top:0 solid var(--border);
+        }
+        .topic-details-toggle.open .topic-details-body { max-height:5000px; border-top-width:1px; }
+        .topic-details-body-inner { padding:12px 14px; display:flex; flex-direction:column; gap:12px; }
+
+        /* ── Upload Progress ───────────────────────────────────── */
+        .upload-progress-wrap {
+            display:none; margin-top:8px; padding:8px 12px;
+            background:var(--surface2); border-radius:var(--radius-sm);
+            border:1px solid var(--border);
+        }
+        .upload-progress-wrap.show { display:block; }
+        .upload-progress-bar {
+            height:6px; background:var(--border); border-radius:99px;
+            overflow:hidden; margin-top:4px;
+        }
+        .upload-progress-fill {
+            height:100%; background:linear-gradient(90deg, var(--accent), var(--accent3));
+            width:0%; transition:width .3s ease;
+            border-radius:99px;
+        }
+        .upload-progress-text {
+            font-size:.8rem; color:var(--text2);
+            display:flex; justify-content:space-between;
+        }
+
+        /* ── PDF Library (Course-level PDFs) ───────────────────── */
+        .pdf-library-grid {
+            display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
+            gap:12px; margin-top:8px;
+        }
+        .pdf-library-card {
+            background:var(--surface); border:1px solid var(--border);
+            border-radius:var(--radius); padding:14px;
+            display:flex; flex-direction:column; gap:8px;
+            transition:all var(--transition);
+        }
+        .pdf-library-card:hover { border-color:var(--accent); transform:translateY(-2px); }
+        .pdf-library-card .pdf-title {
+            font-weight:600; font-size:.9rem; color:var(--text);
+            word-break:break-word;
+        }
+        .pdf-library-card .pdf-meta {
+            font-size:.72rem; color:var(--text3);
+        }
+        .pdf-library-card .pdf-actions {
+            display:flex; gap:6px; margin-top:4px;
+        }
+
+        @media(min-width:600px) {
+            .modal-overlay { align-items:center; padding:20px; }
+            .modal { border-radius:var(--radius); }
+            main { padding:18px 24px 100px; }
+            .media-grid { flex-direction:row; }
+            .img-thumb-wrap { width:auto; max-width:240px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Loading -->
+<div id="loading-screen">
+    <div class="loader-ring"></div>
+    <div class="loader-text">LOADING YOUR STUDY DATA…</div>
+</div>
+
+<!-- App -->
+<div id="app">
+    <header>
+        <button class="header-back" id="back-btn" onclick="goBack()">‹</button>
+        <img id="header-logo" src="" alt="Logo" style="height:34px;width:auto;object-fit:contain;border-radius:6px;display:none;flex-shrink:0;">
+        <div class="breadcrumb" id="breadcrumb"><span>My Courses</span></div>
+        <div class="header-actions">
+            <button class="icon-btn" id="search-toggle-btn" onclick="toggleSearch()" title="Search">🔍</button>
+            <button class="icon-btn" onclick="openNotepad()" title="Notepad">📄</button>
+            <button class="icon-btn" onclick="showTrashView()" title="Trash">🗑</button>
+            <button class="icon-btn" onclick="showBackupView()" title="Backup">💾</button>
+            <button class="icon-btn" id="theme-btn" onclick="toggleTheme()" title="Toggle theme">☀️</button>
+            <a class="icon-btn" href="setup.php" title="Setup & Config" style="font-size:1rem;display:flex;align-items:center;justify-content:center;">⚙️</a>
+        </div>
+    </header>
+
+    <div id="stats-bar">
+        <div class="stat-chip total"    onclick="filterByStatus('all')">
+            <div class="dot"></div><span>Total</span><span class="val" id="stat-total">0</span>
+        </div>
+        <div class="stat-chip pending"  onclick="filterByStatus('Pending')">
+            <div class="dot"></div><span>Pending</span><span class="val" id="stat-pending">0</span>
+        </div>
+        <div class="stat-chip complete" onclick="filterByStatus('Complete')">
+            <div class="dot"></div><span>Complete</span><span class="val" id="stat-complete">0</span>
+        </div>
+        <div class="stat-chip revision" onclick="filterByStatus('Revision')">
+            <div class="dot"></div><span>Revision</span><span class="val" id="stat-revision">0</span>
+        </div>
+    </div>
+
+    <div id="search-wrap">
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="Search topics, subjects, courses…"
+                   oninput="handleSearch(this.value)"
+                   onfocus="showSuggestions(this.value)"
+                   onblur="hideSuggestionsDelayed()"/>
+            <div id="search-suggestions"></div>
+        </div>
+    </div>
+
+    <main id="main-content"></main>
+</div>
+
+<div id="toast"></div>
+
+<div class="modal-overlay" id="modal-overlay" onclick="closeModalOnOverlay(event)">
+    <div class="modal" id="modal">
+        <div class="modal-title" id="modal-title">Add</div>
+        <div id="modal-body"></div>
+        <div class="modal-actions" id="modal-actions"></div>
+    </div>
+</div>
+
+<button class="fab" id="fab" onclick="fabClick()">+</button>
+
+<!-- Fullscreen Description Overlay -->
+<div id="desc-fullscreen-overlay">
+    <div class="desc-fs-header">
+        <span id="desc-fs-title" class="desc-fs-title">📄 Description</span>
+        <button class="desc-fs-close" onclick="closeDescFullscreen()" title="Band karo">✕</button>
+    </div>
+    <div class="desc-fs-body" id="desc-fs-body"></div>
+</div>
+
+<!-- Notepad -->
+<div id="notepad-overlay" onclick="notepadOverlayClick(event)">
+    <div class="notepad-paper">
+        <div class="notepad-header">
+            <div class="notepad-books-bar" id="notepad-books-bar">
+                <button class="book-tab-add" onclick="promptAddBook()" title="Add notebook">＋</button>
+            </div>
+            <div class="notepad-title-bar">
+                <h3 id="notepad-book-title">✏ My Notes</h3>
+                <div class="notepad-header-btns">
+                    <button class="notepad-icon-btn" onclick="promptRenameBook()" title="Rename book">✏</button>
+                    <button class="notepad-icon-btn" onclick="promptDeleteBook()" title="Delete book">🗑</button>
+                    <button class="notepad-close" onclick="closeNotepad()">✕</button>
+                </div>
+            </div>
+            <div class="notepad-toolbar" id="np-toolbar">
+                <button class="np-tool-btn" onclick="npExec('bold')" title="Bold"><b>B</b></button>
+                <button class="np-tool-btn" onclick="npExec('italic')" title="Italic"><i>I</i></button>
+                <button class="np-tool-btn" onclick="npExec('underline')" title="Underline"><u>U</u></button>
+                <button class="np-tool-btn" onclick="npExec('strikeThrough')" title="Strikethrough"><s>S</s></button>
+                <div class="np-tool-sep"></div>
+                <select id="np-font-size" onchange="npFontSize(this.value)" title="Font Size">
+                    <option value="1">Small</option>
+                    <option value="3" selected>Normal</option>
+                    <option value="4">Large</option>
+                    <option value="5">XL</option>
+                    <option value="6">XXL</option>
+                </select>
+                <div class="np-tool-sep"></div>
+                <button class="np-tool-btn" onclick="npExec('insertOrderedList')" title="Numbered List">1.</button>
+                <button class="np-tool-btn" onclick="npExec('insertUnorderedList')" title="Bullet List">•</button>
+                <div class="np-tool-sep"></div>
+                <button class="np-tool-btn" onclick="npHeading('H1')" title="Heading 1">H1</button>
+                <button class="np-tool-btn" onclick="npHeading('H2')" title="Heading 2">H2</button>
+                <button class="np-tool-btn" onclick="npHeading('H3')" title="Heading 3">H3</button>
+                <div class="np-tool-sep"></div>
+                <button class="np-tool-btn" onclick="npExec('justifyLeft')" title="Left">⬅</button>
+                <button class="np-tool-btn" onclick="npExec('justifyCenter')" title="Center">↔</button>
+                <button class="np-tool-btn" onclick="npExec('justifyRight')" title="Right">➡</button>
+                <div class="np-tool-sep"></div>
+                <span class="np-color-dot" style="background:#ffeb3b" onclick="npHighlight('#ffeb3b')" title="Yellow"></span>
+                <span class="np-color-dot" style="background:#a5d6a7" onclick="npHighlight('#a5d6a7')" title="Green"></span>
+                <span class="np-color-dot" style="background:#ef9a9a" onclick="npHighlight('#ef9a9a')" title="Red"></span>
+                <span class="np-color-dot" style="background:#90caf9" onclick="npHighlight('#90caf9')" title="Blue"></span>
+                <div class="np-tool-sep"></div>
+                <button class="np-tool-btn" onclick="npInsertDivider()" title="Line">—</button>
+                <button class="np-tool-btn" onclick="npExec('removeFormat')" title="Clear" style="color:#ff9999;">✕</button>
+            </div>
+        </div>
+        <div class="notepad-body" id="notepad-body">
+            <div class="notepad-lines-wrap">
+                <div class="notepad-line-nums" id="notepad-line-nums"><div class="line-num">1</div></div>
+            </div>
+            <div id="notepad-editor"
+                 contenteditable="true"
+                 data-placeholder="Apne thoughts yahan likho… 📝"
+                 oninput="onNotepadRichInput()"
+                 onkeydown="onNotepadKeyDown(event)"></div>
+        </div>
+        <div class="notepad-footer">
+            <div class="notepad-font-toggle">
+                <button class="font-btn active" id="font-btn-hindi" onclick="setNotepadFont('hindi')">✍ Hindi</button>
+                <button class="font-btn" id="font-btn-urdu" onclick="setNotepadFont('urdu')">اردو</button>
+                <button class="font-btn" id="font-btn-serif" onclick="setNotepadFont('serif')" style="margin-left:4px;">Serif</button>
+            </div>
+            <span id="notepad-wordcount">0 words</span>
+            <div class="save-status">
+                <div class="save-dot" id="save-dot"></div>
+                <span id="save-label">Saved ✓</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    'use strict';
+
+    // ══════════════════════════════════════════════
+    // STATE
+    // ══════════════════════════════════════════════
+    var state = {
+        db:            { courses:[], subjects:[], topics:[], trash:[], pdfs:[] },
+        view:          'courses',
+        activeCourse:  null,
+        activeSubject: null,
+        theme:         getAutoTheme(),
+        themeManualOverride: false,
+        sortOrder:     'createdAt',
+        searchQuery:   '',
+        statusFilter:  null,
+        expandedTopic: null,
+    };
+
+    var notepadState = {
+        books:      { 'Default': '' },
+        activeBook: 'Default',
+        fontMode:   localStorage.getItem('notepadFont') || 'hindi',
+        saveTimer:  null,
+        isDirty:    false,
+    };
+
+    // ══════════════════════════════════════════════
+    // THEME — auto: 6 AM–6 PM = light, baaki time = dark
+    // ══════════════════════════════════════════════
+    function getAutoTheme() {
+        var h = new Date().getHours();
+        return (h >= 6 && h < 18) ? 'light' : 'dark';
+    }
+    applyTheme(state.theme);
+    function applyTheme(t) {
+        document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : '');
+        document.getElementById('theme-btn').textContent = t === 'light' ? '🌙' : '☀️';
+    }
+    function toggleTheme() {
+        state.theme = state.theme === 'dark' ? 'light' : 'dark';
+        state.themeManualOverride = true;
+        applyTheme(state.theme);
+    }
+    function autoThemeTick() {
+        if (state.themeManualOverride) return;
+        var auto = getAutoTheme();
+        if (auto !== state.theme) { state.theme = auto; applyTheme(auto); }
+    }
+    setInterval(autoThemeTick, 5 * 60 * 1000);
+
+    // ══════════════════════════════════════════════
+    // ★ MARKDOWN RENDERER
+    // ══════════════════════════════════════════════
+    function renderMarkdown(rawText, searchQuery) {
+        if (!rawText) return '';
+        var s = rawText
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+        s = s.replace(/\*\*(.+?)\*\*/g, '<b>$1</b>');
+        s = s.replace(/\*([^*\n]+?)\*/g, '<i>$1</i>');
+        s = s.replace(/\n/g, '<br>');
+        if (searchQuery && searchQuery.length > 0) {
+            s = highlightInHTML(s, searchQuery);
+        }
+        return s;
+    }
+    function highlightInHTML(html, query) {
+        if (!query) return html;
+        var parts = html.split(/(<[^>]+>)/g);
+        var q = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        var re = new RegExp('(' + q + ')', 'gi');
+        return parts.map(function(part) {
+            if (part.charAt(0) === '<') return part;
+            return part.replace(re, '<mark class="sh">$1</mark>');
+        }).join('');
+    }
+    function hlText(str, query) {
+        if (!query || !str) return esc(str);
+        var escaped = esc(str);
+        var q = esc(query).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        return escaped.replace(new RegExp('(' + q + ')', 'gi'), '<mark class="sh">$1</mark>');
+    }
+
+    // ══════════════════════════════════════════════
+    // ★ HTML DETECTOR
+    // ══════════════════════════════════════════════
+    function looksLikeHTML(text) {
+        if (!text) return false;
+        var trimmed = text.trim();
+        return /^<(html|head|body|div|p|h[1-6]|ul|ol|li|table|tr|td|th|span|section|article|pre|code|br|hr|img|a|b|i|strong|em|script|style)\b/i.test(trimmed)
+            || /^<!DOCTYPE/i.test(trimmed);
+    }
+
+    function renderDescriptionHTML(topicId, htmlContent) {
+        var iframeId = 'desc-iframe-' + topicId;
+        var wrapper = '<div class="topic-desc-html">' +
+            '<div class="topic-desc-html-label">' +
+            '<span class="html-badge">HTML</span>' +
+            '<span>Rendered Preview — scrollable</span>' +
+            '<button class="desc-expand-btn" onclick="openDescFullscreen(\'' + topicId + '\')" style="position:relative;top:auto;right:auto;margin-left:auto;background:rgba(0,0,0,0.3);color:#fff;width:28px;height:28px;border-radius:50%;font-size:.9rem;border:none;cursor:pointer;">⛶</button>' +
+            '</div>' +
+            '<iframe class="topic-desc-iframe" id="' + iframeId + '" sandbox="allow-scripts" scrolling="yes"></iframe>' +
+            '</div>';
+        setTimeout(function() {
+            var iframe = document.getElementById(iframeId);
+            if (!iframe) return;
+            var doc = '<!DOCTYPE html><html><head><meta charset="UTF-8">' +
+                '<style>body{font-family:system-ui,sans-serif;font-size:14px;line-height:1.6;margin:12px 14px;color:#1a1a2e;word-break:break-word;}' +
+                'pre,code{background:#f0f0f0;border-radius:4px;padding:2px 6px;font-size:13px;}' +
+                'pre{padding:10px;overflow-x:auto;}table{border-collapse:collapse;width:100%;}' +
+                'td,th{border:1px solid #ccc;padding:6px 10px;}</style></head>' +
+                '<body>' + htmlContent + '</body></html>';
+            iframe.srcdoc = doc;
+            iframe.onload = function() {
+                try {
+                    var h = iframe.contentDocument.body.scrollHeight;
+                    iframe.style.height = Math.min(Math.max(h + 20, 80), 400) + 'px';
+                } catch(e) {}
+            };
+        }, 60);
+        return wrapper;
+    }
+
+    // ══════════════════════════════════════════════
+    // ★ FULLSCREEN DESCRIPTION (IN-PAGE OVERLAY)
+    // ══════════════════════════════════════════════
+    function openDescFullscreen(topicId) {
+        var topic = state.db.topics.find(function(t) { return t.id === topicId; });
+        if (!topic) return;
+        var title = topic.name;
+        var content = topic.description || '';
+        var isHtml = looksLikeHTML(content);
+
+        var overlay = document.getElementById('desc-fullscreen-overlay');
+        var titleEl = document.getElementById('desc-fs-title');
+        var bodyEl  = document.getElementById('desc-fs-body');
+
+        titleEl.textContent = '📄 ' + title;
+        bodyEl.innerHTML = '';
+
+        if (!content) {
+            bodyEl.innerHTML = '<div class="empty-desc">No description added.</div>';
+        } else if (isHtml) {
+            bodyEl.innerHTML = '<iframe id="desc-fs-iframe" style="width:100%;min-height:80vh;border:none;border-radius:8px;background:#fff;" sandbox="allow-scripts"></iframe>';
+            setTimeout(function() {
+                var iframe = document.getElementById('desc-fs-iframe');
+                if (!iframe) return;
+                var doc = '<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{font-family:system-ui,sans-serif;font-size:16px;line-height:1.8;margin:16px 20px;color:#1a1a2e;word-break:break-word;}pre,code{background:#f0f0f0;border-radius:4px;padding:2px 6px;}pre{padding:10px;overflow-x:auto;}table{border-collapse:collapse;width:100%;}td,th{border:1px solid #ccc;padding:6px 10px;}</style></head><body>' + content + '</body></html>';
+                iframe.srcdoc = doc;
+            }, 40);
+        } else {
+            var rendered = renderMarkdown(content, '');
+            bodyEl.innerHTML = '<div class="content" style="white-space:pre-wrap;">' + rendered + '</div>';
+        }
+
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeDescFullscreen() {
+        document.getElementById('desc-fullscreen-overlay').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    // ══════════════════════════════════════════════
+    // BOOT
+    // ══════════════════════════════════════════════
+    function boot() {
+        fetch('api.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'loadAll', params: [] })
+        })
+            .then(function(res) {
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return res.json();
+            })
+            .then(function(data) {
+                state.db = data;
+                hideLoading();
+                renderView();
+            })
+            .catch(function(err) {
+                hideLoading();
+                showToast('⚠ Server not reachable — run "php -S 127.0.0.1:8080" or start.sh', 'error');
+                renderView();
+            });
+    }
+    function hideLoading() {
+        var ls = document.getElementById('loading-screen');
+        ls.classList.add('hidden');
+        setTimeout(function() { ls.style.display='none'; }, 400);
+        document.getElementById('app').classList.add('ready');
+    }
+
+    // ══════════════════════════════════════════════
+    // STATS
+    // ══════════════════════════════════════════════
+    function updateStats() {
+        var t = state.db.topics || [];
+        document.getElementById('stat-total').textContent    = t.length;
+        document.getElementById('stat-pending').textContent  = t.filter(function(x){return x.status==='Pending';}).length;
+        document.getElementById('stat-complete').textContent = t.filter(function(x){return x.status==='Complete';}).length;
+        document.getElementById('stat-revision').textContent = t.filter(function(x){return x.status==='Revision';}).length;
+        document.querySelectorAll('.stat-chip').forEach(function(c){c.classList.remove('active-filter');});
+        if (state.statusFilter) {
+            var map = { Pending:'.stat-chip.pending', Complete:'.stat-chip.complete', Revision:'.stat-chip.revision' };
+            var el = document.querySelector(map[state.statusFilter]);
+            if (el) el.classList.add('active-filter');
+        }
+    }
+
+    // ══════════════════════════════════════════════
+    // STATUS FILTER
+    // ══════════════════════════════════════════════
+    function filterByStatus(status) {
+        if (status === 'all') {
+            state.statusFilter = null;
+            if (state.view !== 'topics') showGlobalTopicsList(null);
+            else renderTopics();
+        } else {
+            state.statusFilter = state.statusFilter === status ? null : status;
+            showGlobalTopicsList(state.statusFilter);
+        }
+        updateStats();
+    }
+    function showGlobalTopicsList(statusFilter) {
+        state.view = 'global-topics'; updateNav();
+        var topics = statusFilter
+            ? (state.db.topics||[]).filter(function(t){return t.status===statusFilter;})
+            : (state.db.topics||[]).slice();
+        topics = sortTopics(topics, state.sortOrder);
+
+        var el = document.getElementById('main-content');
+        var dotColor = statusFilter === 'Pending' ? 'var(--pending)' :
+            statusFilter === 'Complete' ? 'var(--complete)' :
+                statusFilter === 'Revision' ? 'var(--revision)' : 'var(--accent)';
+        var banner = statusFilter
+            ? '<div class="filter-banner"><div class="fb-dot" style="background:'+dotColor+'"></div>Showing <strong>'+topics.length+'</strong> '+statusFilter+' topics<span class="filter-clear" onclick="clearStatusFilter()">✕ Clear</span></div>'
+            : '<div class="filter-banner"><div class="fb-dot" style="background:var(--accent)"></div>All <strong>'+topics.length+'</strong> topics<span class="filter-clear" onclick="clearStatusFilter()">✕ Clear</span></div>';
+
+        if (!topics.length) { el.innerHTML = banner + emptyState('📋','No topics found',''); return; }
+
+        var list = topics.map(function(t,i) {
+            var subj = state.db.subjects.find(function(s){return s.id===t.subjectId;});
+            var course = subj ? state.db.courses.find(function(c){return c.id===subj.courseId;}) : null;
+            var path = (course?esc(course.name):'?') + ' › ' + (subj?esc(subj.name):'?');
+            return '<div class="topic-card" id="tc-'+t.id+'" style="animation-delay:'+(i*20)+'ms">'+
+                '<div class="topic-row" onclick="toggleTopic(\''+t.id+'\')">'+
+                '<div class="topic-status-dot status-'+t.status+'"></div>'+
+                '<div style="flex:1;min-width:0"><div class="topic-name">'+esc(t.name)+'</div>'+
+                '<div style="font-size:.72rem;color:var(--text3);margin-top:2px">'+path+'</div></div>'+
+                '<span class="topic-status-badge badge-'+t.status+'">'+t.status+'</span>'+
+                '<span class="topic-chevron">▼</span></div>'+
+                '<div class="topic-expand"><div class="topic-expand-inner">'+topicExpandInner(t)+'</div></div></div>';
+        }).join('');
+
+        el.innerHTML = '<div class="section-title">'+(statusFilter||'All')+' Topics <small>'+topics.length+' total</small></div>'+banner+'<div class="topics-list">'+list+'</div>';
+    }
+    function clearStatusFilter() { state.statusFilter = null; updateStats(); goToCourses(); }
+
+    // ══════════════════════════════════════════════
+    // RENDER
+    // ══════════════════════════════════════════════
+    function renderView() {
+        updateStats();
+        var v = state.view;
+        if      (v==='courses')       renderCourses();
+        else if (v==='subjects')      renderSubjects();
+        else if (v==='topics')        renderTopics();
+        else if (v==='global-topics') showGlobalTopicsList(state.statusFilter);
+        else if (v==='trash')         renderTrash();
+        else if (v==='backup')        renderBackup();
+        else if (v==='pdf-library')   renderPdfLibrary();
+    }
+
+    // ══════════════════════════════════════════════
+    // NAV
+    // ══════════════════════════════════════════════
+    function updateNav() {
+        var bc  = document.getElementById('breadcrumb');
+        var btn = document.getElementById('back-btn');
+        var fab = document.getElementById('fab');
+        var html = ''; var v = state.view;
+        if (v==='courses') {
+            html='<span>My Courses</span>'; btn.classList.remove('visible'); fab.style.display='flex';
+        } else if (v==='subjects') {
+            var c=state.activeCourse;
+            html='<span onclick="goToCourses()" style="cursor:pointer">Courses</span><span class="sep">›</span><span>'+esc(c.name)+'</span>';
+            btn.classList.add('visible'); fab.style.display='flex';
+        } else if (v==='topics') {
+            var c2=state.activeCourse; var s=state.activeSubject;
+            html='<span onclick="goToCourses()" style="cursor:pointer">Courses</span><span class="sep">›</span>'+
+                '<span onclick="openCourse(\''+c2.id+'\')" style="cursor:pointer">'+esc(c2.name)+'</span>'+
+                '<span class="sep">›</span><span>'+esc(s.name)+'</span>';
+            btn.classList.add('visible'); fab.style.display='flex';
+        } else if (v==='global-topics') {
+            html='<span onclick="goToCourses()" style="cursor:pointer">Courses</span><span class="sep">›</span><span>'+(state.statusFilter||'All')+' Topics</span>';
+            btn.classList.add('visible'); fab.style.display='none';
+        } else if (v==='pdf-library') {
+            var c3=state.activeCourse;
+            html='<span onclick="goToCourses()" style="cursor:pointer">Courses</span><span class="sep">›</span>'+
+                '<span onclick="openCourse(\''+c3.id+'\')" style="cursor:pointer">'+esc(c3.name)+'</span>'+
+                '<span class="sep">›</span><span>📄 PDFs</span>';
+            btn.classList.add('visible'); fab.style.display='none';
+        } else {
+            html='<span onclick="goToCourses()" style="cursor:pointer">Courses</span><span class="sep">›</span><span>'+(v==='trash'?'Trash':'Backup')+'</span>';
+            btn.classList.add('visible'); fab.style.display='none';
+        }
+        bc.innerHTML=html;
+    }
+    function goBack() {
+        var v=state.view;
+        if (v==='subjects'||v==='trash'||v==='backup'||v==='global-topics'||v==='pdf-library') goToCourses();
+        else if (v==='topics') { state.view='subjects'; state.activeSubject=null; state.expandedTopic=null; renderView(); updateNav(); }
+        else goToCourses();
+    }
+    function goToCourses() {
+        state.view='courses'; state.activeCourse=null; state.activeSubject=null;
+        state.statusFilter=null; state.expandedTopic=null; renderView(); updateNav(); updateStats();
+    }
+
+    // ══════════════════════════════════════════════
+    // COURSES
+    // ══════════════════════════════════════════════
+    function renderCourses() {
+        updateNav();
+        var courses=applySearch(state.db.courses||[],['name']);
+        var el=document.getElementById('main-content');
+        var searchBanner = state.searchQuery ? makeSearchBanner() : '';
+        if (!courses.length) { el.innerHTML=searchBanner+emptyState('📚','No Courses Yet','Tap + to add your first course'); return; }
+        var grid=courses.map(function(c,i){
+            var subCount=(state.db.subjects||[]).filter(function(s){return s.courseId===c.id;}).length;
+            var topicCount=(state.db.topics||[]).filter(function(t){
+                var s=(state.db.subjects||[]).find(function(s){return s.id===t.subjectId;});
+                return s&&s.courseId===c.id;
+            }).length;
+            var pdfCount=(state.db.pdfs||[]).filter(function(p){return p.courseId===c.id;}).length;
+            return '<div class="entity-card" style="animation-delay:'+(i*40)+'ms" onclick="openCourse(\''+c.id+'\')">'+
+                '<div class="entity-card-top"><div class="entity-icon">📖</div><div class="entity-info">'+
+                '<div class="entity-name">'+hlText(c.name, state.searchQuery)+'</div>'+
+                '<div class="entity-meta">'+subCount+' subjects · '+topicCount+' topics · '+pdfCount+' PDFs · '+progressPct(c.id,'course')+'% done</div>'+
+                '<div class="entity-date">📅 Created: '+(c.createdAt||'')+' · Updated: '+(c.updatedAt||'')+'</div></div></div>'+
+                '<div class="progress-bar"><div class="progress-fill" style="width:'+progressPct(c.id,'course')+'%"></div></div>'+
+                '<div class="entity-card-actions" onclick="event.stopPropagation()">'+
+                '<button class="action-btn open" onclick="openCourse(\''+c.id+'\')">Open</button>'+
+                '<button class="action-btn" onclick="event.stopPropagation();showPdfLibrary(\''+c.id+'\')">📄 PDFs</button>'+
+                '<button class="action-btn" onclick="showEditCourse(\''+c.id+'\')">✏ Edit</button>'+
+                '<button class="action-btn danger" onclick="confirmDeleteCourse(\''+c.id+'\')">🗑 Delete</button>'+
+                '</div></div>';
+        }).join('');
+        el.innerHTML=searchBanner+'<div class="section-title">Courses <small>'+courses.length+' total</small></div><div class="card-grid">'+grid+'</div>';
+    }
+    function progressPct(id,type) {
+        var topics=[];
+        if (type==='course') {
+            var sids=(state.db.subjects||[]).filter(function(s){return s.courseId===id;}).map(function(s){return s.id;});
+            topics=(state.db.topics||[]).filter(function(t){return sids.includes(t.subjectId);});
+        } else {
+            topics=(state.db.topics||[]).filter(function(t){return t.subjectId===id;});
+        }
+        if (!topics.length) return 0;
+        return Math.round(topics.filter(function(t){return t.status!=='Pending';}).length/topics.length*100);
+    }
+    function openCourse(id) {
+        state.activeCourse=state.db.courses.find(function(c){return c.id===id;});
+        state.activeSubject=null; state.expandedTopic=null; state.view='subjects'; renderView(); updateNav();
+    }
+
+    // ══════════════════════════════════════════════
+    // PDF LIBRARY (Course-level PDFs)
+    // ══════════════════════════════════════════════
+    function showPdfLibrary(courseId) {
+        state.activeCourse = state.db.courses.find(function(c){return c.id===courseId;});
+        state.view = 'pdf-library';
+        renderView();
+        updateNav();
+    }
+    function renderPdfLibrary() {
+        var c = state.activeCourse;
+        var pdfs = (state.db.pdfs||[]).filter(function(p){return p.courseId===c.id;});
+        var el = document.getElementById('main-content');
+        var list = pdfs.length ? pdfs.map(function(p,i){
+            return '<div class="pdf-library-card" style="animation-delay:'+(i*30)+'ms">'+
+                '<a href="'+escAttr(p.path||'')+'" target="_blank" class="pdf-title" style="color:var(--accent);">📄 '+esc(p.title||'Untitled')+'</a>'+
+                '<div class="pdf-meta">📅 '+ (p.addedAt||'') +'</div>'+
+                '<div class="pdf-actions">'+
+                '<button class="action-btn danger" onclick="confirmDeletePdf(\''+p.id+'\')">🗑 Delete</button>'+
+                '</div></div>';
+        }).join('') : '<div class="empty-state" style="padding:30px 0;"><div class="empty-icon">📄</div><h3>No PDFs</h3><p>Upload PDFs for this course</p></div>';
+
+        el.innerHTML = '<div class="section-title">📄 PDF Library — '+esc(c.name)+' <small>'+pdfs.length+' files</small></div>'+
+            '<div class="backup-panel" style="margin-bottom:12px;">'+
+            '<div class="modal-field"><label class="modal-label">Upload PDF</label>'+
+            '<div style="display:flex;gap:8px;flex-wrap:wrap;">'+
+            '<input class="modal-input" id="pdf-title-input" placeholder="PDF Title" style="flex:1;min-width:150px;">'+
+            '<button class="btn btn-primary" onclick="triggerCoursePdfUpload(\''+c.id+'\')">📤 Upload</button>'+
+            '</div>'+
+            '<input type="file" class="hidden-file" id="course-pdf-'+c.id+'" accept=".pdf,application/pdf" onchange="handleCoursePdfUpload(event,\''+c.id+'\')"/>'+
+            '<div class="upload-progress-wrap" id="course-pdf-progress-'+c.id+'">'+
+            '<div class="upload-progress-text"><span>Uploading...</span><span id="course-pdf-pct-'+c.id+'">0%</span></div>'+
+            '<div class="upload-progress-bar"><div class="upload-progress-fill" id="course-pdf-bar-'+c.id+'" style="width:0%"></div></div>'+
+            '</div>'+
+            '</div>'+
+            '<div class="pdf-library-grid">'+list+'</div>';
+    }
+    function triggerCoursePdfUpload(courseId) {
+        var el = document.getElementById('course-pdf-'+courseId);
+        if (el) el.click();
+    }
+    function handleCoursePdfUpload(event, courseId) {
+        var file = event.target.files[0];
+        if (!file) return;
+        if (!file.name.toLowerCase().endsWith('.pdf')) {
+            showToast('Sirf PDF files allowed hain', 'error');
+            event.target.value = '';
+            return;
+        }
+        var titleInput = document.getElementById('pdf-title-input');
+        var title = titleInput ? titleInput.value.trim() : '';
+        if (!title) title = file.name.replace(/\.pdf$/i,'');
+
+        var progressWrap = document.getElementById('course-pdf-progress-'+courseId);
+        var progressBar = document.getElementById('course-pdf-bar-'+courseId);
+        var progressText = document.getElementById('course-pdf-pct-'+courseId);
+        progressWrap.classList.add('show');
+        progressBar.style.width = '0%';
+        progressText.textContent = '0%';
+
+        var fd = new FormData();
+        fd.append('action', 'addCoursePdf');
+        fd.append('courseId', courseId);
+        fd.append('title', title);
+        fd.append('pdf', file);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'api.php', true);
+        xhr.upload.onprogress = function(e) {
+            if (e.lengthComputable) {
+                var pct = Math.round((e.loaded / e.total) * 100);
+                progressBar.style.width = pct + '%';
+                progressText.textContent = pct + '%';
+            }
+        };
+        xhr.onload = function() {
+            progressWrap.classList.remove('show');
+            if (xhr.status === 200) {
+                try {
+                    var r = JSON.parse(xhr.responseText);
+                    if (r.ok) {
+                        state.db.pdfs = r.pdfs || state.db.pdfs || [];
+                        renderPdfLibrary();
+                        showToast('PDF upload ho gayi ✓', 'success');
+                    } else {
+                        showToast(r.msg || 'Error', 'error');
+                    }
+                } catch(e) { showToast('Invalid response', 'error'); }
+            } else {
+                showToast('Upload failed: ' + xhr.status, 'error');
+            }
+        };
+        xhr.onerror = function() {
+            progressWrap.classList.remove('show');
+            showToast('Network error', 'error');
+        };
+        xhr.send(fd);
+        event.target.value = '';
+    }
+    function confirmDeletePdf(pdfId) {
+        openModal('Delete PDF?',
+            '<p style="color:var(--text2);font-size:.9rem">Yeh PDF permanently delete ho jayegi.</p>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button>'+
+            '<button class="btn btn-primary" style="background:var(--danger)" onclick="submitDeletePdf(\''+pdfId+'\')">Delete</button>');
+    }
+    function submitDeletePdf(pdfId) {
+        closeModal();
+        apiCall('deleteCoursePdf', [pdfId], function(r) {
+            if (r.ok) {
+                state.db.pdfs = r.pdfs || [];
+                renderPdfLibrary();
+                showToast('PDF delete ho gayi', 'success');
+            } else showToast(r.msg, 'error');
+        });
+    }
+
+    // ══════════════════════════════════════════════
+    // SUBJECTS
+    // ══════════════════════════════════════════════
+    function renderSubjects() {
+        updateNav();
+        var cId=state.activeCourse.id;
+        var subjects=applySearch((state.db.subjects||[]).filter(function(s){return s.courseId===cId;}),['name']);
+        var el=document.getElementById('main-content');
+        var searchBanner = state.searchQuery ? makeSearchBanner() : '';
+        subjects=subjects.sort(function(a,b){
+            var urgentCount=function(sid){return (state.db.topics||[]).filter(function(t){return t.subjectId===sid&&(t.status==='Pending'||t.status==='Revision');}).length;};
+            return urgentCount(b.id)-urgentCount(a.id);
+        });
+        if (!subjects.length) { el.innerHTML=searchBanner+emptyState('📝','No Subjects','Tap + to add subjects'); return; }
+        var grid=subjects.map(function(s,i){
+            var pendingCount=(state.db.topics||[]).filter(function(t){return t.subjectId===s.id&&t.status==='Pending';}).length;
+            var revisionCount=(state.db.topics||[]).filter(function(t){return t.subjectId===s.id&&t.status==='Revision';}).length;
+            var urgentBadge=(pendingCount||revisionCount)
+                ?'<span style="font-size:.7rem;margin-left:4px;">'+(pendingCount?'<span style="color:var(--pending)">●'+pendingCount+' pending</span>':'')+
+                (revisionCount?'<span style="color:var(--revision);margin-left:4px">●'+revisionCount+' revision</span>':'')+'</span>':'';
+            return '<div class="entity-card" style="animation-delay:'+(i*40)+'ms" onclick="openSubject(\''+s.id+'\')">'+
+                '<div class="entity-card-top"><div class="entity-icon">📂</div><div class="entity-info">'+
+                '<div class="entity-name">'+hlText(s.name, state.searchQuery)+'</div>'+
+                '<div class="entity-meta">'+(state.db.topics||[]).filter(function(t){return t.subjectId===s.id;}).length+' topics · '+progressPct(s.id,'subject')+'% done '+urgentBadge+'</div>'+
+                '<div class="entity-date">📅 Created: '+(s.createdAt||'')+' · Updated: '+(s.updatedAt||'')+'</div></div></div>'+
+                '<div class="progress-bar"><div class="progress-fill" style="width:'+progressPct(s.id,'subject')+'%"></div></div>'+
+                '<div class="entity-card-actions" onclick="event.stopPropagation()">'+
+                '<button class="action-btn open" onclick="openSubject(\''+s.id+'\')">Open</button>'+
+                '<button class="action-btn" onclick="showEditSubject(\''+s.id+'\')">✏ Edit</button>'+
+                '<button class="action-btn danger" onclick="confirmDeleteSubject(\''+s.id+'\')">🗑 Delete</button>'+
+                '</div></div>';
+        }).join('');
+        el.innerHTML=searchBanner+'<div class="section-title">Subjects — '+esc(state.activeCourse.name)+' <small>'+subjects.length+' total</small></div><div class="card-grid">'+grid+'</div>';
+    }
+    function openSubject(id) {
+        state.activeSubject=state.db.subjects.find(function(s){return s.id===id;});
+        state.expandedTopic=null; state.view='topics'; renderView(); updateNav();
+    }
+
+    // ══════════════════════════════════════════════
+    // TOPICS
+    // ══════════════════════════════════════════════
+    function renderTopics() {
+        updateNav();
+        var sId=state.activeSubject.id;
+        var allTopics=(state.db.topics||[]).filter(function(t){return t.subjectId===sId;});
+        var topics=allTopics;
+        var q = state.searchQuery.toLowerCase();
+        var matchedIds = {};
+        if (q) {
+            topics=allTopics.filter(function(t){
+                var matches = t.name.toLowerCase().includes(q)||(t.description||'').toLowerCase().includes(q);
+                if (matches) matchedIds[t.id] = true;
+                return matches;
+            });
+        }
+        topics=sortTopics(topics,state.sortOrder);
+        var el=document.getElementById('main-content');
+        var sortBar='<div class="sort-bar"><span>Sort:</span>'+
+            '<select class="sort-select" onchange="changeSortOrder(this.value)">'+
+            '<option value="createdAt" '+(state.sortOrder==='createdAt'?'selected':'')+'>Oldest First</option>'+
+            '<option value="name" '+(state.sortOrder==='name'?'selected':'')+'>Name (A-Z)</option>'+
+            '<option value="status" '+(state.sortOrder==='status'?'selected':'')+'>Status</option>'+
+            '<option value="updatedAt" '+(state.sortOrder==='updatedAt'?'selected':'')+'>Last Updated</option>'+
+            '</select></div>';
+        var searchBanner = q ? makeSearchBanner(topics.length) : '';
+        if (!topics.length) { el.innerHTML=searchBanner+sortBar+emptyState('📋','No Topics Found','Tap + to add topics or clear search'); return; }
+        var list=topics.map(function(t,i){
+            var isMatch = q && matchedIds[t.id];
+            var overdueDays = getRevisionOverdueDays(t);
+            var urgLevel = getRevisionUrgencyLevel(overdueDays);
+            var urgClass = (urgLevel >= 0) ? ' rev-urgent-'+urgLevel : '';
+            var badgeInfo = getRevisionBadgeInfo(overdueDays);
+            var overdBadge = badgeInfo ? '<span class="rev-overdue-badge '+badgeInfo.cls+'">\uD83D\uDD14 '+badgeInfo.label+'</span>' : '';
+            return '<div class="topic-card'+urgClass+(isMatch?' search-match':'')+'" id="tc-'+t.id+'" style="animation-delay:'+(i*22)+'ms">'+
+                '<div class="topic-row" onclick="toggleTopic(\''+t.id+'\')">'+
+                '<div class="topic-status-dot status-'+t.status+'"></div>'+
+                '<span class="topic-name">'+hlText(t.name, state.searchQuery)+'</span>'+
+                overdBadge+
+                '<span class="topic-status-badge badge-'+t.status+'">'+t.status+'</span>'+
+                '<span class="topic-chevron">▼</span></div>'+
+                '<div class="topic-expand"><div class="topic-expand-inner">'+topicExpandInner(t)+'</div></div></div>';
+        }).join('');
+        el.innerHTML=searchBanner+'<div class="section-title">'+esc(state.activeSubject.name)+' <small>'+topics.length+' topics</small></div>'+
+            sortBar+'<div class="topics-list">'+list+'</div>';
+        if (state.expandedTopic) {
+            var card=document.getElementById('tc-'+state.expandedTopic);
+            if (card) card.classList.add('expanded');
+        }
+        if (q && topics.length === 1) {
+            var card = document.getElementById('tc-' + topics[0].id);
+            if (card) { card.classList.add('expanded'); state.expandedTopic = topics[0].id; }
+        }
+    }
+    function toggleTopic(id) {
+        var card=document.getElementById('tc-'+id);
+        if (!card) return;
+        var isExpanded=card.classList.contains('expanded');
+        document.querySelectorAll('.topic-card.expanded').forEach(function(c){c.classList.remove('expanded');});
+        if (!isExpanded) { card.classList.add('expanded'); state.expandedTopic=id; }
+        else state.expandedTopic=null;
+    }
+
+    // ══════════════════════════════════════════════
+    // TOPIC EXPAND INNER
+    // ══════════════════════════════════════════════
+    function topicExpandInner(t) {
+        var daysSince = t.completeDate ? daysBetween(t.completeDate, new Date()) : null;
+        var daysLeft  = daysSince !== null ? Math.max(0, 2 - daysSince) : null;
+        var pendingDays = null;
+        if (t.status === 'Pending' && t.createdAt) {
+            pendingDays = daysBetween(t.createdAt, new Date());
+            if (pendingDays < 0) pendingDays = 0;
+        }
+
+        var descBlock;
+        var expandBtn = '<button class="desc-expand-btn" onclick="openDescFullscreen(\''+t.id+'\')" title="Fullscreen">⛶</button>';
+
+        if (!t.description) {
+            descBlock = '<div class="topic-desc-wrap"><div class="topic-desc empty">No description added.</div>'+expandBtn+'</div>';
+        } else if (looksLikeHTML(t.description)) {
+            descBlock = renderDescriptionHTML(t.id, t.description);
+        } else {
+            var rendered = renderMarkdown(t.description, state.searchQuery);
+            descBlock = '<div class="topic-desc-wrap">'+
+                '<div class="topic-desc">'+rendered+'</div>'+
+                expandBtn+
+                '</div>';
+        }
+
+        var statusRow = '<div class="topic-actions-row" style="margin-top:2px;">'+
+            '<select class="status-select" onchange="changeTopicStatus(\''+t.id+'\', this.value)">'+
+            '<option '+(t.status==='Pending'?'selected':'')+'>Pending</option>'+
+            '<option '+(t.status==='Complete'?'selected':'')+'>Complete</option>'+
+            '<option '+(t.status==='Revision'?'selected':'')+'>Revision</option>'+
+            '</select>'+
+            '<button class="action-btn" style="flex:0;padding:8px 12px" onclick="showEditTopic(\''+t.id+'\')">✏ Edit</button>'+
+            '<button class="action-btn danger" style="flex:0;padding:8px 12px" onclick="confirmDeleteTopic(\''+t.id+'\')">🗑</button>'+
+            '</div>';
+
+        var hasImages = (t.images||[]).length > 0;
+        var hasLinks  = (t.links||[]).length > 0;
+        var hasPdfs   = (t.pdfs||[]).length > 0;
+
+        var pendingDisplay = '';
+        if (t.status === 'Pending' && pendingDays !== null) {
+            pendingDisplay = '<div class="dc-pending-days">⏳ '+pendingDays+'d pending</div>';
+        }
+        var datesGrid = '<div class="topic-dates-grid">'+
+            '<div class="topic-date-cell"><div class="dc-label">📅 Created</div><div class="dc-val">'+(t.createdAt||'—')+'</div></div>'+
+            '<div class="topic-date-cell"><div class="dc-label">✏ Updated</div><div class="dc-val">'+(t.updatedAt||'—')+'</div></div>'+
+            '<div class="topic-date-cell"><div class="dc-label">✅ Completed</div><div class="dc-val">'+(t.completeDate||'Never')+'</div></div>'+
+            '<div class="topic-date-cell"><div class="dc-label">⏳ Revision in</div><div class="dc-val">'+(daysLeft!==null?(t.status==='Complete'?(daysLeft===0?'⚠ Due!':daysLeft+'d'):'—'):'—')+'</div>'+
+            (pendingDisplay ? '<div style="margin-top:2px;">'+pendingDisplay+'</div>' : '')+
+            '</div></div>';
+
+        var mediaHTML = buildMediaSection(t);
+        var revHistory = buildRevisionHistoryHTML(t);
+
+        var dropBadgeParts = [];
+        if (hasImages) dropBadgeParts.push('📸'+((t.images||[]).length));
+        if (hasLinks)  dropBadgeParts.push('▶️'+((t.links||[]).length));
+        if (hasPdfs)   dropBadgeParts.push('📄'+((t.pdfs||[]).length));
+        var dropBadge = dropBadgeParts.length ? ' <small style="font-weight:400;color:var(--accent2);font-size:.7rem;">'+dropBadgeParts.join(' ')+'</small>' : '';
+
+        var dropdownId = 'td-drop-'+t.id;
+        var dropdown = '<div class="topic-details-toggle" id="'+dropdownId+'">'+
+            '<button class="topic-details-toggle-btn" onclick="toggleTopicDetails(\''+dropdownId+'\')">'+
+            '📋 Dates, Media & History'+dropBadge+
+            '<span class="topic-details-chevron">▼</span></button>'+
+            '<div class="topic-details-body"><div class="topic-details-body-inner">'+
+            datesGrid + mediaHTML + revHistory+'</div></div></div>';
+
+        return descBlock + statusRow + dropdown;
+    }
+
+    function toggleTopicDetails(dropdownId) {
+        var el = document.getElementById(dropdownId);
+        if (el) el.classList.toggle('open');
+    }
+
+    // ══════════════════════════════════════════════
+    // ★ MEDIA SECTION — Images + YouTube + PDF
+    // ══════════════════════════════════════════════
+    function buildMediaSection(t) {
+        var imgs = t.images || [];
+        var imgThumbs = imgs.map(function(img){
+            var src = img.path || img.data;
+            return '<div class="img-thumb-wrap">'+
+                '<img class="img-thumb" src="'+escAttr(src)+'" alt="Topic image" onclick="openImageNewTab(\''+escAttr(src)+'\')"/>'+
+                '<a class="img-open-tab-btn" href="'+escAttr(src)+'" target="_blank" title="New tab">↗</a>'+
+                '<button class="img-del-btn" onclick="event.stopPropagation();deleteTopicImage(\''+t.id+'\',\''+img.id+'\')">✕</button>'+
+                '</div>';
+        }).join('');
+
+        var links = t.links || [];
+        var linkHTML = links.map(function(link){
+            var displayUrl = link.url.length > 40 ? link.url.slice(0,38)+'…' : link.url;
+            return '<span class="youtube-link-item">'+
+                '<span class="yt-icon">▶️</span>'+
+                '<a href="'+escAttr(link.url)+'" target="_blank" title="'+escAttr(link.url)+'" style="color:var(--text);text-decoration:underline;font-size:.78rem;">'+esc(displayUrl)+'</a>'+
+                '<span class="yt-del" onclick="deleteTopicLink(\''+t.id+'\',\''+link.id+'\')">✕</span>'+
+                '</span>';
+        }).join('');
+
+        var pdfs = t.pdfs || [];
+        var pdfHTML = pdfs.map(function(pdf){
+            var src = pdf.path || pdf.data;
+            return '<span class="pdf-item">'+
+                '<span class="pdf-icon">📄</span>'+
+                '<a href="'+escAttr(src)+'" target="_blank" title="'+escAttr(pdf.name||'PDF')+'" style="color:var(--text);text-decoration:underline;font-size:.78rem;">'+esc(pdf.name||'PDF')+'</a>'+
+                '<span class="pdf-del" onclick="deleteTopicPdf(\''+t.id+'\',\''+pdf.id+'\')">✕</span>'+
+                '</span>';
+        }).join('');
+
+        var html = '<div class="media-section">';
+
+        html += '<div class="media-label">📸 Images ('+imgs.length+')</div>';
+        html += '<div class="media-grid" style="flex-direction:column;">'+imgThumbs+
+            '<button class="media-add-btn" onclick="triggerImageUpload(\''+t.id+'\')"><span class="cam-icon">📷</span><span>Add Image</span></button>'+
+            '</div>';
+        html += '<input type="file" class="hidden-file" id="file-'+t.id+'" accept="image/*" capture="environment" onchange="handleImageUpload(event,\''+t.id+'\')"/>'+
+            '<div class="upload-progress-wrap" id="img-progress-'+t.id+'">'+
+            '<div class="upload-progress-text"><span>Uploading...</span><span id="img-pct-'+t.id+'">0%</span></div>'+
+            '<div class="upload-progress-bar"><div class="upload-progress-fill" id="img-bar-'+t.id+'" style="width:0%"></div></div>'+
+            '</div>';
+
+        html += '<div style="margin-top:4px;">';
+        html += '<div class="media-label" style="margin-bottom:4px;">▶️ YouTube Links ('+links.length+')</div>';
+        html += '<div class="youtube-link-input-row">';
+        html += '<input type="text" id="yt-input-'+t.id+'" placeholder="Paste YouTube URLs, comma separated…" />';
+        html += '<button onclick="addYouTubeLinks(\''+t.id+'\')">Add</button>';
+        html += '</div>';
+        if (linkHTML) {
+            html += '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;">'+linkHTML+'</div>';
+        } else {
+            html += '<div style="font-size:.75rem;color:var(--text3);margin-top:4px;">No links added yet.</div>';
+        }
+        html += '</div>';
+
+        html += '<div style="margin-top:8px;">';
+        html += '<div class="media-label" style="margin-bottom:4px;">📄 PDFs ('+pdfs.length+')</div>';
+        html += '<div style="display:flex;gap:8px;flex-wrap:wrap;">';
+        html += '<button class="media-add-btn" style="width:auto;min-height:40px;padding:6px 16px;" onclick="triggerPdfUpload(\''+t.id+'\')"><span>📎</span><span>Upload PDF</span></button>';
+        html += '</div>';
+        html += '<input type="file" class="hidden-file" id="pdf-'+t.id+'" accept="application/pdf,.pdf" onchange="handlePdfUpload(event,\''+t.id+'\')"/>';
+        html += '<div class="upload-progress-wrap" id="pdf-progress-'+t.id+'">'+
+            '<div class="upload-progress-text"><span>Uploading...</span><span id="pdf-pct-'+t.id+'">0%</span></div>'+
+            '<div class="upload-progress-bar"><div class="upload-progress-fill" id="pdf-bar-'+t.id+'" style="width:0%"></div></div>'+
+            '</div>';
+        if (pdfHTML) {
+            html += '<div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:6px;">'+pdfHTML+'</div>';
+        } else {
+            html += '<div style="font-size:.75rem;color:var(--text3);margin-top:4px;">No PDFs uploaded yet.</div>';
+        }
+        html += '</div>';
+
+        html += '</div>';
+        return html;
+    }
+
+    // ══════════════════════════════════════════════
+    // ★ YOUTUBE LINKS CRUD
+    // ══════════════════════════════════════════════
+    function addYouTubeLinks(topicId) {
+        var input = document.getElementById('yt-input-'+topicId);
+        if (!input) return;
+        var raw = input.value.trim();
+        if (!raw) { showToast('Kuch URL daalo', 'error'); return; }
+        var urls = raw.split(',').map(function(s){return s.trim();}).filter(function(s){return s.length>0;});
+        if (!urls.length) { showToast('Kuch URL daalo', 'error'); return; }
+        var ytUrls = urls.filter(function(u){ return u.includes('youtube.com') || u.includes('youtu.be'); });
+        if (!ytUrls.length) { showToast('Sirf YouTube links daalo', 'error'); return; }
+
+        apiCall('addTopicLinks', [topicId, ytUrls], function(r) {
+            if (r.ok) {
+                updateTopicInState(r.topic);
+                refreshTopicCard(topicId);
+                input.value = '';
+                showToast(ytUrls.length+' YouTube link(s) add ho gaye ✓', 'success');
+            } else {
+                showToast(r.msg || 'Error', 'error');
+            }
+        });
+    }
+    function deleteTopicLink(topicId, linkId) {
+        openModal('Link Trash mein bhejein?',
+            '<p style="color:var(--text2);font-size:.9rem">Yeh link trash mein jayega.</p>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button>'+
+            '<button class="btn btn-primary" style="background:var(--danger)" onclick="submitDeleteTopicLink(\''+topicId+'\',\''+linkId+'\')">Trash ↓</button>');
+    }
+    function submitDeleteTopicLink(topicId, linkId) {
+        closeModal();
+        apiCall('trashTopicLink', [topicId, linkId], function(r) {
+            if (r.ok) {
+                updateTopicInState(r.topic);
+                refreshTopicCard(topicId);
+                reloadDB();
+                showToast('Link trash mein gaya 🗑', 'success');
+            } else showToast(r.msg, 'error');
+        });
+    }
+
+    // ══════════════════════════════════════════════
+    // ★ IMAGE UPLOAD with Progress
+    // ══════════════════════════════════════════════
+    function triggerImageUpload(topicId) { var el=document.getElementById('file-'+topicId); if(el) el.click(); }
+    function openImageNewTab(url) { window.open(url, '_blank'); }
+
+    function handleImageUpload(event, topicId) {
+        var file = event.target.files[0];
+        if (!file) return;
+
+        var progressWrap = document.getElementById('img-progress-'+topicId);
+        var progressBar = document.getElementById('img-bar-'+topicId);
+        var progressText = document.getElementById('img-pct-'+topicId);
+        progressWrap.classList.add('show');
+        progressBar.style.width = '0%';
+        progressText.textContent = '0%';
+
+        var fd = new FormData();
+        fd.append('action', 'addTopicImage');
+        fd.append('topicId', topicId);
+        fd.append('image', file);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'api.php', true);
+        xhr.upload.onprogress = function(e) {
+            if (e.lengthComputable) {
+                var pct = Math.round((e.loaded / e.total) * 100);
+                progressBar.style.width = pct + '%';
+                progressText.textContent = pct + '%';
+            }
+        };
+        xhr.onload = function() {
+            progressWrap.classList.remove('show');
+            if (xhr.status === 200) {
+                try {
+                    var r = JSON.parse(xhr.responseText);
+                    if (r.ok) {
+                        updateTopicInState(r.topic);
+                        refreshTopicCard(topicId);
+                        showToast('Image add ho gayi ✓', 'success');
+                    } else {
+                        showToast(r.msg || 'Error', 'error');
+                    }
+                } catch(e) { showToast('Invalid response', 'error'); }
+            } else {
+                showToast('Upload failed: ' + xhr.status, 'error');
+            }
+        };
+        xhr.onerror = function() {
+            progressWrap.classList.remove('show');
+            showToast('Network error', 'error');
+        };
+        xhr.send(fd);
+        event.target.value = '';
+    }
+
+    function deleteTopicImage(topicId, imageId) {
+        openModal('Image Trash mein bhejein?',
+            '<p style="color:var(--text2);font-size:.9rem">Yeh image trash mein jayegi.</p>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button>'+
+            '<button class="btn btn-primary" style="background:var(--danger)" onclick="submitDeleteTopicImage(\''+topicId+'\',\''+imageId+'\')">Trash ↓</button>');
+    }
+    function submitDeleteTopicImage(topicId, imageId) {
+        closeModal();
+        apiCall('trashTopicImage', [topicId, imageId], function(r) {
+            if (r.ok) {
+                updateTopicInState(r.topic);
+                refreshTopicCard(topicId);
+                reloadDB();
+                showToast('Image trash mein gayi 🗑', 'success');
+            } else showToast(r.msg, 'error');
+        });
+    }
+
+    // ══════════════════════════════════════════════
+    // ★ PDF UPLOAD with Progress
+    // ══════════════════════════════════════════════
+    function triggerPdfUpload(topicId) {
+        var el = document.getElementById('pdf-'+topicId);
+        if (el) el.click();
+    }
+    function handlePdfUpload(event, topicId) {
+        var file = event.target.files[0];
+        if (!file) return;
+        if (!file.name.toLowerCase().endsWith('.pdf')) {
+            showToast('Sirf PDF files allowed hain', 'error');
+            event.target.value = '';
+            return;
+        }
+
+        var progressWrap = document.getElementById('pdf-progress-'+topicId);
+        var progressBar = document.getElementById('pdf-bar-'+topicId);
+        var progressText = document.getElementById('pdf-pct-'+topicId);
+        progressWrap.classList.add('show');
+        progressBar.style.width = '0%';
+        progressText.textContent = '0%';
+
+        var fd = new FormData();
+        fd.append('action', 'addTopicPdf');
+        fd.append('topicId', topicId);
+        fd.append('pdf', file);
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', 'api.php', true);
+        xhr.upload.onprogress = function(e) {
+            if (e.lengthComputable) {
+                var pct = Math.round((e.loaded / e.total) * 100);
+                progressBar.style.width = pct + '%';
+                progressText.textContent = pct + '%';
+            }
+        };
+        xhr.onload = function() {
+            progressWrap.classList.remove('show');
+            if (xhr.status === 200) {
+                try {
+                    var r = JSON.parse(xhr.responseText);
+                    if (r.ok) {
+                        updateTopicInState(r.topic);
+                        refreshTopicCard(topicId);
+                        showToast('PDF upload ho gayi ✓', 'success');
+                    } else {
+                        showToast(r.msg || 'Error', 'error');
+                    }
+                } catch(e) { showToast('Invalid response', 'error'); }
+            } else {
+                showToast('Upload failed: ' + xhr.status, 'error');
+            }
+        };
+        xhr.onerror = function() {
+            progressWrap.classList.remove('show');
+            showToast('Network error', 'error');
+        };
+        xhr.send(fd);
+        event.target.value = '';
+    }
+
+    function deleteTopicPdf(topicId, pdfId) {
+        openModal('PDF Trash mein bhejein?',
+            '<p style="color:var(--text2);font-size:.9rem">Yeh PDF trash mein jayegi.</p>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button>'+
+            '<button class="btn btn-primary" style="background:var(--danger)" onclick="submitDeleteTopicPdf(\''+topicId+'\',\''+pdfId+'\')">Trash ↓</button>');
+    }
+    function submitDeleteTopicPdf(topicId, pdfId) {
+        closeModal();
+        apiCall('trashTopicPdf', [topicId, pdfId], function(r) {
+            if (r.ok) {
+                updateTopicInState(r.topic);
+                refreshTopicCard(topicId);
+                reloadDB();
+                showToast('PDF trash mein gayi 🗑', 'success');
+            } else showToast(r.msg, 'error');
+        });
+    }
+
+    // ══════════════════════════════════════════════
+    // REVISION HISTORY UI
+    // ══════════════════════════════════════════════
+    function buildRevisionHistoryHTML(t) {
+        var history = t.revisionHistory || [];
+        var countBadge = '<span class="rh-count">'+history.length+'</span>';
+
+        var header = '<div class="revision-history-header">'+
+            '<div class="revision-history-label">📜 Revision History '+countBadge+'</div>'+
+            '<button class="add-revision-btn" onclick="showAddRevisionModal(\''+t.id+'\')">+ Log Entry</button>'+
+            '</div>';
+
+        var timeline = '';
+        if (!history.length) {
+            timeline = '<div class="revision-empty">Abhi koi revision history nahi hai.</div>';
+        } else {
+            var sorted = history.slice().reverse();
+            var entries = sorted.map(function(entry, i) {
+                var typeBadgeClass = 'type-badge-' + (entry.type || 'manual');
+                var typeLabel = entry.type === 'complete' ? '✅ Complete'
+                    : entry.type === 'revision' ? '🔄 Revision'
+                        : entry.type === 'auto-revision' ? '⏰ Auto'
+                            : entry.type === 'status-change' ? '🔀 Status'
+                                : '✍ Manual';
+                return '<div class="revision-entry type-'+(entry.type||'manual')+'" style="animation-delay:'+(i*30)+'ms">'+
+                    '<div class="revision-entry-row">'+
+                    '<span class="revision-entry-note" id="rev-note-'+entry.id+'">'+esc(entry.note)+'</span>'+
+                    '<div class="revision-entry-actions">'+
+                    '<button class="rev-action-btn" onclick="editRevisionEntry(\''+t.id+'\',\''+entry.id+'\')" title="Edit">✏</button>'+
+                    '<button class="rev-action-btn del" onclick="deleteRevisionEntry(\''+t.id+'\',\''+entry.id+'\')" title="Delete">✕</button>'+
+                    '</div></div>'+
+                    '<div class="revision-entry-date">'+
+                    '<span>'+esc(entry.time || entry.date || '')+'</span>'+
+                    '<span class="type-badge '+typeBadgeClass+'">'+typeLabel+'</span>'+
+                    '</div></div>';
+            }).join('');
+            timeline = '<div class="revision-timeline">'+entries+'</div>';
+        }
+
+        return '<div class="revision-history-section">'+header+timeline+'</div>';
+    }
+    function showAddRevisionModal(topicId) {
+        openModal('📜 Log Revision Entry',
+            '<div class="modal-field"><label class="modal-label">Note (optional)</label>'+
+            '<textarea class="modal-textarea" id="rev-note-input" rows="3" placeholder="e.g. Sab formulas yaad ho gaye…"></textarea></div>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button>'+
+            '<button class="btn btn-primary" onclick="submitAddRevision(\''+topicId+'\')">Log Entry</button>');
+        setTimeout(function(){var el=document.getElementById('rev-note-input');if(el)el.focus();},100);
+    }
+    function submitAddRevision(topicId) {
+        var note = (document.getElementById('rev-note-input')||{}).value || '';
+        closeModal();
+        apiCall('addRevisionEntry',[topicId, note, 'manual'], function(r) {
+            if (r.ok) {
+                updateTopicInState(r.topic);
+                refreshTopicCard(topicId);
+                showToast('Revision log ho gayi ✓','success');
+            } else showToast(r.msg,'error');
+        });
+    }
+    function editRevisionEntry(topicId, entryId) {
+        var topic = state.db.topics.find(function(t){return t.id===topicId;});
+        if (!topic) return;
+        var entry = (topic.revisionHistory||[]).find(function(e){return e.id===entryId;});
+        if (!entry) return;
+
+        openModal('✏ Edit Revision Note',
+            '<div class="modal-field"><label class="modal-label">Note</label>'+
+            '<textarea class="modal-textarea" id="edit-rev-note" rows="3">'+esc(entry.note)+'</textarea></div>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button>'+
+            '<button class="btn btn-primary" onclick="submitEditRevision(\''+topicId+'\',\''+entryId+'\')">Save</button>');
+        setTimeout(function(){var el=document.getElementById('edit-rev-note');if(el){el.focus();el.select();}},100);
+    }
+    function submitEditRevision(topicId, entryId) {
+        var newNote = (document.getElementById('edit-rev-note')||{}).value || '';
+        closeModal();
+        apiCall('editRevisionEntry',[topicId, entryId, newNote], function(r) {
+            if (r.ok) {
+                updateTopicInState(r.topic);
+                refreshTopicCard(topicId);
+                showToast('Note update ho gaya ✓','success');
+            } else showToast(r.msg,'error');
+        });
+    }
+    function deleteRevisionEntry(topicId, entryId) {
+        apiCall('deleteRevisionEntry',[topicId, entryId], function(r) {
+            if (r.ok) {
+                updateTopicInState(r.topic);
+                refreshTopicCard(topicId);
+                showToast('Entry delete ho gayi','success');
+            } else showToast(r.msg,'error');
+        });
+    }
+    function updateTopicInState(topic) {
+        var idx = state.db.topics.findIndex(function(t){return t.id===topic.id;});
+        if (idx > -1) state.db.topics[idx] = topic;
+        else state.db.topics.push(topic);
+    }
+    function refreshTopicCard(topicId) {
+        var topic=state.db.topics.find(function(x){return x.id===topicId;});
+        if(!topic)return;
+        var card=document.getElementById('tc-'+topicId);
+        if(!card)return;
+        var inner=card.querySelector('.topic-expand-inner');
+        if(inner)inner.innerHTML=topicExpandInner(topic);
+    }
+
+    // ══════════════════════════════════════════════
+    // SORT + SEARCH
+    // ══════════════════════════════════════════════
+    function changeSortOrder(val) { state.sortOrder=val; renderTopics(); }
+    // ── Revision Urgency ────────────────────────────────────────
+    // Returns overdue days for a Revision topic (0 = just became revision,
+    // positive = days overdue since it was marked Revision).
+    // Returns -1 if topic is not in Revision status.
+    function getRevisionOverdueDays(t) {
+        if (t.status !== 'Revision') return -1;
+        // Find when revision was last triggered (auto or manual)
+        var revEntries = (t.revisionHistory || []).filter(function(e){
+            return e.type === 'auto-revision' || e.type === 'revision';
+        });
+        var refDate = null;
+        if (revEntries.length > 0) {
+            // Use latest revision entry date
+            var latest = revEntries[revEntries.length - 1];
+            refDate = latest.date || latest.time;
+        } else if (t.completeDate) {
+            refDate = t.completeDate;
+        } else if (t.updatedAt) {
+            refDate = t.updatedAt;
+        }
+        if (!refDate) return 0;
+        var days = daysBetween(refDate, new Date());
+        return Math.max(0, days);
+    }
+
+    // Returns urgency level 0-5 based on overdue days
+    function getRevisionUrgencyLevel(overdueDays) {
+        if (overdueDays < 0)  return -1; // not revision
+        if (overdueDays === 0) return 0;  // just due today
+        if (overdueDays === 1) return 1;  // 1 day late
+        if (overdueDays === 2) return 2;  // 2 days late
+        if (overdueDays === 3) return 3;  // 3 days late
+        if (overdueDays <= 5)  return 4;  // 4-5 days late
+        return 5;                          // 6+ days — critical
+    }
+
+    function getRevisionBadgeInfo(overdueDays) {
+        if (overdueDays < 0) return null;
+        var classes = ['fresh','mild','warm','hot','urgent','critical'];
+        var labels  = ['Due Today','1d Late','2d Late','3d Late',overdueDays+'d Late',overdueDays+'d Late'];
+        var level = getRevisionUrgencyLevel(overdueDays);
+        return { cls: classes[level], label: (overdueDays === 0 ? 'Due Today' : overdueDays+'d Overdue') };
+    }
+
+    function sortTopics(topics,order) {
+        // Always sort Revision topics by urgency (most overdue first), then apply user order within non-revision
+        return topics.slice().sort(function(a,b){
+            var aOD = getRevisionOverdueDays(a);
+            var bOD = getRevisionOverdueDays(b);
+            // Revision topics always come first, sorted darkest (most overdue) at top
+            var aIsRev = a.status === 'Revision';
+            var bIsRev = b.status === 'Revision';
+            if (aIsRev && bIsRev) return bOD - aOD; // more overdue = higher
+            if (aIsRev && !bIsRev) return -1;
+            if (!aIsRev && bIsRev) return 1;
+            // Non-revision: apply normal sort
+            if (order==='name')      return a.name.localeCompare(b.name);
+            if (order==='status')    return a.status.localeCompare(b.status);
+            if (order==='updatedAt') return (b.updatedAt||'').localeCompare(a.updatedAt||'');
+            return (a.createdAt||'').localeCompare(b.createdAt||'');
+        });
+    }
+    function makeSearchBanner(count) {
+        var q = state.searchQuery;
+        var countStr = count !== undefined ? ' — ' + count + ' results' : '';
+        return '<div class="search-active-banner">'+
+            '🔍 Searching: <strong>"'+esc(q)+'"</strong>'+countStr+
+            '<span class="search-clear-btn" onclick="clearSearch()">✕ Clear</span>'+
+            '</div>';
+    }
+    function clearSearch() {
+        state.searchQuery = '';
+        var inp = document.getElementById('search-input');
+        if (inp) inp.value = '';
+        hideSuggestions();
+        document.getElementById('search-wrap').classList.remove('visible');
+        document.getElementById('search-toggle-btn').classList.remove('search-active');
+        renderView();
+    }
+    function toggleSearch() {
+        var wrap=document.getElementById('search-wrap');
+        var inp=document.getElementById('search-input');
+        var btn=document.getElementById('search-toggle-btn');
+        var vis=wrap.classList.toggle('visible');
+        btn.classList.toggle('search-active', vis);
+        if (vis) {
+            setTimeout(function(){inp.focus();},50);
+        } else {
+            inp.value='';
+            state.searchQuery='';
+            hideSuggestions();
+            btn.classList.remove('search-active');
+            renderView();
+        }
+    }
+    function handleSearch(q) {
+        state.searchQuery=q.trim();
+        showSuggestions(q);
+        renderView();
+    }
+    var _suggestTimer;
+    function showSuggestions(q) {
+        clearTimeout(_suggestTimer);
+        var box=document.getElementById('search-suggestions');
+        if (!q||q.length<1) { box.innerHTML=''; box.classList.remove('visible'); return; }
+        var query=q.toLowerCase(); var html='';
+        var matchCourses=(state.db.courses||[]).filter(function(c){return c.name.toLowerCase().includes(query);}).slice(0,3);
+        if (matchCourses.length) {
+            html+='<div class="suggestion-sep">Courses</div>';
+            matchCourses.forEach(function(c){
+                html+='<div class="suggestion-item" onmousedown="openCourse(\''+c.id+'\');toggleSearch()">'+
+                    '<span class="s-icon">📖</span><div><div class="s-name">'+hlText(c.name,q)+'</div></div></div>';
+            });
+        }
+        var matchSubjects=(state.db.subjects||[]).filter(function(s){return s.name.toLowerCase().includes(query);}).slice(0,3);
+        if (matchSubjects.length) {
+            html+='<div class="suggestion-sep">Subjects</div>';
+            matchSubjects.forEach(function(s){
+                var course=(state.db.courses||[]).find(function(c){return c.id===s.courseId;});
+                html+='<div class="suggestion-item" onmousedown="openCourseAndSubject(\''+s.courseId+'\',\''+s.id+'\')">'+
+                    '<span class="s-icon">📂</span><div><div class="s-name">'+hlText(s.name,q)+'</div>'+
+                    '<div class="s-path">'+(course?esc(course.name):'')+'</div></div></div>';
+            });
+        }
+        var matchTopics=(state.db.topics||[]).filter(function(t){
+            return t.name.toLowerCase().includes(query)||(t.description||'').toLowerCase().includes(query);
+        }).slice(0,4);
+        if (matchTopics.length) {
+            html+='<div class="suggestion-sep">Topics</div>';
+            matchTopics.forEach(function(t){
+                var subj=(state.db.subjects||[]).find(function(s){return s.id===t.subjectId;});
+                var course=subj?(state.db.courses||[]).find(function(c){return c.id===subj.courseId;}):null;
+                html+='<div class="suggestion-item" onmousedown="navigateToTopic(\''+t.id+'\')">'+
+                    '<span class="s-icon">📋</span><div><div class="s-name">'+hlText(t.name,q)+'</div>'+
+                    '<div class="s-path">'+(course?esc(course.name)+' › ':'')+' '+(subj?esc(subj.name):'')+'</div></div></div>';
+            });
+        }
+        if (!html) { box.innerHTML=''; box.classList.remove('visible'); return; }
+        box.innerHTML=html; box.classList.add('visible');
+    }
+    function hideSuggestions() { document.getElementById('search-suggestions').classList.remove('visible'); }
+    function hideSuggestionsDelayed() { _suggestTimer=setTimeout(hideSuggestions,200); }
+    function openCourseAndSubject(courseId,subjectId) {
+        state.activeCourse=(state.db.courses||[]).find(function(c){return c.id===courseId;});
+        state.activeSubject=(state.db.subjects||[]).find(function(s){return s.id===subjectId;});
+        state.expandedTopic=null; state.view='topics'; renderView(); updateNav(); hideSuggestions();
+    }
+    function navigateToTopic(topicId) {
+        var topic=(state.db.topics||[]).find(function(t){return t.id===topicId;});
+        if (!topic) return;
+        var subject=(state.db.subjects||[]).find(function(s){return s.id===topic.subjectId;});
+        var course=subject?(state.db.courses||[]).find(function(c){return c.id===subject.courseId;}):null;
+        if (subject&&course) openCourseAndSubject(course.id,subject.id);
+        hideSuggestions();
+        setTimeout(function(){
+            document.querySelectorAll('.topic-card.expanded').forEach(function(c){c.classList.remove('expanded');});
+            var card=document.getElementById('tc-'+topicId);
+            if (card) { card.classList.add('expanded'); state.expandedTopic=topicId; card.scrollIntoView({behavior:'smooth',block:'center'}); }
+        },350);
+    }
+    function applySearch(arr,fields) {
+        if (!state.searchQuery) return arr;
+        var q=state.searchQuery.toLowerCase();
+        return arr.filter(function(item){return fields.some(function(f){return (item[f]||'').toLowerCase().includes(q);});});
+    }
+
+    // ══════════════════════════════════════════════
+    // FAB + MODAL
+    // ══════════════════════════════════════════════
+    function fabClick() {
+        var v=state.view;
+        if (v==='courses') showAddTypeSelector();
+        else if (v==='subjects') showAddSubjectOrTopic();
+        else if (v==='topics') showAddTopic();
+    }
+
+    function showAddTypeSelector() {
+        openModal('✨ Kya Add Karna Hai?',
+            '<div style="display:flex;flex-direction:column;gap:10px;">'+
+            '<button class="fab-type-btn" onclick="closeModal();showAddCourse()">'+
+            '<span class="fab-type-icon">📖</span>'+
+            '<div class="fab-type-info"><div class="fab-type-title">Course</div>'+
+            '<div class="fab-type-desc">Naya course banao (e.g. UPTET, CTET, SSC)</div></div>'+
+            '</button>'+
+            '<button class="fab-type-btn" onclick="closeModal();showAddSubjectGlobal()">'+
+            '<span class="fab-type-icon">📂</span>'+
+            '<div class="fab-type-info"><div class="fab-type-title">Subject</div>'+
+            '<div class="fab-type-desc">Kisi bhi course mein subject add karo</div></div>'+
+            '</button>'+
+            '<button class="fab-type-btn" onclick="closeModal();showAddTopicGlobal()">'+
+            '<span class="fab-type-icon">📋</span>'+
+            '<div class="fab-type-info"><div class="fab-type-title">Topic</div>'+
+            '<div class="fab-type-desc">Directly kisi bhi course › subject mein topic daalo</div></div>'+
+            '</button>'+
+            '</div>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button>');
+    }
+
+    function showAddSubjectOrTopic() {
+        openModal('✨ Kya Add Karna Hai?',
+            '<div style="display:flex;flex-direction:column;gap:10px;">'+
+            '<button class="fab-type-btn" onclick="closeModal();showAddSubject()">'+
+            '<span class="fab-type-icon">📂</span>'+
+            '<div class="fab-type-info"><div class="fab-type-title">Subject</div>'+
+            '<div class="fab-type-desc">Is course mein naya subject add karo</div></div>'+
+            '</button>'+
+            '<button class="fab-type-btn" onclick="closeModal();showAddTopicInSubjectSelector()">'+
+            '<span class="fab-type-icon">📋</span>'+
+            '<div class="fab-type-info"><div class="fab-type-title">Topic</div>'+
+            '<div class="fab-type-desc">Is course ke kisi subject mein directly topic daalo</div></div>'+
+            '</button>'+
+            '</div>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button>');
+    }
+
+    function showAddSubjectGlobal() {
+        var courses = state.db.courses;
+        if (!courses.length) return showToast('Pehle ek course banao','error');
+        var opts = courses.map(function(c){
+            return '<option value="'+escAttr(c.id)+'">'+esc(c.name)+'</option>';
+        }).join('');
+        openModal('Add Subject',
+            '<div class="modal-field"><label class="modal-label">Course chunein</label>'+
+            '<select class="modal-input" id="m-course-sel">'+opts+'</select></div>'+
+            '<div class="modal-field"><label class="modal-label">Subject Name</label>'+
+            '<input class="modal-input" id="m-name" placeholder="e.g. Mathematics, CDP, Science"/></div>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button>'+
+            '<button class="btn btn-primary" onclick="submitAddSubjectGlobal()">Add Subject</button>');
+        setTimeout(function(){var el=document.getElementById('m-name');if(el)el.focus();},100);
+    }
+    function submitAddSubjectGlobal() {
+        var courseId=(document.getElementById('m-course-sel')||{}).value;
+        var name=(document.getElementById('m-name')||{}).value;
+        if (!name||!name.trim()) return showToast('Subject naam daalo','error');
+        closeModal();
+        apiCall('addSubject',[courseId,name.trim()],function(r){
+            if(r.ok){state.db.subjects.push(r.subject);renderView();showToast('Subject add ho gaya ✓','success');}
+            else showToast(r.msg,'error');
+        });
+    }
+
+    function showAddTopicGlobal() {
+        var courses = state.db.courses;
+        if (!courses.length) return showToast('Pehle ek course banao','error');
+        var opts = courses.map(function(c){
+            return '<option value="'+escAttr(c.id)+'">'+esc(c.name)+'</option>';
+        }).join('');
+        openModal('Add Topic — Step 1',
+            '<div class="modal-field"><label class="modal-label">Course chunein</label>'+
+            '<select class="modal-input" id="m-course-sel" onchange="updateSubjectDropdown()">'+opts+'</select></div>'+
+            '<div class="modal-field"><label class="modal-label">Subject chunein</label>'+
+            '<select class="modal-input" id="m-subj-sel"><option>— pehle course chunein —</option></select></div>'+
+            '<div class="modal-field"><label class="modal-label">Topic Name</label>'+
+            '<div class="topic-name-wrap">'+
+            '<input class="modal-input" id="m-name" placeholder="e.g. Child Development Theories" autocomplete="off" '+
+            'oninput="filterTopicNameSuggestions(this.value)" onfocus="filterTopicNameSuggestions(this.value)" onblur="hideTopicNameSuggestionsDelayed()"/>'+
+            '<div class="topic-name-suggest" id="topic-name-suggest"></div>'+
+            '</div></div>'+
+            '<div class="modal-field"><label class="modal-label">Description (optional)</label>'+
+            '<textarea class="modal-textarea" id="m-desc" rows="3" placeholder="Notes, key points…"></textarea></div>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button>'+
+            '<button class="btn btn-primary" onclick="submitAddTopicGlobal()">Add Topic</button>');
+        setTimeout(function(){ updateSubjectDropdown(); var el=document.getElementById('m-name');if(el)el.focus();},100);
+    }
+    function updateSubjectDropdown() {
+        var sel=document.getElementById('m-course-sel');
+        var subjSel=document.getElementById('m-subj-sel');
+        if (!sel||!subjSel) return;
+        var cId=sel.value;
+        var subjs=(state.db.subjects||[]).filter(function(s){return s.courseId===cId;});
+        if (!subjs.length) { subjSel.innerHTML='<option value="">— Is course mein koi subject nahi —</option>'; return; }
+        subjSel.innerHTML=subjs.map(function(s){return '<option value="'+escAttr(s.id)+'">'+esc(s.name)+'</option>';}).join('');
+    }
+    function submitAddTopicGlobal() {
+        var subjId=(document.getElementById('m-subj-sel')||{}).value;
+        var name=(document.getElementById('m-name')||{}).value;
+        var desc=(document.getElementById('m-desc')||{}).value||'';
+        if (!subjId) return showToast('Subject chunein','error');
+        if (!name||!name.trim()) return showToast('Topic naam daalo','error');
+        closeModal();
+        apiCall('addTopic',[subjId,name.trim(),desc],function(r){
+            if(r.ok){state.db.topics.push(r.topic);renderView();showToast('Topic add ho gaya ✓','success');}
+            else showToast(r.msg,'error');
+        });
+    }
+
+    function showAddTopicInSubjectSelector() {
+        var cId=state.activeCourse.id;
+        var subjs=(state.db.subjects||[]).filter(function(s){return s.courseId===cId;});
+        if (!subjs.length) return showToast('Pehle is course mein koi subject banao','error');
+        var opts=subjs.map(function(s){return '<option value="'+escAttr(s.id)+'">'+esc(s.name)+'</option>';}).join('');
+        openModal('Add Topic',
+            '<div class="modal-field"><label class="modal-label">Subject chunein</label>'+
+            '<select class="modal-input" id="m-subj-sel">'+opts+'</select></div>'+
+            '<div class="modal-field"><label class="modal-label">Topic Name</label>'+
+            '<div class="topic-name-wrap">'+
+            '<input class="modal-input" id="m-name" placeholder="e.g. Child Development Theories" autocomplete="off" '+
+            'oninput="filterTopicNameSuggestions(this.value)" onfocus="filterTopicNameSuggestions(this.value)" onblur="hideTopicNameSuggestionsDelayed()"/>'+
+            '<div class="topic-name-suggest" id="topic-name-suggest"></div>'+
+            '</div></div>'+
+            '<div class="modal-field"><label class="modal-label">Description (optional)</label>'+
+            '<textarea class="modal-textarea" id="m-desc" rows="3" placeholder="Notes, key points…"></textarea></div>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button>'+
+            '<button class="btn btn-primary" onclick="submitAddTopicInSubject()">Add Topic</button>');
+        setTimeout(function(){var el=document.getElementById('m-name');if(el)el.focus();},100);
+    }
+    function submitAddTopicInSubject() {
+        var subjId=(document.getElementById('m-subj-sel')||{}).value;
+        var name=(document.getElementById('m-name')||{}).value;
+        var desc=(document.getElementById('m-desc')||{}).value||'';
+        if (!subjId) return showToast('Subject chunein','error');
+        if (!name||!name.trim()) return showToast('Topic naam daalo','error');
+        closeModal();
+        apiCall('addTopic',[subjId,name.trim(),desc],function(r){
+            if(r.ok){state.db.topics.push(r.topic);renderView();showToast('Topic add ho gaya ✓','success');}
+            else showToast(r.msg,'error');
+        });
+    }
+    function openModal(title,bodyHTML,buttons) {
+        document.getElementById('modal-title').textContent=title;
+        document.getElementById('modal-body').innerHTML=bodyHTML;
+        document.getElementById('modal-actions').innerHTML=buttons;
+        document.getElementById('modal-overlay').classList.add('open');
+    }
+    function closeModal() { document.getElementById('modal-overlay').classList.remove('open'); }
+    function closeModalOnOverlay(e) { if(e.target===document.getElementById('modal-overlay'))closeModal(); }
+
+    // ══════════════════════════════════════════════
+    // COURSES CRUD
+    // ══════════════════════════════════════════════
+    function showAddCourse() {
+        openModal('Add Course',
+            '<div class="modal-field"><label class="modal-label">Course Name</label><input class="modal-input" id="m-name" placeholder="e.g. UPTET, CTET, SSC"/></div>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="submitAddCourse()">Add Course</button>');
+        setTimeout(function(){var el=document.getElementById('m-name');if(el)el.focus();},100);
+    }
+    function submitAddCourse() {
+        var name=(document.getElementById('m-name')||{}).value;
+        if (!name||!name.trim()) return showToast('Enter a course name','error');
+        closeModal();
+        apiCall('addCourse',[name.trim()],function(r){if(r.ok){state.db.courses.push(r.course);renderView();showToast('Course add ho gaya ✓','success');}else showToast(r.msg,'error');});
+    }
+    function showEditCourse(id) {
+        var c=state.db.courses.find(function(x){return x.id===id;});
+        openModal('Edit Course',
+            '<div class="modal-field"><label class="modal-label">Course Name</label><input class="modal-input" id="m-name" value="'+esc(c.name)+'"/></div>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="submitEditCourse(\''+id+'\')">Save</button>');
+        setTimeout(function(){var el=document.getElementById('m-name');if(el)el.focus();},100);
+    }
+    function submitEditCourse(id) {
+        var name=(document.getElementById('m-name')||{}).value;
+        if (!name||!name.trim()) return showToast('Enter a name','error');
+        closeModal();
+        apiCall('editCourse',[id,name.trim()],function(r){if(r.ok){var i=state.db.courses.findIndex(function(x){return x.id===id;});if(i>-1)state.db.courses[i]=r.course;renderView();showToast('Course update ho gaya ✓','success');}else showToast(r.msg,'error');});
+    }
+    function confirmDeleteCourse(id) {
+        var c=state.db.courses.find(function(x){return x.id===id;});
+        openModal('Move to Trash?',
+            '<p style="color:var(--text2);font-size:.9rem">Move <strong>"'+esc(c.name)+'"</strong> aur uske saare subjects/topics ko Trash mein bhejein?</p>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button><button class="btn btn-primary" style="background:var(--danger)" onclick="submitDeleteCourse(\''+id+'\')">Move to Trash</button>');
+    }
+    function submitDeleteCourse(id) {
+        closeModal();
+        apiCall('deleteCourse',[id],function(r){if(r.ok){reloadDB();showToast('Trash mein chala gaya','success');}else showToast(r.msg,'error');});
+    }
+
+    // ══════════════════════════════════════════════
+    // SUBJECTS CRUD
+    // ══════════════════════════════════════════════
+    function showAddSubject() {
+        openModal('Add Subject',
+            '<div class="modal-field"><label class="modal-label">Subject Name</label><input class="modal-input" id="m-name" placeholder="e.g. Mathematics, CDP, Science"/></div>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="submitAddSubject()">Add Subject</button>');
+        setTimeout(function(){var el=document.getElementById('m-name');if(el)el.focus();},100);
+    }
+    function submitAddSubject() {
+        var name=(document.getElementById('m-name')||{}).value;
+        if (!name||!name.trim()) return showToast('Enter a subject name','error');
+        closeModal();
+        apiCall('addSubject',[state.activeCourse.id,name.trim()],function(r){if(r.ok){state.db.subjects.push(r.subject);renderView();showToast('Subject add ho gaya ✓','success');}else showToast(r.msg,'error');});
+    }
+    function showEditSubject(id) {
+        var s=state.db.subjects.find(function(x){return x.id===id;});
+        openModal('Edit Subject',
+            '<div class="modal-field"><label class="modal-label">Subject Name</label><input class="modal-input" id="m-name" value="'+esc(s.name)+'"/></div>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="submitEditSubject(\''+id+'\')">Save</button>');
+        setTimeout(function(){var el=document.getElementById('m-name');if(el)el.focus();},100);
+    }
+    function submitEditSubject(id) {
+        var name=(document.getElementById('m-name')||{}).value;
+        if (!name||!name.trim()) return showToast('Enter a name','error');
+        closeModal();
+        apiCall('editSubject',[id,name.trim()],function(r){if(r.ok){var i=state.db.subjects.findIndex(function(x){return x.id===id;});if(i>-1)state.db.subjects[i]=r.subject;renderView();showToast('Subject update ho gaya ✓','success');}else showToast(r.msg,'error');});
+    }
+    function confirmDeleteSubject(id) {
+        var s=state.db.subjects.find(function(x){return x.id===id;});
+        openModal('Move to Trash?',
+            '<p style="color:var(--text2);font-size:.9rem">Move <strong>"'+esc(s.name)+'"</strong> aur uske saare topics ko Trash mein bhejein?</p>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button><button class="btn btn-primary" style="background:var(--danger)" onclick="submitDeleteSubject(\''+id+'\')">Move to Trash</button>');
+    }
+    function submitDeleteSubject(id) {
+        closeModal();
+        apiCall('deleteSubject',[id],function(r){if(r.ok){reloadDB();showToast('Trash mein chala gaya','success');}else showToast(r.msg,'error');});
+    }
+
+    // ══════════════════════════════════════════════
+    // TOPICS CRUD
+    // ══════════════════════════════════════════════
+    function showAddTopic() {
+        openModal('Add Topic',
+            '<div class="modal-field"><label class="modal-label">Topic Name</label>'+
+            '<div class="topic-name-wrap">'+
+            '<input class="modal-input" id="m-name" placeholder="e.g. Child Development Theories" autocomplete="off" '+
+            'oninput="filterTopicNameSuggestions(this.value)" onfocus="filterTopicNameSuggestions(this.value)" onblur="hideTopicNameSuggestionsDelayed()"/>'+
+            '<div class="topic-name-suggest" id="topic-name-suggest"></div>'+
+            '</div></div>'+
+            '<div class="modal-field"><label class="modal-label">Description (optional) — *italic* **bold** ya HTML paste kar sakte ho</label>'+
+            '<textarea class="modal-textarea" id="m-desc" rows="4" placeholder="Notes, key points… ya HTML paste karo"></textarea></div>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button>'+
+            '<button class="btn btn-primary" onclick="submitAddTopic()">Add Topic</button>');
+        setTimeout(function(){var el=document.getElementById('m-name');if(el)el.focus();},100);
+    }
+    var _topicNameSuggestTimer;
+    function getAllTopicNamesWithPath() {
+        var seen = {}; var list = [];
+        (state.db.topics||[]).forEach(function(t) {
+            var key = (t.name || '').toLowerCase();
+            if (!key || seen[key]) return;
+            seen[key] = true;
+            var subj = state.db.subjects.find(function(s){return s.id===t.subjectId;});
+            var course = subj ? state.db.courses.find(function(c){return c.id===subj.courseId;}) : null;
+            list.push({ name: t.name, path: (course?course.name+' › ':'')+(subj?subj.name:'') });
+        });
+        return list;
+    }
+    function filterTopicNameSuggestions(q) {
+        var box = document.getElementById('topic-name-suggest');
+        if (!box) return;
+        q = (q||'').trim().toLowerCase();
+        if (!q) { box.innerHTML=''; box.classList.remove('visible'); return; }
+        var matches = getAllTopicNamesWithPath().filter(function(item){
+            return item.name.toLowerCase().includes(q);
+        }).slice(0,6);
+        if (!matches.length) { box.innerHTML=''; box.classList.remove('visible'); return; }
+        box.innerHTML = matches.map(function(item){
+            return '<div class="tns-item" onmousedown="selectTopicNameSuggestion(\''+escAttr(item.name)+'\')">'+
+                esc(item.name)+(item.path?'<div class="tns-path">'+esc(item.path)+'</div>':'')+'</div>';
+        }).join('');
+        box.classList.add('visible');
+    }
+    function selectTopicNameSuggestion(name) {
+        var el = document.getElementById('m-name');
+        if (el) el.value = name;
+        hideTopicNameSuggestions();
+    }
+    function hideTopicNameSuggestions() {
+        var box = document.getElementById('topic-name-suggest');
+        if (box) box.classList.remove('visible');
+    }
+    function hideTopicNameSuggestionsDelayed() {
+        clearTimeout(_topicNameSuggestTimer);
+        _topicNameSuggestTimer = setTimeout(hideTopicNameSuggestions, 200);
+    }
+    function submitAddTopic() {
+        var name=(document.getElementById('m-name')||{}).value;
+        var desc=(document.getElementById('m-desc')||{}).value||'';
+        if (!name||!name.trim()) return showToast('Enter a topic name','error');
+        closeModal();
+        apiCall('addTopic',[state.activeSubject.id,name.trim(),desc],function(r){if(r.ok){state.db.topics.push(r.topic);renderView();showToast('Topic add ho gaya ✓','success');}else showToast(r.msg,'error');});
+    }
+    function showEditTopic(id) {
+        var t=state.db.topics.find(function(x){return x.id===id;});
+        openModal('Edit Topic',
+            '<div class="modal-field"><label class="modal-label">Topic Name</label>'+
+            '<input class="modal-input" id="m-name" value="'+esc(t.name)+'"/></div>'+
+            '<div class="modal-field"><label class="modal-label">Description — *italic* **bold** ya HTML paste kar sakte ho</label>'+
+            '<textarea class="modal-textarea" id="m-desc" rows="5">'+esc(t.description||'')+'</textarea></div>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button>'+
+            '<button class="btn btn-primary" onclick="submitEditTopic(\''+id+'\')">Save</button>');
+        setTimeout(function(){var el=document.getElementById('m-name');if(el)el.focus();},100);
+    }
+    function submitEditTopic(id) {
+        var name=(document.getElementById('m-name')||{}).value;
+        var desc=(document.getElementById('m-desc')||{}).value||'';
+        if (!name||!name.trim()) return showToast('Enter a name','error');
+        closeModal();
+        apiCall('editTopic',[id,name.trim(),desc],function(r){if(r.ok){updateTopicInState(r.topic);renderView();showToast('Topic update ho gaya ✓','success');}else showToast(r.msg,'error');});
+    }
+    function confirmDeleteTopic(id) {
+        var t=state.db.topics.find(function(x){return x.id===id;});
+        openModal('Move to Trash?',
+            '<p style="color:var(--text2);font-size:.9rem">Move <strong>"'+esc(t.name)+'"</strong> ko Trash mein bhejein?</p>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button>'+
+            '<button class="btn btn-primary" style="background:var(--danger)" onclick="submitDeleteTopic(\''+id+'\')">Move to Trash</button>');
+    }
+    function submitDeleteTopic(id) {
+        closeModal();
+        apiCall('deleteTopic',[id],function(r){if(r.ok){reloadDB();showToast('Trash mein chala gaya','success');}else showToast(r.msg,'error');});
+    }
+
+    // ══════════════════════════════════════════════
+    // STATUS CHANGE
+    // ══════════════════════════════════════════════
+    function changeTopicStatus(id,status) {
+        apiCall('updateTopicStatus',[id,status],function(r){
+            if(r.ok){updateTopicInState(r.topic);refreshTopicCard(id);updateStats();showToast('Status → '+status,'success');}
+            else showToast(r.msg,'error');
+        });
+    }
+
+    // ══════════════════════════════════════════════
+    // TRASH
+    // ══════════════════════════════════════════════
+    function showTrashView() { window._trashFilter='all'; state.view='trash'; renderView(); updateNav(); }
+    function renderTrash() {
+        updateNav();
+        var el=document.getElementById('main-content');
+        var active=window._trashFilter||'all';
+        var tabs=['all','course','subject','topic','media-image','media-link','media-pdf'].map(function(f){
+            var labels={'all':'🗄 All','course':'📖 Courses','subject':'📂 Subjects','topic':'📋 Topics','media-image':'📸 Images','media-link':'▶️ Links','media-pdf':'📄 PDFs'};
+            return '<button class="view-tab '+(active===f?'active':'')+'" onclick="filterTrash(\''+f+'\')">'+labels[f]+'</button>';
+        }).join('');
+        var items=state.db.trash||[];
+        if(active!=='all')items=items.filter(function(i){return i.type===active;});
+        var list=!items.length
+            ?emptyState('🗑','Trash is Empty','Deleted items will appear here')
+            :items.map(function(item){
+                var origIdx=state.db.trash.indexOf(item);
+                var icons={'course':'📖','subject':'📂','topic':'📋','media-image':'📸','media-link':'▶️','media-pdf':'📄'};
+                var displayName = item.data.name || item.data.url || item.data.path || '—';
+                return '<div class="trash-item">'+
+                    '<div class="trash-icon">'+(icons[item.type]||'📄')+'</div>'+
+                    '<div class="trash-info">'+
+                    '<div class="trash-name">'+esc(displayName)+'</div>'+
+                    (item.path?'<div class="trash-path">📍 '+esc(item.path)+'</div>':'')+
+                    '<div class="trash-date">🗑 '+item.deletedAt+'</div>'+
+                    '</div><button class="recover-btn" onclick="recoverItem('+origIdx+')">↩ Recover</button></div>';
+            }).join('');
+        el.innerHTML='<div class="section-title">Trash <small>'+(state.db.trash||[]).length+' items</small></div>'+
+            '<div class="view-tabs" style="flex-wrap:wrap;height:auto;gap:4px;padding:6px;">'+tabs+'</div>'+
+            '<div style="display:flex;flex-direction:column;gap:8px;margin-top:10px">'+list+'</div>';
+    }
+    function filterTrash(f){window._trashFilter=f;renderTrash();}
+    function recoverItem(idx){
+        apiCall('recoverFromTrash',[idx],function(r){if(r.ok){reloadDB();showToast(r.type+' recover ho gaya ✓','success');}else showToast(r.msg,'error');});
+    }
+
+    // ══════════════════════════════════════════════
+    // BACKUP
+    // ══════════════════════════════════════════════
+    function showBackupView(){state.view='backup';renderView();updateNav();}
+    function renderBackup(){
+        updateNav();
+        document.getElementById('main-content').innerHTML=
+            '<div class="section-title">Backup & Restore</div>'+
+            '<div class="backup-panel"><h4>📤 Export Backup</h4><p>Poora study database JSON file mein download karo.</p>'+
+            '<div class="backup-row"><button class="btn btn-primary" onclick="doExport()">Export JSON</button></div></div>'+
+            '<div class="backup-panel"><h4>📥 Import Backup</h4><p>⚠️ Yeh saara data <strong>replace</strong> kar dega. Pehle export karo!</p>'+
+            '<div class="modal-field"><label class="modal-label">Option 1 — Purani backup file choose karo (.json):</label>'+
+            '<div class="backup-row"><button class="btn btn-ghost" onclick="triggerImportFile()">📁 Choose Backup File</button></div>'+
+            '<input type="file" class="hidden-file" id="import-file-input" accept="application/json,.json" onchange="handleImportFile(event)"/>'+
+            '</div>'+
+            '<div class="modal-field"><label class="modal-label">Option 2 — Ya JSON yahan paste karo:</label>'+
+            '<textarea class="modal-textarea" id="import-json" rows="8" placeholder=\'{"courses":[],...}\'></textarea></div>'+
+            '<div class="backup-row"><button class="btn btn-primary" onclick="doImport()">Import & Replace</button></div></div>';
+    }
+    function doExport(){
+        apiCall('exportBackup',[],function(data){
+            var json=JSON.stringify(data,null,2);
+            var blob=new Blob([json],{type:'application/json'});
+            var url=URL.createObjectURL(blob);
+            var a=document.createElement('a');
+            a.href=url;a.download='StudyTopicBackup_'+new Date().toISOString().slice(0,10)+'.json';
+            a.click();URL.revokeObjectURL(url);showToast('Backup export ho gaya ✓','success');
+        });
+    }
+    function triggerImportFile(){ var el=document.getElementById('import-file-input'); if(el) el.click(); }
+    function handleImportFile(event){
+        var file=event.target.files[0];
+        if(!file)return;
+        var reader=new FileReader();
+        reader.onload=function(e){
+            var ta=document.getElementById('import-json');
+            if(ta) ta.value = e.target.result;
+            showToast('Backup file load ho gayi — ab "Import & Replace" dabao','success');
+        };
+        reader.readAsText(file);
+        event.target.value='';
+    }
+    function doImport(){
+        var json=(document.getElementById('import-json')||{}).value;
+        if(!json||!json.trim())return showToast('JSON paste karo ya file choose karo pehle','error');
+        openModal('Confirm Import',
+            '<p style="color:var(--text2);font-size:.9rem">Yeh <strong style="color:var(--danger)">saara data replace</strong> kar dega. Continue?</p>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button>'+
+            '<button class="btn btn-primary" style="background:var(--danger)" onclick="submitImport()">Haan, Import Karo</button>');
+        window._pendingImport=json;
+    }
+    function submitImport(){
+        closeModal();
+        apiCall('importBackup',[window._pendingImport],function(r){if(r.ok){reloadDB();showToast('Backup import ho gaya ✓','success');}else showToast(r.msg,'error');});
+    }
+
+    // ══════════════════════════════════════════════
+    // NOTEPAD — Redesigned with Rich Editor
+    // ══════════════════════════════════════════════
+    function loadNotepadLocal(){
+        try{
+            var stored=localStorage.getItem('studyNotepadV2');
+            if(stored){var data=JSON.parse(stored);notepadState.books=data.books||{'Default':''};notepadState.activeBook=data.activeBook||Object.keys(notepadState.books)[0];}
+        }catch(e){var old=localStorage.getItem('studyNotepad');if(old)notepadState.books={'Default':old};}
+        renderNotepadBooks();loadCurrentBook();
+    }
+
+    function npExec(cmd, val) {
+        document.getElementById('notepad-editor').focus();
+        document.execCommand(cmd, false, val || null);
+        onNotepadRichInput();
+    }
+    function npFontSize(size) { npExec('fontSize', size); }
+    function npHighlight(color) { npExec('hiliteColor', color); }
+    function npHeading(tag) {
+        document.getElementById('notepad-editor').focus();
+        document.execCommand('formatBlock', false, tag);
+        onNotepadRichInput();
+    }
+    function npInsertDivider() {
+        document.getElementById('notepad-editor').focus();
+        document.execCommand('insertHTML', false, '<hr style="border:none;border-top:2px solid rgba(91,138,240,.4);margin:10px 0;"/>');
+        onNotepadRichInput();
+    }
+    function onNotepadKeyDown(e) {
+        if (e.key === 'Tab') {
+            e.preventDefault();
+            document.execCommand('insertHTML', false, '&nbsp;&nbsp;&nbsp;&nbsp;');
+        }
+    }
+    function onNotepadRichInput() {
+        var editor = document.getElementById('notepad-editor');
+        if (!editor) return;
+        var html = editor.innerHTML;
+        notepadState.books[notepadState.activeBook] = html;
+        var text = editor.innerText || '';
+        updateWordCount(text);
+        updateLineNumbers(text);
+        notepadState.isDirty = true;
+        document.getElementById('save-label').textContent = 'Saving…';
+        clearTimeout(notepadState.saveTimer);
+        notepadState.saveTimer = setTimeout(function(){
+            saveCurrentBookContent(); saveNotepadToServer();
+        }, 800);
+    }
+
+    function openNotepad() {
+        document.getElementById('notepad-overlay').classList.add('open');
+        apiCall('loadNotepad', [], function(data) {
+            if (data && data.books) {
+                notepadState.books = data.books;
+                if (data.activeBook && data.books[data.activeBook] !== undefined) notepadState.activeBook = data.activeBook;
+                else notepadState.activeBook = Object.keys(data.books)[0];
+            }
+            renderNotepadBooks();
+            loadCurrentBook();
+        });
+        var saved = localStorage.getItem('studyNotepadV2');
+        if (saved) {
+            try {
+                var obj = JSON.parse(saved);
+                if (obj.books) {
+                    notepadState.books = obj.books;
+                    if (obj.activeBook && obj.books[obj.activeBook] !== undefined) notepadState.activeBook = obj.activeBook;
+                    renderNotepadBooks(); loadCurrentBook();
+                }
+            } catch(e) {}
+        }
+        applyNotepadFont(notepadState.fontMode);
+        document.getElementById('save-label').textContent = 'Saved ✓';
+    }
+
+    function renderNotepadBooks() {
+        var bar = document.getElementById('notepad-books-bar');
+        if (!bar) return;
+        var html = '';
+        Object.keys(notepadState.books).forEach(function(name) {
+            var active = name === notepadState.activeBook;
+            html += '<button class="book-tab'+(active?' active':'')+'" onclick="switchBook(\''+escAttr(name)+'\')">'+esc(name)+'</button>';
+        });
+        html += '<button class="book-tab-add" onclick="promptAddBook()" title="Add notebook">＋</button>';
+        bar.innerHTML = html;
+        var titleEl = document.getElementById('notepad-book-title');
+        if (titleEl) titleEl.textContent = '✏ ' + notepadState.activeBook;
+    }
+
+    function loadCurrentBook(){
+        var editor = document.getElementById('notepad-editor');
+        var content = notepadState.books[notepadState.activeBook] || '';
+        if (editor) {
+            editor.innerHTML = content;
+            var text = editor.innerText || '';
+            updateWordCount(text);
+            updateLineNumbers(text);
+        }
+    }
+
+    function switchBook(name){saveCurrentBookContent();notepadState.activeBook=name;renderNotepadBooks();loadCurrentBook();}
+
+    function updateLineNumbers(text) {
+        var numEl = document.getElementById('notepad-line-nums');
+        if (!numEl) return;
+        var lines = (text || '').split('\n');
+        var count = Math.max(lines.length, 1);
+        var html = '';
+        for (var i = 1; i <= count; i++) {
+            html += '<div class="line-num">' + i + '</div>';
+        }
+        numEl.innerHTML = html;
+    }
+
+    function saveCurrentBookContent(){
+        var editor = document.getElementById('notepad-editor');
+        var val = editor ? editor.innerHTML : '';
+        notepadState.books[notepadState.activeBook]=val;
+        localStorage.setItem('studyNotepadV2',JSON.stringify({books:notepadState.books,activeBook:notepadState.activeBook}));
+    }
+
+    function saveNotepadToServer(){
+        var bookName=notepadState.activeBook;
+        var content=notepadState.books[bookName]||'';
+        fetch('api.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: 'saveNotepadContent', params: [bookName, content] })
+        })
+            .then(function(res){ if(!res.ok) throw new Error('HTTP '+res.status); return res.json(); })
+            .then(function(){ document.getElementById('save-label').textContent='Saved ✓'; notepadState.isDirty=false; })
+            .catch(function(){ document.getElementById('save-label').textContent='Save failed ⚠'; });
+    }
+
+    function promptAddBook(){
+        openModal('Naya Notebook',
+            '<div class="modal-field"><label class="modal-label">Notebook ka naam</label><input class="modal-input" id="m-book-name" placeholder="e.g. Math Notes"/></div>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="submitAddBook()">Add</button>');
+        setTimeout(function(){var el=document.getElementById('m-book-name');if(el)el.focus();},100);
+    }
+    function submitAddBook(){
+        var name=(document.getElementById('m-book-name')||{}).value;
+        if(!name||!name.trim())return showToast('Naam daalo','error');
+        closeModal();
+        if(notepadState.books[name.trim()])return showToast('Yeh naam pehle se hai','error');
+        notepadState.books[name.trim()]='';notepadState.activeBook=name.trim();
+        renderNotepadBooks();loadCurrentBook();
+        apiCall('addNotepadBook',[name.trim()],function(r){if(r&&r.ok&&r.data)notepadState.books=r.data.books;});
+        showToast('Notebook add ho gayi ✓','success');
+    }
+    function promptRenameBook(){
+        var current=notepadState.activeBook;
+        openModal('Rename Notebook',
+            '<div class="modal-field"><label class="modal-label">Naya naam</label><input class="modal-input" id="m-book-name" value="'+esc(current)+'"/></div>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button><button class="btn btn-primary" onclick="submitRenameBook(\''+escAttr(current)+'\')">Rename</button>');
+        setTimeout(function(){var el=document.getElementById('m-book-name');if(el){el.focus();el.select();}},100);
+    }
+    function submitRenameBook(oldName){
+        var newName=(document.getElementById('m-book-name')||{}).value;
+        if(!newName||!newName.trim())return showToast('Naam daalo','error');
+        closeModal();
+        if(notepadState.books[newName.trim()]!==undefined&&newName.trim()!==oldName)return showToast('Yeh naam pehle se hai','error');
+        notepadState.books[newName.trim()]=notepadState.books[oldName];
+        if(oldName!==newName.trim())delete notepadState.books[oldName];
+        notepadState.activeBook=newName.trim();renderNotepadBooks();
+        apiCall('renameNotepadBook',[oldName,newName.trim()],function(){});
+        showToast('Rename ho gaya ✓','success');
+    }
+    function promptDeleteBook(){
+        var books=Object.keys(notepadState.books);
+        if(books.length<=1)return showToast('Aakhri notebook delete nahi kar sakte','error');
+        openModal('Delete Notebook?',
+            '<p style="color:var(--text2);font-size:.9rem"><strong>"'+esc(notepadState.activeBook)+'"</strong> notebook aur uske saare notes delete honge.</p>',
+            '<button class="btn btn-ghost" onclick="closeModal()">Cancel</button>'+
+            '<button class="btn btn-primary" style="background:var(--danger)" onclick="submitDeleteBook()">Delete</button>');
+    }
+    function submitDeleteBook(){
+        closeModal();
+        var name=notepadState.activeBook;
+        var books=Object.keys(notepadState.books);
+        if(books.length<=1)return showToast('Aakhri notebook delete nahi kar sakte','error');
+        delete notepadState.books[name];notepadState.activeBook=Object.keys(notepadState.books)[0];
+        renderNotepadBooks();loadCurrentBook();
+        apiCall('deleteNotepadBook',[name],function(r){if(r&&r.ok&&r.data)notepadState.books=r.data.books;});
+        showToast('Notebook delete ho gayi','success');
+    }
+    function closeNotepad(){
+        saveCurrentBookContent();clearTimeout(notepadState.saveTimer);
+        if(notepadState.isDirty)saveNotepadToServer();
+        document.getElementById('notepad-overlay').classList.remove('open');
+    }
+    function notepadOverlayClick(e){if(e.target===document.getElementById('notepad-overlay'))closeNotepad();}
+    function setNotepadFont(mode){notepadState.fontMode=mode;localStorage.setItem('notepadFont',mode);applyNotepadFont(mode);}
+    function applyNotepadFont(mode){
+        var body=document.getElementById('notepad-body');
+        var editor=document.getElementById('notepad-editor');
+        document.getElementById('font-btn-hindi').classList.toggle('active',mode==='hindi');
+        document.getElementById('font-btn-urdu').classList.toggle('active',mode==='urdu');
+        document.getElementById('font-btn-serif').classList.toggle('active',mode==='serif');
+        if(mode==='urdu'){
+            body.classList.add('urdu-mode');
+            if(editor){editor.dir='rtl';editor.style.fontFamily="'Noto Nastaliq Urdu', serif";editor.style.fontSize='1.3rem';editor.style.lineHeight='38px';editor.style.textAlign='right';editor.setAttribute('data-placeholder','آپ یہاں لکھ سکتے ہیں…');}
+        } else if(mode==='serif'){
+            body.classList.remove('urdu-mode');
+            if(editor){editor.dir='ltr';editor.style.fontFamily="Georgia, 'Times New Roman', serif";editor.style.fontSize='1rem';editor.style.lineHeight='28px';editor.style.textAlign='left';editor.setAttribute('data-placeholder','Apne thoughts yahan likho… 📝');}
+        } else {
+            body.classList.remove('urdu-mode');
+            if(editor){editor.dir='ltr';editor.style.fontFamily="'Caveat', cursive";editor.style.fontSize='1.22rem';editor.style.lineHeight='32px';editor.style.textAlign='left';editor.setAttribute('data-placeholder','Apne thoughts yahan likho… 📝');}
+        }
+    }
+    function updateWordCount(text){
+        var words=text.trim()?text.trim().split(/\s+/).length:0;
+        document.getElementById('notepad-wordcount').textContent=words+' words';
+    }
+
+    // ══════════════════════════════════════════════
+    // API HELPER + RELOAD
+    // ══════════════════════════════════════════════
+    function apiCall(fnName,args,successHandler){
+        fetch('api.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ action: fnName, params: args })
+        })
+            .then(function(res) {
+                if (!res.ok) throw new Error('HTTP ' + res.status);
+                return res.json();
+            })
+            .then(function(data) {
+                if (typeof successHandler === 'function') successHandler(data);
+            })
+            .catch(function(err) {
+                showToast('⚠ ' + err.message, 'error');
+            });
+    }
+    function reloadDB(){
+        apiCall('loadAll', [], function(data){ state.db=data; renderView(); updateStats(); });
+    }
+
+    // ══════════════════════════════════════════════
+    // HELPERS
+    // ══════════════════════════════════════════════
+    function esc(str){
+        return String(str||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+    function escAttr(str){return String(str||'').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+    function daysBetween(dateStr,toDate){return Math.floor((toDate-new Date(dateStr))/(1000*60*60*24));}
+    function emptyState(icon,title,text){
+        return '<div class="empty-state"><div class="empty-icon">'+icon+'</div><h3>'+title+'</h3><p>'+text+'</p></div>';
+    }
+    var _toastTimer;
+    function showToast(msg,type){
+        var el=document.getElementById('toast');
+        el.textContent=msg;el.className='show '+(type||'');
+        clearTimeout(_toastTimer);
+        _toastTimer=setTimeout(function(){el.className='';},2800);
+    }
+
+    // ══════════════════════════════════════════════
+    // SETUP CONFIG LOADER (setup.php se settings)
+    // ══════════════════════════════════════════════
+    function applySetupConfig() {
+        // Logo
+        var logo = localStorage.getItem('stm_logo');
+        if (!logo) {
+            // Server se load karo
+            fetch('data/logo.txt')
+                .then(function(r){ if(r.ok) return r.text(); })
+                .then(function(t){
+                    if (t && t.trim()) {
+                        try { localStorage.setItem('stm_logo', t.trim()); } catch(e) {}
+                        setHeaderLogo(t.trim());
+                    }
+                })
+                .catch(function(){});
+        } else {
+            setHeaderLogo(logo);
+        }
+
+        // Accent color
+        var color = localStorage.getItem('stm_accentColor');
+        if (!color) {
+            fetch('data/config.json')
+                .then(function(r){ if(r.ok) return r.json(); })
+                .then(function(cfg){
+                    if (cfg && cfg.accentColor) {
+                        try { localStorage.setItem('stm_accentColor', cfg.accentColor); } catch(e) {}
+                        setAccentColor(cfg.accentColor);
+                    }
+                    if (cfg && cfg.appTitle) {
+                        document.title = cfg.appTitle;
+                    }
+                })
+                .catch(function(){});
+        } else {
+            setAccentColor(color);
+        }
+    }
+    function setHeaderLogo(src) {
+        var img = document.getElementById('header-logo');
+        if (!img || !src) return;
+        img.src = src;
+        img.style.display = 'block';
+    }
+    function setAccentColor(hex) {
+        if (!hex) return;
+        document.documentElement.style.setProperty('--accent', hex);
+        // Lighten for accent2
+        document.documentElement.style.setProperty('--accent2', hex);
+    }
+    applySetupConfig();
+
+    boot();
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+[
+  {
+    "title": "Modals (Models)",
+    "icon": "fas fa-comments",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> Modals are auxiliary verbs that express the mood or attitude of the speaker, such as ability, possibility, permission, or necessity.<br><strong>Hindi:</strong> Modals sahayak kriyaen hoti hain jo vakta ka bhav ya drishtikon vyakt karti hain, jaise kshamata, sambhavana, anumati, ya aavashyakta.</p><p>They modify the meaning of the main verb.<br>Yeh mukhya kriya ke arth ko badalte hain.</p><div class='popup-example'><strong>Example:</strong> She <strong>can</strong> dance well.<br><strong>Hindi:</strong> Wah accha naach <strong>sakti hai</strong>.</div>"
+  },
+  {
+    "title": "Functions of Modals",
+    "icon": "fas fa-list-ul",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> Each modal verb expresses a specific function like ability, permission, obligation, or probability.<br><strong>Hindi:</strong> Har modal kriya ek vishesh karya jaise kshamata, anumati, kartavya, ya sambhavana vyakt karti hai.</p><h3>Main Functions</h3><ul><li><strong>Ability:</strong> 'can', 'could'</li><li><strong>Permission:</strong> 'may', 'can'</li><li><strong>Obligation:</strong> 'must', 'should'</li><li><strong>Possibility:</strong> 'might', 'could'</li><li><strong>Advice:</strong> 'should', 'ought to'</li><li><strong>Necessity:</strong> 'must', 'have to'</li></ul><div class='popup-example'><strong>Example:</strong> You <strong>should</strong> study hard.<br><strong>Hindi:</strong> Tumhe man laga kar padhai <strong>karni chahiye</strong>.</div>"
+  },
+  {
+    "title": "Modals of Ability",
+    "icon": "fas fa-dumbbell",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Express what someone is able to do.<br><strong>Hindi:</strong> Yeh batate hain ki koi vyakti kya kar sakta hai.</p><h3>Common Modals</h3><ul><li><strong>Can:</strong> Present ability (e.g., I can swim.)</li><li><strong>Could:</strong> Past ability or polite request (e.g., I could dance when I was young.)</li></ul><div class='popup-example'><strong>Example:</strong> He <strong>can</strong> speak three languages.<br><strong>Hindi:</strong> Wah teen bhaashayen <strong>bol sakta hai</strong>.</div>"
+  },
+  {
+    "title": "Modals of Permission",
+    "icon": "fas fa-unlock-alt",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Express asking for or giving permission.<br><strong>Hindi:</strong> Yeh anumati maangne ya dene ke liye upyog hote hain.</p><h3>Common Modals</h3><ul><li><strong>Can:</strong> Informal permission (e.g., Can I leave?)</li><li><strong>May:</strong> Formal permission (e.g., May I come in?)</li><li><strong>Could:</strong> Polite request (e.g., Could I borrow your pen?)</li></ul><div class='popup-example'><strong>Example:</strong> You <strong>may</strong> go now.<br><strong>Hindi:</strong> Tum ab ja <strong>sakte ho</strong>.</div>"
+  },
+  {
+    "title": "Modals of Obligation",
+    "icon": "fas fa-check-circle",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Indicate duty, responsibility, or necessity.<br><strong>Hindi:</strong> Yeh kartavya, zimmedari, ya aavashyakta darshate hain.</p><h3>Common Modals</h3><ul><li><strong>Must:</strong> Strong necessity (e.g., You must wear a helmet.)</li><li><strong>Should:</strong> Moral duty or advice (e.g., You should help others.)</li><li><strong>Have to:</strong> External obligation (e.g., I have to pay bills.)</li></ul><div class='popup-example'><strong>Example:</strong> You <strong>must</strong> obey the rules.<br><strong>Hindi:</strong> Tumhe niyamon ka <strong>paalan karna hi hoga</strong>.</div>"
+  },
+  {
+    "title": "Modals of Possibility",
+    "icon": "fas fa-lightbulb",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Express what is possible or uncertain.<br><strong>Hindi:</strong> Yeh batate hain ki kuch ho sakta hai ya nahi bhi ho sakta.</p><h3>Common Modals</h3><ul><li><strong>Might:</strong> Weak possibility (e.g., It might rain.)</li><li><strong>May:</strong> Reasonable possibility (e.g., It may snow tonight.)</li><li><strong>Could:</strong> General or uncertain possibility (e.g., It could happen.)</li></ul><div class='popup-example'><strong>Example:</strong> He <strong>might</strong> come tomorrow.<br><strong>Hindi:</strong> Wah kal <strong>aa sakta hai</strong>.</div>"
+  },
+  {
+    "title": "Modals of Advice",
+    "icon": "fas fa-handshake",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Used to give suggestions or advice.<br><strong>Hindi:</strong> Salah ya sujhav dene ke liye prayog kiye jaate hain.</p><h3>Common Modals</h3><ul><li><strong>Should:</strong> Suggestion or moral advice (e.g., You should rest.)</li><li><strong>Ought to:</strong> Moral or logical duty (e.g., You ought to respect elders.)</li></ul><div class='popup-example'><strong>Example:</strong> You <strong>ought to</strong> be careful.<br><strong>Hindi:</strong> Tumhe saavdhan <strong>rehna chahiye</strong>.</div>"
+  },
+  {
+    "title": "Modals of Necessity",
+    "icon": "fas fa-exclamation-triangle",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Show something that is essential or unavoidable.<br><strong>Hindi:</strong> Yeh darshate hain ki kuch aavashyak ya anivaray hai.</p><h3>Common Modals</h3><ul><li><strong>Must:</strong> Personal necessity (e.g., I must finish this work.)</li><li><strong>Have to:</strong> External necessity (e.g., I have to catch the bus.)</li></ul><div class='popup-example'><strong>Example:</strong> We <strong>have to</strong> submit the form today.<br><strong>Hindi:</strong> Humein aaj form <strong>jama karna hai</strong>.</div>"
+  },
+  {
+    "title": "Common Challenges with Modals",
+    "icon": "fas fa-brain",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> Learners often confuse modals because some have multiple meanings or change form in the past tense.<br><strong>Hindi:</strong> Seekhne walon ko modals mein kathinai hoti hai kyunki kuch modals ke kai arth hote hain ya ve past tense mein badal jaate hain.</p><div class='popup-example'><strong>Example:</strong> 'Can' becomes 'could' in the past, but 'must' has no past form.<br><strong>Hindi:</strong> 'Can' ka past 'could' hota hai, lekin 'must' ka koi past form nahi hota.</div>"
+  }
+]

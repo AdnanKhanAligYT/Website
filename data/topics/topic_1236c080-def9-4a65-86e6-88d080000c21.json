@@ -1,0 +1,29 @@
+{
+    "id": "1236c080-def9-4a65-86e6-88d080000c21",
+    "subjectId": "349b6112-ad37-421c-ac23-0cedcbf7e23b",
+    "name": "The absolute refractive index of any material medium is always:",
+    "description": "Question:\n\nThe absolute refractive index of any material medium is always:\n\n(a) Greater than 1\n(b) Less than 1\n(c) Equal to 1\n(d) Zero\n\nAnswer: (a) Greater than 1 ✅\n\nFormula:\n\nμ = c/v\n\nWhere,\n\nμ = Absolute Refractive Index\nc = Speed of light in vacuum = 3 × 10⁸ m/s\nv = Speed of light in medium\n\nConcept:\n\nSince light travels fastest in vacuum,\n\nc > v\n\nTherefore,\n\nμ = c/v > 1\n\nHence,\n\nAbsolute Refractive Index is always greater than 1.\n\nSpecial Case:\n\nVacuum:\nμ = 1\n\nAny Material Medium:\nμ > 1\n\nTRICK:\n\n\"Vacuum mein One,\nMedium mein More than One.\"\n\nYaad Rakho:\n\nc > v\n⇒ c/v > 1\n⇒ μ > 1\n\nOne-Line Exam Trick:\n\n\"Absolute Refractive Index = c/v\n\nVacuum fastest hai,\nisliye μ hamesha 1 se bada hota hai.\"",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "3594548e-8ee7-47d3-9ce8-5f6a24580558",
+            "date": "2026-06-17",
+            "time": "2026-06-17 20:31",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "06060ad1-77c2-422e-9afa-83a5db14f9d7",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-17 20:28",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Reported Speech",
+    "icon": "fas fa-quote-right",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> Reported speech (or indirect speech) is when someone’s words are reported in a different form rather than quoting them exactly.<br><strong>Hindi:</strong> Reported speech (ya paroksh vachan) tab hota hai jab kisi ke shabd sidhe na batakar alag roop mein vyakt kiye jate hain.</p><p>It contrasts with direct speech, which uses exact words in quotes.<br>Yeh sidhe vachan se alag hai, jo shabdon ko quotes mein bilkul waisa hi batata hai.</p><div class='popup-example'><strong>Example:</strong> Direct: She said, 'I am tired.' Indirect: She said that she was tired.<br><strong>Hindi:</strong> Direct: Usne kaha, 'Main thak gayi hoon.' Indirect: Usne kaha ki woh thak gayi thi.</div>"
+  },
+  {
+    "title": "Rules for Changing Direct to Indirect Speech",
+    "icon": "fas fa-exchange-alt",
+    "content": "<h3>Guidelines</h3><p><strong>English:</strong> To convert direct speech to indirect: 1) Remove quotation marks, 2) Change pronouns as needed, 3) Adjust verb tense (usually one step back), 4) Change time/place expressions, 5) Use 'that' or other conjunctions if needed.<br><strong>Hindi:</strong> Sidhe vachan ko paroksh mein badalne ke niyam: 1) Quotation marks hatao, 2) Sarvanam ko zarurat ke hisaab se badlo, 3) Kriya ka tense ek kadam peechhe karo, 4) Samay/sthan ke shabd badlo, 5) 'Ki' ya doosre samuchchay bodhak ka prayog karo agar zaruri ho.</p><div class='popup-example'><strong>Example:</strong> Direct: He said, 'I will come tomorrow.' Indirect: He said that he would come the next day.<br><strong>Hindi:</strong> Direct: Usne kaha, 'Main kal aaunga.' Indirect: Usne kaha ki woh agle din aayega.</div>"
+  },
+  {
+    "title": "Tense Changes in Reported Speech",
+    "icon": "fas fa-clock",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> Verb tenses in direct speech usually shift back one tense in reported speech (e.g., present to past, past to past perfect).<br><strong>Hindi:</strong> Sidhe vachan mein kriya ka tense paroksh vachan mein ek tense peechhe chala jata hai (jaise, vartamaan se bhoot, bhoot se poorna bhoot).</p><h3>Tense Shift Examples</h3><ul><li><strong>Present Simple:</strong> Direct: 'I play.' Indirect: He said that he played.<br>Hindi: Direct: 'Main khelta hoon.' Indirect: Usne kaha ki woh khelta tha.</li><li><strong>Past Simple:</strong> Direct: 'I ate.' Indirect: She said that she had eaten.<br>Hindi: Direct: 'Maine khaya.' Indirect: Usne kaha ki usne khaya tha.</li><li><strong>Present Continuous:</strong> Direct: 'I am reading.' Indirect: He said that he was reading.<br>Hindi: Direct: 'Main padh raha hoon.' Indirect: Usne kaha ki woh padh raha tha.</li><li><strong>Will:</strong> Direct: 'I will go.' Indirect: She said that she would go.<br>Hindi: Direct: 'Main jaunga.' Indirect: Usne kaha ki woh jayegi.</li></ul><div class='popup-example'><strong>Example:</strong> Direct: 'I have finished.' Indirect: He said that he had finished.<br><strong>Hindi:</strong> Direct: 'Maine pura kar liya.' Indirect: Usne kaha ki usne pura kar liya tha.</div>"
+  },
+  {
+    "title": "Pronoun Changes in Reported Speech",
+    "icon": "fas fa-user",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Pronouns change based on the speaker and listener in the reported form to reflect the new context.<br><strong>Hindi:</strong> Sarvanam bolne wale aur sunne wale ke anusaar paroksh roop mein badalte hain taaki naya sandarbh vyakt ho.</p><div class='popup-example'><strong>Example:</strong> Direct: She said, 'I am happy.' Indirect: She said that she was happy.<br><strong>Hindi:</strong> Direct: Usne kaha, 'Main khush hoon.' Indirect: Usne kaha ki woh khush thi.</div>"
+  },
+  {
+    "title": "Time and Place Expression Changes",
+    "icon": "fas fa-map-marker-alt",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> Time and place words change in reported speech to match the new context (e.g., 'now' becomes 'then,' 'today' becomes 'that day').<br><strong>Hindi:</strong> Samay aur sthan ke shabd paroksh vachan mein naye sandarbh ke anusaar badalte hain (jaise, 'abhi' ban jata hai 'tab,' 'aaj' ban jata hai 'us din').</p><h3>Examples</h3><ul><li>'Now' → 'Then' (Abhi → Tab)</li><li>'Today' → 'That day' (Aaj → Us din)</li><li>'Tomorrow' → 'The next day' (Kal → Agla din)</li><li>'Here' → 'There' (Yahan → Wahan)</li></ul><div class='popup-example'><strong>Example:</strong> Direct: 'I’ll meet you here tomorrow.' Indirect: He said that he would meet me there the next day.<br><strong>Hindi:</strong> Direct: 'Main tumse yahan kal milunga.' Indirect: Usne kaha ki woh mujhse wahan agle din milega.</div>"
+  },
+  {
+    "title": "Reported Questions",
+    "icon": "fas fa-question-circle",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Questions in direct speech become statements in reported speech, using 'if/whether' for yes/no questions or question words (who, what, etc.) for wh-questions.<br><strong>Hindi:</strong> Sidhe vachan ke prashn paroksh vachan mein vakya ban jate hain, haan/na prashnon ke liye 'ki' ya 'kya,' aur wh-prashnon ke liye prashn shabd (kaun, kya, aadi) ka prayog hota hai.</p><h3>Structure</h3><p><strong>Subject + Asked/Wondered + If/Whether/Question Word + Clause</strong></p><div class='popup-example'><strong>Example:</strong> Direct: 'Are you coming?' Indirect: He asked if I was coming.<br><strong>Hindi:</strong> Direct: 'Kya tum aa rahe ho?' Indirect: Usne poochha ki kya main aa raha tha.</div>"
+  },
+  {
+    "title": "Reported Commands and Requests",
+    "icon": "fas fa-hand-point-up",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Commands and requests in direct speech use 'to' + verb or phrases like 'asked to' or 'told to' in reported speech.<br><strong>Hindi:</strong> Sidhe vachan ke aadesh ya anurodh paroksh vachan mein 'ko' + kriya ya 'poochha' ya 'kaha' jaise shabdon ke saath badalte hain.</p><h3>Structure</h3><p><strong>Subject + Told/Asked + Object + to + Verb</strong></p><div class='popup-example'><strong>Example:</strong> Direct: 'Close the door.' Indirect: He told me to close the door.<br><strong>Hindi:</strong> Direct: 'Darwaza band karo.' Indirect: Usne mujhe darwaza band karne ko kaha.</div>"
+  },
+  {
+    "title": "Special Cases in Reported Speech",
+    "icon": "fas fa-star",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> Some situations don’t require tense changes, like universal truths, or when the reporting verb is in the present tense. Modal verbs like 'would,' 'could,' or 'might' often remain unchanged.<br><strong>Hindi:</strong> Kuch sthitiyon mein tense nahi badalta, jaise vishwa satya, ya jab reporting verb vartamaan kaal mein ho. Modal verbs jaise 'would,' 'could,' ya 'might' aksar bina badle rehte hain.</p><div class='popup-example'><strong>Examples:</strong><ul><li>Direct: 'The sun rises in the east.' Indirect: He said that the sun rises in the east.<br>Hindi: Direct: 'Suraj poorab mein ugta hai.' Indirect: Usne kaha ki suraj poorab mein ugta hai.</li><li>Direct: 'I might go.' Indirect: She says that she might go.<br>Hindi: Direct: 'Main ja sakta hoon.' Indirect: Woh kehti hai ki woh ja sakti hai.</li></ul></div>"
+  }
+]

@@ -1,0 +1,36 @@
+{
+    "id": "7bda8f41-5c25-40da-aa11-291f5807beb7",
+    "subjectId": "38fe1eb2-f38f-4dc6-9e65-8711d6af8f11",
+    "name": "मुखविवर (खुलना) के आधार पर स्वरों का वर्गीकरण",
+    "description": "1. संवृत स्वर – इ, ई, उ, ऊ\n   (संवृत = बंद)\n2. अर्धसंवृत स्वर – ए, ओ\n   (अर्धसंवृत = आधा बंद)\n3. अर्धविवृत स्वर – ऐ, औ, अ\n   (अर्धविवृत = आधा खुला)\n4. विवृत स्वर – आ\n   (विवृत = पूरा खुला)",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "createdAt": "2026-06-08 09:36",
+    "updatedAt": "2026-06-22 04:25:00",
+    "revisionHistory": [
+        {
+            "id": "011763fc-ba9f-4825-951b-67fd8c05dbc1",
+            "date": "2026-06-15",
+            "time": "2026-06-15 10:07",
+            "note": "Auto: 7 din baad revision scheduled",
+            "type": "auto-revision"
+        },
+        {
+            "id": "87edc7b1-0ec5-48e7-9999-c36cf61eb9d3",
+            "date": "2026-06-17",
+            "time": "2026-06-17 08:37",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "bd604f57-23ce-42dd-8c4f-61762e97a596",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "links": [],
+    "pdfs": []
+}

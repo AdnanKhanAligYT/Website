@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Articles",
+    "icon": "fas fa-bookmark",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> Articles are words that define whether a noun is specific or general.<br><strong>Hindi:</strong> Articles वे शब्द होते हैं जो बताते हैं कि कोई noun सामान्य है या विशेष।</p><p>There are two types of articles: <strong>Definite Article</strong> and <strong>Indefinite Article</strong>.<br><strong>Hindi:</strong> Articles दो प्रकार के होते हैं: <strong>Definite Article</strong> और <strong>Indefinite Article</strong>.</p><div class='popup-example'><strong>Example:</strong> I saw <strong>a</strong> cat. <strong>The</strong> cat was black.<br><strong>Hindi:</strong> मैंने <strong>एक</strong> बिल्ली देखी। <strong>वह</strong> बिल्ली काली थी।</div>"
+  },
+  {
+    "title": "Indefinite Articles (A / An)",
+    "icon": "fas fa-audio-description",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> 'A' and 'An' are called Indefinite Articles because they refer to non-specific persons or things.<br><strong>Hindi:</strong> 'A' और 'An' को Indefinite Articles कहा जाता है क्योंकि ये किसी सामान्य व्यक्ति या वस्तु के लिए प्रयोग होते हैं।</p><h3>Use of 'A'</h3><p><strong>English:</strong> Used before words beginning with a consonant sound.<br><strong>Hindi:</strong> 'A' का प्रयोग उन शब्दों से पहले किया जाता है जो व्यंजन (consonant) ध्वनि से शुरू होते हैं।</p><div class='popup-example'><strong>Examples:</strong><br> a boy — एक लड़का<br> a pen — एक पेन<br> a teacher — एक शिक्षक</div><h3>Use of 'An'</h3><p><strong>English:</strong> Used before words beginning with a vowel sound (a, e, i, o, u).<br><strong>Hindi:</strong> 'An' का प्रयोग उन शब्दों से पहले किया जाता है जो स्वर (vowel) ध्वनि से शुरू होते हैं।</p><div class='popup-example'><strong>Examples:</strong><br> an apple — एक सेब<br> an elephant — एक हाथी<br> an honest man — एक ईमानदार आदमी (ध्यान दें: 'honest' का उच्चारण vowel sound से शुरू होता है)</div>"
+  },
+  {
+    "title": "Special Rules for 'A' and 'An'",
+    "icon": "fas fa-lightbulb",
+    "content": "<h3>Rule 1:</h3><p><strong>English:</strong> The choice between 'A' and 'An' depends on sound, not spelling.<br><strong>Hindi:</strong> 'A' या 'An' का प्रयोग शब्द की ध्वनि पर निर्भर करता है, spelling पर नहीं।</p><div class='popup-example'><strong>Examples:</strong><br> an hour (because 'hour' starts with a vowel sound)<br> a university (because 'university' starts with a consonant sound 'yu')</div><h3>Rule 2:</h3><p><strong>English:</strong> 'A' and 'An' are used before singular countable nouns only.<br><strong>Hindi:</strong> 'A' और 'An' का प्रयोग केवल एकवचन गिनने योग्य संज्ञाओं (singular countable nouns) के पहले किया जाता है।</p><div class='popup-example'><strong>Examples:</strong><br> a car ✅ | cars ❌<br> an umbrella ✅ | umbrellas ❌</div>"
+  },
+  {
+    "title": "Definite Article (The)",
+    "icon": "fas fa-theater-masks",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> 'The' is called the Definite Article because it refers to a particular person, place, or thing.<br><strong>Hindi:</strong> 'The' को Definite Article कहा जाता है क्योंकि यह किसी विशेष व्यक्ति, स्थान या वस्तु को दर्शाता है।</p><h3>Use of 'The'</h3><ul><li><strong>English:</strong> Before names of famous monuments, rivers, seas, and mountains.<br><strong>Hindi:</strong> प्रसिद्ध स्थलों, नदियों, समुद्रों और पर्वतों के नाम से पहले।<br><em>Examples:</em> the Taj Mahal, the Ganga, the Himalayas.</li><li><strong>English:</strong> Before something already mentioned.<br><strong>Hindi:</strong> जब कोई चीज़ पहले ही कही जा चुकी हो।<br><em>Example:</em> I saw a dog. <strong>The</strong> dog was barking.</li><li><strong>English:</strong> Before unique things.<br><strong>Hindi:</strong> जो वस्तु केवल एक ही होती है।<br><em>Examples:</em> the sun, the moon, the earth.</li><li><strong>English:</strong> Before superlative degrees.<br><strong>Hindi:</strong> Superlative degree वाले adjectives से पहले।<br><em>Example:</em> the best student, the tallest man.</li></ul>"
+  },
+  {
+    "title": "Omission of Article (When not to use any article)",
+    "icon": "fas fa-ban",
+    "content": "<h3>Rule 1:</h3><p><strong>English:</strong> Do not use articles before names of people, countries, cities, or languages.<br><strong>Hindi:</strong> व्यक्ति, देश, शहर या भाषा के नाम से पहले articles का प्रयोग नहीं होता।</p><div class='popup-example'><strong>Examples:</strong><br> I live in India. ✅ (not <strike>the India</strike>)<br> He speaks Hindi. ✅ (not <strike>the Hindi</strike>)</div><h3>Rule 2:</h3><p><strong>English:</strong> No article before plural or uncountable nouns when speaking generally.<br><strong>Hindi:</strong> जब किसी चीज़ के बारे में सामान्य रूप से कहा जाए तो plural या uncountable nouns से पहले article नहीं लगता।</p><div class='popup-example'><strong>Examples:</strong><br> Books are useful. ✅<br> Milk is good for health. ✅</div>"
+  },
+  {
+    "title": "Quick Recap",
+    "icon": "fas fa-check-double",
+    "content": "<ul><li><strong>A</strong> — before consonant sounds (a boy, a car)</li><li><strong>An</strong> — before vowel sounds (an apple, an hour)</li><li><strong>The</strong> — for something specific or unique (the sun, the Ganga)</li><li><strong>No Article</strong> — before general, plural, or proper nouns (books, India)</li></ul><div class='popup-example'><strong>English Example:</strong> The boy saw an elephant in a zoo.<br><strong>Hindi:</strong> उस लड़के ने चिड़ियाघर में एक हाथी देखा।</div>"
+  }
+]

@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masjid-e-Aisah | مسجدِ عائشہ – Prayer Times</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Noto+Nastaliq+Urdu:wght@600;700&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Base Styles */
+        *{ margin:0; padding:0; box-sizing:border-box; }
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(135deg,#0b3d2e,#145a32,#1e8449);
+            font-family:Arial, sans-serif;
+            padding:10px;
+        }
+        .container{
+            width:100%;
+            max-width:1200px;
+            background:#ffffff;
+            border-radius:18px;
+            overflow:hidden;
+            box-shadow:0 20px 40px rgba(0,0,0,0.35);
+            border:4px solid #d4af37;
+        }
+        .header{
+            position: relative;
+            width: 100%;
+            height: 28vw;
+            min-height: 160px;
+            max-height: 260px;
+            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('masjid.jpg');
+            background-size: cover;
+            background-position: center;
+            border-bottom: 4px solid #d4af37;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align:center;
+            padding: 10px 20px;
+            color: #fff;
+            transition: all 0.5s ease;
+        }
+        .header.ramadan-fullscreen {
+            height: 28vw;
+            min-height: 160px;
+            max-height: 260px;
+            background: linear-gradient(135deg, #0B3D2E, #145a32, #1e8449);
+            justify-content: center;
+            align-items: center;
+        }
+        .ramadan-full-display {
+            display: none;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            animation: fadeIn 0.5s ease;
+            padding: 0 15px;
+        }
+        .header.ramadan-fullscreen .ramadan-full-display {
+            display: flex;
+        }
+        .header.ramadan-fullscreen .sub-title,
+        .header.ramadan-fullscreen .title-container,
+        .header.ramadan-fullscreen .imam-info {
+            display: none;
+        }
+        .full-ramadan-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255, 215, 0, 0.25);
+            backdrop-filter: blur(10px);
+            padding: 12px 25px;
+            border-radius: 20px;
+            border: 3px solid #FFD700;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+            flex: 0 1 auto;
+            min-width: 180px;
+            transition: all 0.3s ease;
+        }
+        .full-ramadan-item.past-ramadan {
+            background: rgba(255, 0, 0, 0.4);
+            border-color: #FF0000;
+            box-shadow: 0 0 40px rgba(255, 0, 0, 0.6);
+            opacity: 0.8;
+        }
+        .full-ramadan-item.upcoming-ramadan {
+            background: rgba(0, 255, 0, 0.25);
+            border-color: #00FF00;
+            box-shadow: 0 0 40px rgba(0, 255, 0, 0.8);
+            animation: pulse-green 1.5s infinite;
+            transform: scale(1.05);
+        }
+        .full-ramadan-item .label {
+            font-family: 'Playfair Display', serif;
+            font-size: 28px;
+            color: #FFD700;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
+        }
+        .full-ramadan-item.past-ramadan .label {
+            color: #FF9999;
+        }
+        .full-ramadan-item.upcoming-ramadan .label {
+            color: #FFFFFF;
+            text-shadow: 0 0 15px #00FF00;
+        }
+        .full-ramadan-item .time {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 48px;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 0 0 20px #FFD700, 0 0 40px #FFD700;
+            line-height: 1;
+        }
+        .full-ramadan-item.past-ramadan .time {
+            text-shadow: 0 0 20px #FF0000, 0 0 40px #FF0000;
+        }
+        .full-ramadan-item.upcoming-ramadan .time {
+            text-shadow: 0 0 30px #00FF00, 0 0 60px #00FF00;
+        }
+        @keyframes pulse-green {
+            0%, 100% { transform: scale(1.05); box-shadow: 0 0 30px rgba(0, 255, 0, 0.6); }
+            50% { transform: scale(1.08); box-shadow: 0 0 50px rgba(0, 255, 0, 0.9); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .masjid-name{ 
+            font-family:'Playfair Display', serif; 
+            font-size:56px; 
+            font-weight:700; 
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
+            margin-bottom: 10px;
+        }
+        .sub-title{ 
+            font-family:'Playfair Display', serif; 
+            font-size: 28px; 
+            color:#f9e79f; 
+            margin-bottom: 2px; 
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
+        }
+        .title-container {
+            position: relative;
+            margin: 2px 0;
+            padding: 8px 15px;
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.15), rgba(20, 90, 50, 0.2), rgba(212, 175, 55, 0.15));
+            border-radius: 8px;
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            width: 90%;
+            max-width: 900px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .title-container:hover {
+            border-color: #f9e79f;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            transform: translateY(-2px);
+        }
+        .title {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 19px;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(212, 175, 55, 0.7), 
+                         0 0 15px rgba(212, 175, 55, 0.5),
+                         2px 2px 4px rgba(0, 0, 0, 0.8);
+            letter-spacing: 0.5px;
+            line-height: 1.2;
+            position: relative;
+            padding: 3px 0;
+            text-align: center;
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .title::before, .title::after {
+            content: "۞";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #f9e79f;
+            font-size: 14px;
+            opacity: 0.8;
+            animation: pulse 2s infinite;
+        }
+        .title::before { left: 0; }
+        .title::after { right: 0; }
+        .title-decoration {
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 85%;
+            height: 1.5px;
+            background: linear-gradient(90deg, transparent, #d4af37, #f9e79f, #d4af37, transparent);
+            border-radius: 1px;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; transform: translateY(-50%) scale(1); }
+            50% { opacity: 1; transform: translateY(-50%) scale(1.1); }
+        }
+        .date-info { 
+            display: flex; 
+            gap: 15px; 
+            padding: 20px; 
+            background: #f4f9f6; 
+            justify-content: center;
+        }
+        .date-box, .image-box { 
+            flex: 1; 
+            height: 160px; 
+            background: #ffffff; 
+            border: 3px solid #d4af37; 
+            border-radius: 12px; 
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .date-label { 
+            font-size: 14px; 
+            font-weight: bold; 
+            color: #145a32; 
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+        .gregorian-date { 
+            font-size: 18px; 
+            font-weight: bold; 
+            color: #0b3d2e; 
+            text-align: center;
+        }
+        #hijriDate {
+            font-size: 22px;
+            font-weight: 800;
+            color: #922b21;
+            margin-top: 8px;
+            background: #fcf3cf;
+            padding: 2px 10px;
+            border-radius: 6px;
+            border: 1px solid #d4af37;
+            text-align: center;
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .imam-logo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        .imam-logo:hover { transform: scale(1.02); }
+        .imam-info {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(20, 90, 50, 0.85);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 8px;
+            border: 2px solid #d4af37;
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 18px;
+            direction: rtl;
+            text-align: center;
+            max-width: 320px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            z-index: 2;
+            backdrop-filter: blur(4px);
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+        .ramadan-split {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            direction: ltr;
+        }
+        .split-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(0,0,0,0.2);
+            padding: 4px 10px;
+            border-radius: 30px;
+            min-width: 90px;
+            border: 1px solid #f9e79f;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .split-item:hover {
+            background: rgba(0,0,0,0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+        .split-label {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            color: #f9e79f;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .split-time {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 900;
+            color: #ffffff;
+            text-shadow: 0 0 8px #d4af37;
+            line-height: 1.2;
+        }
+        .imam-name-ar {
+            font-weight: 700;
+            color: #f9e79f;
+            margin-bottom: 2px;
+            white-space: nowrap;
+        }
+        .imam-name-en {
+            font-family: 'Playfair Display', serif;
+            font-size: 16px;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+        .table-container{ padding: 20px; position: relative; }
+        .namaz-table{ 
+            width:100%; 
+            border-collapse:separate; 
+            border-spacing: 0;
+            border: 3px solid #145a32; 
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow:0 8px 20px rgba(0,0,0,0.15);
+        }
+        .namaz-table thead{ 
+            background: linear-gradient(90deg, #145a32, #1e8449); 
+            position: relative;
+        }
+        .namaz-table thead::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #d4af37, #f9e79f, #d4af37);
+        }
+        .namaz-table th{ 
+            padding:18px; 
+            font-size:22px; 
+            color:#fff; 
+            border-right: 2px solid rgba(212, 175, 55, 0.5);
+            text-align: center;
+            position: relative;
+            font-weight: bold;
+        }
+        .namaz-table th:last-child { border-right: none; }
+        .namaz-table th i { margin-right: 10px; color: #f9e79f; }
+        .namaz-table td{ 
+            padding:18px; 
+            text-align:center; 
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            border-right: 2px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.2s ease;
+        }
+        .namaz-table td:last-child { border-right: none; }
+        .namaz-table tbody tr:last-child td { border-bottom: none; }
+        .namaz-table tbody tr { 
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .namaz-table tbody tr:hover td { background-color: rgba(212, 175, 55, 0.15); }
+        .namaz-table tbody tr:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .hindi-column{ 
+            font-weight:bold; 
+            color:#0b3d2e; 
+            font-size: 20px; 
+        }
+        .time-column{ 
+            font-weight: 900; 
+            color:#922b21; 
+            background:linear-gradient(90deg, #fef9e7, #fcf3cf);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 34px !important; 
+            position: relative;
+            padding: 22px !important; 
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+            letter-spacing: 1.5px;
+            -webkit-font-smoothing: antialiased;
+            box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.2);
+            border-radius: 8px;
+            margin: 4px;
+            border: 2px solid rgba(212, 175, 55, 0.4);
+        }
+        .urdu-column{ font-family:'Noto Nastaliq Urdu', serif; font-size:22px; direction:rtl; color:#1b2631; line-height: 1.5; }
+        .footer{ 
+            text-align:center; 
+            padding:20px; 
+            background:linear-gradient(135deg,#145a32,#0b3d2e); 
+            color:#fff; 
+            font-size:16px;
+        }
+        .location{ 
+            color:#f9e79f; 
+            margin-top:10px; 
+            font-weight:bold; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 8px; 
+            font-size: 16px;
+        }
+        #loading { text-align: center; padding: 20px; font-weight: bold; color: #145a32; }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 5px solid #f3f3f3;
+            border-top: 5px solid #145a32;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Info Popup Styles */
+        .info-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: linear-gradient(135deg, #ffffff, #f4f9f6);
+            border: 4px solid #d4af37;
+            border-radius: 16px;
+            padding: 0;
+            z-index: 2000;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.7);
+            animation: popupopen 0.4s ease-out;
+            width: 90%;
+            max-width: 550px;
+            max-height: 85vh;
+            display: none;
+            overflow: hidden;
+        }
+        .info-popup-header {
+            background: linear-gradient(135deg, #0b3d2e, #145a32);
+            color: #f9e79f;
+            padding: 20px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            text-align: center;
+            border-bottom: 4px solid #d4af37;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .info-popup-header h3 {
+            font-family: 'Playfair Display', serif;
+            margin: 0;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .info-popup-body {
+            padding: 25px;
+            max-height: calc(85vh - 140px);
+            overflow-y: auto;
+            background: #fefefe;
+        }
+        .info-content {
+            font-family: 'Noto Nastaliq Urdu', 'Playfair Display', serif;
+            line-height: 1.8;
+            font-size: 18px;
+            color: #0b3d2e;
+            text-align: right;
+            direction: rtl;
+        }
+        .info-content.hindi-lang {
+            font-family: 'Playfair Display', 'Noto Nastaliq Urdu', serif;
+            direction: ltr;
+            text-align: left;
+        }
+        .info-content .arabic-text {
+            font-family: 'Noto Nastaliq Urdu', serif;
+            font-size: 22px;
+            color: #922b21;
+            text-align: center;
+            margin: 15px 0;
+            padding: 15px;
+            background: #fcf3cf;
+            border-radius: 12px;
+            border: 2px solid #d4af37;
+        }
+        .info-content .main-text {
+            margin: 15px 0;
+            font-size: 18px;
+        }
+        .info-content ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+        .info-content ul li {
+            margin-bottom: 12px;
+            padding-right: 25px;
+            position: relative;
+            border-bottom: 1px dashed #d4af37;
+            padding-bottom: 8px;
+        }
+        .info-content ul li:last-child {
+            border-bottom: none;
+        }
+        .info-content ul li::before {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            color: #d4af37;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .info-content.hindi-lang ul li {
+            padding-right: 0;
+            padding-left: 25px;
+        }
+        .info-content.hindi-lang ul li::before {
+            right: auto;
+            left: 0;
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+            padding: 15px;
+            background: linear-gradient(135deg, #f4f9f6, #e8f5e9);
+            border-radius: 10px;
+            border: 2px solid #d4af37;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+        }
+        .contact-item i {
+            color: #922b21;
+            font-size: 18px;
+            min-width: 25px;
+        }
+        .contact-item a {
+            text-decoration: none;
+            color: #0b3d2e;
+            font-weight: 600;
+            transition: color 0.3s;
+            word-break: break-all;
+        }
+        .contact-item a:hover {
+            color: #922b21;
+            text-decoration: underline;
+        }
+        .language-switch {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+        .lang-btn {
+            background: linear-gradient(135deg, #922b21, #c0392b);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border: 2px solid #d4af37;
+            transition: all 0.3s;
+            min-width: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .lang-btn:hover {
+            background: linear-gradient(135deg, #c0392b, #922b21);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(146, 43, 33, 0.4);
+        }
+        .close-popup-btn {
+            background: linear-gradient(135deg, #145a32, #0b3d2e);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border: 2px solid #d4af37;
+            transition: all 0.3s;
+            min-width: 150px;
+            margin-top: 15px;
+        }
+        .close-popup-btn:hover {
+            background: linear-gradient(135deg, #0b3d2e, #145a32);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(11, 61, 46, 0.4);
+        }
+        .popup-footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 3px solid #f4f9f6;
+            background: linear-gradient(135deg, #f4f9f6, #e8f5e9);
+        }
+        @keyframes popupopen {
+            from {opacity: 0; transform: translate(-50%, -60%);}
+            to {opacity: 1; transform: translate(-50%, -50%);}
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1500;
+            display: none;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        /* Green Flag for Deen Sikhe - Always visible */
+        .deen-flag-container {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: block; /* Always visible */
+        }
+        .deen-flag {
+            background: linear-gradient(145deg, #2e7d32, #1b5e20);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            border: 3px solid #f9e79f;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.4), 0 0 20px #f9e79f;
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            backdrop-filter: blur(5px);
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .deen-flag i {
+            color: #f9e79f;
+            font-size: 28px;
+        }
+        .deen-flag:hover {
+            transform: scale(1.05) translateX(5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5), 0 0 30px #f9e79f;
+            background: linear-gradient(145deg, #388e3c, #2e7d32);
+        }
+        .flag-close {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #922b21;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            cursor: pointer;
+            border: 2px solid #f9e79f;
+            transition: all 0.3s ease;
+            z-index: 1002;
+        }
+        .flag-close:hover {
+            background: #c0392b;
+            transform: scale(1.1);
+        }
+
+        /* Topic Grid inside Flag Popup */
+        .flag-popup {
+            position: fixed;
+            top: 100px;
+            left: 20px;
+            background: white;
+            border: 4px solid #d4af37;
+            border-radius: 16px;
+            padding: 20px;
+            z-index: 1001;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            width: 300px;
+            max-width: 90vw;
+            max-height: 70vh;
+            overflow-y: auto;
+            display: none;
+        }
+        .flag-popup h4 {
+            font-family: 'Playfair Display', serif;
+            color: #0b3d2e;
+            text-align: center;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 8px;
+        }
+        .topic-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .topic-btn {
+            background: linear-gradient(135deg, #f4f9f6, #e8f5e9);
+            border: 2px solid #145a32;
+            border-radius: 40px;
+            padding: 12px 16px;
+            font-size: 16px;
+            font-weight: bold;
+            color: #0b3d2e;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .topic-btn i {
+            color: #d4af37;
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+        .topic-btn:hover {
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            transform: translateX(5px);
+            border-color: #d4af37;
+        }
+
+        @media(max-width:600px){ 
+            .container { max-width: 95%; }
+            .masjid-name{font-size:36px;} 
+            .sub-title{font-size:22px;} 
+            .header { height: 30vw; min-height: 160px; max-height: 220px; padding: 5px 15px; }
+            .header.ramadan-fullscreen { height: 30vw; min-height: 160px; max-height: 220px; }
+            .full-ramadan-item { padding: 8px 15px; min-width: 120px; }
+            .full-ramadan-item .label { font-size: 20px; }
+            .full-ramadan-item .time { font-size: 32px; }
+            .date-info { gap: 10px; padding: 12px; }
+            .date-box, .image-box { height: 140px; }
+            #hijriDate { font-size: 18px; }
+            .namaz-table th, .namaz-table td { padding: 12px; }
+            .namaz-table th { font-size: 18px; }
+            .hindi-column { font-size: 16px; }
+            .time-column { font-size: 26px !important; padding: 16px !important; letter-spacing: 1px; margin: 2px; }
+            .urdu-column { font-size: 18px; }
+            .imam-info { 
+                position: relative; 
+                bottom: auto; 
+                right: auto; 
+                margin-top: 10px; 
+                max-width: 95%; 
+                font-size: 16px; 
+                padding: 8px 12px; 
+                width: auto;
+                display: inline-block;
+            }
+            .ramadan-split { gap: 8px; flex-wrap: wrap; }
+            .split-item { min-width: 70px; padding: 2px 5px; }
+            .split-time { font-size: 18px; }
+            .title { font-size: 13px; padding: 2px 0; white-space: normal; line-height: 1.3; }
+            .title::before, .title::after { font-size: 10px; display: block; position: relative; transform: none; margin: 0 3px; top: 0; }
+            .title-container { padding: 5px 10px; margin: 1px 0; width: 95%; min-height: 40px; }
+            .title-decoration { width: 70%; bottom: -3px; height: 1px; }
+            .info-popup { width: 95%; max-height: 90vh; }
+            .info-popup-header { padding: 15px; }
+            .info-popup-header h3 { font-size: 20px; }
+            .info-popup-body { padding: 15px; }
+            .info-content { font-size: 16px; }
+            .lang-btn { padding: 10px 20px; min-width: 100px; }
+            .contact-item { flex-direction: column; text-align: center; }
+            .deen-flag { font-size: 16px; padding: 8px 16px; }
+            .deen-flag i { font-size: 20px; }
+            .flag-popup { left: 10px; top: 70px; width: 280px; }
+            .flag-close { width: 20px; height: 20px; font-size: 12px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Green Flag for Deen Sikhe - Always visible -->
+    <div class="deen-flag-container" id="deenFlagContainer">
+        <div class="deen-flag" id="deenFlag">
+            <i class="fas fa-book-open"></i>
+        </div>
+        <div class="flag-close" id="flagCloseBtn" title="Close">
+            <i class="fas fa-times"></i>
+        </div>
+    </div>
+
+    <!-- Flag Popup for Topics -->
+    <div class="flag-popup" id="flagPopup">
+        <h4><i class="fas fa-list"></i> موضوعات / Topics</h4>
+        <div class="topic-grid" id="topicGrid">
+            <!-- Topics will be populated dynamically from index.json -->
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="header" id="mainHeader">
+            <!-- Fullscreen Ramadan Display -->
+            <div class="ramadan-full-display" id="ramadanFullDisplay">
+                <div class="full-ramadan-item" id="fullSehriItem" onclick="showRamadanPopup('sehri')">
+                    <span class="label">سحری</span>
+                    <span class="time" id="fullSehriTime">--:--</span>
+                </div>
+                <div class="full-ramadan-item" id="fullIftarItem" onclick="showRamadanPopup('iftar')">
+                    <span class="label">افطار</span>
+                    <span class="time" id="fullIftarTime">--:--</span>
+                </div>
+            </div>
+            
+            <!-- Normal Header Content -->
+            <div class="sub-title">Aisah Masjid | مسجدِ عائشہ </div>
+            <div class="title-container" id="duaTitleContainer">
+                <div class="title">اوقاتِ نمازِ جماعت</div>
+                <div class="title-decoration"></div>
+            </div>
+            <!-- امام المسجد / Sehri-Iftar dynamic box -->
+            <div class="imam-info" id="imamInfoBox">
+                <div class="imam-name-ar" id="imamPrimary">امام المسجد: مولانا تفضل</div>
+            </div>
+        </div>
+        <div class="date-info">
+            <div class="date-box">
+                <div class="date-label">📅 Date & तारीख</div>
+                <div id="gregorianDate" class="gregorian-date"></div>
+                <div id="hijriDate">Loading...</div>
+            </div>
+            <div class="image-box">
+                <img src="imam.jpg" alt="Imam Maulana Tafazzul" class="imam-logo" id="imamImage" onclick="showImamPopup()" onerror="this.src='https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80'">
+            </div>
+        </div>
+        <div class="table-container">
+            <div id="loading">
+                <div class="spinner"></div>
+                Loading Prayer Times...
+            </div>
+            <table class="namaz-table" style="display:none;" id="prayerTable">
+                <thead>
+                    <tr>
+                        <th><i class="fas fa-pray"></i> नमाज़</th>
+                        <th>वक़्त</th>
+                        <th><i class="fas fa-mosque"></i> نماز</th>
+                    </tr>
+                </thead>
+                <tbody id="namaz-body"></tbody>
+            </table>
+        </div>
+        <div class="footer">
+            <div class="location"><i class=""></i> عدنان رضا نے تیار کیا</div>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Info Popup -->
+    <div class="info-popup" id="infoPopup">
+        <div class="info-popup-header" id="popupHeader">
+            <h3><i class="fas fa-info-circle"></i> <span id="popupTitle">जानकारी</span></h3>
+        </div>
+        <div class="info-popup-body">
+            <div id="popupContent" class="info-content"></div>
+            <div class="language-switch">
+                <button class="lang-btn" id="btnUrdu"><i class="fas fa-language"></i> اردو</button>
+                <button class="lang-btn" id="btnHindi"><i class="fas fa-language"></i> हिन्दी</button>
+            </div>
+        </div>
+        <div class="popup-footer">
+            <button class="close-popup-btn" id="closePopupBtn"><i class="fas fa-times"></i> बंद करें</button>
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        const SHEET_ID = '1EmY-XqQORauly2j2NrivAlFLeI1XJNlD1GMBNGa_NVo';
+        const NAMAZ_SHEET = 'namaz_time';
+        const RAMADAN_SHEET = 'Ramdhan';
+        const NAMAZ_CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${NAMAZ_SHEET}`;
+        const RAMADAN_CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=${RAMADAN_SHEET}`;
+
+        let JSON_DATA = null;
+        let currentPopupType = '';
+        let currentTopicKey = '';
+        let currentLanguage = 'hindi';
+        let currentNamazKey = '';
+        let ramadanFullscreenTimeout = null;
+        let ramadanData = { sehri: '', iftar: '' };
+
+        // ========== Utility Functions ==========
+        function updateClock() {
+            const now = new Date();
+            const dateOptions = { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' };
+            document.getElementById("gregorianDate").innerText = now.toLocaleDateString("en-GB", dateOptions);
+        }
+        updateClock();
+        setInterval(updateClock, 60000);
+
+        function getTodayDateFormatted() {
+            const now = new Date();
+            const month = now.getMonth() + 1;
+            const day = now.getDate();
+            const year = now.getFullYear();
+            return `${month}/${day}/${year}`;
+        }
+        
+        function getTodayDateFormattedAlt() {
+            const now = new Date();
+            const day = now.getDate().toString().padStart(2, '0');
+            const month = (now.getMonth() + 1).toString().padStart(2, '0');
+            const year = now.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+
+        // Parse time string (handles both with and without AM/PM)
+        function parseTimeString(timeStr) {
+            if (!timeStr) return null;
+            
+            timeStr = timeStr.trim();
+            let hours, minutes;
+            
+            // Check if time includes AM/PM
+            if (timeStr.includes('AM') || timeStr.includes('PM')) {
+                const parts = timeStr.split(' ');
+                const timePart = parts[0];
+                const modifier = parts[1];
+                [hours, minutes] = timePart.split(':').map(Number);
+                if (modifier === 'PM' && hours < 12) hours += 12;
+                if (modifier === 'AM' && hours === 12) hours = 0;
+            } else {
+                // Assume AM for Sehri (before noon) and PM for Iftar (after noon)
+                [hours, minutes] = timeStr.split(':').map(Number);
+                // We'll handle AM/PM assignment in the calling function
+            }
+            
+            return { hours, minutes };
+        }
+
+        // Compare current time with given time string
+        function isTimePast(timeStr, isSehri) {
+            if (!timeStr) return false;
+            
+            const now = new Date();
+            const currentMinutes = now.getHours() * 60 + now.getMinutes();
+            
+            let hours, minutes;
+            
+            if (timeStr.includes('AM') || timeStr.includes('PM')) {
+                const parsed = parseTimeString(timeStr);
+                hours = parsed.hours;
+                minutes = parsed.minutes;
+            } else {
+                [hours, minutes] = timeStr.split(':').map(Number);
+                // For Sehri (morning), times are AM
+                // For Iftar (evening), times are PM
+                if (!isSehri && hours < 12) hours += 12; // Convert to PM for Iftar
+            }
+            
+            const timeMinutes = hours * 60 + minutes;
+            return currentMinutes > timeMinutes;
+        }
+
+        // ========== Update Ramadan items based on current time ==========
+        function updateRamadanStatus() {
+            if (!ramadanData.sehri || !ramadanData.iftar) return;
+            
+            const sehriItem = document.getElementById('fullSehriItem');
+            const iftarItem = document.getElementById('fullIftarItem');
+            
+            // Remove all classes
+            sehriItem.classList.remove('past-ramadan', 'upcoming-ramadan');
+            iftarItem.classList.remove('past-ramadan', 'upcoming-ramadan');
+            
+            const sehriPast = isTimePast(ramadanData.sehri, true);
+            const iftarPast = isTimePast(ramadanData.iftar, false);
+            
+            if (!sehriPast && !iftarPast) {
+                // Before Sehri - Iftar is upcoming (green), Sehri is future but not focused
+                iftarItem.classList.add('upcoming-ramadan');
+                sehriItem.classList.remove('upcoming-ramadan');
+            } else if (sehriPast && !iftarPast) {
+                // Between Sehri and Iftar - Iftar is upcoming (green)
+                iftarItem.classList.add('upcoming-ramadan');
+                sehriItem.classList.add('past-ramadan');
+            } else if (sehriPast && iftarPast) {
+                // After Iftar - Sehri (next day's) is upcoming (green)
+                sehriItem.classList.add('upcoming-ramadan');
+                iftarItem.classList.add('past-ramadan');
+            }
+        }
+
+        // ========== Load index.json ==========
+        async function loadJsonData() {
+            try {
+                const response = await fetch('index.json');
+                if (!response.ok) throw new Error('index.json not found');
+                JSON_DATA = await response.json();
+                console.log('JSON data loaded successfully');
+                populateTopicGrid();
+            } catch (error) {
+                console.error('Error loading index.json:', error);
+                JSON_DATA = {
+                    imam: { details: { name_arabic: "محمد تفضل قاسمی", name_urdu: "محمد تفضل قاسمی", name_hindi: "मौलाना तफ़ज़्ज़ुल", qualification_urdu: [], qualification_hindi: [], experience_urdu: "", experience_hindi: "", specialization_urdu: "", specialization_hindi: "" }, dua: { arabic: "", urdu: "", hindi: "" }, contact_info: { phone: "+91 9761010920", email: "mdtafazzulq@gmail.com" } },
+                    namaz: {},
+                    ramzan: {},
+                    islamic_months: {},
+                    daily_duas: {},
+                    quranic_chapters: {},
+                    islamic_concepts: {}
+                };
+            }
+        }
+
+        // ========== Populate Topic Grid ==========
+        function populateTopicGrid() {
+            if (!JSON_DATA) return;
+            const grid = document.getElementById('topicGrid');
+            grid.innerHTML = '';
+
+            const topics = [
+                { key: 'imam', labelUrdu: 'امام', labelHindi: 'इमाम', icon: 'fa-user-tie' },
+                { key: 'namaz', labelUrdu: 'نمازیں', labelHindi: 'नमाज़ें', icon: 'fa-pray' },
+                { key: 'ramzan', labelUrdu: 'رمضان', labelHindi: 'रमज़ान', icon: 'fa-moon' },
+                { key: 'islamic_months', labelUrdu: 'اسلامی مہینے', labelHindi: 'इस्लामिक महीने', icon: 'fa-calendar-alt' },
+                { key: 'daily_duas', labelUrdu: 'روزانہ کی دعائیں', labelHindi: 'दैनिक दुआएँ', icon: 'fa-hands-praying' },
+                { key: 'quranic_chapters', labelUrdu: 'قرآنی سورتیں', labelHindi: 'क़ुरआनी सूरतें', icon: 'fa-quran' },
+                { key: 'islamic_concepts', labelUrdu: 'اسلامی تصورات', labelHindi: 'इस्लामी अवधारणाएँ', icon: 'fa-mosque' }
+            ];
+
+            topics.forEach(topic => {
+                if (JSON_DATA[topic.key]) {
+                    const btn = document.createElement('div');
+                    btn.className = 'topic-btn';
+                    btn.setAttribute('data-topic', topic.key);
+                    btn.innerHTML = `<i class="fas ${topic.icon}"></i> <span class="topic-urdu">${topic.labelUrdu}</span> / <span class="topic-hindi">${topic.labelHindi}</span>`;
+                    btn.onclick = () => showTopicPopup(topic.key);
+                    grid.appendChild(btn);
+                }
+            });
+        }
+
+        // ========== Show Topic Popup ==========
+        function showTopicPopup(topicKey) {
+            currentPopupType = 'topic';
+            currentTopicKey = topicKey;
+            updatePopupContent('hindi');
+            closeFlagPopup();
+        }
+
+        // ========== Hijri Date ==========
+        async function fetchHijriDate() {
+            try {
+                const response = await fetch(RAMADAN_CSV_URL);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const data = await response.text();
+                if (!data || data.trim() === '') throw new Error('Empty response');
+                const rows = data.split('\n').slice(1);
+                const todayFormatted = getTodayDateFormatted();
+                let chandData = "Hijri Date";
+                for (const row of rows) {
+                    if (!row.trim()) continue;
+                    const columns = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                    if (columns.length >= 5) {
+                        const dateCol = columns[0].replace(/"/g, '').trim();
+                        const chandCol = columns[4].replace(/"/g, '').trim();
+                        if (dateCol === todayFormatted || dateCol === getTodayDateFormattedAlt() || 
+                            dateCol === todayFormatted.replace(/^0/, '') ||
+                            dateCol === `${todayFormatted.split('/')[0]}/${todayFormatted.split('/')[1].replace(/^0/, '')}/${todayFormatted.split('/')[2]}`) {
+                            if (chandCol && chandCol !== "") { chandData = chandCol; break; }
+                        }
+                    }
+                }
+                document.getElementById("hijriDate").innerText = chandData;
+            } catch (error) {
+                console.error("Hijri error:", error);
+                document.getElementById("hijriDate").innerText = "Hijri Date";
+            }
+        }
+
+        // ========== Update Imam Box with Ramadan Data ==========
+        async function updateImamBoxWithRamadan() {
+            const imamBox = document.getElementById('imamInfoBox');
+            try {
+                const response = await fetch(RAMADAN_CSV_URL);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const data = await response.text();
+                if (!data.trim()) throw new Error('Empty response');
+                const rows = data.split('\n').slice(1);
+                const todayFormatted = getTodayDateFormatted();
+                let todayData = null;
+
+                for (const row of rows) {
+                    if (!row.trim()) continue;
+                    const columns = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                    if (columns.length >= 3) {
+                        const date = columns[0].replace(/"/g, '').trim();
+                        const sehri = columns[1].replace(/"/g, '').trim();
+                        const iftar = columns[2].replace(/"/g, '').trim();
+                        if (date === todayFormatted || date === getTodayDateFormattedAlt() ||
+                            date === todayFormatted.replace(/^0/, '') ||
+                            date === `${todayFormatted.split('/')[0]}/${todayFormatted.split('/')[1].replace(/^0/, '')}/${todayFormatted.split('/')[2]}`) {
+                            todayData = { date, sehri, iftar }; break;
+                        }
+                    }
+                }
+
+                if (todayData && todayData.sehri && todayData.sehri !== "" && todayData.iftar && todayData.iftar !== "") {
+                    ramadanData = { sehri: todayData.sehri, iftar: todayData.iftar };
+                    
+                    imamBox.innerHTML = `
+                        <div class="ramadan-split">
+                            <div class="split-item" onclick="showRamadanPopup('sehri')">
+                                <span class="split-label">سحری</span>
+                                <span class="split-time">${todayData.sehri}</span>
+                            </div>
+                            <div class="split-item" onclick="showRamadanPopup('iftar')">
+                                <span class="split-label">افطار</span>
+                                <span class="split-time">${todayData.iftar}</span>
+                            </div>
+                        </div>
+                    `;
+                    
+                    document.getElementById('fullSehriTime').textContent = todayData.sehri;
+                    document.getElementById('fullIftarTime').textContent = todayData.iftar;
+                    
+                    updateRamadanStatus();
+                    showRamadanFullscreen();
+                } else if (JSON_DATA && JSON_DATA.imam) {
+                    imamBox.innerHTML = `
+                        <div class="imam-name-ar">${JSON_DATA.imam.details.name_arabic}</div>
+                        <div class="imam-name-en">${JSON_DATA.imam.details.name_english || ''}</div>
+                    `;
+                }
+            } catch (error) {
+                console.error("Ramadan check error, showing imam:", error);
+                if (JSON_DATA && JSON_DATA.imam) {
+                    imamBox.innerHTML = `
+                        <div class="imam-name-ar">${JSON_DATA.imam.details.name_arabic}</div>
+                        <div class="imam-name-en">${JSON_DATA.imam.details.name_english || ''}</div>
+                    `;
+                }
+            }
+        }
+
+        // ========== Show Ramadan Fullscreen ==========
+        function showRamadanFullscreen() {
+            const header = document.getElementById('mainHeader');
+            
+            if (ramadanFullscreenTimeout) {
+                clearTimeout(ramadanFullscreenTimeout);
+            }
+            
+            header.classList.add('ramadan-fullscreen');
+            
+            ramadanFullscreenTimeout = setTimeout(() => {
+                header.classList.remove('ramadan-fullscreen');
+                ramadanFullscreenTimeout = null;
+            }, 20000);
+        }
+
+        // ========== Fetch Namaz Times ==========
+        async function fetchNamazData() {
+            try {
+                const response = await fetch(NAMAZ_CSV_URL);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const data = await response.text();
+                if (!data.trim()) throw new Error('Empty response');
+                const rows = data.split('\n').slice(1);
+                const tbody = document.getElementById('namaz-body');
+                tbody.innerHTML = '';
+                let prayerTimesArray = [];
+                let hasValidData = false;
+
+                const namazKeyMap = {
+                    "फ़ज्र": "fajr",
+                    "ज़ोहर": "zuhr",
+                    "असर": "asr",
+                    "मगरिब": "maghrib",
+                    "इशा": "isha",
+                    "जुमा": "jumuah"
+                };
+
+                rows.forEach((row) => {
+                    if (!row.trim()) return;
+                    const columns = row.split(/,(?=(?:(?:[^"]*"){2})*[^"]*$)/);
+                    if (columns.length >= 3) {
+                        const namazHindi = columns[0].replace(/"/g, '').trim();
+                        const time = columns[1].replace(/"/g, '').trim();
+                        const urdu = columns[2].replace(/"/g, '').trim();
+                        if (!time || time === "" || time === "null") return;
+                        const tr = document.createElement('tr');
+                        const key = namazKeyMap[namazHindi] || namazHindi;
+                        tr.setAttribute('onclick', `showNamazPopup('${key}')`);
+                        tr.innerHTML = `<td class="hindi-column">${namazHindi}</td>
+                                        <td class="time-column">${time}</td>
+                                        <td class="urdu-column">${urdu}</td>`;
+                        tbody.appendChild(tr);
+                        prayerTimesArray.push({ time: time, element: tr, name: namazHindi });
+                        hasValidData = true;
+                    }
+                });
+
+                if (hasValidData) {
+                    document.getElementById('loading').style.display = 'none';
+                    document.getElementById('prayerTable').style.display = 'table';
+                    updateCurrentPrayer(prayerTimesArray);
+                } else throw new Error('No valid prayer data');
+            } catch (error) {
+                console.error("Namaz error:", error);
+                document.getElementById('loading').innerHTML = `<div style="color:#922b21; padding:20px;"><i class="fas fa-exclamation-triangle"></i> Error loading prayer times.</div>`;
+            }
+        }
+
+        // Current prayer highlighter
+        function updateCurrentPrayer(prayerArray) {
+            if (!prayerArray || prayerArray.length === 0) return;
+            const now = new Date();
+            const currentTime = now.getHours() * 60 + now.getMinutes();
+            let currentIdx = -1;
+            prayerArray.forEach(p => p.element.classList.remove('current-namaz'));
+            for (let i = 0; i < prayerArray.length; i++) {
+                const p = prayerArray[i];
+                if(!p.time.includes(':')) continue;
+                const parts = p.time.split(' ');
+                const timePart = parts[0];
+                const modifier = parts[1];
+                let [hours, minutes] = timePart.split(':').map(Number);
+                if (modifier === 'PM' && hours < 12) hours += 12;
+                if (modifier === 'AM' && hours === 12) hours = 0;
+                const pMinutes = hours * 60 + minutes;
+                if (currentTime >= pMinutes) currentIdx = i;
+            }
+            if (currentIdx !== -1) prayerArray[currentIdx].element.classList.add('current-namaz');
+            else if (prayerArray.length > 0) prayerArray[0].element.classList.add('current-namaz');
+        }
+
+        // ========== Popup Functions ==========
+        function showPopup(title, content) {
+            document.getElementById('popupTitle').innerText = title;
+            const contentDiv = document.getElementById('popupContent');
+            contentDiv.innerHTML = content;
+            contentDiv.className = 'info-content ' + (currentLanguage === 'hindi' ? 'hindi-lang' : '');
+            document.getElementById('infoPopup').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
+        }
+
+        function closePopup() {
+            document.getElementById('infoPopup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        function closeFlagPopup() {
+            document.getElementById('flagPopup').style.display = 'none';
+        }
+
+        function showImamPopup() {
+            if (!JSON_DATA) { alert('Data loading, please wait.'); return; }
+            currentPopupType = 'imam';
+            updatePopupContent('hindi');
+        }
+
+        function showNamazPopup(namazKey) {
+            if (!JSON_DATA) { alert('Data loading, please wait.'); return; }
+            currentPopupType = 'namaz';
+            currentNamazKey = namazKey;
+            updatePopupContent('hindi');
+        }
+
+        function showRamadanPopup(type) {
+            if (!JSON_DATA) { alert('Data loading, please wait.'); return; }
+            currentPopupType = 'ramadan';
+            currentNamazKey = type;
+            updatePopupContent('hindi');
+        }
+
+        function showDuaPopup() {
+            if (!JSON_DATA) { alert('Data loading, please wait.'); return; }
+            currentPopupType = 'dua';
+            updatePopupContent('hindi');
+        }
+
+        function updatePopupContent(lang) {
+            currentLanguage = lang;
+            let title = '';
+            let content = '';
+
+            if (currentPopupType === 'imam') {
+                title = lang === 'urdu' ? 'امام المسجد' : 'इमाम मस्जिद';
+                const data = JSON_DATA.imam.details;
+                const dua = JSON_DATA.imam.dua;
+                const contact = JSON_DATA.imam.contact_info;
+
+                content = `
+                    <div class="arabic-text">${data.name_arabic}</div>
+                    <div class="main-text"><strong>${lang === 'urdu' ? 'نام' : 'नाम'}:</strong> ${lang === 'urdu' ? data.name_urdu : data.name_hindi}</div>
+                    <div><strong>${lang === 'urdu' ? 'تعلیمی قابلیتیں' : 'शैक्षिक योग्यताएँ'}:</strong></div>
+                    <ul>
+                        ${(lang === 'urdu' ? data.qualifications_urdu : data.qualification_hindi).map(q => `<li>${q}</li>`).join('')}
+                    </ul>
+                    <div><strong>${lang === 'urdu' ? 'تجربہ' : 'अनुभव'}:</strong> ${lang === 'urdu' ? data.experience_urdu : data.experience_hindi}</div>
+                    <div><strong>${lang === 'urdu' ? 'تخصص' : 'विशेषज्ञता'}:</strong> ${lang === 'urdu' ? data.specialization_urdu : data.specialization_hindi}</div>
+                    <div class="contact-info">
+                        <div class="contact-item"><i class="fas fa-phone"></i><a href="tel:${contact.phone.replace(/\s/g,'')}">${contact.phone}</a></div>
+                        <div class="contact-item"><i class="fas fa-envelope"></i><a href="mailto:${contact.email}">${contact.email}</a></div>
+                    </div>
+                    <div class="arabic-text" style="margin-top:20px;">${dua.arabic}</div>
+                    <div><strong>${lang === 'urdu' ? 'دعا' : 'दुआ'}:</strong> ${lang === 'urdu' ? dua.urdu : dua.hindi}</div>
+                `;
+            }
+            else if (currentPopupType === 'namaz') {
+                const namazKey = currentNamazKey;
+                const data = JSON_DATA.namaz[namazKey];
+                if (!data) { content = '<p>Data not available</p>'; }
+                else {
+                    title = lang === 'urdu' ? namazKey : (namazKey === 'fajr' ? 'फ़ज्र' : namazKey === 'zuhr' ? 'ज़ोहर' : namazKey === 'asr' ? 'असर' : namazKey === 'maghrib' ? 'मगरिब' : namazKey === 'isha' ? 'इशा' : namazKey === 'jumuah' ? 'जुमा' : namazKey);
+                    content = `
+                        <div class="arabic-text">${data.arabic}</div>
+                        <div><strong>${lang === 'urdu' ? 'اہمیت' : 'अहमियत'}:</strong> ${lang === 'urdu' ? data.urdu_ahmiyat : data.hindi_ahmiyat}</div>
+                        <div><strong>${lang === 'urdu' ? 'کیسے آئی' : 'कैसे आई'}:</strong> ${lang === 'urdu' ? data.urdu_kaise_aayi : data.hindi_kaise_aayi}</div>
+                        <div><strong>${lang === 'urdu' ? 'رکعات' : 'रकात'}:</strong> ${data.rakat || ''}</div>
+                        <div><strong>${lang === 'urdu' ? 'وقت' : 'समय'}:</strong> ${data.time || ''}</div>
+                    `;
+                }
+            }
+            else if (currentPopupType === 'ramadan') {
+                const type = currentNamazKey;
+                const data = JSON_DATA.ramzan[type];
+                title = lang === 'urdu' ? (type === 'sehri' ? 'سحری' : 'افطار') : (type === 'sehri' ? 'सहरी' : 'इफ़्तार');
+                content = `
+                    <div class="arabic-text">${data.arabic}</div>
+                    <div><strong>${lang === 'urdu' ? 'دعا' : 'दुआ'}:</strong> ${lang === 'urdu' ? data.urdu : data.hindi}</div>
+                    <div><strong>${lang === 'urdu' ? 'وقت' : 'समय'}:</strong> ${data.time || ''}</div>
+                    <div><strong>${lang === 'urdu' ? 'اہمیت' : 'महत्व'}:</strong> ${lang === 'urdu' ? data.importance : data.importance}</div>
+                `;
+            }
+            else if (currentPopupType === 'dua') {
+                title = lang === 'urdu' ? 'اوقاتِ نمازِ جماعت' : 'नमाज़ के समय';
+                const dua = JSON_DATA.imam.dua;
+                content = `
+                    <div class="arabic-text">${dua.arabic}</div>
+                    <div><strong>${lang === 'urdu' ? 'دعا' : 'दुआ'}:</strong> ${lang === 'urdu' ? dua.urdu : dua.hindi}</div>
+                `;
+            }
+            else if (currentPopupType === 'topic') {
+                const topicKey = currentTopicKey;
+                const topicData = JSON_DATA[topicKey];
+                if (!topicData) return;
+
+                const topicTitles = {
+                    imam: { urdu: 'امام', hindi: 'इमाम' },
+                    namaz: { urdu: 'نمازیں', hindi: 'नमाज़ें' },
+                    ramzan: { urdu: 'رمضان', hindi: 'रमज़ान' },
+                    islamic_months: { urdu: 'اسلامی مہینے', hindi: 'इस्लामिक महीने' },
+                    daily_duas: { urdu: 'روزانہ کی دعائیں', hindi: 'दैनिक दुआएँ' },
+                    quranic_chapters: { urdu: 'قرآنی سورتیں', hindi: 'क़ुरआनी सूरतें' },
+                    islamic_concepts: { urdu: 'اسلامی تصورات', hindi: 'इस्लामी अवधारणाएँ' }
+                };
+                title = lang === 'urdu' ? topicTitles[topicKey].urdu : topicTitles[topicKey].hindi;
+
+                content = '<div style="max-height: 400px; overflow-y: auto;">';
+                for (const [subKey, subValue] of Object.entries(topicData)) {
+                    if (typeof subValue === 'object' && subValue !== null) {
+                        content += `<div style="margin-bottom: 20px; border-bottom: 2px solid #d4af37; padding-bottom: 15px;">`;
+                        content += `<h4 style="color: #145a32; font-family: 'Playfair Display'; margin-bottom: 10px;">${lang === 'urdu' ? subKey : subKey}</h4>`;
+                        for (const [field, val] of Object.entries(subValue)) {
+                            if (Array.isArray(val)) {
+                                content += `<div><strong>${field}:</strong> <ul>${val.map(v => `<li>${v}</li>`).join('')}</ul></div>`;
+                            } else if (typeof val === 'object' && val !== null) {
+                                content += `<div><strong>${field}:</strong> ${JSON.stringify(val)}</div>`;
+                            } else {
+                                content += `<div><strong>${field}:</strong> ${val}</div>`;
+                            }
+                        }
+                        content += `</div>`;
+                    }
+                }
+                content += '</div>';
+            }
+
+            showPopup(title, content);
+        }
+
+        // ========== Flag Popup Toggle ==========
+        document.getElementById('deenFlag').addEventListener('click', function(e) {
+            e.stopPropagation();
+            const popup = document.getElementById('flagPopup');
+            popup.style.display = popup.style.display === 'block' ? 'none' : 'block';
+        });
+
+        document.getElementById('flagCloseBtn').addEventListener('click', function() {
+            document.getElementById('deenFlagContainer').style.display = 'none';
+        });
+
+        document.addEventListener('click', function(e) {
+            const flag = document.getElementById('deenFlag');
+            const popup = document.getElementById('flagPopup');
+            const flagContainer = document.getElementById('deenFlagContainer');
+            if (!flagContainer.contains(e.target) && !popup.contains(e.target)) {
+                popup.style.display = 'none';
+            }
+        });
+
+        // ========== Event Listeners ==========
+        document.getElementById('closePopupBtn').addEventListener('click', closePopup);
+        document.getElementById('overlay').addEventListener('click', closePopup);
+        document.getElementById('btnUrdu').addEventListener('click', () => updatePopupContent('urdu'));
+        document.getElementById('btnHindi').addEventListener('click', () => updatePopupContent('hindi'));
+        document.getElementById('duaTitleContainer').addEventListener('click', showDuaPopup);
+
+        // ========== Window Load ==========
+        window.onload = async function() {
+            await loadJsonData();
+            updateClock();
+            fetchHijriDate();
+            fetchNamazData();
+            updateImamBoxWithRamadan();
+
+            setInterval(fetchNamazData, 300000);
+            setInterval(updateImamBoxWithRamadan, 600000);
+            setInterval(() => {
+                const prayerTable = document.getElementById('prayerTable');
+                if (prayerTable && prayerTable.style.display === 'table') {
+                    const rows = prayerTable.querySelectorAll('tbody tr');
+                    const prayerArray = Array.from(rows).map((row) => ({
+                        time: row.querySelector('.time-column').textContent,
+                        element: row,
+                        name: row.querySelector('.hindi-column').textContent
+                    }));
+                    updateCurrentPrayer(prayerArray);
+                }
+                updateRamadanStatus();
+            }, 60000);
+        };
+    </script>
+</body>
+</html>

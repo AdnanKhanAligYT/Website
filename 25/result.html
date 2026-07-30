@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMPS Student Portal</title>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- jsPDF Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-blue: #1e40af;
+            --secondary-blue: #3b82f6;
+            --light-blue: #60a5fa;
+            --very-light-blue: #dbeafe;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --dark-gray: #64748b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+            color: #1e293b;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        .app-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            border-radius: var(--border-radius);
+            color: var(--white);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #60a5fa, #93c5fd, #60a5fa);
+        }
+
+        .app-header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .app-header h2 {
+            font-size: 1.3rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        /* Portal Card */
+        .portal-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 40px;
+            max-width: 500px;
+            margin: 0 auto 40px;
+            position: relative;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease;
+        }
+
+        .portal-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .portal-card-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .portal-icon {
+            margin-bottom: 25px;
+        }
+
+        .portal-icon img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 5px solid var(--very-light-blue);
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+        }
+
+        .portal-card h3 {
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .portal-card p {
+            color: var(--dark-gray);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        /* Input Groups */
+        .input-group {
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary-blue);
+            font-size: 0.95rem;
+        }
+
+        .input-group > div {
+            position: relative;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+        }
+
+        .input-group select,
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+            background: var(--white);
+            color: #1e293b;
+        }
+
+        .input-group select:focus,
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .input-group select {
+            appearance: none;
+            cursor: pointer;
+        }
+
+        /* Primary Button */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            margin-top: 10px;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 4px 6px rgba(30, 64, 175, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(30, 64, 175, 0.25);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        /* Footer Note */
+        .footer-note {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 25px;
+            padding: 15px;
+            background: var(--very-light-blue);
+            border-radius: 8px;
+            width: 100%;
+            font-size: 0.9rem;
+            color: var(--primary-blue);
+        }
+
+        .footer-note i {
+            font-size: 1.2rem;
+        }
+
+        /* Result/Profile Screens */
+        .result-screen,
+        .profile-card {
+            display: none;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .back-btn,
+        .download-pdf-btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .back-btn {
+            background: var(--very-light-blue);
+            color: var(--primary-blue);
+            border: 1px solid var(--light-blue);
+        }
+
+        .back-btn:hover {
+            background: var(--light-blue);
+            color: white;
+        }
+
+        .download-pdf-btn {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 6px rgba(30, 64, 175, 0.2);
+        }
+
+        .download-pdf-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(30, 64, 175, 0.25);
+        }
+
+        /* Result Content */
+        .result-header-content {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .result-header-content h1 {
+            color: var(--primary-blue);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            margin: 15px 0 5px;
+        }
+
+        .result-header-content h2 {
+            color: var(--dark-gray);
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+
+        .result-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid var(--very-light-blue);
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+        }
+
+        .student-info {
+            background: var(--very-light-blue);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .student-info p {
+            margin-bottom: 0;
+            color: #1e293b;
+        }
+
+        .student-info b {
+            color: var(--primary-blue);
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            color: var(--primary-blue);
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Table Styles */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .marks-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+        }
+
+        .marks-table th {
+            background: var(--primary-blue);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .marks-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+            color: #1e293b;
+        }
+
+        .marks-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .marks-table tr:hover {
+            background: var(--very-light-blue);
+        }
+
+        /* Percentage Classes */
+        .excellent {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .good {
+            color: var(--secondary-blue);
+            font-weight: 600;
+        }
+
+        .average {
+            color: var(--warning);
+            font-weight: 600;
+        }
+
+        .poor {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        /* Topper Section */
+        .topper {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 30px;
+            color: #854d0e;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: 1px solid #fbbf24;
+        }
+
+        .topper i {
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+
+        /* Preboard Link */
+        .preboard-link {
+            color: var(--primary-blue);
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .preboard-link:hover {
+            color: var(--secondary-blue);
+        }
+
+        /* Loading Spinner */
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: 9999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid var(--very-light-blue);
+            border-top: 5px solid var(--primary-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading p {
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        /* Alert Styles */
+        .alert {
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            animation: slideIn 0.3s ease;
+            font-weight: 500;
+        }
+
+        .alert-warning {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fbbf24;
+        }
+
+        .alert-error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #f87171;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .app-header h1 {
+                font-size: 2rem;
+            }
+            
+            .app-header h2 {
+                font-size: 1.1rem;
+            }
+            
+            .portal-card {
+                padding: 30px 20px;
+            }
+            
+            .result-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+            
+            .back-btn,
+            .download-pdf-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .marks-table th,
+            .marks-table td {
+                padding: 10px 8px;
+                font-size: 0.9rem;
+            }
+            
+            .student-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .app-header {
+                padding: 20px 15px;
+            }
+            
+            .app-header h1 {
+                font-size: 1.7rem;
+            }
+            
+            .portal-icon img {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <h1>Saiema Mansoor Public School</h1>
+            <h2>Student Portal - Academic Results & Preboard Marks</h2>
+        </header>
+        
+        <!-- Main Portal Card -->
+        <div class="portal-card" id="mainPortal">
+            <div class="portal-card-inner">
+                <div class="portal-icon">
+                    <img src="images/smps_logo.jpg" alt="SMPS Logo" id="schoolLogo" onerror="this.src='https://via.placeholder.com/120x120/1e40af/ffffff?text=SMPS'">
+                </div>
+                <h3>Student Portal</h3>
+                <p>View your academic results and preboard marks</p>
+                
+                <div class="input-group">
+                    <label for="portalType">Select Portal Type</label>
+                    <div style="position: relative;">
+                        <i class="fas fa-list"></i>
+                        <select id="portalType">
+                            <option value="1to12">Result 1st to 12th</option>
+                            <option value="preboard">Preboard Marks (10th & 12th)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="admInput">Admission Number</label>
+                    <div style="position: relative;">
+                        <i class="fas fa-id-card"></i>
+                        <input type="text" id="admInput" placeholder="Enter Admission Number" autocomplete="off">
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="sessionInput">Academic Session</label>
+                    <div style="position: relative;">
+                        <i class="fas fa-calendar-alt"></i>
+                        <input type="text" id="sessionInput" placeholder="Session (e.g. 2024-25)" autocomplete="off">
+                    </div>
+                </div>
+                
+                <button id="proceedBtn" class="btn-primary">
+                    <i class="fas fa-arrow-right"></i> Proceed
+                </button>
+                
+                <div class="footer-note">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Please enter your admission number carefully</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Result Screen for 1st to 12th -->
+        <div class="result-screen" id="resultScreen1to12">
+            <div class="result-container">
+                <div class="result-header">
+                    <button class="back-btn" id="backFromResult1to12">
+                        <i class="fas fa-arrow-left"></i> Back to Portal
+                    </button>
+                    <button class="download-pdf-btn" id="downloadResultPdfBtn">
+                        <i class="fas fa-download"></i> Download Result PDF
+                    </button>
+                </div>
+                <div class="result-content" id="resultArea1to12">
+                    <!-- Result content will be loaded here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Preboard Screen -->
+        <div class="result-screen" id="preboardScreen">
+            <div class="result-header">
+                <button class="back-btn" id="backFromPreboard">
+                    <i class="fas fa-arrow-left"></i> Back to Portal
+                </button>
+                <button class="download-pdf-btn" id="downloadPreboardPdfBtn">
+                    <i class="fas fa-download"></i> Download Preboard PDF
+                </button>
+            </div>
+            <div class="result-content" id="preboardArea">
+                <!-- Preboard content will be loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Fetching your information...</p>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Saiema Mansoor Public School. All rights reserved.</p>
+    </div>
+
+    <script>
+        // ===== GLOBAL VARIABLES =====
+        const SHEET_URL = 'https://opensheet.elk.sh/1FUpqRyVWcQZGK8bPuXEd12f-4xU7h6M9VUHlG4rMlnw/Result';
+        
+        let currentStudentData = null;
+        let currentResultType = null;
+        let topperData = null;
+        let marksDataForPDF = null;
+        let preboardMarksData = null;
+
+        // ===== INITIALIZATION =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up event listeners
+            document.getElementById('backFromResult1to12').onclick = () => {
+                document.getElementById('resultScreen1to12').style.display = 'none';
+                document.getElementById('mainPortal').style.display = 'block';
+            };
+            
+            document.getElementById('backFromPreboard').onclick = () => {
+                document.getElementById('preboardScreen').style.display = 'none';
+                document.getElementById('mainPortal').style.display = 'block';
+            };
+            
+            // Main portal functionality
+            document.getElementById('proceedBtn').onclick = fetchData;
+            
+            // PDF download buttons
+            document.getElementById('downloadResultPdfBtn').onclick = downloadResultPDF;
+            document.getElementById('downloadPreboardPdfBtn').onclick = downloadPreboardPDF;
+            
+            // Enable pressing Enter key to submit
+            document.getElementById('admInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') fetchData();
+            });
+            
+            document.getElementById('sessionInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') fetchData();
+            });
+        });
+
+        // ===== MAIN FUNCTIONS =====
+        async function fetchData() {
+            const portalType = document.getElementById('portalType').value;
+            const adm = document.getElementById('admInput').value.trim();
+            const session = document.getElementById('sessionInput').value.trim();
+            
+            if (!adm) {
+                showAlert('Please enter Admission No.', 'warning');
+                return;
+            }
+            
+            if (!session) {
+                showAlert('Please enter Session', 'warning');
+                return;
+            }
+            
+            // Show loading spinner
+            document.getElementById('loading').style.display = 'flex';
+            
+            try {
+                currentResultType = portalType;
+                
+                if (portalType === '1to12') {
+                    await fetchResult1to12(adm, session);
+                } else if (portalType === 'preboard') {
+                    await fetchPreboardMarks(adm, session);
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                showAlert('Failed to fetch data. Please try again later.', 'error');
+            } finally {
+                // Hide loading spinner
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        async function fetchResult1to12(adm, session) {
+            try {
+                const res = await fetch(SHEET_URL);
+                const data = await res.json();
+                
+                const student = data.find(row => row.Admission_Number === adm && row.Session === session);
+                
+                if (!student) {
+                    showAlert('Invalid Admission Number or Session.', 'error');
+                    return;
+                }
+                
+                const status = (student.Status || '').toString().toLowerCase();
+                if (status !== 'publish') {
+                    showAlert('Your result is not yet published.', 'error');
+                    return;
+                }
+                
+                // Store student data
+                currentStudentData = student;
+                
+                // Process subjects and marks for display
+                const subjects = {};
+                let totalMarks = 0, totalMaxMarks = 0;
+                const availableTests = { 'PT1': false, 'SA1': false, 'PT2': false, 'SA2': false };
+
+                // Prepare data for PDF
+                marksDataForPDF = {
+                    subjects: [],
+                    availableTests: [],
+                    studentInfo: {
+                        name: student.Name,
+                        admissionNo: student.Admission_Number,
+                        class: student.Class,
+                        rollNo: student.Roll_Number,
+                        session: student.Session
+                    }
+                };
+
+                for (const [key, value] of Object.entries(student)) {
+                    if (key.includes('_PT1') || key.includes('_PT2') || key.includes('_SA1') || key.includes('_SA2')) {
+                        const subject = key.split('_').slice(0, -1).join('_');
+                        const examType = key.split('_').pop();
+                        if (!subjects[subject]) subjects[subject] = { PT1: null, SA1: null, PT2: null, SA2: null };
+                        const numericValue = isNaN(parseFloat(value)) ? null : parseFloat(value);
+                        subjects[subject][examType] = numericValue;
+                        if (numericValue !== null) availableTests[examType] = true;
+                    }
+                }
+
+                // Prepare table headers
+                const testHeaders = [];
+                if (availableTests.PT1) {
+                    testHeaders.push('<th>PT-1</th>');
+                    marksDataForPDF.availableTests.push('PT-1');
+                }
+                if (availableTests.SA1) {
+                    testHeaders.push('<th>SA-1</th>');
+                    marksDataForPDF.availableTests.push('SA-1');
+                }
+                if (availableTests.PT2) {
+                    testHeaders.push('<th>PT-2</th>');
+                    marksDataForPDF.availableTests.push('PT-2');
+                }
+                if (availableTests.SA2) {
+                    testHeaders.push('<th>SA-2</th>');
+                    marksDataForPDF.availableTests.push('SA-2');
+                }
+
+                // Prepare table rows
+                const tableRows = [];
+                
+                Object.entries(subjects).forEach(([subject, marks]) => {
+                    // Only include subjects that have at least one mark
+                    if (marks.PT1 !== null || marks.SA1 !== null || marks.PT2 !== null || marks.SA2 !== null) {
+                        let subjectTotal = 0, subjectMax = 0;
+                        
+                        // Determine max marks based on subject type
+                        const isScienceSubject = ['Physics', 'Chemistry', 'Biology', 'Physical_Education'].includes(subject);
+                        
+                        // PT1 marks
+                        if (marks.PT1 !== null) { 
+                            subjectTotal += marks.PT1; 
+                            subjectMax += isScienceSubject ? 30 : 20;
+                        }
+                        
+                        // PT2 marks
+                        if (marks.PT2 !== null) { 
+                            subjectTotal += marks.PT2; 
+                            subjectMax += isScienceSubject ? 30 : 20;
+                        }
+                        
+                        // SA1 marks
+                        if (marks.SA1 !== null) { 
+                            subjectTotal += marks.SA1; 
+                            subjectMax += isScienceSubject ? 70 : 80;
+                        }
+                        
+                        // SA2 marks
+                        if (marks.SA2 !== null) { 
+                            subjectTotal += marks.SA2; 
+                            subjectMax += isScienceSubject ? 70 : 80;
+                        }
+
+                        const subjectPercentage = subjectMax > 0 ? (subjectTotal / subjectMax) * 100 : 0;
+                        let subjectPercentageClass = '';
+                        if (subjectPercentage >= 80) subjectPercentageClass = 'excellent';
+                        else if (subjectPercentage >= 60) subjectPercentageClass = 'good';
+                        else if (subjectPercentage >= 40) subjectPercentageClass = 'average';
+                        else subjectPercentageClass = 'poor';
+
+                        totalMarks += subjectTotal;
+                        totalMaxMarks += subjectMax;
+
+                        // Store data for PDF
+                        marksDataForPDF.subjects.push({
+                            name: subject.replace(/_/g, ' '),
+                            marks: marks,
+                            total: subjectTotal,
+                            max: subjectMax,
+                            percentage: subjectPercentage,
+                            isScienceSubject: isScienceSubject
+                        });
+
+                        // Create HTML row - Show only obtained marks, not "marks/max"
+                        let rowHTML = `<tr><td>${subject.replace(/_/g, ' ')}</td>`;
+                        
+                        // PT1 cell - Show only marks
+                        if (availableTests.PT1) {
+                            const pt1Max = isScienceSubject ? 30 : 20;
+                            const pt1Percentage = marks.PT1 !== null ? (marks.PT1 / pt1Max) * 100 : 0;
+                            let pt1Class = '';
+                            if (pt1Percentage >= 80) pt1Class = 'excellent';
+                            else if (pt1Percentage >= 60) pt1Class = 'good';
+                            else if (pt1Percentage >= 40) pt1Class = 'average';
+                            else pt1Class = 'poor';
+                            rowHTML += `<td class="${pt1Class}">${marks.PT1 !== null ? marks.PT1 : '-'}</td>`;
+                        }
+                        
+                        // SA1 cell - Show only marks
+                        if (availableTests.SA1) {
+                            const sa1Max = isScienceSubject ? 70 : 80;
+                            const sa1Percentage = marks.SA1 !== null ? (marks.SA1 / sa1Max) * 100 : 0;
+                            let sa1Class = '';
+                            if (sa1Percentage >= 80) sa1Class = 'excellent';
+                            else if (sa1Percentage >= 60) sa1Class = 'good';
+                            else if (sa1Percentage >= 40) sa1Class = 'average';
+                            else sa1Class = 'poor';
+                            rowHTML += `<td class="${sa1Class}">${marks.SA1 !== null ? marks.SA1 : '-'}</td>`;
+                        }
+                        
+                        // PT2 cell - Show only marks
+                        if (availableTests.PT2) {
+                            const pt2Max = isScienceSubject ? 30 : 20;
+                            const pt2Percentage = marks.PT2 !== null ? (marks.PT2 / pt2Max) * 100 : 0;
+                            let pt2Class = '';
+                            if (pt2Percentage >= 80) pt2Class = 'excellent';
+                            else if (pt2Percentage >= 60) pt2Class = 'good';
+                            else if (pt2Percentage >= 40) pt2Class = 'average';
+                            else pt2Class = 'poor';
+                            rowHTML += `<td class="${pt2Class}">${marks.PT2 !== null ? marks.PT2 : '-'}</td>`;
+                        }
+                        
+                        // SA2 cell - Show only marks
+                        if (availableTests.SA2) {
+                            const sa2Max = isScienceSubject ? 70 : 80;
+                            const sa2Percentage = marks.SA2 !== null ? (marks.SA2 / sa2Max) * 100 : 0;
+                            let sa2Class = '';
+                            if (sa2Percentage >= 80) sa2Class = 'excellent';
+                            else if (sa2Percentage >= 60) sa2Class = 'good';
+                            else if (sa2Percentage >= 40) sa2Class = 'average';
+                            else sa2Class = 'poor';
+                            
+                            // For 10th and 12th, make SA2 clickable for preboard download
+                            const studentClass = student.Class.toString();
+                            if (studentClass.includes('10') || studentClass.includes('12')) {
+                                rowHTML += `<td><span class="preboard-link" onclick="showPreboardFromResult()">${marks.SA2 !== null ? marks.SA2 : '-'}</span></td>`;
+                            } else {
+                                rowHTML += `<td class="${sa2Class}">${marks.SA2 !== null ? marks.SA2 : '-'}</td>`;
+                            }
+                        }
+                        
+                        // Total column shows "obtained/max"
+                        rowHTML += `<td>${subjectTotal}/${subjectMax}</td><td class="${subjectPercentageClass}">${subjectPercentage.toFixed(2)}%</td></tr>`;
+                        tableRows.push(rowHTML);
+                    }
+                });
+
+                const percent = totalMaxMarks > 0 ? (totalMarks / totalMaxMarks) * 100 : 0;
+                marksDataForPDF.overallPercentage = percent;
+                
+                // Find topper
+                let topper = { percent: 0, name: '', adm: '' };
+                data.forEach(row => {
+                    const rowStatus = (row.Status || '').toString().toLowerCase();
+                    if (rowStatus !== 'publish' || row.Session !== session) return;
+                    
+                    let obt = 0, max = 0;
+                    for (const [key, value] of Object.entries(row)) {
+                        if (key.includes('_PT1') || key.includes('_PT2') || key.includes('_SA1') || key.includes('_SA2')) {
+                            const numericValue = isNaN(parseFloat(value)) ? null : parseFloat(value);
+                            if (numericValue !== null) {
+                                obt += numericValue;
+                                const subject = key.split('_').slice(0, -1).join('_');
+                                const isScienceSubject = ['Physics', 'Chemistry', 'Biology', 'Physical_Education'].includes(subject);
+                                
+                                if (key.includes('_PT1') || key.includes('_PT2')) {
+                                    max += isScienceSubject ? 30 : 20;
+                                } else if (key.includes('_SA1') || key.includes('_SA2')) {
+                                    max += isScienceSubject ? 70 : 80;
+                                }
+                            }
+                        }
+                    }
+                    const p = max > 0 ? (obt / max) * 100 : 0;
+                    if (p > topper.percent) {
+                        topper = {
+                            percent: p,
+                            name: row.Name,
+                            adm: row.Admission_Number
+                        };
+                    }
+                });
+                
+                topperData = topper;
+                marksDataForPDF.topper = topper;
+                
+                // Render result
+                renderResult1to12(student, percent, tableRows, testHeaders, topper, adm);
+            } catch (error) {
+                console.error('Error fetching 1-12 result:', error);
+                throw error;
+            }
+        }
+
+        async function fetchPreboardMarks(adm, session) {
+            try {
+                const res = await fetch(SHEET_URL);
+                const data = await res.json();
+                
+                const student = data.find(row => row.Admission_Number === adm && row.Session === session);
+                
+                if (!student) {
+                    showAlert('Invalid Admission Number or Session.', 'error');
+                    return;
+                }
+                
+                const status = (student.Status || '').toString().toLowerCase();
+                if (status !== 'publish') {
+                    showAlert('Your preboard marks are not yet published.', 'error');
+                    return;
+                }
+                
+                // Check if student is in 10th or 12th class
+                const studentClass = student.Class.toString();
+                if (!studentClass.includes('10') && !studentClass.includes('12')) {
+                    showAlert('Preboard marks are only available for 10th and 12th class students.', 'error');
+                    return;
+                }
+                
+                currentStudentData = student;
+                
+                // Prepare preboard marks data for PDF
+                preboardMarksData = {
+                    studentInfo: {
+                        name: student.Name,
+                        admissionNo: student.Admission_Number,
+                        class: student.Class,
+                        rollNo: student.Roll_Number,
+                        session: student.Session
+                    },
+                    subjects: []
+                };
+                
+                // Collect SA2 marks as preboard marks - Only include if marks > 0
+                let preboardTotal = 0;
+                let preboardMaxTotal = 0;
+                
+                for (const [key, value] of Object.entries(student)) {
+                    if (key.includes('_SA2')) {
+                        const subject = key.split('_').slice(0, -1).join('_');
+                        const marks = isNaN(parseFloat(value)) ? 0 : parseFloat(value);
+                        
+                        // Only include subjects that have marks
+                        if (marks > 0) {
+                            // Determine max marks based on subject type
+                            const isScienceSubject = ['Physics', 'Chemistry', 'Biology', 'Physical_Education'].includes(subject);
+                            const maxMarks = isScienceSubject ? 70 : 80;
+                            
+                            const percentage = maxMarks > 0 ? (marks / maxMarks) * 100 : 0;
+                            
+                            preboardMarksData.subjects.push({
+                                name: subject.replace(/_/g, ' '),
+                                marks: marks,
+                                maxMarks: maxMarks,
+                                percentage: percentage
+                            });
+                            
+                            preboardTotal += marks;
+                            preboardMaxTotal += maxMarks;
+                        }
+                    }
+                }
+                
+                // Check if any preboard marks were found
+                if (preboardMarksData.subjects.length === 0) {
+                    showAlert('No preboard marks found for this student.', 'error');
+                    return;
+                }
+                
+                preboardMarksData.totalMarks = preboardTotal;
+                preboardMarksData.maxMarks = preboardMaxTotal;
+                preboardMarksData.overallPercentage = preboardMaxTotal > 0 ? (preboardTotal / preboardMaxTotal) * 100 : 0;
+                
+                renderPreboardMarks(student);
+            } catch (error) {
+                console.error('Error fetching preboard marks:', error);
+                throw error;
+            }
+        }
+
+        // ===== RENDER FUNCTIONS =====
+        function renderResult1to12(student, percent, tableRows, testHeaders, topper, adm) {
+            document.getElementById('mainPortal').style.display = 'none';
+            document.getElementById('resultScreen1to12').style.display = 'block';
+            
+            const isTopper = student.Admission_Number === topper.adm;
+            const studentClass = student.Class.toString();
+            const isTenthOrTwelfth = studentClass.includes('10') || studentClass.includes('12');
+            
+            // Student photo URL
+            const studentPhotoUrl = `images/${adm}.jpg`;
+            
+            const resultHTML = `
+                <div class="result-header-content">
+                    <img src="${studentPhotoUrl}" 
+                         alt="Student Photo" 
+                         class="result-logo" 
+                         onerror="this.src='https://via.placeholder.com/100x100/1e40af/ffffff?text=Student'">
+                    <h1>Saiema Mansoor Public School</h1>
+                    <h2>Academic Report Card - Session: ${student.Session}</h2>
+                </div>
+                
+                <div class="student-info">
+                    <p><b>Admission No.:</b> ${student.Admission_Number}</p>
+                    <p><b>Name:</b> ${student.Name}</p>
+                    <p><b>Class:</b> ${student.Class}</p>
+                    <p><b>Roll No.:</b> ${student.Roll_Number}</p>
+                </div>
+                
+                <div class="section-title">Subject-wise Marks</div>
+                <div class="table-container">
+                    <table class="marks-table">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                ${testHeaders.join('')}
+                                <th>Total</th>
+                                <th>%</th>
+                            </tr>
+                        </thead>
+                        <tbody>${tableRows.join('')}</tbody>
+                    </table>
+                </div>
+                
+                ${isTenthOrTwelfth ? `
+                    <div class="student-info" style="background: #eff6ff; margin-top: 20px;">
+                        <p><i class="fas fa-info-circle" style="color: #1e40af;"></i> <b>Note for ${student.Class} students:</b> SA-2 marks are treated as Preboard marks. Click on SA-2 marks to view Preboard Result.</p>
+                    </div>
+                ` : ''}
+                
+                <div class="section-title">Overall Result</div>
+                <div class="student-info">
+                    <p><b>Total Marks Obtained:</b> ${marksDataForPDF.subjects.reduce((sum, sub) => sum + sub.total, 0)}</p>
+                    <p><b>Maximum Marks:</b> ${marksDataForPDF.subjects.reduce((sum, sub) => sum + sub.max, 0)}</p>
+                    <p><b>Overall Percentage:</b> <span class="${percent >= 80 ? 'excellent' : percent >= 60 ? 'good' : percent >= 40 ? 'average' : 'poor'}">${percent.toFixed(2)}%</span></p>
+                </div>
+                
+                ${isTopper 
+                    ? `<div class="topper">  
+                        <i class="fas fa-trophy"></i> School Topper with ${percent.toFixed(2)}%  
+                       </div>` 
+                    : `<div class="student-info">
+                          <p><i class="fas fa-crown"></i> <b>School Topper:</b> ${topper.name} (${topper.adm}) - ${topper.percent.toFixed(2)}%</p>
+                          <p><i class="fas fa-user"></i> <b>Your Position:</b> ${getPositionText(percent, topper.percent)}</p>
+                       </div>`
+                }
+                
+                <div class="student-info" style="margin-top: 30px; background: #eff6ff;">
+                    <p><i class="fas fa-info-circle" style="color: #1e40af;"></i> <b>Note:</b> Physics, Chemistry, Biology and Physical Education subjects have updated marks distribution:</p>
+                    <p style="text-align: center; width: 100%; margin-top: 10px;">
+                        PT-1/PT-2: 30 marks &nbsp;&nbsp;|&nbsp;&nbsp; 
+                        SA-1/SA-2: 70 marks
+                    </p>
+                </div>
+            `;
+            
+            document.getElementById('resultArea1to12').innerHTML = resultHTML;
+        }
+
+        function renderPreboardMarks(student) {
+            document.getElementById('mainPortal').style.display = 'none';
+            document.getElementById('preboardScreen').style.display = 'block';
+            
+            // Student photo URL
+            const studentPhotoUrl = `images/${student.Admission_Number}.jpg`;
+            
+            // Prepare preboard table rows - Only include subjects with marks
+            let preboardTableRows = '';
+            let totalMarks = 0;
+            let totalMaxMarks = 0;
+            
+            preboardMarksData.subjects.forEach(subject => {
+                const percentage = subject.percentage;
+                let percentageClass = '';
+                if (percentage >= 80) percentageClass = 'excellent';
+                else if (percentage >= 60) percentageClass = 'good';
+                else if (percentage >= 40) percentageClass = 'average';
+                else percentageClass = 'poor';
+                
+                preboardTableRows += `
+                    <tr>
+                        <td>${subject.name}</td>
+                        <td>${subject.marks}</td>
+                        <td>${subject.maxMarks}</td>
+                        <td class="${percentageClass}">${percentage.toFixed(2)}%</td>
+                    </tr>
+                `;
+                
+                totalMarks += subject.marks;
+                totalMaxMarks += subject.maxMarks;
+            });
+            
+            const overallPercentage = totalMaxMarks > 0 ? (totalMarks / totalMaxMarks) * 100 : 0;
+            let overallClass = '';
+            if (overallPercentage >= 80) overallClass = 'excellent';
+            else if (overallPercentage >= 60) overallClass = 'good';
+            else if (overallPercentage >= 40) overallClass = 'average';
+            else overallClass = 'poor';
+            
+            const preboardHTML = `
+                <div class="result-header-content">
+                    <img src="${studentPhotoUrl}" 
+                         alt="Student Photo" 
+                         class="result-logo" 
+                         onerror="this.src='https://via.placeholder.com/100x100/1e40af/ffffff?text=Student'">
+                    <h1>Saiema Mansoor Public School</h1>
+                    <h2>Preboard Examination - Session: ${student.Session}</h2>
+                </div>
+                
+                <div class="student-info">
+                    <p><b>Admission No.:</b> ${student.Admission_Number}</p>
+                    <p><b>Name:</b> ${student.Name}</p>
+                    <p><b>Class:</b> ${student.Class}</p>
+                    <p><b>Roll No.:</b> ${student.Roll_Number}</p>
+                </div>
+                
+                <div class="section-title">Preboard Marks</div>
+                ${preboardMarksData.subjects.length > 0 ? `
+                    <div class="table-container">
+                        <table class="marks-table">
+                            <thead>
+                                <tr>
+                                    <th>Subject</th>
+                                    <th>Marks Obtained</th>
+                                    <th>Maximum Marks</th>
+                                    <th>Percentage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${preboardTableRows}
+                                <tr style="background: #f0f9ff; font-weight: 600;">
+                                    <td><b>TOTAL</b></td>
+                                    <td><b>${totalMarks}</b></td>
+                                    <td><b>${totalMaxMarks}</b></td>
+                                    <td class="${overallClass}"><b>${overallPercentage.toFixed(2)}%</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="section-title">Preboard Result Summary</div>
+                    <div class="student-info">
+                        <p><b>Total Marks Obtained:</b> ${totalMarks}</p>
+                        <p><b>Maximum Marks:</b> ${totalMaxMarks}</p>
+                        <p><b>Overall Percentage:</b> <span class="${overallClass}">${overallPercentage.toFixed(2)}%</span></p>
+                    </div>
+                    
+                    <div class="student-info" style="margin-top: 30px; background: #eff6ff;">
+                        <p><i class="fas fa-info-circle" style="color: #1e40af;"></i> <b>Note:</b> English and Mathematics subjects are out of 80 marks. All other subjects are out of 70 marks.</p>
+                    </div>
+                ` : `
+                    <div class="student-info" style="text-align: center;">
+                        <p><i class="fas fa-info-circle" style="color: #1e40af; font-size: 2rem;"></i></p>
+                        <p><b>No preboard marks found for this student.</b></p>
+                        <p>Preboard marks may not be published yet or the student may not have any preboard marks recorded.</p>
+                    </div>
+                `}
+            `;
+            
+            document.getElementById('preboardArea').innerHTML = preboardHTML;
+        }
+
+        // ===== PDF DOWNLOAD FUNCTIONS =====
+        function downloadResultPDF() {
+            console.log('Download Result PDF called');
+            console.log('marksDataForPDF:', marksDataForPDF);
+            
+            if (!marksDataForPDF || !marksDataForPDF.subjects || marksDataForPDF.subjects.length === 0) {
+                showAlert('No student data available to download. Please fetch your result first.', 'error');
+                return;
+            }
+            
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                // Set document properties
+                doc.setProperties({
+                    title: `Result - ${marksDataForPDF.studentInfo.name}`,
+                    subject: 'Academic Report Card',
+                    author: 'Saiema Mansoor Public School',
+                    keywords: 'result, marks, report card',
+                    creator: 'SMPS Student Portal'
+                });
+                
+                // Add header
+                doc.setFontSize(20);
+                doc.setFont('helvetica', 'bold');
+                doc.text('Saiema Mansoor Public School', 105, 20, { align: 'center' });
+                
+                doc.setFontSize(16);
+                doc.text('Academic Report Card', 105, 30, { align: 'center' });
+                
+                doc.setFontSize(12);
+                doc.setFont('helvetica', 'normal');
+                doc.text(`Session: ${marksDataForPDF.studentInfo.session}`, 105, 38, { align: 'center' });
+                
+                // Student Information
+                doc.setFontSize(11);
+                doc.text(`Admission No.: ${marksDataForPDF.studentInfo.admissionNo}`, 20, 50);
+                doc.text(`Name: ${marksDataForPDF.studentInfo.name}`, 20, 57);
+                doc.text(`Class: ${marksDataForPDF.studentInfo.class}`, 20, 64);
+                
+                doc.text(`Roll No.: ${marksDataForPDF.studentInfo.rollNo}`, 120, 50);
+                doc.text(`Date: ${new Date().toLocaleDateString()}`, 120, 57);
+                
+                // Marks Table
+                let y = 75;
+                
+                // Table header
+                const tableHeaders = ['Subject'];
+                marksDataForPDF.availableTests.forEach(test => {
+                    tableHeaders.push(test);
+                });
+                tableHeaders.push('Total', 'Percentage');
+                
+                const tableData = [];
+                
+                // Prepare table data - Show only obtained marks in test columns
+                marksDataForPDF.subjects.forEach(subject => {
+                    const row = [subject.name];
+                    
+                    marksDataForPDF.availableTests.forEach(test => {
+                        const testCode = test.replace('-', '');
+                        const mark = subject.marks[testCode] !== null ? subject.marks[testCode] : '-';
+                        // Show only obtained marks, not "marks/max"
+                        row.push(mark !== '-' ? mark.toString() : '-');
+                    });
+                    
+                    // Total column shows "obtained/max"
+                    row.push(`${subject.total}/${subject.max}`);
+                    row.push(`${subject.percentage.toFixed(2)}%`);
+                    tableData.push(row);
+                });
+                
+                // Add total row
+                const totalMarks = marksDataForPDF.subjects.reduce((sum, sub) => sum + sub.total, 0);
+                const totalMax = marksDataForPDF.subjects.reduce((sum, sub) => sum + sub.max, 0);
+                const totalPercentage = totalMax > 0 ? (totalMarks / totalMax) * 100 : 0;
+                
+                // Create empty cells for test columns
+                const emptyTestCells = marksDataForPDF.availableTests.map(() => '');
+                tableData.push(['TOTAL', ...emptyTestCells, `${totalMarks}/${totalMax}`, `${totalPercentage.toFixed(2)}%`]);
+                
+                // Create the table
+                doc.autoTable({
+                    startY: y,
+                    head: [tableHeaders],
+                    body: tableData,
+                    theme: 'grid',
+                    headStyles: { 
+                        fillColor: [30, 64, 175],
+                        textColor: 255,
+                        fontStyle: 'bold',
+                        fontSize: 10
+                    },
+                    bodyStyles: {
+                        fontSize: 9,
+                        halign: 'center'
+                    },
+                    margin: { left: 20, right: 20 },
+                    styles: {
+                        fontSize: 9,
+                        cellPadding: 4,
+                        overflow: 'linebreak'
+                    }
+                });
+                
+                // Overall Result
+                y = doc.lastAutoTable.finalY + 15;
+                
+                doc.setFontSize(12);
+                doc.setFont('helvetica', 'bold');
+                doc.text('Overall Result', 20, y);
+                
+                doc.setFontSize(10);
+                doc.setFont('helvetica', 'normal');
+                
+                doc.text(`Total Marks Obtained: ${totalMarks}`, 25, y + 10);
+                doc.text(`Maximum Marks: ${totalMax}`, 25, y + 17);
+                doc.setFont('helvetica', 'bold');
+                doc.text(`Overall Percentage: ${totalPercentage.toFixed(2)}%`, 25, y + 24);
+                
+                // Topper Information
+                y += 35;
+                
+                if (marksDataForPDF.topper) {
+                    doc.setFontSize(10);
+                    doc.setFont('helvetica', 'normal');
+                    
+                    doc.text(`School Topper: ${marksDataForPDF.topper.name} (${marksDataForPDF.topper.adm})`, 20, y);
+                    doc.text(`Topper Percentage: ${marksDataForPDF.topper.percent.toFixed(2)}%`, 20, y + 7);
+                    
+                    const positionText = getPositionText(totalPercentage, marksDataForPDF.topper.percent);
+                    doc.text(`Your Position: ${positionText}`, 20, y + 14);
+                }
+                
+                // Marks Distribution Note
+                y += 25;
+                doc.setFontSize(9);
+                doc.setTextColor(128, 128, 128);
+                doc.text('Note: Physics, Chemistry, Biology and Physical Education subjects have updated marks distribution:', 20, y);
+                doc.text('PT-1/PT-2: 30 marks each, SA-1/SA-2: 70 marks each', 20, y + 5);
+                
+                // Footer
+                const pageHeight = doc.internal.pageSize.height;
+                
+                doc.setFontSize(8);
+                doc.setTextColor(128, 128, 128);
+                doc.text('Generated by SMPS Student Portal', 105, pageHeight - 15, { align: 'center' });
+                doc.text(`Generated on: ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`, 105, pageHeight - 10, { align: 'center' });
+                
+                // Save PDF
+                const fileName = `SMPS_Result_${marksDataForPDF.studentInfo.admissionNo}_${marksDataForPDF.studentInfo.name.replace(/\s+/g, '_')}.pdf`;
+                console.log('Saving PDF:', fileName);
+                doc.save(fileName);
+                
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                showAlert('Error generating PDF. Please try again.', 'error');
+            }
+        }
+
+        function downloadPreboardPDF() {
+            console.log('Download Preboard PDF called');
+            console.log('preboardMarksData:', preboardMarksData);
+            
+            if (!preboardMarksData || !preboardMarksData.subjects || preboardMarksData.subjects.length === 0) {
+                showAlert('No preboard data available to download. Please fetch your preboard marks first.', 'error');
+                return;
+            }
+            
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                // Set document properties
+                doc.setProperties({
+                    title: `Preboard Result - ${preboardMarksData.studentInfo.name}`,
+                    subject: 'Preboard Examination Result',
+                    author: 'Saiema Mansoor Public School',
+                    keywords: 'preboard, examination, result',
+                    creator: 'SMPS Student Portal'
+                });
+                
+                // Add header
+                doc.setFontSize(20);
+                doc.setFont('helvetica', 'bold');
+                doc.text('Saiema Mansoor Public School', 105, 20, { align: 'center' });
+                
+                doc.setFontSize(16);
+                doc.text('Preboard Examination Result', 105, 30, { align: 'center' });
+                
+                doc.setFontSize(12);
+                doc.setFont('helvetica', 'normal');
+                doc.text(`Session: ${preboardMarksData.studentInfo.session}`, 105, 38, { align: 'center' });
+                
+                // Student Information
+                doc.setFontSize(11);
+                doc.text(`Admission No.: ${preboardMarksData.studentInfo.admissionNo}`, 20, 50);
+                doc.text(`Name: ${preboardMarksData.studentInfo.name}`, 20, 57);
+                doc.text(`Class: ${preboardMarksData.studentInfo.class}`, 20, 64);
+                
+                doc.text(`Roll No.: ${preboardMarksData.studentInfo.rollNo}`, 120, 50);
+                doc.text(`Date: ${new Date().toLocaleDateString()}`, 120, 57);
+                
+                // Marks Table
+                let y = 75;
+                
+                // Table header
+                const tableHeaders = ['Subject', 'Marks Obtained', 'Max Marks', 'Percentage'];
+                
+                const tableData = preboardMarksData.subjects.map(subject => {
+                    return [
+                        subject.name,
+                        `${subject.marks}`,
+                        `${subject.maxMarks}`,
+                        `${subject.percentage.toFixed(2)}%`
+                    ];
+                });
+                
+                // Add total row
+                tableData.push([
+                    'TOTAL',
+                    `${preboardMarksData.totalMarks}`,
+                    `${preboardMarksData.maxMarks}`,
+                    `${preboardMarksData.overallPercentage.toFixed(2)}%`
+                ]);
+                
+                // Create the table
+                doc.autoTable({
+                    startY: y,
+                    head: [tableHeaders],
+                    body: tableData,
+                    theme: 'grid',
+                    headStyles: { 
+                        fillColor: [30, 64, 175],
+                        textColor: 255,
+                        fontStyle: 'bold',
+                        fontSize: 10
+                    },
+                    bodyStyles: {
+                        fontSize: 9,
+                        halign: 'center'
+                    },
+                    margin: { left: 20, right: 20 },
+                    styles: {
+                        fontSize: 9,
+                        cellPadding: 4,
+                        overflow: 'linebreak'
+                    }
+                });
+                
+                // Overall Result
+                y = doc.lastAutoTable.finalY + 15;
+                
+                doc.setFontSize(12);
+                doc.setFont('helvetica', 'bold');
+                doc.text('Preboard Result Summary', 20, y);
+                
+                doc.setFontSize(10);
+                doc.setFont('helvetica', 'normal');
+                
+                doc.text(`Total Marks Obtained: ${preboardMarksData.totalMarks}`, 25, y + 10);
+                doc.text(`Maximum Marks: ${preboardMarksData.maxMarks}`, 25, y + 17);
+                doc.setFont('helvetica', 'bold');
+                doc.text(`Overall Percentage: ${preboardMarksData.overallPercentage.toFixed(2)}%`, 25, y + 24);
+                
+                // Footer
+                const pageHeight = doc.internal.pageSize.height;
+                
+                doc.setFontSize(8);
+                doc.text('Generated by SMPS Student Portal', 105, pageHeight - 15, { align: 'center' });
+                doc.text(`Generated on: ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`, 105, pageHeight - 10, { align: 'center' });
+                
+                // Save PDF
+                const fileName = `SMPS_Preboard_${preboardMarksData.studentInfo.admissionNo}_${preboardMarksData.studentInfo.name.replace(/\s+/g, '_')}.pdf`;
+                console.log('Saving Preboard PDF:', fileName);
+                doc.save(fileName);
+                
+            } catch (error) {
+                console.error('Error generating Preboard PDF:', error);
+                showAlert('Error generating Preboard PDF. Please try again.', 'error');
+            }
+        }
+
+        // ===== HELPER FUNCTIONS =====
+        function showPreboardFromResult() {
+            if (currentStudentData) {
+                const session = document.getElementById('sessionInput').value.trim();
+                fetchPreboardMarks(currentStudentData.Admission_Number, session);
+            }
+        }
+
+        function getPositionText(studentPercent, topperPercent) {
+            const difference = topperPercent - studentPercent;
+            
+            if (difference === 0) {
+                return "1st (Topper)";
+            } else if (difference <= 5) {
+                return "Top 5";
+            } else if (difference <= 10) {
+                return "Top 10";
+            } else if (difference <= 20) {
+                return "Above Average";
+            } else {
+                return "Needs Improvement";
+            }
+        }
+
+        function showAlert(message, type) {
+            // Hide loading spinner if shown
+            document.getElementById('loading').style.display = 'none';
+            
+            // Remove existing alerts
+            const existingAlerts = document.querySelectorAll('.alert');
+            existingAlerts.forEach(alert => alert.remove());
+            
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.innerHTML = `
+                <i class="fas fa-${type === 'error' ? 'exclamation-triangle' : 'exclamation-circle'}"></i>
+                ${message}
+            `;
+            
+            document.querySelector('.portal-card-inner').prepend(alert);
+            
+            // Auto remove after 3 seconds
+            setTimeout(() => {
+                alert.style.opacity = '0';
+                setTimeout(() => alert.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

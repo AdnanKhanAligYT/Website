@@ -1,0 +1,36 @@
+{
+    "id": "9236f79a-002b-43b3-8281-6692eb618c06",
+    "subjectId": "b07f5264-5928-4d06-8577-46ed17bd59f5",
+    "name": "Sentences",
+    "description": "1. SIMPLE SENTENCE\n⇒ S + V\n⇒ I (Independent)\nE.g. : I have a watch.\n* Sentence - 1\n  Clause - 1\n→ Independent Clause\n→ Main Clause\n→ Principal Clause\n━━━━━━━━━━━━━━━━━━━━\n2. COMPOUND SENTENCE\n⇒ I + I\n⇒ Independent + Independent\nE.g. : I went to school and my brother stayed at home.\n* Sentence - 1\n  Clause - 2\n1st Clause → Independent Clause\n2nd Clause → Independent Clause\n→ Joined by Coordinating Conjunction\n(and, but, or, so, for, yet, nor)\n→ Both clauses are Main / Principal Clauses\n━━━━━━━━━━━━━━━━━━━━\n3. COMPLEX SENTENCE\n⇒ I + D\n⇒ Independent + Dependent\nE.g. : I know that he is honest.\n* Sentence - 1\n  Clause - 2\n1st Clause → Independent Clause\n2nd Clause → Dependent Clause\n→ One Main / Principal Clause\n→ One Subordinate Clause\nSubordinate Clauses :\n1. Noun Clause\n2. Adjective Clause\n3. Adverb Clause\n━━━━━━━━━━━━━━━━━━━━\n4. COMPOUND-COMPLEX SENTENCE\n⇒ I + I + D\n⇒ Independent + Independent + Dependent\nE.g. : I went to school and my friend stayed home because he was ill.\n* Sentence - 1\n  Clause - 3\n1st Clause → Independent Clause\n2nd Clause → Independent Clause\n3rd Clause → Dependent Clause\n→ Two Main / Principal Clauses\n→ One Subordinate Clause",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "createdAt": "2026-06-08 18:11",
+    "updatedAt": "2026-06-22 04:25:00",
+    "revisionHistory": [
+        {
+            "id": "8839af51-3124-4b2d-b56c-a97d7b2e7a04",
+            "date": "2026-06-15",
+            "time": "2026-06-15 10:06",
+            "note": "Auto: 7 din baad revision scheduled",
+            "type": "auto-revision"
+        },
+        {
+            "id": "0af3ad95-7f95-4bcf-b49c-f1e8089bc5bd",
+            "date": "2026-06-17",
+            "time": "2026-06-17 08:23",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "45ea888e-a4c1-44c1-99d6-391259840162",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "links": [],
+    "pdfs": []
+}

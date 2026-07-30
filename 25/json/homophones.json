@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Homophones",
+    "icon": "fas fa-volume-up",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> Homophones are words that sound the same when spoken but have different meanings and often different spellings.<br><strong>Hindi:</strong> Samadhvani shabd (समध्वनीय शब्द) ve shabd hote hain jinki dhvani ek jaise hoti hai lekin arth aur akshar alag hote hain.</p><p>They can create confusion in writing or understanding, so context is important.<br>Yeh likhne aur samajhne mein bhram paida kar sakte hain, isliye sandarbh par dhyan dena zaruri hai.</p><div class='popup-example'><strong>Example:</strong> 'Two', 'Too', and 'To' sound alike.<br><strong>Hindi:</strong> 'टू', 'टू', aur 'टू' ek jaise sunai dete hain.</div>"
+  },
+  {
+    "title": "Key Characteristics",
+    "icon": "fas fa-lightbulb",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> Homophones share pronunciation but differ in spelling and meaning.<br><strong>Hindi:</strong> Homophones ki uccharan ek samaan hoti hai par lekhan aur arth alag hote hain.</p><ul><li>Same sound</li><li>Different meanings</li><li>Different spellings (in most cases)</li><li>Context decides meaning</li></ul><div class='popup-example'><strong>Example:</strong> 'Right' (correct) and 'Write' (to form letters).<br><strong>Hindi:</strong> 'राइट' (सही) aur 'राइट' (लिखना).</div>"
+  },
+  {
+    "title": "Common English Homophones",
+    "icon": "fas fa-book-open",
+    "content": "<h3>Examples</h3><ul><li><strong>See / Sea:</strong> Look / Large water body</li><li><strong>Buy / By:</strong> Purchase / Near or through</li><li><strong>Flour / Flower:</strong> Powder / Bloom</li><li><strong>Mail / Male:</strong> Post / Gender</li><li><strong>Sun / Son:</strong> Star / Male child</li><li><strong>One / Won:</strong> Number / Past of win</li><li><strong>Peace / Piece:</strong> Calm / A part</li><li><strong>Hour / Our:</strong> 60 minutes / Belonging to us</li><li><strong>Knight / Night:</strong> Warrior / Dark period</li><li><strong>Weak / Week:</strong> Not strong / Seven days</li></ul><div class='popup-example'><strong>Example:</strong> I saw the <strong>sea</strong> and could <strong>see</strong> the waves.<br><strong>Hindi:</strong> Main ne <strong>samundar</strong> dekha aur main <strong>dekh sakta tha</strong> uski laharein.</div>"
+  },
+  {
+    "title": "Common Hindi Homophones",
+    "icon": "fas fa-language",
+    "content": "<h3>Examples</h3><ul><li><strong>कला (Kala)</strong> – Art<br><strong>काला (Kala)</strong> – Black</li><li><strong>फल (Phal)</strong> – Fruit<br><strong>फाल (Phaal)</strong> – Slice</li><li><strong>बात (Baat)</strong> – Talk<br><strong>बाट (Baat)</strong> – Path</li><li><strong>कर (Kar)</strong> – Tax<br><strong>कर (Kar)</strong> – Do</li><li><strong>राज (Raaj)</strong> – Kingdom<br><strong>राज़ (Raaz)</strong> – Secret</li></ul><div class='popup-example'><strong>Example:</strong> 'कला' aur 'काला' ek jaise sunai dete hain par arth alag hain.<br><strong>English:</strong> 'Kala' (art) and 'Kala' (black) are homophones.</div>"
+  },
+  {
+    "title": "Importance of Homophones",
+    "icon": "fas fa-graduation-cap",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Understanding homophones helps improve spelling, pronunciation, and comprehension in reading and writing.<br><strong>Hindi:</strong> Homophones ko samajhne se spelling, ucharan, aur pathan likhan ka gyaan sudharta hai.</p><p>They often appear in puns, jokes, and poetic expressions.<br>Yeh akshar vinod, mazaak, aur kavita mein prayog kiye jaate hain.</p>"
+  },
+  {
+    "title": "Common Challenges",
+    "icon": "fas fa-exclamation-triangle",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> Learners may confuse homophones because they sound identical but differ in function and meaning.<br><strong>Hindi:</strong> Seekhne waale aksar homophones ko ghumraha kar lete hain kyunki unka ucharan ek jaise hota hai par arth alag.</p><div class='popup-example'><strong>Example:</strong> 'Their' (belonging) and 'There' (place).<br><strong>Hindi:</strong> 'Their' ka arth hai kisi ka hona, jabki 'There' sthal batata hai.</div>"
+  },
+  {
+    "title": "How to Master Homophones",
+    "icon": "fas fa-lightbulb",
+    "content": "<h3>Tips</h3><ul><li><strong>Use Context:</strong> Understand meaning through surrounding words.</li><li><strong>Practice Writing:</strong> Write sentences with pairs of homophones.</li><li><strong>Listen Carefully:</strong> Sound distinction helps in comprehension.</li><li><strong>Visual Memory:</strong> Link spellings with images or meanings.</li></ul><div class='popup-example'><strong>Example:</strong> Practice with pairs like 'no / know', 'two / too'.</div>"
+  }
+]

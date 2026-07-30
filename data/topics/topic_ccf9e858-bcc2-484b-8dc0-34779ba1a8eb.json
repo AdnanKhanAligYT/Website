@@ -1,0 +1,36 @@
+{
+    "id": "ccf9e858-bcc2-484b-8dc0-34779ba1a8eb",
+    "subjectId": "38fe1eb2-f38f-4dc6-9e65-8711d6af8f11",
+    "name": "होंठों की स्थिति के आधार पर स्वरों का वर्गीकरण",
+    "description": "1. वृत्तमुखी स्वर – उ, ऊ, ओ, औ\n   (उच्चारण में होंठ गोल हो जाते हैं)\n2. अवृत्तमुखी स्वर – अ, आ, इ, ई, ए, ऐ, ऋ\n   (उच्चारण में होंठ गोल नहीं होते)",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "createdAt": "2026-06-08 09:41",
+    "updatedAt": "2026-06-22 04:25:00",
+    "revisionHistory": [
+        {
+            "id": "1ba9f39d-e24d-4ae3-9016-2b475d124533",
+            "date": "2026-06-15",
+            "time": "2026-06-15 10:07",
+            "note": "Auto: 7 din baad revision scheduled",
+            "type": "auto-revision"
+        },
+        {
+            "id": "3285db85-45c2-4569-a968-07ad254c12f4",
+            "date": "2026-06-17",
+            "time": "2026-06-17 08:38",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "c7d1da20-7a6a-433c-b2f2-6d31a5990026",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "links": [],
+    "pdfs": []
+}

@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grammar & Speaking Practice</title>
+    <link rel="stylesheet" href="css/class.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Color scheme for headings */
+        :root {
+            --primary-color: #4361ee;
+            --secondary-color: #3a0ca3;
+            --accent-1: #f72585;
+            --accent-2: #4cc9f0;
+            --accent-3: #7209b7;
+            --accent-4: #4895ef;
+            --accent-5: #560bad;
+            --success-color: #4caf50;
+            --warning-color: #ff9800;
+            --info-color: #2196f3;
+            --dark-color: #333;
+            --light-color: #f8f9fa;
+        }
+        
+        /* Color classes for headings */
+        .heading-primary {
+            color: var(--primary-color);
+            border-left: 4px solid var(--primary-color);
+            padding-left: 10px;
+        }
+        
+        .heading-secondary {
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 5px;
+        }
+        
+        .heading-accent-1 {
+            color: var(--accent-1);
+            background: linear-gradient(to right, var(--accent-1), transparent);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        .heading-accent-2 {
+            color: var(--accent-2);
+            border: 1px solid var(--accent-2);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        .heading-accent-3 {
+            color: var(--accent-3);
+            border-bottom: 2px dashed var(--accent-3);
+            padding-bottom: 5px;
+        }
+        
+        .heading-accent-4 {
+            color: var(--accent-4);
+            background-color: rgba(72, 149, 239, 0.1);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        .heading-accent-5 {
+            color: var(--accent-5);
+            border-left: 4px solid var(--accent-5);
+            padding-left: 10px;
+        }
+        
+        .heading-success {
+            color: var(--success-color);
+            border-bottom: 2px solid var(--success-color);
+            padding-bottom: 5px;
+        }
+        
+        .heading-warning {
+            color: var(--warning-color);
+            background-color: rgba(255, 152, 0, 0.1);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        .heading-info {
+            color: var(--info-color);
+            border: 1px dashed var(--info-color);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+        
+        .heading-dark {
+            color: var(--dark-color);
+            border-bottom: 2px solid var(--dark-color);
+            padding-bottom: 5px;
+        }
+        
+        /* Subheading styles */
+        .subheading-primary {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .subheading-secondary {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+        
+        .subheading-accent-1 {
+            color: var(--accent-1);
+            font-weight: 600;
+        }
+        
+        .subheading-accent-2 {
+            color: var(--accent-2);
+            font-weight: 600;
+        }
+        
+        .subheading-accent-3 {
+            color: var(--accent-3);
+            font-weight: 600;
+        }
+        
+        .subheading-accent-4 {
+            color: var(--accent-4);
+            font-weight: 600;
+        }
+        
+        .subheading-accent-5 {
+            color: var(--accent-5);
+            font-weight: 600;
+        }
+        
+        .subheading-success {
+            color: var(--success-color);
+            font-weight: 600;
+        }
+        
+        .subheading-warning {
+            color: var(--warning-color);
+            font-weight: 600;
+        }
+        
+        .subheading-info {
+            color: var(--info-color);
+            font-weight: 600;
+        }
+        
+        .subheading-dark {
+            color: var(--dark-color);
+            font-weight: 600;
+        }
+        
+        /* Popup content styling */
+        .section-card {
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(26, 26, 46, 0.7);
+            border-radius: 16px;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section-card h2 {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-content {
+            line-height: 1.6;
+        }
+        
+        .section-content h3 {
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+        
+        .section-content ul, .section-content ol {
+            padding-left: 20px;
+            margin-bottom: 15px;
+        }
+        
+        .section-content li {
+            margin-bottom: 8px;
+        }
+        
+        .section-content table {
+            width: 100%;
+            margin: 15px 0;
+            border-collapse: collapse;
+        }
+        
+        .section-content table th, .section-content table td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid rgba(139, 92, 246, 0.2);
+        }
+        
+        .section-content table th {
+            background: rgba(139, 92, 246, 0.2);
+            color: var(--primary-light);
+        }
+        
+        .section-content table tr:hover {
+            background: rgba(139, 92, 246, 0.1);
+        }
+        
+        /* Popup example styling */
+        .popup-example {
+            background: rgba(139, 92, 246, 0.15);
+            border-left: 4px solid var(--primary);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        
+        .popup-answer {
+            background: rgba(16, 185, 129, 0.15);
+            border-left: 4px solid var(--success);
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+        }
+        
+        /* Conversation specific styles */
+        .conversation-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .conversation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(139, 92, 246, 0.2);
+        }
+        
+        .conversation-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--dark-border);
+        }
+        
+        .conversation-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary-light);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .conversation-meta {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .conversation-date {
+            background: rgba(6, 182, 212, 0.2);
+            color: var(--secondary);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(6, 182, 212, 0.3);
+        }
+        
+        .conversation-language {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+        
+        .conversation-status {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .conversation-status.publish {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+            border: 1px solid var(--success);
+        }
+        
+        .conversation-status.draft {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+            border: 1px solid var(--warning);
+        }
+        
+        .conversation-body {
+            margin-bottom: 15px;
+        }
+        
+        .conversation-dialogue {
+            background: rgba(139, 92, 246, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-left: 4px solid var(--primary);
+        }
+        
+        .dialogue-line {
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .dialogue-line:last-child {
+            margin-bottom: 0;
+        }
+        
+        .dialogue-speaker {
+            font-weight: 600;
+            min-width: 120px;
+            color: var(--primary-light);
+        }
+        
+        .dialogue-text {
+            flex: 1;
+        }
+        
+        .dialogue-translation {
+            font-style: italic;
+            color: var(--light-muted);
+            margin-top: 4px;
+            padding-left: 10px;
+            border-left: 2px solid var(--secondary);
+        }
+        
+        .conversation-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid var(--dark-border);
+        }
+        
+        .conversation-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .conversation-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .conversation-btn.primary {
+            background: var(--gradient-primary);
+            color: white;
+        }
+        
+        .conversation-btn.secondary {
+            background: rgba(139, 92, 246, 0.15);
+            color: var(--light);
+            border: 1px solid var(--card-border);
+        }
+        
+        .conversation-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.3);
+        }
+        
+        /* Conversation filters */
+        .conversation-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .filter-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: var(--primary-light);
+        }
+        
+        .filter-select {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            background: rgba(26, 26, 46, 0.8);
+            color: var(--light);
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.2);
+        }
+        
+        /* Search box */
+        .search-container {
+            position: relative;
+            flex: 2;
+            min-width: 300px;
+        }
+        
+        .search-box {
+            display: flex;
+            background: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--card-border);
+            transition: all 0.3s ease;
+        }
+        
+        .search-box:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.2);
+        }
+        
+        .search-box input {
+            flex: 1;
+            border: none;
+            padding: 12px 15px;
+            font-size: 1rem;
+            outline: none;
+            background: transparent;
+            color: var(--light);
+        }
+        
+        .search-box button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .search-box button:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* No results message */
+        .no-conversations {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--light-muted);
+            font-size: 1.1rem;
+            border: 1px dashed var(--warning);
+            border-radius: 12px;
+            margin: 20px 0;
+            background: rgba(245, 158, 11, 0.1);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .conversation-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .conversation-meta {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .conversation-filters {
+                flex-direction: column;
+            }
+            
+            .filter-group, .search-container {
+                min-width: 100%;
+            }
+            
+            .conversation-footer {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+            
+            .conversation-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <img src="images/smps_logo.jpg" alt="School Logo" class="logo" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iNDAiIGN5PSI0MCIgcj0iNDAiIGZpbGw9IiM0MzYxZWUiLz4KPHBhdGggZD0iTTQwIDQ0QzQ0LjQxODMgNDQgNDggNDAuNDE4MyA0OCAzNkM0OCAzMS41ODE3IDQ0LjQxODMgMjggNDAgMjhDMzUuNTgxNyAyOCAzMiAzMS41ODE3IDMyIDM2QzMyIDQwLjQxODMgMzUuNTgxNyA0NCA0MCA0NFoiIGZpbGw9IiNmOGZhZmMiLz4KPHBhdGggZD0iTTUyIDU2QzUyIDUxLjU4MTcgNDguNDE4MyA0OCA0NCA0OEgzNkMzMS41ODE3IDQ4IDI4IDUxLjU4MTcgMjggNTZWNjBINTJWNjBINTJWNjBINTJWNTVaIiBmaWxsPSIjZjhmYWZjIi8+Cjx0ZXh0IHg9IjQwIiB5PSI3MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2Y4ZmFmYyIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwIj5TTVBTPC90ZXh0Pgo8L3N2Zz4K'">
+            </div>
+            
+            <h1>Grammar & Speaking Practice</h1>
+            <p>Master English through interactive learning</p>
+            
+            <div class="teacher-info">
+                <strong><i class="fas fa-user-tie"></i> Your Grammar Guide: <span id="teacherName">Adnan Sir</span></strong>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-book-open"></i> Core Grammar Topics</h2>
+            <div class="buttons-grid">
+                <button class="dashboard-btn" onclick="showGrammarTopic('parts-of-speech')">
+                    <i class="fas fa-pen-nib"></i>
+                    <span>Parts of Speech</span>
+                </button>
+                <button class="dashboard-btn" onclick="showGrammarTopic('tenses')">
+                    <i class="fas fa-clock"></i>
+                    <span>Tenses</span>
+                </button>
+                <button class="dashboard-btn" onclick="showGrammarTopic('sentence-types')">
+                    <i class="fas fa-stream"></i>
+                    <span>Sentence Types</span>
+                </button>
+                <button class="dashboard-btn" onclick="showGrammarTopic('modals')">
+                    <i class="fas fa-sliders-h"></i>
+                    <span>Modals</span>
+                </button>
+                <button class="dashboard-btn" onclick="showGrammarTopic('voice')">
+                    <i class="fas fa-bullhorn"></i>
+                    <span>Voice</span>
+                </button>
+                <button class="dashboard-btn" onclick="showGrammarTopic('speech')">
+                    <i class="fas fa-comments"></i>
+                    <span>Reported Speech</span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-language"></i> Advanced Grammar</h2>
+            <div class="buttons-grid">
+                <button class="dashboard-btn" onclick="showGrammarTopic('conditionals')">
+                    <i class="fas fa-code-branch"></i>
+                    <span>Conditionals</span>
+                </button>
+                <button class="dashboard-btn" onclick="showGrammarTopic('gerunds-infinitives')">
+                    <i class="fas fa-code"></i>
+                    <span>Gerunds & Infinitives</span>
+                </button>
+                <button class="dashboard-btn" onclick="showGrammarTopic('subject-verb-agreement')">
+                    <i class="fas fa-user-check"></i>
+                    <span>Subject-Verb Agreement</span>
+                </button>
+                <button class="dashboard-btn" onclick="showGrammarTopic('determiners')">
+                    <i class="fas fa-asterisk"></i>
+                    <span>Determiners</span>
+                </button>
+                <button class="dashboard-btn" onclick="showGrammarTopic('articles')">
+                    <i class="fas fa-book"></i>
+                    <span>Articles</span>
+                </button>
+                <button class="dashboard-btn" onclick="showGrammarTopic('prepositions')">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Prepositions</span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-comments"></i> Speaking & Vocabulary</h2>
+            <div class="buttons-grid">
+                <button class="dashboard-btn" onclick="showConversations()">
+                    <i class="fas fa-comment-dots"></i>
+                    <span>Conversation Practice</span>
+                </button>
+                <button class="dashboard-btn" onclick="showGrammarTopic('idioms')">
+                    <i class="fas fa-comment-dots"></i>
+                    <span>Idioms & Phrases</span>
+                </button>
+                <button class="dashboard-btn" onclick="showGrammarTopic('collocations')">
+                    <i class="fas fa-random"></i>
+                    <span>Collocations</span>
+                </button>
+                <button class="dashboard-btn" onclick="showGrammarTopic('synonyms-antonyms')">
+                    <i class="fas fa-adjust"></i>
+                    <span>Synonyms & Antonyms</span>
+                </button>
+                <button class="dashboard-btn" onclick="showGrammarTopic('homophones')">
+                    <i class="fas fa-volume-up"></i>
+                    <span>Homophones</span>
+                </button>
+                <button class="dashboard-btn" onclick="showGrammarTopic('figures-of-speech')">
+                    <i class="fas fa-palette"></i>
+                    <span>Figures of Speech</span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-tools"></i> Practice & Assessment</h2>
+            <div class="buttons-grid">
+                <button class="dashboard-btn" onclick="showGrammarTopic('quiz')">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Grammar Quiz</span>
+                </button>
+                <button class="dashboard-btn" onclick="showGrammarTopic('exercises')">
+                    <i class="fas fa-pencil-alt"></i>
+                    <span>Practice Exercises</span>
+                </button>
+                <button class="dashboard-btn" onclick="showGrammarTopic('tests')">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Test Yourself</span>
+                </button>
+                <button class="dashboard-btn" onclick="showGrammarTopic('progress')">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Progress Tracking</span>
+                </button>
+                <button class="dashboard-btn" onclick="showGrammarTopic('question-tags')">
+                    <i class="fas fa-question-circle"></i>
+                    <span>Question Tags</span>
+                </button>
+                <button class="dashboard-btn" onclick="showGrammarTopic('punctuation')">
+                    <i class="fas fa-quote-right"></i>
+                    <span>Punctuation</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-external-link-alt"></i> Additional Resources</h2>
+            <div class="buttons-grid">
+                <button class="dashboard-btn" onclick="showGrammarTopic('youtube')">
+                    <i class="fab fa-youtube"></i>
+                    <span>YouTube Resources</span>
+                </button>
+                <button class="dashboard-btn" onclick="showGrammarTopic('conjunctions')">
+                    <i class="fas fa-link"></i>
+                    <span>Conjunctions</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="popup-overlay" id="popupOverlay"></div>
+    
+    <div class="popup-container" id="popupContainer">
+        <div class="popup-header">
+            <h3 class="popup-title" id="popupTitle">Grammar Topic</h3>
+            <button class="close-popup" onclick="closePopup()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="popupContent">
+            <!-- Content will be loaded here -->
+        </div>
+    </div>
+    
+    <!-- Conversation Practice Modal -->
+    <div id="conversationModal" class="popup-modal">
+        <div class="popup-content chapter-popup-content">
+            <button class="close-popup" onclick="closeConversationModal()">&times;</button>
+            <h2 class="popup-title">
+                <i class="fas fa-comments"></i>
+                Conversation Practice
+            </h2>
+            <p class="popup-subtitle">Practice English conversations in different scenarios</p>
+            
+            <!-- Conversation Filters -->
+            <div class="conversation-filters">
+                <div class="filter-group">
+                    <label for="languageFilter">Language</label>
+                    <select id="languageFilter" class="filter-select" onchange="filterConversations()">
+                        <option value="all">All Languages</option>
+                        <option value="English-Hindi">English-Hindi</option>
+                        <option value="English">English Only</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="statusFilter">Status</label>
+                    <select id="statusFilter" class="filter-select" onchange="filterConversations()">
+                        <option value="all">All Status</option>
+                        <option value="Publish">Published</option>
+                        <option value="Draft">Draft</option>
+                    </select>
+                </div>
+                <div class="search-container">
+                    <label for="searchInput">Search Conversations</label>
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Search by title or content..." onkeyup="filterConversations()">
+                        <button type="button">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="conversationContent">
+                <div class="loading-chapters">
+                    <i class="fas fa-spinner fa-spin"></i> Loading conversations...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Google Sheet ID for conversation data
+        const SHEET_ID = '1FUpqRyVWcQZGK8bPuXEd12f-4xU7h6M9VUHlG4rMlnw';
+        const API_BASE = 'https://opensheet.elk.sh';
+        
+        // DOM Elements
+        const popupOverlay = document.getElementById('popupOverlay');
+        const popupContainer = document.getElementById('popupContainer');
+        const popupTitle = document.getElementById('popupTitle');
+        const popupContent = document.getElementById('popupContent');
+        const conversationModal = document.getElementById('conversationModal');
+        const conversationContent = document.getElementById('conversationContent');
+        
+        // Store conversations data
+        let allConversations = [];
+        let filteredConversations = [];
+        
+        // Show grammar topic from JSON
+        function showGrammarTopic(topicId) {
+            // Show loading state
+            popupTitle.textContent = 'Loading...';
+            popupContent.innerHTML = '<p style="text-align: center; margin-top: 2rem;">Fetching content, please wait...</p>';
+            showPopup();
+            
+            // Fetch data from the corresponding JSON file
+            fetch(`json/${topicId}.json`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Content file not found for topic: ${topicId}`);
+                    }
+                    return response.json();
+                })
+                .then(topic => {
+                    // Handle both single-object and array formats
+                    const sections = Array.isArray(topic) ? topic : [topic];
+                    
+                    let combinedHTML = "";
+                    sections.forEach(section => {
+                        // Check for required properties
+                        if (!section.title || !section.content) {
+                            throw new Error('JSON data is incomplete (missing title or content).');
+                        }
+                        
+                        // Apply color coding to headings in the content
+                        let processedContent = processContentWithColorCoding(section.content);
+                        
+                        combinedHTML += `
+                            <div class="section-card">
+                                <h2><i class="${section.icon || "fas fa-book"}"></i> ${section.title}</h2>
+                                <div class="section-content">${processedContent}</div>
+                            </div>
+                        `;
+                    });
+                    
+                    // Update the popup with fetched data
+                    popupTitle.textContent = sections[0].title || 'Grammar Topic';
+                    popupContent.innerHTML = combinedHTML;
+                })
+                .catch(error => {
+                    console.error('Error loading grammar data:', error);
+                    // Update popup to show the error message
+                    popupTitle.textContent = 'Error';
+                    popupContent.innerHTML = `
+                        <div class="section-card">
+                            <h2><i class="fas fa-exclamation-triangle"></i> Error Loading Content</h2>
+                            <div class="section-content">
+                                <p style="color: #ff8a80;"><strong>Could not load topic content.</strong></p>
+                                <p>Please ensure a file named <code>json/${topicId}.json</code> exists and is correctly formatted.</p>
+                                <p class="popup-example">Error Details: ${error.message}</p>
+                            </div>
+                        </div>
+                    `;
+                });
+        }
+        
+        // Process content to add color coding to headings
+        function processContentWithColorCoding(content) {
+            // Define heading patterns and their corresponding color classes
+            const headingPatterns = [
+                { pattern: /<h3>/g, replacement: '<h3 class="heading-primary">' },
+                { pattern: /<h3>Definition<\/h3>/g, replacement: '<h3 class="heading-primary">Definition</h3>' },
+                { pattern: /<h3>Use<\/h3>/g, replacement: '<h3 class="heading-success">Use</h3>' },
+                { pattern: /<h3>Structure<\/h3>/g, replacement: '<h3 class="heading-info">Structure</h3>' },
+                { pattern: /<h3>Explanation<\/h3>/g, replacement: '<h3 class="heading-secondary">Explanation</h3>' },
+                { pattern: /<h3>Examples?<\/h3>/g, replacement: '<h3 class="heading-accent-1">Examples</h3>' },
+                { pattern: /<h3>List<\/h3>/g, replacement: '<h3 class="heading-accent-2">List</h3>' },
+                { pattern: /<h3>Guidelines?<\/h3>/g, replacement: '<h3 class="heading-accent-3">Guidelines</h3>' },
+                { pattern: /<h3>Types?<\/h3>/g, replacement: '<h3 class="heading-accent-4">Types</h3>' },
+                { pattern: /<h3>Rules?<\/h3>/g, replacement: '<h3 class="heading-accent-5">Rules</h3>' },
+                { pattern: /<h3>Tips?<\/h3>/g, replacement: '<h3 class="heading-warning">Tips</h3>' },
+                { pattern: /<h3>Challenges?<\/h3>/g, replacement: '<h3 class="heading-warning">Challenges</h3>' },
+                { pattern: /<h3>Common Mistakes<\/h3>/g, replacement: '<h3 class="heading-warning">Common Mistakes</h3>' },
+                { pattern: /<h3>Quick Recap<\/h3>/g, replacement: '<h3 class="heading-success">Quick Recap</h3>' },
+                { pattern: /<h3>Purpose<\/h3>/g, replacement: '<h3 class="heading-primary">Purpose</h3>' },
+                { pattern: /<h3>Steps<\/h3>/g, replacement: '<h3 class="heading-info">Steps</h3>' },
+                { pattern: /<h3>After Each Session<\/h3>/g, replacement: '<h3 class="heading-info">After Each Session</h3>' },
+                { pattern: /<h3>Summary and Adjustments<\/h3>/g, replacement: '<h3 class="heading-success">Summary and Adjustments</h3>' },
+                { pattern: /<h3>Memory Trick<\/h3>/g, replacement: '<h3 class="heading-accent-1">Memory Trick</h3>' },
+                { pattern: /<h3>Quick Comparison Table<\/h3>/g, replacement: '<h3 class="heading-info">Quick Comparison Table</h3>' }
+            ];
+            
+            // Apply the patterns to the content
+            let processedContent = content;
+            headingPatterns.forEach(pattern => {
+                processedContent = processedContent.replace(pattern.pattern, pattern.replacement);
+            });
+            
+            // Also process subheadings (strong tags)
+            processedContent = processedContent.replace(/<strong>/g, '<strong class="subheading-primary">');
+            
+            return processedContent;
+        }
+        
+        // Show conversations from Google Sheet
+        function showConversations() {
+            conversationModal.style.display = 'block';
+            
+            // Load conversations from Google Sheet
+            fetch(`${API_BASE}/${SHEET_ID}/Conversation`)
+                .then(response => response.json())
+                .then(data => {
+                    allConversations = data;
+                    filteredConversations = [...allConversations];
+                    renderConversations();
+                })
+                .catch(error => {
+                    console.error('Error fetching conversations:', error);
+                    conversationContent.innerHTML = `
+                        <div class="no-conversations">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <p>Error loading conversations. Please try again later.</p>
+                            <p>Error details: ${error.message}</p>
+                        </div>
+                    `;
+                });
+        }
+        
+        // Render conversations to the page
+        function renderConversations() {
+            if (filteredConversations.length === 0) {
+                conversationContent.innerHTML = `
+                    <div class="no-conversations">
+                        <i class="fas fa-search"></i>
+                        <p>No conversations match your search criteria.</p>
+                        <p>Try changing your filters or search term.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let html = '';
+            
+            filteredConversations.forEach((conversation, index) => {
+                // Parse the conversation story
+                const dialogueLines = parseConversationStory(conversation.Story || '');
+                
+                html += `
+                    <div class="conversation-card">
+                        <div class="conversation-header">
+                            <h3 class="conversation-title">
+                                <i class="fas fa-comments"></i>
+                                ${conversation.Title || 'Conversation'}
+                            </h3>
+                            <div class="conversation-meta">
+                                ${conversation.Date ? `<span class="conversation-date"><i class="fas fa-calendar"></i> ${conversation.Date}</span>` : ''}
+                                ${conversation.Language ? `<span class="conversation-language"><i class="fas fa-language"></i> ${conversation.Language}</span>` : ''}
+                                <span class="conversation-status ${conversation.Status ? conversation.Status.toLowerCase() : 'publish'}">
+                                    ${conversation.Status || 'Publish'}
+                                </span>
+                            </div>
+                        </div>
+                        
+                        <div class="conversation-body">
+                            <div class="conversation-dialogue">
+                                ${dialogueLines}
+                            </div>
+                        </div>
+                        
+                        <div class="conversation-footer">
+                            <div class="conversation-actions">
+                                ${conversation["Video URL (Optional)"] ? `
+                                <a href="${conversation["Video URL (Optional)"]}" target="_blank" class="conversation-btn primary">
+                                    <i class="fas fa-play-circle"></i> Watch Video
+                                </a>` : ''}
+                                <button class="conversation-btn secondary" onclick="practiceConversation(${index})">
+                                    <i class="fas fa-microphone"></i> Practice
+                                </button>
+                                <button class="conversation-btn secondary" onclick="shareConversation(${index})">
+                                    <i class="fas fa-share-alt"></i> Share
+                                </button>
+                            </div>
+                            ${conversation["Image URL"] ? `
+                            <div>
+                                <button class="conversation-btn secondary" onclick="viewImage('${conversation["Image URL"]}')">
+                                    <i class="fas fa-image"></i> View Image
+                                </button>
+                            </div>` : ''}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            conversationContent.innerHTML = html;
+        }
+        
+        // Parse conversation story into formatted dialogue
+        function parseConversationStory(story) {
+            if (!story) return '<p>No conversation content available.</p>';
+            
+            // Split by lines and process each line
+            const lines = story.split('\n');
+            let html = '';
+            
+            lines.forEach(line => {
+                line = line.trim();
+                if (!line) return;
+                
+                // Check if line contains both English and Hindi (separated by newline or special pattern)
+                if (line.includes('\n')) {
+                    // Handle multiline entries
+                    const parts = line.split('\n');
+                    if (parts.length >= 2) {
+                        html += `
+                            <div class="dialogue-line">
+                                <div class="dialogue-speaker">${parts[0]}</div>
+                                <div class="dialogue-text">
+                                    <div>${parts[1]}</div>
+                                    ${parts[2] ? `<div class="dialogue-translation">${parts[2]}</div>` : ''}
+                                </div>
+                            </div>
+                        `;
+                    } else {
+                        html += `<p>${line}</p>`;
+                    }
+                } else if (line.includes(':')) {
+                    // Handle speaker: dialogue format
+                    const parts = line.split(':');
+                    if (parts.length >= 2) {
+                        html += `
+                            <div class="dialogue-line">
+                                <div class="dialogue-speaker">${parts[0]}:</div>
+                                <div class="dialogue-text">${parts.slice(1).join(':')}</div>
+                            </div>
+                        `;
+                    } else {
+                        html += `<p>${line}</p>`;
+                    }
+                } else {
+                    // Regular paragraph
+                    html += `<p>${line}</p>`;
+                }
+            });
+            
+            return html || '<p>Conversation content is being prepared.</p>';
+        }
+        
+        // Filter conversations based on selected criteria
+        function filterConversations() {
+            const languageFilter = document.getElementById('languageFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            
+            filteredConversations = allConversations.filter(conversation => {
+                // Language filter
+                if (languageFilter !== 'all' && conversation.Language !== languageFilter) {
+                    return false;
+                }
+                
+                // Status filter
+                if (statusFilter !== 'all' && conversation.Status !== statusFilter) {
+                    return false;
+                }
+                
+                // Search filter
+                if (searchTerm) {
+                    const titleMatch = conversation.Title && conversation.Title.toLowerCase().includes(searchTerm);
+                    const storyMatch = conversation.Story && conversation.Story.toLowerCase().includes(searchTerm);
+                    return titleMatch || storyMatch;
+                }
+                
+                return true;
+            });
+            
+            renderConversations();
+        }
+        
+        // Practice conversation function
+        function practiceConversation(index) {
+            const conversation = filteredConversations[index];
+            alert(`Now practicing: ${conversation.Title}\n\nClick OK to start the conversation practice.`);
+            // In a real implementation, this would open a practice interface
+        }
+        
+        // Share conversation function
+        function shareConversation(index) {
+            const conversation = filteredConversations[index];
+            if (navigator.share) {
+                navigator.share({
+                    title: conversation.Title,
+                    text: conversation.Story ? conversation.Story.substring(0, 100) + '...' : 'English conversation practice',
+                    url: window.location.href
+                });
+            } else {
+                // Fallback for browsers that don't support Web Share API
+                alert(`Share this conversation: ${conversation.Title}`);
+            }
+        }
+        
+        // View image function
+        function viewImage(imageUrl) {
+            window.open(imageUrl, '_blank');
+        }
+        
+        // Show popup
+        function showPopup() {
+            popupOverlay.style.display = 'block';
+            popupContainer.style.display = 'block';
+        }
+        
+        // Close popup
+        function closePopup() {
+            popupOverlay.style.display = 'none';
+            popupContainer.style.display = 'none';
+        }
+        
+        // Close conversation modal
+        function closeConversationModal() {
+            conversationModal.style.display = 'none';
+        }
+        
+        // Close popup when clicking outside
+        popupOverlay.addEventListener('click', closePopup);
+        
+        // Close conversation modal when clicking outside
+        conversationModal.addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeConversationModal();
+            }
+        });
+
+        // Close popup with ESC key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePopup();
+                closeConversationModal();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+[
+  {
+    "title": "Test: Grammar Proficiency",
+    "icon": "fas fa-pen-alt",
+    "content": "<h3>Section A: Parts of Speech</h3><p>Identify the part of speech for the underlined word: 'She quickly ran to the store.'</p><p>Options: a) noun b) verb c) adverb d) adjective</p><div class='popup-answer'><strong>Answer:</strong> c) adverb</div>",
+    "youtubeLink": "https://www.youtube.com/watch?v=8ZP2uCqUvto"
+  },
+  {
+    "title": "Test: Reading Comprehension",
+    "icon": "fas fa-book",
+    "content": "<h3>Section B: Read & Answer</h3><p>Read the short paragraph and answer: What is the main idea?</p><p>Answer: The paragraph explains the importance of daily reading habits for language improvement.</p><div class='popup-answer'><strong>Answer:</strong> Daily reading aids language improvement.</div>",
+    "youtubeLink": "https://www.youtube.com/watch?v=HgJQX2obT4M"
+  },
+  {
+    "title": "Test: Vocabulary in Context",
+    "icon": "fas fa-language",
+    "content": "<h3>Section C: Contextual Meaning</h3><p>Choose the best meaning for the word in context: 'dominant' in the sentence: 'The dominant theme of the novel is resilience.'</p><ul><li>a) weak</li><li>b) controlling</li><li>c) secondary</li><li>d) dominant</li></ul><div class='popup-answer'><strong>Answer:</strong> d) dominant</div>",
+    "youtubeLink": "https://www.youtube.com/watch?v=85eTjksFEms"
+  },
+  {
+    "title": "Test: Writing Skill",
+    "icon": "fas fa-writing",
+    "content": "<h3>Section D: Short Essay</h3><p>Write 120–150 words on: 'My favorite hobby and why it helps me learn English.'</p><div class='popup-answer'><strong>Guideline:</strong> Include introduction, two body points, and a conclusion. Check grammar and vocabulary usage.</div>",
+    "youtubeLink": "https://www.youtube.com/watch?v=ot8wH7xojWY"
+  },
+  {
+    "title": "Test: Pronunciation & Fluency",
+    "icon": "fas fa-volume-up",
+    "content": "<h3>Section E: Intonation and Stress</h3><p>Listen to the sentence: 'I didn't say she stole my money.' How does the meaning change when a different word is stressed?</p><div class='popup-answer'><strong>Guideline:</strong> Practice saying the sentence aloud, stressing a different word each time to see how the implied meaning shifts.</div>",
+    "youtubeLink": "https://www.youtube.com/watch?v=k8o8LBlmUr4"
+  },
+  {
+    "title": "Test: Listening Comprehension",
+    "icon": "fas fa-headphones",
+    "content": "<h3>Section F: Understanding Accents</h3><p>Listen to the audio clip featuring a British speaker and an American speaker. What is the key difference in how they pronounce the word 'water'?</p><div class='popup-answer'><strong>Answer:</strong> The 't' sound is pronounced more clearly in British English, while it sounds like a soft 'd' in American English.</div>",
+    "youtubeLink": "https://www.youtube.com/watch?v=rrrDP0VF21w"
+  },
+  {
+    "title": "Test: Common Idioms",
+    "icon": "fas fa-comment-dots",
+    "content": "<h3>Section G: Idiomatic Expressions</h3><p>What does the idiom 'bite the bullet' mean in this sentence? 'I didn't want to wake up early, but I had to bite the bullet and go to work.'</p><p>Options: a) To eat something hard b) To avoid a problem c) To endure a painful situation d) To get angry</p><div class='popup-answer'><strong>Answer:</strong> c) To endure a painful situation</div>",
+    "youtubeLink": "https://www.youtube.com/watch?v=Wq0U-89umh8"
+  },
+  {
+    "title": "Test: Conversational English",
+    "icon": "fas fa-users",
+    "content": "<h3>Section H: Natural Dialogues</h3><p>Role-play a conversation where you order food in a restaurant. Use polite phrases and clarify your order.</p><div class='popup-answer'><strong>Guideline:</strong> Use phrases like 'I'd like to order...', 'Could I get...?', and 'Does that come with...?'</div>",
+    "youtubeLink": "https://www.youtube.com/watch?v=M4z1Kpum0_s"
+  },
+  {
+    "title": "Test: Business English",
+    "icon": "fas fa-briefcase",
+    "content": "<h3>Section I: Professional Communication</h3><p>Write a professional email to a colleague requesting an extension for a project deadline. Be formal and provide a reason.</p><div class='popup-answer'><strong>Guideline:</strong> Start with 'Dear [Name]', state your request clearly, explain the reason briefly, and propose a new deadline.</div>",
+    "youtubeLink": "https://www.youtube.com/watch?v=Q0rDX2SrQME"
+  },
+  {
+    "title": "Test: Phrasal Verbs",
+    "icon": "fas fa-puzzle-piece",
+    "content": "<h3>Section J: Verb & Particle Combinations</h3><p>Complete the sentence with the correct phrasal verb: 'Please can you _____ the music? It's too loud.' (turn on / turn down / turn off)</p><div class='popup-answer'><strong>Answer:</strong> turn down</div>",
+    "youtubeLink": "https://www.youtube.com/watch?v=9aK4KjVceW0"
+  }
+]

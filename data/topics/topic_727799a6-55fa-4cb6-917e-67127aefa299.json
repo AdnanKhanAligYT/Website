@@ -1,0 +1,29 @@
+{
+    "id": "727799a6-55fa-4cb6-917e-67127aefa299",
+    "subjectId": "594ab60f-da93-4cf7-91da-12a1ae3fb73e",
+    "name": "Topic: Two-Factor Theory of Intelligence (बुद्धि का द्विकारक सिद्धान्त)",
+    "description": "### Topic: Two-Factor Theory of Intelligence (बुद्धि का द्विकारक सिद्धान्त)\n\n**Question:** Who propounded the 'Two Factor Theory' of intelligence? / बुद्धि के 'द्विकारक सिद्धान्त' का प्रतिपादन किसने किया ?\n1. Thorndike / थॉर्नडाइक\n2. Stern / स्टर्न\n3. Vernon / वर्नन\n4. Spearman / स्पीयरमैन\n\n**Correct Answer:** 4. Spearman / स्पीयरमैन\n\n---\n\n### 📝 Options Breakdown & Short Notes (Bilingual)\n\n#### 1. Thorndike (थॉर्नडाइक)\n* **English:** Edward Lee Thorndike propounded the **Multi-Factor Theory** of intelligence. He is famously known as the **Father of Educational Psychology**. He conducted his famous learning experiments on a cat (Trial and Error Theory).\n* **Hindi:** एडवर्ड ली थॉर्नडाइक ने बुद्धि के **बहु-तत्व सिद्धान्त (Multi-Factor Theory)** का प्रतिपादन किया था। इन्हें **शिक्षा मनोविज्ञान का जनक** कहा जाता है। इन्होंने बिल्ली पर अपना प्रसिद्ध अधिगम का प्रयोग (प्रयास एवं त्रुटि का सिद्धान्त) किया था।\n\n#### 2. Stern (स्टर्न)\n* **English:** William Stern introduced the concept of **IQ (Intelligence Quotient)** in 1912. He initially gave the formula $\\text{IQ} = \\frac{\\text{MA}}{\\text{CA}}$ (without multiplying by 100). He also supported Binet's Uni-factor theory.\n* **Hindi:** विलियम स्टर्न ने 1912 में **बुद्धि लब्धि (IQ)** की अवधारणा दी थी। इन्होंने शुरुआत में $\\text{IQ} = \\frac{\\text{मानसिक आयु}}{\\text{वास्तविक आयु}}$ का सूत्र दिया था (100 से गुणा किए बिना)। इन्होंने बिने के एक-कारक सिद्धान्त का भी समर्थन किया था।\n\n#### 3. Vernon (वर्नन)\n* **English:** Philip E. Vernon propounded the **Hierarchical Theory of Intelligence** (बुद्धि का पदानुक्रमिक सिद्धान्त). He structured intelligence in a pyramid form, keeping the general factor (g) at the top and specific factors at the bottom.\n* **Hindi:** फिलिप ई. वर्नन ने **बुद्धि का पदानुक्रमिक सिद्धान्त (Hierarchical Theory)** प्रतिपादित किया था। उन्होंने बुद्धि को एक पिरामिड के रूप में व्यवस्थित किया, जिसमें सामान्य कारक (g) को सबसे ऊपर और विशिष्ट कारकों को सबसे नीचे रखा।\n\n#### 4. Spearman (स्पीयरमैन) - *Correct Answer Concept*\n* **English:** Charles Spearman (1904) propounded the **Two-Factor Theory**. According to him, intelligence consists of two elements:\n  - **G-Factor (General Intelligence):** Universal, inborn ability used in all mental operations.\n  - **S-Factor (Specific Intelligence):** Learned/acquired from the environment, unique to specific tasks.\n* **Hindi:** चार्ल्स स्पीयरमैन (1904) ने **द्विकारक सिद्धान्त** का प्रतिपादन किया था। उनके अनुसार बुद्धि दो तत्वों से मिलकर बनी है:\n  - **G-कारक (सामान्य बुद्धि):** सार्वभौमिक और जन्मजात योग्यता जो सभी मानसिक कार्यों में उपयोग होती है।\n  - **S-कारक (विशिष्ट बुद्धि):** वातावरण से अर्जित योग्यता जो किसी विशिष्ट कार्य के लिए होती है।\n* **TET Exam Key Point:** Spearman later added a third factor, making it the **Three-Factor Theory** (त्रिकारक सिद्धान्त) as well. (स्पीयरमैन ने बाद में तीसरा तत्व जोड़कर 'त्रिकारक सिद्धान्त' भी दिया था)।\n\n---\n\n### 🌟 Extra Famous TET Concepts Related to Intelligence:\n\n* **Terman's Contribution:** Lewis Terman completed the IQ formula in 1916 by multiplying it by 100:\n  $$\\text{IQ} = \\frac{\\text{MA}}{\\text{CA}} \\times 100$$\n* **Fluid & Crystallized Intelligence (तरल एवं ठोस बुद्धि का सिद्धान्त):** Given by **Raymond Cattell (आर. बी. कैटल)**.\n* **Triarchic Theory of Intelligence (बुद्धि का त्रि-चापीय सिद्धान्त):** Given by **Robert Sternberg** (Analytical, Creative, and Practical intelligence).",
+    "status": "Revision",
+    "completeDate": "2026-06-19",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "7527c06f-ce68-4ef5-bb18-09b936f5f422",
+            "date": "2026-06-19",
+            "time": "2026-06-19 11:31",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "a1653538-71f6-4726-a334-2c8070b9126a",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-18 15:15",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

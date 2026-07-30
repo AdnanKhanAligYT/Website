@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>Study Materials - Class 11th | Saiema Mansoor Public School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- EXTERNAL CSS ONLY -->
+    <link rel="stylesheet" href="https://adnansmps.free.nf/wp-content/uploads/2026/03/class.css">
+</head>
+<body>
+    <!-- Full Image Modal (for teacher photo) -->
+    <div id="fullImageModal" class="full-image-modal" onclick="closeFullImageModal()">
+        <div class="full-image-content">
+            <img id="fullImageSrc" src="" alt="Full View">
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- School Header -->
+        <div class="school-header">
+            <img src="https://adnansmps.free.nf/wp-content/uploads/2026/03/smps_logo.jpg" alt="SMPS Logo" onclick="openFullPage()">
+            <span onclick="openFullPage()">Saiema Mansoor Public Schools<p>Parsara Hathras</p></span>
+        </div>
+
+        <!-- Class Teacher Section -->
+        <div class="class-teacher-section" id="classTeacherSection">
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <p>Loading teacher information...</p>
+            </div>
+        </div>
+
+        <!-- Flags Overlay -->
+        <div class="flag-overlay" id="flagOverlay"></div>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Class 11th</h1>
+        </div>
+
+        <!-- Filters Section -->
+        <div class="filters-section">
+            <h2 class="filters-title">Select Subject</h2>
+            <div class="filter-group">
+                <div class="buttons-container" id="subjectButtons">
+                    <div class="loading-spinner">
+                        <div class="spinner"></div>
+                        <p>Loading subjects...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-group" id="typeFilterGroup" style="display: none;">
+                <h2 class="filters-title">Select Material Type</h2>
+                <div class="buttons-container" id="typeButtons"></div>
+            </div>
+        </div>
+
+        <!-- Materials Section -->
+        <div class="materials-section" id="materialsSection" style="display: none;">
+            <h2 class="section-title" id="materialsTitle">Available Study Materials</h2>
+            <div class="materials-grid" id="materialsGrid"></div>
+        </div>
+
+        <!-- Quick Actions Bottom -->
+        <div id="quickActionsBottomContainer" class="quick-actions-bottom" style="display: none;">
+            <div class="quick-actions-section">
+                <div class="quick-actions-title">
+                    <i class="fas fa-bolt" style="color:#ff8c00;"></i> Quick Actions
+                </div>
+                <div class="quick-buttons-container" id="quickActionsBottomButtons"></div>
+            </div>
+        </div>
+
+        <!-- Modals -->
+        <div id="chaptersModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeTopModal()">&times;</span><h2 class="modal-title" id="modalTitle">Chapters</h2><div class="chapters-grid" id="chaptersGrid"></div></div></div>
+        <div id="pptLinksModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeTopModal()">&times;</span><h2 class="modal-title" id="pptModalTitle">PPT Links</h2><div class="ppt-links-container" id="pptLinksContainer"></div></div></div>
+        <div id="projectsModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeTopModal()">&times;</span><h2 class="modal-title" id="projectsModalTitle">Projects</h2><div id="projectsContainer"></div></div></div>
+        <div id="allMarksModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeTopModal()">&times;</span><h2 class="modal-title" id="allMarksModalTitle">All Subject Marks</h2><div id="allMarksContent"></div></div></div>
+        <div id="mathsMarksModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeTopModal()">&times;</span><h2 class="modal-title" id="mathsMarksModalTitle">Mathematics Marks - Class 11th</h2><div id="mathsMarksContent"></div></div></div>
+        <div id="notebookModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeTopModal()">&times;</span><h2 class="modal-title" id="notebookModalTitle">Notebook Status - Class 11th</h2><div id="notebookContent"></div></div></div>
+        <div id="studentDetailsModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeTopModal()">&times;</span><h2 class="modal-title" id="studentDetailsModalTitle">Student Details</h2><div id="studentDetailsContent"></div></div></div>
+        <div id="subjectMarksModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeTopModal()">&times;</span><h2 class="modal-title" id="subjectMarksModalTitle">Subject Marks</h2><div id="subjectMarksContent"></div></div></div>
+        <div id="syllabusTypeModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeTopModal()">&times;</span><h2 class="modal-title" id="syllabusTypeModalTitle">Select Syllabus Type</h2><div id="syllabusTypeButtons" class="buttons-container"></div></div></div>
+        <div id="syllabusDetailModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeTopModal()">&times;</span><h2 class="modal-title" id="syllabusDetailModalTitle">Syllabus Details</h2><div id="syllabusDetailContent"></div></div></div>
+        <div id="indexLinkModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeTopModal()">&times;</span><h2 class="modal-title" id="indexLinkModalTitle">Activity / Link</h2><div id="indexLinkContent" style="text-align:center; padding:20px;"></div></div></div>
+
+        <!-- Assembly Details Modal -->
+        <div id="assemblyDetailsModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeTopModal()">&times;</span>
+                <h2 class="modal-title" id="assemblyDetailsModalTitle">Today's Assembly</h2>
+                <div id="assemblyDetailsContent" style="max-height: 60vh; overflow-y: auto;"></div>
+            </div>
+        </div>
+
+        <!-- Absentees Details Modal -->
+        <div id="absenteesDetailsModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeTopModal()">&times;</span>
+                <h2 class="modal-title" id="absenteesDetailsModalTitle">Today's Absentees - Class 11th</h2>
+                <div id="absenteesDetailsContent" style="max-height: 60vh; overflow-y: auto;"></div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2026 Saiema Mansoor Public School, Parsara Hathras. All rights reserved.</p>
+            <p>Study Materials Dashboard - Class 11th</p>
+        </div>
+    </div>
+
+    <script>
+        // ==============================================================
+        //   CONFIGURATION
+        //   ⚠️  GAS_BASE_URL → Apna deployed GAS Web App URL yahan paste karo
+        // ==============================================================
+        const GAS_BASE_URL = "https://script.google.com/macros/s/AKfycbx5ywFQvXR69bOfWJjTe6ljybi0_WSmvl7gpYqQOjHfFU20M5YT6L72ypn5EJe0XZxlXw/exec";
+        // Example:
+        // const GAS_BASE_URL = "https://script.google.com/macros/s/AKfycb.../exec";
+
+        // ---- OpenSheet / Google Sheets endpoints (unchanged) ----
+        const RAW_MARKS_URL      = "https://opensheet.elk.sh/1KOl4unW-bZvghag-MCBQx36z_aaDlecWpUfIt2anQKE/RawMarks";
+        const SHEET_URL          = "https://opensheet.elk.sh/1KOl4unW-bZvghag-MCBQx36z_aaDlecWpUfIt2anQKE/StudyMaterials";
+        const PROJECTS_SHEET_URL = "https://opensheet.elk.sh/1KOl4unW-bZvghag-MCBQx36z_aaDlecWpUfIt2anQKE/Project";
+        const SYLLABUS_URL       = "https://opensheet.elk.sh/1KOl4unW-bZvghag-MCBQx36z_aaDlecWpUfIt2anQKE/Syllabus";
+        const INDEX_URL          = "https://opensheet.elk.sh/1KOl4unW-bZvghag-MCBQx36z_aaDlecWpUfIt2anQKE/index";
+        const ACTIVITY_URL       = "https://opensheet.elk.sh/1KOl4unW-bZvghag-MCBQx36z_aaDlecWpUfIt2anQKE/Activity";
+        const HOLIDAYS_URL       = "https://opensheet.elk.sh/1KOl4unW-bZvghag-MCBQx36z_aaDlecWpUfIt2anQKE/Holidays";
+
+        // ==============================================================
+        //   JSONP HELPER  –  CORS-free Drive fetch via GAS
+        //   GAS Web App se ?callback= parameter ke saath data laata hai
+        //   Ye InfinityFree / any static host pe kaam karta hai
+        // ==============================================================
+        let _jsonpCounter = 0;
+
+        function driveJsonp(params) {
+            return new Promise((resolve, reject) => {
+                const cbName = "_gasCallback_" + (++_jsonpCounter) + "_" + Date.now();
+                const timeout = setTimeout(() => {
+                    delete window[cbName];
+                    script.remove();
+                    reject(new Error("JSONP timeout: " + JSON.stringify(params)));
+                }, 15000);
+
+                window[cbName] = function(data) {
+                    clearTimeout(timeout);
+                    delete window[cbName];
+                    script.remove();
+                    resolve(data);
+                };
+
+                const qs     = new URLSearchParams({ ...params, callback: cbName }).toString();
+                const script = document.createElement("script");
+                script.src   = GAS_BASE_URL + "?" + qs;
+                script.onerror = () => {
+                    clearTimeout(timeout);
+                    delete window[cbName];
+                    reject(new Error("JSONP script error: " + script.src));
+                };
+                document.head.appendChild(script);
+            });
+        }
+
+        // ---- Icons config ----
+        const TYPE_ICONS = {
+            "Notes":"fas fa-sticky-note","Book":"fas fa-book","PPT":"fas fa-presentation",
+            "Papers":"fas fa-file-alt","PYQs":"fas fa-question-circle","Rd_MCQs":"fas fa-list-ol",
+            "RD_Sharma":"fas fa-calculator","Others":"fas fa-file","Projects":"fas fa-project-diagram",
+            "Notebook":"fas fa-book-open"
+        };
+        const SUBJECT_ICONS = {
+            "Mathematics":"fas fa-calculator","Science":"fas fa-flask","Computer":"fas fa-laptop-code",
+            "Social Studies":"fas fa-globe-americas","English":"fas fa-language","Hindi":"fas fa-language",
+            "Urdu":"fas fa-language","Physics":"fas fa-atom","Chemistry":"fas fa-vial",
+            "Biology":"fas fa-dna","Physical Education":"fas fa-running"
+        };
+
+        // ---- Global state ----
+        let allMaterials = [], allProjects = [], allMarks = [], studentsData = {};
+        let class11thStudents = new Map(), studentNames11th = [];
+        let availableSubjects = [], availableTypes = [];
+        let currentSubject = null, currentType = null;
+        let mathsMarksData = [], notebookStatusData = [], classTeacherData = {}, testMarksData = [];
+        let syllabusData = [], indexData = [], activityData = [], holidaysData = [];
+        let teachersData = [];      // ← from Drive Teachers.json
+        let todayAbsentees = [];
+        let todayHoliday   = null;
+        let todayAssembly  = null;  // ← from Drive House_Date.json (today's)
+        let testPaperLinks = new Map();
+        let allStudentsData = {};
+        let modalStack = [];
+
+        // ---- DOM refs ----
+        const classTeacherSection = document.getElementById('classTeacherSection');
+        const subjectButtonsContainer = document.getElementById('subjectButtons');
+        const typeButtonsContainer    = document.getElementById('typeButtons');
+        const typeFilterGroup         = document.getElementById('typeFilterGroup');
+        const materialsSection        = document.getElementById('materialsSection');
+        const materialsGrid           = document.getElementById('materialsGrid');
+        const materialsTitle          = document.getElementById('materialsTitle');
+        const chaptersModal           = document.getElementById('chaptersModal');
+        const chaptersGrid            = document.getElementById('chaptersGrid');
+        const modalTitle              = document.getElementById('modalTitle');
+        const pptLinksModal           = document.getElementById('pptLinksModal');
+        const pptLinksContainer       = document.getElementById('pptLinksContainer');
+        const pptModalTitle           = document.getElementById('pptModalTitle');
+        const projectsModal           = document.getElementById('projectsModal');
+        const projectsContainer       = document.getElementById('projectsContainer');
+        const projectsModalTitle      = document.getElementById('projectsModalTitle');
+        const allMarksModal           = document.getElementById('allMarksModal');
+        const allMarksContent         = document.getElementById('allMarksContent');
+        const allMarksModalTitle      = document.getElementById('allMarksModalTitle');
+        const mathsMarksModal         = document.getElementById('mathsMarksModal');
+        const mathsMarksContent       = document.getElementById('mathsMarksContent');
+        const mathsMarksModalTitle    = document.getElementById('mathsMarksModalTitle');
+        const notebookModal           = document.getElementById('notebookModal');
+        const notebookContent         = document.getElementById('notebookContent');
+        const notebookModalTitle      = document.getElementById('notebookModalTitle');
+        const studentDetailsModal     = document.getElementById('studentDetailsModal');
+        const studentDetailsContent   = document.getElementById('studentDetailsContent');
+        const studentDetailsModalTitle = document.getElementById('studentDetailsModalTitle');
+        const subjectMarksModal       = document.getElementById('subjectMarksModal');
+        const subjectMarksContent     = document.getElementById('subjectMarksContent');
+        const subjectMarksModalTitle  = document.getElementById('subjectMarksModalTitle');
+        const fullImageModal          = document.getElementById('fullImageModal');
+        const fullImageSrc            = document.getElementById('fullImageSrc');
+        const syllabusTypeModal       = document.getElementById('syllabusTypeModal');
+        const syllabusTypeModalTitle  = document.getElementById('syllabusTypeModalTitle');
+        const syllabusTypeButtons     = document.getElementById('syllabusTypeButtons');
+        const syllabusDetailModal     = document.getElementById('syllabusDetailModal');
+        const syllabusDetailModalTitle = document.getElementById('syllabusDetailModalTitle');
+        const syllabusDetailContent   = document.getElementById('syllabusDetailContent');
+        const quickActionsBottomContainer = document.getElementById('quickActionsBottomContainer');
+        const quickActionsBottomButtons   = document.getElementById('quickActionsBottomButtons');
+        const indexLinkModal          = document.getElementById('indexLinkModal');
+        const indexLinkContent        = document.getElementById('indexLinkContent');
+        const indexLinkModalTitle     = document.getElementById('indexLinkModalTitle');
+        const flagOverlay             = document.getElementById('flagOverlay');
+        const assemblyDetailsModal    = document.getElementById('assemblyDetailsModal');
+        const assemblyDetailsContent  = document.getElementById('assemblyDetailsContent');
+        const assemblyDetailsModalTitle = document.getElementById('assemblyDetailsModalTitle');
+        const absenteesDetailsModal   = document.getElementById('absenteesDetailsModal');
+        const absenteesDetailsContent = document.getElementById('absenteesDetailsContent');
+        const absenteesDetailsModalTitle = document.getElementById('absenteesDetailsModalTitle');
+
+        // ==============================================================
+        //   UTILITY
+        // ==============================================================
+        function openModal(el)  { if (el) { el.style.display='block'; modalStack.push(el); } }
+        function closeTopModal() { if (modalStack.length>0) { const m=modalStack.pop(); m.style.display='none'; } }
+        function closeModal()    { closeTopModal(); }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('full-image-modal')) { closeFullImageModal(); return; }
+            if (modalStack.length > 0) {
+                const top = modalStack[modalStack.length-1];
+                if (event.target === top) closeTopModal();
+            }
+            if (!event.target.closest('.flag') && flagOverlay && flagOverlay.style.display !== 'none') {
+                flagOverlay.style.display = 'none';
+            }
+        };
+        function closeFullImageModal() { fullImageModal.style.display='none'; }
+        function showFullImage(src) { fullImageSrc.src=src; fullImageModal.style.display='block'; }
+        function openLink(url) { if (url&&url!=='#'&&url.trim()!=='') window.open(url,'_blank'); else alert('No link available.'); }
+        function openFullPage() { window.open(window.location.href,'_blank'); }
+        function openDailyContact(phone) { if (phone) window.open(`tel:${phone.replace(/\D/g,'')}`, '_self'); else alert('Contact not available'); }
+
+        /** Returns today as  DD-MM-YYYY  (for assembly file name matching) */
+        function getTodayDDMMYYYY() {
+            const d = new Date();
+            const dd   = String(d.getDate()).padStart(2,'0');
+            const mm   = String(d.getMonth()+1).padStart(2,'0');
+            const yyyy = d.getFullYear();
+            return `${dd}-${mm}-${yyyy}`;
+        }
+
+        /** Returns today as  M/D/YYYY  (for holiday matching, same format as Sheets) */
+        function getTodayFormatted() {
+            const d = new Date();
+            return `${d.getMonth()+1}/${d.getDate()}/${d.getFullYear()}`;
+        }
+
+        function formatDateForDisplay(dateString) {
+            if (!dateString) return "N/A";
+            const d = new Date(dateString);
+            return d.toLocaleDateString('en-IN', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+        }
+
+        // ==============================================================
+        //   DATA LOADERS
+        // ==============================================================
+
+        // ---- 1. Students from Drive smps.json (JSONP) ----
+        async function loadStudentsData() {
+            try {
+                const data = await driveJsonp({ file: "smps.json" });
+                if (data.error) throw new Error(data.error);
+                studentsData    = data;
+                allStudentsData = data;
+                if (data["11th"] && Array.isArray(data["11th"])) {
+                    data["11th"].forEach(s => {
+                        if (s["Adm. No."]) {
+                            class11thStudents.set(s["Adm. No."].toString(), s);
+                            if (s["Student's Name"]) studentNames11th.push(s["Student's Name"]);
+                        }
+                    });
+                }
+            } catch (err) { console.error("loadStudentsData:", err); }
+        }
+
+        // ---- 2. Teachers from Drive Teachers.json (JSONP) ----
+        async function loadTeachersData() {
+            try {
+                const data = await driveJsonp({ file: "Teachers.json" });
+                if (data.error) throw new Error(data.error);
+                teachersData = Array.isArray(data) ? data : [];
+                displayClassTeacherFromDrive();
+            } catch (err) {
+                console.error("loadTeachersData:", err);
+                classTeacherSection.innerHTML = `<div style="text-align:center;"><i class="fas fa-exclamation-triangle"></i><p>Error loading teacher info</p></div>`;
+            }
+        }
+
+        /** Finds 11th class teacher from Drive Teachers.json and renders card */
+        function displayClassTeacherFromDrive() {
+            const teacher = teachersData.find(t =>
+                t.class_teacher && t.class_teacher.toString().trim() === "11th"
+            );
+            if (!teacher) {
+                classTeacherSection.innerHTML = `<div style="text-align:center;"><i class="fas fa-chalkboard-teacher" style="font-size:40px;"></i><p>Class teacher not found</p></div>`;
+                return;
+            }
+            // Save for use elsewhere (absentees flag modal etc.)
+            classTeacherData = teacher;
+            const name       = teacher.name || "Class Teacher";
+            const subject    = teacher.subject ? ` · ${teacher.subject}` : "";
+            const house      = teacher.house  ? ` · ${teacher.house} House`  : "";
+            const houseRole  = teacher.house_role ? ` (${teacher.house_role})` : "";
+            const extraRoles = (teacher.extra_roles || []).filter(r => r).join(", ");
+            const avatarUrl  = `https://adnansmps.free.nf/wp-content/uploads/2026/03/11th.jpg`;
+
+            classTeacherSection.innerHTML = `
+                <img src="${avatarUrl}" alt="${name}" class="teacher-avatar"
+                     onclick="showFullImage('${avatarUrl}')"
+                     onerror="this.src='https://adnansmps.free.nf/wp-content/uploads/2026/03/smps_logo.jpg';">
+                <div class="teacher-details">
+                    <div class="teacher-name">${name}${subject ? `<span style="font-size:.85em; font-weight:400; margin-left:6px;">${subject}</span>` : ''}</div>
+                    <div class="teacher-class">Class 11th Teacher${house}${houseRole}</div>
+                    ${extraRoles ? `<div class="teacher-class" style="font-size:.8em; opacity:.8;">${extraRoles}</div>` : ''}
+                </div>
+            `;
+        }
+
+        // ---- 3. Assembly from Drive House_Date.json – today (JSONP) ----
+        async function loadTodayAssembly() {
+            const today = getTodayDDMMYYYY();
+            try {
+                const data = await driveJsonp({ file: "assembly", date: today });
+                todayAssembly = (data && !data.info && data.house) ? data : null;
+            } catch (err) {
+                console.error("loadTodayAssembly:", err);
+                todayAssembly = null;
+            }
+        }
+
+        // ---- 4. Study Materials (unchanged, from Sheets) ----
+        async function loadStudyMaterials() {
+            try {
+                const res  = await fetch(SHEET_URL);
+                const data = await res.json();
+                allMaterials = data.filter(i => i.Class && i.Class.toString().includes('11th'));
+                const subjectSet = new Set(), typeSet = new Set();
+                allMaterials.forEach(m => {
+                    if (m.Subject) subjectSet.add(m.Subject.trim());
+                    if (m.Types && m.Types.trim() !== 'Projects') typeSet.add(m.Types.trim());
+                });
+                availableSubjects = Array.from(subjectSet).sort();
+                availableTypes    = Array.from(typeSet).sort();
+                createSubjectButtons();
+            } catch {
+                subjectButtonsContainer.innerHTML = `<div class="no-results"><i class="fas fa-redo"></i><p>Error loading.</p><button onclick="loadStudyMaterials()">Retry</button></div>`;
+            }
+        }
+
+        // ---- 5. Projects ----
+        async function loadProjectsData() {
+            try {
+                const res  = await fetch(PROJECTS_SHEET_URL);
+                const data = await res.json();
+                allProjects = data.filter(i => i["Adm. No."] && class11thStudents.has(i["Adm. No."].toString()));
+                todayAbsentees = data.filter(i =>
+                    i["Adm. No."] &&
+                    class11thStudents.has(i["Adm. No."].toString()) &&
+                    i["Absentees"] && i["Absentees"].toString().trim().toUpperCase() === 'A'
+                ).map(i => {
+                    const admNo   = i["Adm. No."].toString();
+                    const student = class11thStudents.get(admNo);
+                    return { admNo, name: student ? student["Student's Name"] : "Unknown", ...student };
+                });
+            } catch { allProjects = []; todayAbsentees = []; }
+        }
+
+        async function loadMathsMarks() {
+            try {
+                const res  = await fetch(PROJECTS_SHEET_URL);
+                const data = await res.json();
+                mathsMarksData = data.filter(i => i["Adm. No."] && class11thStudents.has(i["Adm. No."].toString()));
+            } catch { mathsMarksData = []; }
+        }
+
+        async function loadNotebookStatus() {
+            try {
+                const res  = await fetch(PROJECTS_SHEET_URL);
+                const data = await res.json();
+                notebookStatusData = data.filter(i =>
+                    i["Adm. No."] && class11thStudents.has(i["Adm. No."].toString()) && i["Notebook_Status"]
+                );
+            } catch { notebookStatusData = []; }
+        }
+
+        // ---- 6. Raw Marks ----
+        async function loadRawMarksData() {
+            try {
+                const res  = await fetch(RAW_MARKS_URL);
+                const data = await res.json();
+                const rawMarks = data.filter(r => r.Class && r.Class.toString().trim() === '11th');
+                const testMap  = new Map();
+                rawMarks.forEach(row => {
+                    if (row.Status && row.Status.trim().toLowerCase() !== 'submit') return;
+                    const key = `${row.Date||''}|${row.Subject||''}|${row['Exam Category']||''}`;
+                    if (!testMap.has(key)) {
+                        testMap.set(key, {
+                            'Date of Exam': row.Date||'',
+                            'Subject': row.Subject||'',
+                            'Type': row['Exam Category']||'',
+                            'maxMarks': row.MaxMarks ? parseFloat(row.MaxMarks) : 0
+                        });
+                    }
+                    const entry  = testMap.get(key);
+                    const admNo  = row['Admission No'] ? row['Admission No'].toString() : null;
+                    const sName  = row['Student Name'] || '';
+                    let matched  = null;
+                    if (admNo && class11thStudents.has(admNo)) matched = class11thStudents.get(admNo);
+                    else if (sName) {
+                        for (let [,s] of class11thStudents.entries()) {
+                            if (s["Student's Name"]?.toLowerCase() === sName.toLowerCase()) { matched = s; break; }
+                        }
+                    }
+                    if (matched) entry[`${matched["Student's Name"]} - Marks`] = row.Marks ? parseFloat(row.Marks) : '';
+                });
+                testMarksData = Array.from(testMap.values());
+            } catch { testMarksData = []; }
+        }
+        async function fetchTestMarksData() { await loadRawMarksData(); }
+
+        // ---- 7. Syllabus ----
+        async function loadSyllabusData() {
+            try {
+                const r    = await fetch(SYLLABUS_URL);
+                const data = await r.json();
+                syllabusData = data.filter(i => i.Class && i.Class.toString().includes('11th'));
+            } catch { syllabusData = []; }
+        }
+
+        // ---- 8. Index ----
+        async function loadIndexData() {
+            try {
+                const r    = await fetch(INDEX_URL);
+                const data = await r.json();
+                indexData  = data.filter(i => i.Class && i.Class.toString().includes('11th'));
+                buildQuickActionsBottom();
+            } catch { indexData = []; }
+        }
+
+        // ---- 9. Activity ----
+        async function loadActivityData() {
+            try {
+                const res  = await fetch(ACTIVITY_URL);
+                const data = await res.json();
+                activityData = data.filter(i => i.Class && i.Class.toString().includes('11th'));
+            } catch { activityData = []; }
+        }
+
+        // ---- 10. Holidays ----
+        async function loadHolidaysData() {
+            try {
+                const res  = await fetch(HOLIDAYS_URL);
+                const data = await res.json();
+                holidaysData = data;
+                const todayStr = getTodayFormatted();
+                const found    = holidaysData.find(i => i.Date && i.Date.trim() === todayStr);
+                todayHoliday   = found ? (found["Holiday Name"] || "Holiday") : null;
+            } catch { holidaysData = []; }
+        }
+
+        // ==============================================================
+        //   FLAGS  (Holiday + Absentees + Assembly)
+        // ==============================================================
+        function showFlags() {
+            flagOverlay.innerHTML = '';
+
+            // --- Holiday flag ---
+            if (todayHoliday) {
+                const f = document.createElement('div');
+                f.className = 'flag holiday-flag flag-clickable flag-pulse';
+                f.innerHTML = `
+                    <div class="flag-header">
+                        <span class="flag-title"><i class="fas fa-umbrella-beach"></i> Holiday Today</span>
+                        <span class="flag-close" onclick="event.stopPropagation(); this.parentElement.parentElement.remove();">&times;</span>
+                    </div>
+                    <div class="flag-content"><strong>${todayHoliday}</strong></div>`;
+                f.onclick = e => { if (!e.target.classList.contains('flag-close')) alert(`Holiday: ${todayHoliday}`); };
+                flagOverlay.appendChild(f);
+            }
+
+            // --- Absentees flag ---
+            if (todayAbsentees.length > 0) {
+                const f = document.createElement('div');
+                f.className = 'flag absentees-flag flag-clickable';
+                f.innerHTML = `
+                    <div class="flag-header">
+                        <span class="flag-title"><i class="fas fa-user-times"></i> Absentees (${todayAbsentees.length})</span>
+                        <span class="flag-close" onclick="event.stopPropagation(); this.parentElement.parentElement.remove();">&times;</span>
+                    </div>
+                    <div class="flag-content">
+                        <div class="flag-content-scroll">
+                            ${todayAbsentees.slice(0,5).map(s=>`
+                                <div class="absentee-item">
+                                    <img src="https://adnansmps.free.nf/wp-content/uploads/2026/03/${s.admNo}.jpg" class="absentee-photo"
+                                         onerror="this.src='https://adnansmps.free.nf/wp-content/uploads/2026/03/smps_logo.jpg'">
+                                    <span class="absentee-name">${s.name}</span>
+                                </div>`).join('')}
+                            ${todayAbsentees.length>5 ? `<div style="text-align:center;margin-top:5px;"><small>+${todayAbsentees.length-5} more</small></div>`:''}
+                        </div>
+                    </div>`;
+                f.onclick = e => { if (!e.target.classList.contains('flag-close')) showAbsenteesDetails(); };
+                flagOverlay.appendChild(f);
+            }
+
+            // --- Assembly flag (from Drive House_Date.json) ---
+            if (todayAssembly && todayAssembly.formData) {
+                const house     = todayAssembly.house || "Assembly";
+                const date      = todayAssembly.date  || getTodayDDMMYYYY();
+                const formData  = todayAssembly.formData;
+
+                // Build participant list from formData values
+                const participants = [];
+                Object.entries(formData).forEach(([role, value]) => {
+                    if (value && value.trim()) {
+                        participants.push({ role, name: value.trim() });
+                    }
+                });
+
+                if (participants.length > 0) {
+                    const houseClass = house.toLowerCase().replace(/[^a-z]/g,'');
+                    const f = document.createElement('div');
+                    f.className = `flag house-flag house-${houseClass}`;
+                    f.innerHTML = `
+                        <div class="flag-header">
+                            <span class="flag-title"><i class="fas fa-users"></i> ${house} Assembly</span>
+                            <span class="flag-close" onclick="event.stopPropagation(); this.parentElement.parentElement.remove();">&times;</span>
+                        </div>
+                        <div class="flag-content">
+                            <div class="house-flag-content">
+                                <span class="house-name">${house}</span>
+                                <span class="student-count">${date}</span>
+                            </div>
+                            <div class="flag-content-scroll" style="max-height:140px;">
+                                ${participants.slice(0,4).map(p=>`
+                                    <div class="student-item" style="padding:4px 6px;">
+                                        <div class="student-info">
+                                            <div class="student-name">${p.name}</div>
+                                            <div class="student-role">${p.role}</div>
+                                        </div>
+                                    </div>`).join('')}
+                                ${participants.length>4 ? `<div style="text-align:center;margin-top:4px;"><small>+${participants.length-4} more roles</small></div>`:''}
+                            </div>
+                        </div>`;
+                    f.onclick = e => { if (!e.target.classList.contains('flag-close')) showAssemblyDetails(); };
+                    flagOverlay.appendChild(f);
+                }
+            }
+
+            flagOverlay.style.display = flagOverlay.children.length > 0 ? 'flex' : 'none';
+        }
+
+        // ---- Show full assembly details modal ----
+        function showAssemblyDetails() {
+            if (!todayAssembly || !todayAssembly.formData) return;
+            const house     = todayAssembly.house || "Assembly";
+            const date      = todayAssembly.date  || getTodayDDMMYYYY();
+            const formData  = todayAssembly.formData;
+
+            assemblyDetailsModalTitle.textContent = `${house} Assembly — ${date}`;
+            let html = `<div style="max-height:60vh;overflow-y:auto;">`;
+
+            // House & date info
+            html += `<div style="background:linear-gradient(135deg,#1a1a2e,#16213e);color:#fff;padding:14px 16px;border-radius:10px;margin-bottom:14px;">
+                <div style="font-size:1.1em;font-weight:700;"><i class="fas fa-home"></i> ${house}</div>
+                <div style="font-size:.85em;opacity:.8;margin-top:4px;"><i class="fas fa-calendar-alt"></i> ${date}</div>
+            </div>`;
+
+            // Roles table
+            html += `<table style="width:100%;border-collapse:collapse;">`;
+            Object.entries(formData).forEach(([role, value]) => {
+                if (!value || !value.trim()) return;
+                html += `<tr style="border-bottom:1px solid #eee;">
+                    <td style="padding:9px 8px;font-weight:600;color:#1a237e;width:45%;">${role}</td>
+                    <td style="padding:9px 8px;">${value}</td>
+                </tr>`;
+            });
+            html += `</table>`;
+
+            // scriptData if present
+            if (todayAssembly.scriptData && Object.keys(todayAssembly.scriptData).length > 0) {
+                html += `<div style="margin-top:16px;padding:12px;background:#f5f5f5;border-radius:8px;">
+                    <strong>Script Notes</strong><br>`;
+                Object.entries(todayAssembly.scriptData).forEach(([k,v]) => {
+                    if (v) html += `<div style="margin-top:6px;"><em>${k}:</em> ${v}</div>`;
+                });
+                html += `</div>`;
+            }
+
+            html += `</div>`;
+            assemblyDetailsContent.innerHTML = html;
+            openModal(assemblyDetailsModal);
+        }
+
+        // ---- Absentees details modal ----
+        function showAbsenteesDetails() {
+            absenteesDetailsModalTitle.textContent = `Today's Absentees (${todayAbsentees.length}) — Class 11th`;
+            let html = '';
+            if (todayAbsentees.length === 0) {
+                html = '<div style="text-align:center;padding:30px;"><i class="fas fa-check-circle" style="font-size:3rem;color:#4CAF50;"></i><h3>No Absentees Today</h3></div>';
+            } else {
+                html = '<div class="flag-content-scroll">';
+                todayAbsentees.forEach(s => {
+                    html += `<div class="student-item" onclick="showStudentDetails('${s.admNo}')">
+                        <img src="https://adnansmps.free.nf/wp-content/uploads/2026/03/${s.admNo}.jpg" class="student-photo"
+                             onerror="this.src='https://adnansmps.free.nf/wp-content/uploads/2026/03/smps_logo.jpg'">
+                        <div class="student-info">
+                            <div class="student-name">${s.name}</div>
+                            <div class="student-role">Adm. No.: ${s.admNo}</div>
+                        </div>
+                    </div>`;
+                });
+                html += '</div>';
+            }
+            absenteesDetailsContent.innerHTML = html;
+            openModal(absenteesDetailsModal);
+        }
+
+        // ---- Student details modal ----
+        function showStudentDetails(admNo) {
+            const s = class11thStudents.get(admNo.toString());
+            if (!s) return;
+            studentDetailsModalTitle.textContent = `Student Details — ${s["Student's Name"]}`;
+            let html = `<div style="text-align:center;margin-bottom:20px;">
+                <img src="https://adnansmps.free.nf/wp-content/uploads/2026/03/${admNo}.jpg"
+                     style="width:120px;height:120px;border-radius:50%;object-fit:cover;border:3px solid #667eea;"
+                     onerror="this.src='https://adnansmps.free.nf/wp-content/uploads/2026/03/smps_logo.jpg'">
+                <h3 style="margin-top:10px;">${s["Student's Name"]}</h3>
+            </div><table style="width:100%;border-collapse:collapse;">`;
+            for (let key in s) {
+                if (key !== "Student's Name" && s[key]) {
+                    html += `<tr style="border-bottom:1px solid #eee;">
+                        <td style="padding:8px;font-weight:600;color:#1a237e;">${key}</td>
+                        <td style="padding:8px;">${s[key]}</td>
+                    </tr>`;
+                }
+            }
+            html += '</table>';
+            studentDetailsContent.innerHTML = html;
+            openModal(studentDetailsModal);
+        }
+
+        // ==============================================================
+        //   QUICK ACTIONS (BOTTOM)
+        // ==============================================================
+        function buildQuickActionsBottom() {
+            if (!indexData || indexData.length === 0) { quickActionsBottomContainer.style.display='none'; return; }
+            quickActionsBottomContainer.style.display='block';
+            quickActionsBottomButtons.innerHTML='';
+            indexData.forEach(entry => {
+                const name      = entry.name  || entry.Name  || "Action";
+                const iconClass = entry.icon  || entry.Icon  || "fas fa-link";
+                const link      = entry.link  || entry.Link  || "#";
+                const btn = document.createElement('button');
+                btn.className   = 'quick-btn';
+                btn.innerHTML   = `<i class="${iconClass}"></i> ${name}`;
+                btn.onclick     = e => { e.preventDefault(); if (link&&link!=='#') window.open(link,'_blank'); else alert('No link'); };
+                quickActionsBottomButtons.appendChild(btn);
+            });
+            if (activityData.length > 0) {
+                const btn = document.createElement('button');
+                btn.className = 'quick-btn quick-activity-btn';
+                btn.innerHTML = `<i class="fas fa-video"></i> Activity`;
+                btn.onclick   = e => { e.preventDefault(); showActivityModal(); };
+                quickActionsBottomButtons.appendChild(btn);
+            }
+        }
+
+        function showActivityModal() {
+            if (!activityData.length) { alert("No activities for Class 11th"); return; }
+            indexLinkModalTitle.textContent = "Activities for Class 11th";
+            let html = '<div style="max-height:400px;overflow-y:auto;">';
+            [...activityData].sort((a,b) => {
+                return (new Date(b.Date||0)) - (new Date(a.Date||0));
+            }).forEach(a => {
+                html += `<div class="activity-card" onclick="window.open('${a.Link||'#'}','_blank')" style="cursor:pointer;">
+                    <div class="activity-name"><i class="fas fa-play-circle" style="color:#e74c3c;"></i> ${a["Activity Name"]||"Activity"}</div>
+                    <div class="activity-details">${formatDateForDisplay(a.Date)}</div>
+                </div>`;
+            });
+            html += '</div>';
+            indexLinkContent.innerHTML = html;
+            openModal(indexLinkModal);
+        }
+
+        // ==============================================================
+        //   SUBJECT BUTTONS
+        // ==============================================================
+        function createSubjectButtons() {
+            subjectButtonsContainer.innerHTML='';
+            if (!availableSubjects.length) {
+                subjectButtonsContainer.innerHTML='<div class="no-results">📭<p>No study materials available.</p></div>'; return;
+            }
+            availableSubjects.forEach(subject => {
+                const btn = document.createElement('button');
+                btn.className='filter-btn'; btn.innerHTML=`<i class="${SUBJECT_ICONS[subject]||'fas fa-book'}"></i> ${subject}`;
+                btn.dataset.subject=subject; btn.addEventListener('click',()=>selectSubject(subject));
+                subjectButtonsContainer.appendChild(btn);
+            });
+            const nbBtn = document.createElement('button');
+            nbBtn.className='filter-btn notebook-btn'; nbBtn.innerHTML=`<i class="fas fa-book-open"></i> Notebook Status`;
+            nbBtn.addEventListener('click',showNotebookStatus); subjectButtonsContainer.appendChild(nbBtn);
+            const mkBtn = document.createElement('button');
+            mkBtn.className='filter-btn marks-btn'; mkBtn.innerHTML=`<i class="fas fa-chart-line"></i> All Subject Marks`;
+            mkBtn.addEventListener('click',showTestMarks); subjectButtonsContainer.appendChild(mkBtn);
+        }
+
+        function selectSubject(subject) {
+            currentSubject=subject;
+            document.querySelectorAll('#subjectButtons .filter-btn').forEach(b=>{
+                b.classList.remove('active'); if(b.dataset.subject===subject) b.classList.add('active');
+            });
+            document.getElementById('dynamicSubjectMarksBtn')?.remove();
+            document.getElementById('dynamicSyllabusBtn')?.remove();
+            if (allProjects.some(p=>p.Subject===subject&&p["Adm. No."]&&class11thStudents.has(p["Adm. No."].toString()))) {
+                const b=document.createElement('button'); b.id='dynamicSubjectMarksBtn'; b.className='filter-btn maths-marks-btn';
+                b.innerHTML=`<i class="fas fa-calculator"></i> ${subject} Marks`; b.addEventListener('click',()=>showSubjectMarks(subject));
+                subjectButtonsContainer.appendChild(b);
+            }
+            if (syllabusData.some(s=>s.Subject===subject)) {
+                const b=document.createElement('button'); b.id='dynamicSyllabusBtn'; b.className='filter-btn syllabus-btn';
+                b.innerHTML=`<i class="fas fa-book"></i> Syllabus`; b.addEventListener('click',()=>showSyllabusTypes(subject));
+                subjectButtonsContainer.appendChild(b);
+            }
+            typeFilterGroup.style.display='block'; createTypeButtons(subject); materialsSection.style.display='none';
+        }
+
+        function showSyllabusTypes(subject) {
+            const filtered = syllabusData.filter(s=>s.Subject===subject);
+            if (!filtered.length) { alert("No syllabus found."); return; }
+            const typesSet=new Set(); filtered.forEach(s=>{ if(s.Type) typesSet.add(s.Type.trim()); });
+            syllabusTypeModalTitle.textContent=`${subject} — Select Syllabus Type`; syllabusTypeButtons.innerHTML='';
+            Array.from(typesSet).sort().forEach(type=>{
+                const b=document.createElement('button'); b.className='filter-btn';
+                b.innerHTML=`<i class="fas fa-calendar-alt"></i> ${type}`; b.onclick=()=>showSyllabusDetail(subject,type);
+                syllabusTypeButtons.appendChild(b);
+            });
+            openModal(syllabusTypeModal);
+        }
+
+        function showSyllabusDetail(subject,type) {
+            const filtered=syllabusData.filter(s=>s.Subject===subject&&s.Type===type);
+            if (!filtered.length) { alert("No details."); return; }
+            syllabusDetailModalTitle.textContent=`${subject} — ${type} Syllabus`;
+            let html=`<div class="table-container"><table class="syllabus-table"><thead><tr><th>Chapter/Topic</th><th>Exercise</th><th>Questions</th><th>Weightage</th></tr></thead><tbody>`;
+            filtered.forEach(r=>{ html+=`<tr><td>${r.Chapter_Topic||''}</td><td>${r.Exercise||''}</td><td>${r.Questions||''}</td><td>${r.Weightage||''}</td></tr>`; });
+            html+=`</tbody></table></div>`; syllabusDetailContent.innerHTML=html; closeTopModal(); openModal(syllabusDetailModal);
+        }
+
+        function showSubjectMarks(subject) {
+            const filtered=allProjects.filter(p=>p.Subject===subject&&p["Adm. No."]&&class11thStudents.has(p["Adm. No."].toString()));
+            if (!filtered.length) { alert(`No marks found for ${subject}`); return; }
+            subjectMarksModalTitle.textContent=`${subject} Marks — Class 11th`;
+            let html=`<div class="filter-section"><div class="filter-controls"><div class="filter-group"><label><i class="fas fa-search"></i> Search:</label><div class="search-box"><input type="text" id="searchSubjectMarks" placeholder="Student name"><i class="fas fa-search"></i></div></div></div></div>`;
+            html+=`<div class="table-container"><table><thead><tr><th>Photo</th><th>Student</th><th>PT1</th><th>SA1</th><th>PT2</th><th>SA2</th><th>Avg</th><th>%</th></tr></thead><tbody id="subjectMarksBody">`;
+            const map=new Map();
+            filtered.forEach(item=>{
+                const admNo=item["Adm. No."]; if(!admNo) return;
+                const s=class11thStudents.get(admNo.toString()); if(!s) return;
+                const name=s["Student's Name"]||"Unknown";
+                if(!map.has(name)) map.set(name,{name,admNo,pt1:null,sa1:null,pt2:null,sa2:null});
+                const rec=map.get(name);
+                if(item.PT1&&!isNaN(parseFloat(item.PT1))) rec.pt1=parseFloat(item.PT1);
+                if(item.SA1&&!isNaN(parseFloat(item.SA1))) rec.sa1=parseFloat(item.SA1);
+                if(item.PT2&&!isNaN(parseFloat(item.PT2))) rec.pt2=parseFloat(item.PT2);
+                if(item.SA2&&!isNaN(parseFloat(item.SA2))) rec.sa2=parseFloat(item.SA2);
+            });
+            Array.from(map.values()).sort((a,b)=>a.name.localeCompare(b.name)).forEach(s=>{
+                let total=0,count=0,maxT=0;
+                if(s.pt1!==null){total+=s.pt1;count++;maxT+=20;} if(s.sa1!==null){total+=s.sa1;count++;maxT+=80;}
+                if(s.pt2!==null){total+=s.pt2;count++;maxT+=20;} if(s.sa2!==null){total+=s.sa2;count++;maxT+=80;}
+                const avg=count?(total/count).toFixed(1):0; const perc=maxT?((total/maxT)*100).toFixed(1):0;
+                html+=`<tr><td><img src="https://adnansmps.free.nf/wp-content/uploads/2026/03/${s.admNo}.jpg" class="student-photo" onerror="this.src='https://adnansmps.free.nf/wp-content/uploads/2026/03/smps_logo.jpg'"></td><td>${s.name}</td><td>${s.pt1??'-'}</td><td>${s.sa1??'-'}</td><td>${s.pt2??'-'}</td><td>${s.sa2??'-'}</td><td>${avg}</td><td>${perc}%</td></tr>`;
+            });
+            html+=`</tbody></table></div>`; subjectMarksContent.innerHTML=html; openModal(subjectMarksModal);
+            setTimeout(()=>{
+                const inp=document.getElementById('searchSubjectMarks');
+                if(inp) inp.addEventListener('input',e=>{
+                    const t=e.target.value.toLowerCase();
+                    document.querySelectorAll('#subjectMarksBody tr').forEach(r=>{ r.style.display=r.cells[1]?.textContent.toLowerCase().includes(t)?'':'none'; });
+                });
+            },100);
+        }
+
+        function createTypeButtons(subject) {
+            typeButtonsContainer.innerHTML='';
+            const subjectTypes=new Set();
+            allMaterials.forEach(m=>{ if(m.Subject===subject&&m.Types&&m.Types.trim()!=='Projects') subjectTypes.add(m.Types.trim()); });
+            if(allProjects.some(p=>p.Subject&&p.Subject.toString().trim()===subject)) subjectTypes.add("Projects");
+            const types=Array.from(subjectTypes).sort();
+            if(!types.length){ typeButtonsContainer.innerHTML=`<div class="no-results"><p>No material types for ${subject}.</p></div>`; return; }
+            types.forEach(type=>{
+                const b=document.createElement('button'); b.className='filter-btn';
+                b.innerHTML=`<i class="${TYPE_ICONS[type]||'fas fa-file'}"></i> ${type}`; b.dataset.type=type;
+                b.addEventListener('click',()=>selectType(subject,type)); typeButtonsContainer.appendChild(b);
+            });
+        }
+
+        function selectType(subject,type) {
+            currentSubject=subject; currentType=type;
+            document.querySelectorAll('#typeButtons .filter-btn').forEach(b=>{ b.classList.remove('active'); if(b.dataset.type===type) b.classList.add('active'); });
+            if(type==="Projects"){ showProjectsForSubject(); return; }
+            if(type==="PPT"){ showPPTChaptersForSubject(); return; }
+            showChaptersForSubjectAndType();
+        }
+
+        function showChaptersForSubjectAndType() {
+            const filtered=allMaterials.filter(m=>m.Subject===currentSubject&&m.Types===currentType);
+            if(!filtered.length){ alert(`No ${currentType} available`); return; }
+            const chaptersMap=new Map();
+            filtered.forEach(m=>{ const k=m["Chapter's Name"]||"Unnamed"; if(!chaptersMap.has(k)) chaptersMap.set(k,{name:k,links:[]}); chaptersMap.get(k).links.push({url:m.Link||'#',type:m.Types}); });
+            showChaptersModal(Array.from(chaptersMap.values()).sort((a,b)=>a.name.localeCompare(b.name)));
+        }
+
+        function showPPTChaptersForSubject() {
+            const filtered=allMaterials.filter(m=>m.Subject===currentSubject&&m.Types==="PPT");
+            if(!filtered.length){ alert('No PPT available'); return; }
+            const chaptersMap=new Map();
+            filtered.forEach(m=>{
+                const k=m["Chapter's Name"]||"Unnamed"; if(!chaptersMap.has(k)) chaptersMap.set(k,{name:k,links:[]});
+                const link=m.Link||'#';
+                if(link.includes(',')) link.split(',').map(l=>l.trim()).forEach(l=>chaptersMap.get(k).links.push({url:l,type:'PPT',title:'PPT Link'}));
+                else chaptersMap.get(k).links.push({url:link,type:'PPT',title:'PPT Link'});
+            });
+            showPPTChaptersModal(Array.from(chaptersMap.values()).sort((a,b)=>a.name.localeCompare(b.name)));
+        }
+
+        function showProjectsForSubject() {
+            const projects=allProjects.filter(p=>p.Subject&&p.Subject.toString().trim()===currentSubject);
+            if(!projects.length){ projectsContainer.innerHTML=`<div class="no-projects"><i class="fas fa-folder-open"></i><p>No projects submitted.</p></div>`; }
+            else {
+                let html=`<table class="projects-table"><thead><tr><th>Photo</th><th>Student Name</th><th>Topic</th></tr></thead><tbody>`;
+                projects.forEach(p=>{
+                    const admNo=p["Adm. No."]||""; const topic=p.Topic||"No Topic"; const link=p.Link||"#";
+                    const s=class11thStudents.get(admNo.toString()); const name=s?s["Student's Name"]:"Unknown";
+                    html+=`<tr onclick="openLink('${link}')"><td><img src="https://adnansmps.free.nf/wp-content/uploads/2026/03/${admNo}.jpg" class="student-photo" onerror="this.src='https://adnansmps.free.nf/wp-content/uploads/2026/03/smps_logo.jpg'"></td><td>${name}</td><td>${topic}</td></tr>`;
+                });
+                html+=`</tbody></table>`; projectsContainer.innerHTML=html;
+            }
+            projectsModalTitle.textContent=`${currentSubject} — Projects (Class 11th)`; openModal(projectsModal);
+        }
+
+        function showChaptersModal(chapters) {
+            modalTitle.textContent=`${currentSubject} — ${currentType}`; chaptersGrid.innerHTML='';
+            if(!chapters.length){ chaptersGrid.innerHTML=`<div class="no-chapters"><i class="fas fa-folder-open"></i><p>No materials.</p></div>`; }
+            else chapters.forEach(c=>{ const card=document.createElement('div'); card.className='chapter-card'; card.addEventListener('click',()=>openLink(c.links[0]?.url||'#')); card.innerHTML=`<div class="chapter-name">${c.name}</div><div class="chapter-type">${currentType}</div>`; chaptersGrid.appendChild(card); });
+            openModal(chaptersModal);
+        }
+
+        function showPPTChaptersModal(chapters) {
+            pptModalTitle.textContent=`${currentSubject} — PPT`; pptLinksContainer.innerHTML='';
+            if(!chapters.length){ pptLinksContainer.innerHTML=`<div class="no-chapters"><i class="fas fa-folder-open"></i><p>No PPT materials.</p></div>`; }
+            else chapters.forEach((c,i)=>{
+                const t=document.createElement('div'); t.className='chapter-name'; t.style.cssText=`margin-top:${i>0?'20px':'0'};font-weight:bold;color:#1a237e;`; t.textContent=c.name; pptLinksContainer.appendChild(t);
+                c.links.forEach(l=>{ const item=document.createElement('div'); item.className='ppt-link-item'; item.addEventListener('click',()=>openLink(l.url)); item.innerHTML=`<div class="ppt-link-title">${l.title||'PPT Link'}</div><div class="ppt-link-url">${l.url}</div>`; pptLinksContainer.appendChild(item); });
+            });
+            openModal(pptLinksModal);
+        }
+
+        function showNotebookStatus() {
+            notebookModalTitle.textContent='Notebook Status — Class 11th';
+            const map=new Map();
+            notebookStatusData.forEach(item=>{
+                const admNo=item["Adm. No."]; if(!admNo) return;
+                const s=class11thStudents.get(admNo.toString()); if(!s) return;
+                map.set(admNo,{name:s["Student's Name"]||"Unknown",admNo,status:item["Notebook_Status"]||"Not Completed"});
+            });
+            const sorted=Array.from(map.values()).sort((a,b)=>a.name.localeCompare(b.name));
+            let html=`<div class="table-container"><table><thead><tr><th>Photo</th><th>Student</th><th>Notebook Status</th></tr></thead><tbody>`;
+            let done=0,notDone=0;
+            sorted.forEach(item=>{
+                const cls=item.status==="Completed"?"completed":"not-completed";
+                if(item.status==="Completed") done++; else notDone++;
+                html+=`<tr><td><img src="https://adnansmps.free.nf/wp-content/uploads/2026/03/${item.admNo}.jpg" class="student-photo" onerror="this.src='https://adnansmps.free.nf/wp-content/uploads/2026/03/smps_logo.jpg'"></td><td>${item.name}</td><td><span class="notebook-status ${cls}">${item.status}</span></td></tr>`;
+            });
+            html+=`</tbody></table></div><div style="margin-top:15px;display:grid;grid-template-columns:repeat(2,1fr);gap:10px;"><div style="background:#4CAF50;color:white;padding:10px;border-radius:8px;text-align:center;"><div style="font-size:1.4rem;">${done}</div><div>Completed</div></div><div style="background:#f44336;color:white;padding:10px;border-radius:8px;text-align:center;"><div style="font-size:1.4rem;">${notDone}</div><div>Not Completed</div></div></div>`;
+            notebookContent.innerHTML=html; openModal(notebookModal);
+        }
+
+        function showTestMarks() {
+            allMarksModalTitle.textContent='All Subject Marks Viewer';
+            let html=`<div style="margin-bottom:20px;"><div style="display:flex;gap:15px;margin-bottom:20px;">
+                <button class="filter-btn" onclick="showAllStudentsMarks()" style="flex:1;background:linear-gradient(135deg,#667eea,#764ba2);color:white;"><i class="fas fa-users"></i> All Students</button>
+                <button class="filter-btn" onclick="showMarksDetails()" style="flex:1;background:linear-gradient(135deg,#4CAF50,#2E7D32);color:white;"><i class="fas fa-chart-bar"></i> Marks</button>
+                <button class="filter-btn" onclick="showLatestTestReport()" style="flex:1;background:linear-gradient(135deg,#FF9800,#F57C00);color:white;"><i class="fas fa-calendar-alt"></i> Latest Test</button>
+            </div></div><div id="marksContent"><div style="text-align:center;padding:40px;color:#666;"><i class="fas fa-graduation-cap" style="font-size:3rem;"></i><h3>Select an option above</h3></div></div>`;
+            allMarksContent.innerHTML=html; openModal(allMarksModal);
+        }
+
+        function showAllStudentsMarks() {
+            if(!testMarksData.length){ document.getElementById('marksContent').innerHTML='<div class="no-results">No data</div>'; return; }
+            let html=`<div class="table-container"><table><thead><tr><th>Student</th><th>Tests</th><th>Avg</th><th>Best</th><th>Action</th></tr></thead><tbody id="studentsListBody">`;
+            const stats={};
+            testMarksData.forEach(test=>{
+                studentNames11th.forEach(name=>{
+                    const key=`${name} - Marks`; if(!stats[name]) stats[name]={totalTests:0,totalMarks:0,totalMax:0,highest:0};
+                    if(test[key]!==undefined&&test[key]!==''&&!isNaN(parseFloat(test[key]))){
+                        const m=parseFloat(test[key]); stats[name].totalTests++; stats[name].totalMarks+=m; stats[name].totalMax+=test.maxMarks||0;
+                        if(m>stats[name].highest) stats[name].highest=m;
+                    }
+                });
+            });
+            [...studentNames11th].sort((a,b)=>a.localeCompare(b)).forEach(name=>{
+                const s=stats[name]||{totalTests:0,totalMarks:0,highest:0};
+                const avg=s.totalTests?(s.totalMarks/s.totalTests).toFixed(1):0;
+                html+=`<tr><td><i class="fas fa-user-graduate"></i> ${name}</td><td>${s.totalTests}</td><td>${avg}</td><td>${s.highest.toFixed(1)}</td><td><button class="open-link-btn" onclick="downloadStudentMarksReport('${name}')"><i class="fas fa-download"></i> Report</button></td></tr>`;
+            });
+            html+=`</tbody></table></div>`; document.getElementById('marksContent').innerHTML=html;
+        }
+
+        function showLatestTestReport() {
+            if(!testMarksData.length){ alert("No test data"); return; }
+            const latest=testMarksData.reduce((a,b)=>new Date(b['Date of Exam']||0)>new Date(a['Date of Exam']||0)?b:a);
+            viewTestDetails(testMarksData.indexOf(latest));
+        }
+
+        function showMarksDetails() {
+            if(!testMarksData.length){ document.getElementById('marksContent').innerHTML='<div class="no-results">No data</div>'; return; }
+            let html=`<div class="table-container"><table><thead><tr><th>Date</th><th>Type</th><th>Subject</th><th>Max</th><th>Students</th><th></th></tr></thead><tbody id="testDataBody">`;
+            testMarksData.forEach((test,i)=>{
+                let cnt=0; for(const k in test) if(k.includes(' - Marks')&&test[k]!==''&&!isNaN(parseFloat(test[k]))) cnt++;
+                html+=`<tr class="clickable-test-row" data-index="${i}" onclick="viewTestDetails(${i})"><td>${test['Date of Exam']||'N/A'}</td><td><span class="type-badge">${test['Type']||''}</span></td><td>${test['Subject']||''}</td><td>${test.maxMarks||0}</td><td>${cnt}</td><td><button class="open-link-btn" onclick="event.stopPropagation();viewTestDetails(${i})">View</button></td></tr>`;
+            });
+            html+=`</tbody></table></div>`; document.getElementById('marksContent').innerHTML=html;
+        }
+
+        function viewTestDetails(index) {
+            const test=testMarksData[index];
+            const {Type:testType='',Subject:subject='',maxMarks=0}=test; const dateOfExam=test['Date of Exam']||''; const examName=test['Name of Test']||testType;
+            let html=`<div class="test-details-header"><h3>Test Details</h3><div class="test-info"><div><strong>Date:</strong> ${dateOfExam}</div><div><strong>Type:</strong> ${testType}</div><div><strong>Subject:</strong> ${subject}</div><div><strong>Max Marks:</strong> ${maxMarks}</div></div></div><div class="table-container"><table><thead><tr><th>Student</th><th>Marks</th><th>%</th><th>Status</th><th>Performance</th></tr></thead><tbody>`;
+            let present=0,absent=0,total=0,highest=0;
+            studentNames11th.forEach(name=>{
+                const key=`${name} - Marks`; let marks=0,status='Absent',perc=0;
+                if(test[key]!==undefined&&test[key]!==''&&!isNaN(parseFloat(test[key]))){
+                    marks=parseFloat(test[key]); perc=maxMarks>0?((marks/maxMarks)*100).toFixed(1):0; status='Present'; present++; total+=marks; if(marks>highest) highest=marks;
+                } else absent++;
+                let pc='',pt='';
+                if(status==='Present'){ if(perc>=90){pc='excellent';pt='Excellent';}else if(perc>=75){pc='good';pt='Good';}else if(perc>=50){pc='average';pt='Average';}else if(perc>=33){pc='pass';pt='Pass';}else{pc='poor';pt='Needs Improvement';} }
+                else { pc='poor'; pt='Absent'; }
+                html+=`<tr><td><a class="clickable-student" onclick="downloadStudentMarksPDF('${name}','${dateOfExam}','${examName}','${subject}',${marks},${maxMarks},${perc},'${status}')"><i class="fas fa-user"></i> ${name}</a></td><td>${status==='Present'?`${marks}/${maxMarks}`:'Absent'}</td><td>${status==='Present'?`${perc}%`:'N/A'}</td><td><span class="${status==='Present'?'status-submitted':'status-pending'}">${status}</span></td><td><span class="performance-badge ${pc}">${pt}</span></td></tr>`;
+            });
+            const avg=present>0?(total/present).toFixed(1):0; const avgP=maxMarks>0?((avg/maxMarks)*100).toFixed(1):0;
+            html+=`</tbody></table></div><div class="test-summary"><div class="summary-card"><div class="summary-label">Total</div><div class="summary-value">${studentNames11th.length}</div></div><div class="summary-card"><div class="summary-label">Present</div><div class="summary-value">${present}</div></div><div class="summary-card"><div class="summary-label">Absent</div><div class="summary-value">${absent}</div></div><div class="summary-card"><div class="summary-label">Average</div><div class="summary-value">${avg}/${maxMarks}</div></div><div class="summary-card"><div class="summary-label">Avg %</div><div class="summary-value">${avgP}%</div></div><div class="summary-card"><div class="summary-label">Highest</div><div class="summary-value">${highest}/${maxMarks}</div></div></div>`;
+            allMarksContent.innerHTML=html;
+        }
+
+        function downloadStudentMarksPDF(name,dateOfExam,examName,subject,marks,maxMarks,percentage,status='Present') {
+            const {jsPDF}=window.jspdf; const doc=new jsPDF();
+            doc.setFontSize(20); doc.setTextColor(40,53,147); doc.text("Saiema Mansoor Public School",105,20,{align:"center"});
+            doc.setFontSize(16); doc.setTextColor(0,0,0); doc.text("Student Marks Report",105,30,{align:"center"});
+            doc.setFontSize(12); doc.text("Class 11th — Academic Year 2025-26",105,40,{align:"center"});
+            doc.setFontSize(14); doc.text("Student Information:",20,55); doc.setFontSize(12);
+            doc.text(`Name: ${name}`,20,65); doc.text("Class: 11th",20,72);
+            doc.setFontSize(14); doc.text("Test Information:",20,85); doc.setFontSize(12);
+            doc.text(`Date: ${dateOfExam}`,20,95); doc.text(`Exam: ${examName}`,20,102);
+            doc.text(`Subject: ${subject}`,20,109); doc.text(`Max Marks: ${maxMarks}`,20,116);
+            doc.setFontSize(14); doc.text("Marks:",20,130); doc.setFontSize(12);
+            if(status==='Absent'){ doc.setTextColor(255,0,0); doc.text("Status: ABSENT",20,140); doc.text("Marks: Not Available",20,147); }
+            else { doc.text(`Status: ${status}`,20,140); doc.text(`Marks: ${marks}/${maxMarks}`,20,147); doc.text(`Percentage: ${percentage}%`,20,154); }
+            doc.setFontSize(10); doc.setTextColor(100,100,100); doc.text("Generated by Class 11th Dashboard",105,280,{align:"center"}); doc.text(`Generated on: ${new Date().toLocaleDateString()}`,105,285,{align:"center"});
+            doc.save(`${name}_${subject}_${dateOfExam.replace(/\//g,'-')}_Marks.pdf`);
+        }
+
+        function downloadStudentMarksReport(name) {
+            const {jsPDF}=window.jspdf; const doc=new jsPDF();
+            doc.setFontSize(20); doc.setTextColor(40,53,147); doc.text("Saiema Mansoor Public School",105,20,{align:"center"});
+            doc.setFontSize(16); doc.setTextColor(0,0,0); doc.text("Student Marks Report",105,30,{align:"center"});
+            doc.setFontSize(12); doc.text("Class 11th — Academic Year 2025-26",105,40,{align:"center"});
+            doc.setFontSize(14); doc.text("Student Information:",20,55); doc.setFontSize(12); doc.text(`Name: ${name}`,20,65); doc.text("Class: 11th",20,72);
+            const tests=[]; let totalM=0,totalMax=0,present=0,absent=0;
+            testMarksData.forEach(test=>{
+                const k=`${name} - Marks`; const {Type:t='',Subject:s='','Date of Exam':d='',maxMarks:mm=0}=test;
+                if(test[k]!==undefined&&test[k]!==''&&!isNaN(parseFloat(test[k]))){
+                    const m=parseFloat(test[k]); tests.push({date:d,type:t,subject:s,marks:m,maxMarks:mm,status:'Present',percentage:mm>0?((m/mm)*100).toFixed(1):0}); totalM+=m; totalMax+=mm; present++;
+                } else { let hasOthers=Object.keys(test).some(kk=>kk.includes(' - Marks')&&test[kk]!==''&&!isNaN(parseFloat(test[kk]))); if(hasOthers){ tests.push({date:d,type:t,subject:s,marks:0,maxMarks:mm,status:'Absent',percentage:0}); absent++; } }
+            });
+            tests.sort((a,b)=>new Date(a.date)-new Date(b.date));
+            doc.setFontSize(14); doc.text("Summary:",20,85); doc.setFontSize(12);
+            doc.text(`Total Tests: ${tests.length}`,20,95); doc.text(`Present: ${present}`,20,102); doc.text(`Absent: ${absent}`,20,109);
+            if(present>0){ doc.text(`Avg: ${(totalM/present).toFixed(1)}`,20,116); doc.text(`Avg %: ${totalMax>0?((totalM/totalMax)*100).toFixed(1):0}%`,20,123); }
+            doc.setFontSize(14); doc.text("Detailed Marks:",20,140); doc.setFontSize(10); doc.setTextColor(255,255,255); doc.setFillColor(40,53,147); doc.rect(20,145,170,8,'F');
+            doc.text("Date",25,150); doc.text("Type",60,150); doc.text("Subject",95,150); doc.text("Marks",130,150); doc.text("Max",150,150); doc.text("Status",165,150); doc.setTextColor(0,0,0);
+            let y=158;
+            tests.forEach(t=>{ if(y>270){doc.addPage();y=20;} doc.text(t.date,25,y); doc.text(t.type.substring(0,15),60,y); doc.text(t.subject.substring(0,10),95,y); doc.text(String(t.marks),130,y); doc.text(String(t.maxMarks),150,y); if(t.status==='Absent')doc.setTextColor(255,0,0); doc.text(t.status,165,y); doc.setTextColor(0,0,0); y+=8; });
+            doc.setFontSize(10); doc.setTextColor(100,100,100); doc.text("Generated by Class 11th Dashboard",105,280,{align:"center"}); doc.text(`Generated on: ${new Date().toLocaleDateString()}`,105,285,{align:"center"});
+            doc.save(`${name}_Complete_Marks_Report.pdf`);
+        }
+
+        // ==============================================================
+        //   INIT
+        // ==============================================================
+        async function initDashboard() {
+            // Load Drive-backed data first
+            await loadStudentsData();        // smps.json from Drive
+            await loadTeachersData();        // Teachers.json from Drive → also renders teacher card
+            await loadTodayAssembly();       // House_Date.json from Drive (today)
+
+            // Load Sheets data in parallel
+            await Promise.all([
+                loadStudyMaterials(),
+                loadProjectsData(),
+                loadMathsMarks(),
+                loadNotebookStatus(),
+                fetchTestMarksData(),
+                loadSyllabusData(),
+                loadIndexData(),
+                loadActivityData(),
+                loadHolidaysData(),
+            ]);
+
+            // Show notification flags
+            showFlags();
+        }
+
+        window.addEventListener('DOMContentLoaded', initDashboard);
+    </script>
+</body>
+</html>

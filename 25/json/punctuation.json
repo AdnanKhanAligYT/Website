@@ -1,0 +1,57 @@
+[
+  {
+    "title": "Punctuation",
+    "icon": "fas fa-pen-alt",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> Punctuation refers to the use of symbols in writing to separate sentences, clauses, or words, making the meaning clear and the text easier to read.<br><strong>Hindi:</strong> Viram chihn likhit bhasha mein chihnon ka prayog hai jo vakyas, upvakyas, ya shabdon ko alag karte hain, arth ko spasht aur pathan ko saral banate hain.</p><p>It organizes and structures written language.<br>Yeh likhit bhasha ko vyavasthit aur sanrachit karta hai.</p><div class='popup-example'><strong>Example:</strong> Let's eat, Grandma! (With comma) vs. Let's eat Grandma! (Without comma).<br><strong>Hindi:</strong> Chalo, Dadi, khana khaate hain! (Alpa viram ke saath) vs. Chalo Dadi khana khaate hain! (Bina alpa viram).</div>"
+  },
+  {
+    "title": "Full Stop (Period)",
+    "icon": "fas fa-circle",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> A full stop (.) marks the end of a declarative sentence or an abbreviation.<br><strong>Hindi:</strong> Poorna viram (.) ek vivaranatmak vakya ya sankshiptakshar ke ant ko darshata hai.</p><h3>Use</h3><p>Used to indicate a complete thought or end of a statement.<br>Poorn vichar ya kathan ke ant ke liye.</p><div class='popup-example'><strong>Example:</strong> She is reading a book.<br><strong>Hindi:</strong> Woh ek kitaab padh rahi hai.</div>"
+  },
+  {
+    "title": "Comma",
+    "icon": "fas fa-comma",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> A comma (,) separates elements in a list, clauses, or phrases to improve clarity.<br><strong>Hindi:</strong> Alpa viram (,) soochi, up Florida, or phrases ke beech alag karta hai aur spashtata badhata hai.</p><h3>Use</h3><p>Used in lists, to separate clauses, or to mark non-essential information.<br>Soochi mein, upvakyas ke beech, ya gair-zaruri jankari ke liye.</p><div class='popup-example'><strong>Example:</strong> I bought apples, oranges, and bananas.<br><strong>Hindi:</strong> Maine seb, santre, aur kele kharide.</div>"
+  },
+  {
+    "title": "Question Mark",
+    "icon": "fas fa-question",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> A question mark (?) indicates the end of an interrogative sentence.<br><strong>Hindi:</strong> Prashna chihn (?) prashnavachak vakya ke ant ko darshata hai.</p><h3>Use</h3><p>Used to show a question is being asked.<br>Prashn poochhe jane ko dikhane ke liye.</p><div class='popup-example'><strong>Example:</strong> Where are you going?<br><strong>Hindi:</strong> Tum kahan ja rahe ho?</div>"
+  },
+  {
+    "title": "Exclamation Mark",
+    "icon": "fas fa-exclamation",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> An exclamation mark (!) indicates excitement, surprise, or emphasis in an exclamatory sentence.<br><strong>Hindi:</strong> Vismay soochak chihn (!) vismayadibodhak vakya mein uttejana, ashcharya, ya zor dikhata hai.</p><h3>Use</h3><p>Used to express strong emotion or emphasis.<br>Teez bhavna ya zor dikhane ke liye.</p><div class='popup-example'><strong>Example:</strong> What a beautiful sunset!<br><strong>Hindi:</strong> Kya sundar suryast hai!</div>"
+  },
+  {
+    "title": "Semicolon",
+    "icon": "fas fa-pause",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> A semicolon (;) separates two independent clauses that are closely related or balances items in a complex list.<br><strong>Hindi:</strong> Upviram (;) do swatantra upvakyas ko alag karta hai jo ek doosre se sambandhit hote hain ya jटil soochi mein santulan banata hai.</p><h3>Use</h3><p>Used to connect related ideas or clarify complex lists.<br>Sambandhit vicharon ko jodne ya jटil soochiyon ko spasht karne ke liye.</p><div class='popup-example'><strong>Example:</strong> She loves reading; he prefers movies.<br><strong>Hindi:</strong> Use padhna pasand hai; woh filmein pasand karta hai.</div>"
+  },
+  {
+    "title": "Colon",
+    "icon": "fas fa-ellipsis-v",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> A colon (:) introduces a list, explanation, or elaboration.<br><strong>Hindi:</strong> Visham chihn (:) ek soochi, vyakhya, ya vistaran ka parichay deta hai.</p><h3>Use</h3><p>Used to introduce or emphasize what follows.<br>Agla vivaran prastut ya uspar zor dene ke liye.</p><div class='popup-example'><strong>Example:</strong> I need three things: a pen, a notebook, and coffee.<br><strong>Hindi:</strong> Mujhe teen cheezein chahiye: ek pen, ek notebook, aur coffee.</div>"
+  },
+  {
+    "title": "Apostrophe",
+    "icon": "fas fa-quote-left",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> An apostrophe (') shows possession or forms contractions.<br><strong>Hindi:</strong> Apasvar chihn (') swaamitva dikhata hai ya sankochan banata hai.</p><h3>Use</h3><p>Used to indicate ownership or combine words (e.g., don't, can't).<br>Swaamitva ya shabd jodne ke liye (jaise, nahi, nahi kar sakta).</p><div class='popup-example'><strong>Example:</strong> This is John's book. I can't come.<br><strong>Hindi:</strong> Yeh John ki kitaab hai. Main nahi aa sakta.</div>"
+  },
+  {
+    "title": "Quotation Marks",
+    "icon": "fas fa-quote-right",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> Quotation marks ('') or (\"\") enclose direct speech, quotes, or specific words/phrases.<br><strong>Hindi:</strong> Udharan chihn ('') ya (\"\") sidhe vachan, uddharan, ya vishesh shabd/vakyansh ko gherte hain.</p><h3>Use</h3><p>Used to indicate direct speech or highlight specific terms.<br>Sidhe vachan ya vishesh shabdon ko ujaagar karne ke liye.</p><div class='popup-example'><strong>Example:</strong> She said, \"I love reading.\"<br><strong>Hindi:</strong> Usne kaha, \"Mujhe padhna pasand hai.\"</div>"
+  },
+  {
+    "title": "Parentheses",
+    "icon": "fas fa-parentheses",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> Parentheses (()) enclose additional or explanatory information.<br><strong>Hindi:</strong> Kramik chihn (()) atirikt ya vyakhyatmak jankari ko gherte hain.</p><h3>Use</h3><p>Used to add extra details without disrupting the main sentence.<br>Mukhya vakya mein badhal daale bina atirikt jankari jodne ke liye.</p><div class='popup-example'><strong>Example:</strong> He arrived late (as usual).<br><strong>Hindi:</strong> Woh der se pahuncha (hamesha ki tarah).</div>"
+  },
+  {
+    "title": "Hyphen and Dash",
+    "icon": "fas fa-minus",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> A hyphen (-) joins compound words or separates syllables. A dash (– or —) separates phrases or indicates a pause.<br><strong>Hindi:</strong> Yojak chihn (-) samyukt shabd jodta hai ya akshar alag karta hai. Dash (– ya —) vakyansh alag karta hai ya viram dikhata hai.</p><h3>Use</h3><p>Hyphen for word formation; dash for separation or emphasis.<br>Yojak chihn shabd nirmaan ke liye; dash alag karne ya zor dene ke liye.</p><div class='popup-example'><strong>Example:</strong> A well-known author – she wrote many books – visited us.<br><strong>Hindi:</strong> Ek prasiddh lekhika – usne kai kitaabein likhi – humse mili.</div>"
+  }
+]

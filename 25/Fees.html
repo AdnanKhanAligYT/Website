@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Fees Status – Month Wise Analysis</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- jsPDF library for PDF generation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+<!-- Include your CSS -->
+<link rel="stylesheet" href="css/class.css">
+
+<style>
+/* Additional styles specific to fees page */
+body.fees-page {
+    background: var(--gradient-dark);
+    color: var(--light);
+    min-height: 100vh;
+    padding: 15px;
+}
+
+.fees-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.fees-header {
+    text-align: center;
+    padding: 25px 20px;
+    margin-bottom: 25px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+    background: var(--card-bg);
+    backdrop-filter: blur(15px);
+    border: 1px solid var(--card-border);
+    box-shadow: var(--glow);
+    transition: all 0.3s ease;
+}
+
+.fees-header:hover {
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
+    transform: translateY(-2px);
+}
+
+.fees-logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.fees-logo {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--primary);
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.3), 0 0 0 4px rgba(168, 85, 247, 0.3);
+    transition: all 0.3s ease;
+}
+
+.fees-logo:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.4), 0 0 0 6px rgba(168, 85, 247, 0.4);
+}
+
+.fees-header h1 {
+    margin: 0.5rem 0;
+    font-size: 2.2rem;
+    font-weight: 700;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 10px rgba(168, 85, 247, 0.4);
+    letter-spacing: -0.5px;
+}
+
+.fees-header p {
+    margin: 0;
+    font-size: 1.05rem;
+    max-width: 600px;
+    margin: 0 auto;
+    color: var(--light-muted);
+}
+
+/* Compact stats for fees */
+.fees-stats-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.fees-stat-box {
+    background: rgba(168, 85, 247, 0.2);
+    border-radius: 12px;
+    padding: 12px 8px;
+    text-align: center;
+    border: 1px solid var(--card-border);
+    transition: all 0.3s ease;
+}
+
+.fees-stat-box:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(168, 85, 247, 0.3);
+}
+
+.fees-stat-value {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary-light);
+    margin-bottom: 5px;
+}
+
+.fees-stat-label {
+    font-size: 0.75rem;
+    color: var(--light-muted);
+}
+
+/* Controls styling */
+.fees-controls {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 25px;
+    padding: 20px;
+    background: var(--card-bg);
+    border-radius: 16px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.fees-controls select {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px 15px;
+    border: 2px solid var(--dark-border);
+    border-radius: 8px;
+    background: var(--dark-card);
+    color: var(--light);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%23faf5ff' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    padding-right: 40px;
+}
+
+.fees-controls select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.3);
+}
+
+.fees-controls option {
+    background: var(--dark-card);
+    color: var(--light);
+}
+
+.fees-controls input {
+    flex: 1;
+    min-width: 200px;
+    padding: 12px 15px;
+    border: 2px solid var(--dark-border);
+    border-radius: 8px;
+    background: var(--dark-card);
+    color: var(--light);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.fees-controls input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.3);
+}
+
+/* Month filter buttons */
+.month-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: var(--card-bg);
+    border-radius: 12px;
+    border: 1px solid var(--card-border);
+}
+
+.month-filter-btn {
+    padding: 8px 16px;
+    border: 1px solid var(--card-border);
+    background: rgba(168, 85, 247, 0.1);
+    color: var(--light);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.month-filter-btn:hover {
+    background: rgba(168, 85, 247, 0.2);
+    transform: translateY(-2px);
+}
+
+.month-filter-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
+}
+
+/* Mobile section for class display */
+.fees-mobile-section {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+.fees-class-title {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    color: var(--primary-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 2px solid rgba(168, 85, 247, 0.4);
+    font-weight: 600;
+}
+
+.fees-table-container {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid var(--dark-border);
+}
+
+.fees-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    background: rgba(26, 22, 37, 0.9);
+}
+
+.fees-table th, .fees-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid var(--dark-border);
+}
+
+.fees-table th {
+    background: rgba(168, 85, 247, 0.3);
+    color: var(--primary-light);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.fees-table tr:hover {
+    background: rgba(168, 85, 247, 0.15);
+}
+
+/* Student name styling */
+.fees-student-name {
+    color: var(--primary-light);
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 4px 8px;
+    border-radius: 6px;
+    display: inline-block;
+}
+
+.fees-student-name:hover {
+    color: var(--secondary);
+    background: rgba(168, 85, 247, 0.1);
+    transform: translateX(3px);
+}
+
+/* Fees details styling */
+.fees-details {
+    color: var(--light);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    background: rgba(168, 85, 247, 0.08);
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-top: 5px;
+    border-left: 3px solid var(--primary);
+    max-width: 400px;
+}
+
+/* Amount display */
+.amount-display {
+    font-family: monospace;
+    font-size: 1rem;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.amount-total {
+    font-weight: 700;
+    color: var(--primary-light);
+}
+
+/* Badge styling */
+.fees-badge {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-block;
+}
+
+.fees-badge.paid {
+    background: rgba(22, 163, 74, 0.25);
+    color: var(--success);
+    border: 1px solid var(--success);
+}
+
+.fees-badge.pending {
+    background: rgba(245, 158, 11, 0.25);
+    color: var(--warning);
+    border: 1px solid var(--warning);
+}
+
+.fees-badge.partial {
+    background: rgba(59, 130, 246, 0.25);
+    color: #3b82f6;
+    border: 1px solid #3b82f6;
+}
+
+.fees-badge.overdue {
+    background: rgba(239, 68, 68, 0.25);
+    color: var(--danger);
+    border: 1px solid var(--danger);
+}
+
+/* Download buttons */
+.fees-download-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.fees-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    padding: 12px 25px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+}
+
+.fees-download-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(168, 85, 247, 0.5);
+}
+
+.fees-download-btn.full-report {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+.fees-download-btn.excel-report {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+/* Empty state */
+.fees-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--light-muted);
+    background: rgba(168, 85, 247, 0.05);
+    border-radius: 12px;
+    border: 2px dashed var(--card-border);
+    margin: 20px 0;
+}
+
+.fees-empty i {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    color: var(--primary);
+    opacity: 0.5;
+}
+
+.fees-empty p {
+    font-size: 1.1rem;
+    color: var(--light-muted);
+}
+
+/* Class stats */
+.fees-class-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.fees-class-stat-box {
+    background: rgba(168, 85, 247, 0.12);
+    border-radius: 10px;
+    padding: 12px;
+    text-align: center;
+    border: 1px solid var(--card-border);
+    transition: all 0.3s ease;
+}
+
+.fees-class-stat-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(168, 85, 247, 0.2);
+}
+
+.fees-class-stat-value {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary-light);
+    margin-bottom: 3px;
+}
+
+.fees-class-stat-label {
+    font-size: 0.75rem;
+    color: var(--light-muted);
+}
+
+/* Total Due styling */
+.total-due-amount {
+    font-weight: 700;
+    font-family: monospace;
+    padding: 4px 8px;
+    border-radius: 6px;
+    display: inline-block;
+    min-width: 80px;
+    text-align: right;
+}
+
+.total-due-amount.paid {
+    background: rgba(22, 163, 74, 0.15);
+    color: var(--success);
+    border: 1px solid rgba(22, 163, 74, 0.3);
+}
+
+.total-due-amount.pending {
+    background: rgba(245, 158, 11, 0.15);
+    color: var(--warning);
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.total-due-amount.partial {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.total-due-amount.overdue {
+    background: rgba(239, 68, 68, 0.15);
+    color: var(--danger);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .fees-stats-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+    
+    .fees-controls {
+        flex-direction: column;
+    }
+    
+    .fees-controls select,
+    .fees-controls input {
+        width: 100%;
+        min-width: unset;
+    }
+    
+    .month-filters {
+        justify-content: center;
+    }
+    
+    .fees-download-buttons {
+        flex-direction: column;
+    }
+    
+    .fees-download-btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .fees-class-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .fees-table {
+        font-size: 0.85rem;
+    }
+    
+    .fees-table th,
+    .fees-table td {
+        padding: 10px 12px;
+    }
+    
+    .total-due-amount {
+        min-width: 60px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .fees-header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .fees-stats-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .fees-class-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .fees-table th,
+    .fees-table td {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+    }
+    
+    .fees-details {
+        font-size: 0.8rem;
+        padding: 8px 10px;
+    }
+    
+    .total-due-amount {
+        min-width: 50px;
+        font-size: 0.8rem;
+        padding: 3px 6px;
+    }
+}
+
+/* Fees modal popup for receipt */
+.fees-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    z-index: 10000;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.fees-modal.active {
+    display: flex;
+    opacity: 1;
+    animation: fadeIn 0.3s ease;
+}
+
+.fees-modal-content {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 2.5rem;
+    max-width: 500px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    border: 1px solid var(--card-border);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(15px);
+    animation: popupSlideIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes popupSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.close-fees-modal {
+    position: absolute;
+    top: 1.2rem;
+    right: 1.5rem;
+    font-size: 1.8rem;
+    color: var(--light-muted);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: rgba(168, 85, 247, 0.1);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--card-border);
+}
+
+.close-fees-modal:hover {
+    color: var(--danger);
+    background: rgba(239, 68, 68, 0.2);
+    transform: rotate(90deg);
+}
+
+.fees-modal-title {
+    color: var(--primary-light);
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--card-border);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+</style>
+</head>
+
+<body class="fees-page">
+
+<div class="fees-container">
+    <!-- Header -->
+    <div class="fees-header">
+        <div class="fees-logo-container">
+            <img src="images/smps_logo.jpg" alt="SMPS Logo" class="fees-logo">
+        </div>
+        <h1>📘 Fees Status Dashboard</h1>
+        <p>Saiema Mansoor Public School - Month Wise Fee Analysis System</p>
+        
+        <!-- Stats -->
+        <div class="fees-stats-container">
+            <div class="fees-stat-box">
+                <div class="fees-stat-value" id="totalStudents">0</div>
+                <div class="fees-stat-label">Total Students</div>
+            </div>
+            <div class="fees-stat-box">
+                <div class="fees-stat-value" id="paidAmount">₹0</div>
+                <div class="fees-stat-label">Total Paid</div>
+            </div>
+            <div class="fees-stat-box">
+                <div class="fees-stat-value" id="pendingAmount">₹0</div>
+                <div class="fees-stat-label">Total Due</div>
+            </div>
+            <div class="fees-stat-box">
+                <div class="fees-stat-value" id="collectionRate">0%</div>
+                <div class="fees-stat-label">Collection Rate</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="fees-controls">
+        <select id="monthSelect">
+            <option value="">Select Month</option>
+            <option value="April">April</option>
+            <option value="May">May</option>
+            <option value="June">June</option>
+            <option value="July">July</option>
+            <option value="August">August</option>
+            <option value="September">September</option>
+            <option value="October">October (with SA1)</option>
+            <option value="November">November</option>
+            <option value="December">December</option>
+            <option value="January">January</option>
+            <option value="February">February</option>
+            <option value="March">March</option>
+        </select>
+
+        <select id="classSelect">
+            <option value="">All Classes</option>
+        </select>
+        
+        <input type="text" id="studentSearch" placeholder="Search student by name..." />
+    </div>
+    
+    <!-- Month Filters -->
+    <div class="month-filters" id="monthFilters">
+        <!-- Month buttons will be generated here -->
+    </div>
+
+    <!-- Output Area -->
+    <div id="output"></div>
+
+    <!-- Download Buttons -->
+    <div class="fees-download-buttons">
+        <button class="fees-download-btn" onclick="downloadFullReport()">
+            <i class="fas fa-file-pdf"></i> Download Full Report PDF
+        </button>
+        <button class="fees-download-btn excel-report" onclick="downloadExcelReport()">
+            <i class="fas fa-file-excel"></i> Download Excel Report
+        </button>
+    </div>
+</div>
+
+<!-- Fees Modal -->
+<div class="fees-modal" id="feesModal">
+    <div class="fees-modal-content">
+        <span class="close-fees-modal" onclick="closeFeesModal()">&times;</span>
+        <h2 class="fees-modal-title">
+            <i class="fas fa-file-invoice-dollar"></i> Fee Details
+        </h2>
+        <div id="feesModalContent">
+            <!-- Content will be loaded here -->
+        </div>
+    </div>
+</div>
+
+<!-- Font Awesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<script>
+// Google Sheets URLs
+const FEES_SHEET_URL = "https://opensheet.elk.sh/1FUpqRyVWcQZGK8bPuXEd12f-4xU7h6M9VUHlG4rMlnw/Fees";
+const AMOUNT_SHEET_URL = "https://opensheet.elk.sh/1FUpqRyVWcQZGK8bPuXEd12f-4xU7h6M9VUHlG4rMlnw/Amount";
+
+let feesData = [];
+let amountData = [];
+let headers = [];
+let filteredData = [];
+let currentMonth = "";
+let classAmounts = {};
+let latestFeesDate = null;
+
+// Month mapping for m/d/yyyy format
+const monthNames = ["January", "February", "March", "April", "May", "June", "July", 
+                   "August", "September", "October", "November", "December"];
+const monthMapping = {
+    "1": "January", "2": "February", "3": "March", "4": "April",
+    "5": "May", "6": "June", "7": "July", "8": "August",
+    "9": "September", "10": "October", "11": "November", "12": "December"
+};
+
+// Month order for academic year (April to March)
+const academicMonthOrder = ["April", "May", "June", "July", "August", "September", 
+                           "October", "November", "December", "January", "February", "March"];
+
+// Fetch data from both Google Sheets
+Promise.all([
+    fetch(FEES_SHEET_URL).then(response => response.json()),
+    fetch(AMOUNT_SHEET_URL).then(response => response.json())
+])
+.then(([feesJson, amountJson]) => {
+    feesData = feesJson;
+    amountData = amountJson;
+    headers = Object.keys(feesData[0]);
+    
+    // Process amount data into classAmounts object
+    processAmountData();
+    
+    // Extract and sort dates from fees data
+    const dates = [...new Set(feesData.map(row => row.Date))].filter(date => date);
+    dates.sort((a, b) => {
+        const dateA = parseDate(a);
+        const dateB = parseDate(b);
+        return dateB - dateA; // Descending order
+    });
+    
+    // Set latest date
+    if (dates.length > 0) {
+        latestFeesDate = parseDate(dates[0]);
+        currentMonth = getMonthFromDate(dates[0]);
+        document.getElementById('monthSelect').value = currentMonth;
+    }
+    
+    // Extract and populate classes from amount data
+    const classes = amountData.map(row => row.Class).filter(cls => cls);
+    classes.sort((a, b) => {
+        const order = ["PLAYWAY", "LKG", "UKG", "1st", "2nd", "3rd", "4th", "5th", 
+                      "6th", "7th", "8th", "9th", "10th", "11th", "12th"];
+        return order.indexOf(a) - order.indexOf(b);
+    });
+    
+    const classSelect = document.getElementById('classSelect');
+    classes.forEach(cls => {
+        const option = document.createElement('option');
+        option.value = cls;
+        option.textContent = cls;
+        classSelect.appendChild(option);
+    });
+    
+    // Create month filter buttons
+    createMonthFilters();
+    
+    // Render initial data
+    render();
+})
+.catch(error => {
+    console.error('Error fetching data:', error);
+    document.getElementById('output').innerHTML = `
+        <div class="fees-empty">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>Error loading data. Please try again later.</p>
+        </div>
+    `;
+});
+
+// Process amount data into classAmounts object
+function processAmountData() {
+    classAmounts = {};
+    
+    amountData.forEach(row => {
+        const className = row.Class;
+        if (!className) return;
+        
+        classAmounts[className] = {
+            Total: parseFloat(row.Total) || 0,
+            April: parseFloat(row.April) || 0,
+            May: parseFloat(row.May) || 0,
+            June: parseFloat(row.June) || 0,
+            July: parseFloat(row.July) || 0,
+            August: parseFloat(row.August) || 0,
+            September: parseFloat(row.September) || 0,
+            October: (parseFloat(row.October) || 0) + (parseFloat(row.SA1) || 0),
+            November: parseFloat(row.November) || 0,
+            December: parseFloat(row.December) || 0,
+            January: parseFloat(row.January) || 0,
+            February: parseFloat(row.February) || 0,
+            March: parseFloat(row.March) || 0,
+            SA1: parseFloat(row.SA1) || 0,
+            SA2: parseFloat(row.SA2) || 0,
+            Practical: parseFloat(row.Practical) || 0,
+            Development: parseFloat(row.Development) || 0,
+            Others: parseFloat(row.Others) || 0
+        };
+    });
+}
+
+// Create month filter buttons
+function createMonthFilters() {
+    const monthFilters = document.getElementById('monthFilters');
+    monthNames.forEach(month => {
+        const button = document.createElement('button');
+        button.className = 'month-filter-btn';
+        button.textContent = month;
+        button.setAttribute('data-month', month);
+        button.onclick = () => {
+            document.querySelectorAll('.month-filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            button.classList.add('active');
+            document.getElementById('monthSelect').value = month;
+            render();
+        };
+        monthFilters.appendChild(button);
+    });
+    
+    // Set current month as active
+    if (currentMonth) {
+        const currentBtn = document.querySelector(`.month-filter-btn[data-month="${currentMonth}"]`);
+        if (currentBtn) currentBtn.classList.add('active');
+    }
+}
+
+// Event listeners
+document.getElementById('monthSelect').addEventListener('change', function() {
+    const month = this.value;
+    document.querySelectorAll('.month-filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.getAttribute('data-month') === month) {
+            btn.classList.add('active');
+        }
+    });
+    render();
+});
+
+document.getElementById('classSelect').addEventListener('change', render);
+document.getElementById('studentSearch').addEventListener('input', render);
+
+// Parse date in format m/d/yyyy
+function parseDate(dateString) {
+    if (!dateString) return new Date();
+    const parts = dateString.split('/');
+    const month = parseInt(parts[0]) - 1; // months are 0-indexed
+    const day = parseInt(parts[1]);
+    const year = parseInt(parts[2]);
+    return new Date(year, month, day);
+}
+
+// Get month name from date string (m/d/yyyy format)
+function getMonthFromDate(dateString) {
+    if (!dateString) return '';
+    const parts = dateString.split('/');
+    const monthNum = parseInt(parts[0]);
+    return monthMapping[monthNum.toString()] || '';
+}
+
+// Format date for display from m/d/yyyy format
+function formatDate(dateString) {
+    if (!dateString) return '';
+    const parts = dateString.split('/');
+    const month = parts[0];
+    const day = parts[1];
+    const year = parts[2];
+    return `${day}-${month}-${year}`;
+}
+
+// Extract amount from fee string
+function extractAmount(feeString) {
+    if (!feeString) return 0;
+    
+    const matches = feeString.match(/\d+/g);
+    if (matches) {
+        return matches.reduce((sum, num) => sum + parseInt(num), 0);
+    }
+    
+    return 0;
+}
+
+// Format amount as Indian Rupees
+function formatAmount(amount) {
+    return '₹' + amount.toLocaleString('en-IN');
+}
+
+// Calculate cumulative required amount from April to selected month
+function getCumulativeRequiredAmount(className, selectedMonth) {
+    if (!classAmounts[className]) return 0;
+    
+    const selectedMonthIndex = academicMonthOrder.indexOf(selectedMonth);
+    if (selectedMonthIndex === -1) return 0;
+    
+    let cumulativeAmount = 0;
+    for (let i = 0; i <= selectedMonthIndex; i++) {
+        const month = academicMonthOrder[i];
+        if (month === 'October') {
+            cumulativeAmount += classAmounts[className].October || 0;
+        } else {
+            cumulativeAmount += classAmounts[className][month] || 0;
+        }
+    }
+    
+    return cumulativeAmount;
+}
+
+// Calculate total annual amount for a class
+function getTotalAnnualAmount(className) {
+    if (!classAmounts[className]) return 0;
+    return classAmounts[className].Total || 0;
+}
+
+// Get student count for a class from latest fees data
+function getClassStudentCount(className) {
+    if (!latestFeesDate) return 0;
+    
+    const latestDateStr = feesData.find(row => 
+        parseDate(row.Date).getTime() === latestFeesDate.getTime()
+    )?.Date;
+    
+    if (!latestDateStr) return 0;
+    
+    const classRow = feesData.find(row => 
+        row.Date === latestDateStr && 
+        row.Class === className
+    );
+    
+    if (!classRow) return 0;
+    
+    let studentCount = 0;
+    const studentColumns = Object.keys(classRow).filter(header => 
+        header.includes(' - Fees') && 
+        !['Date', 'Class', 'Timestamp'].includes(header)
+    );
+    
+    studentColumns.forEach(column => {
+        const feeValue = classRow[column];
+        if (feeValue && feeValue.trim() !== '') {
+            studentCount++;
+        }
+    });
+    
+    return studentCount;
+}
+
+// Get total paid amount for a class from latest fees data
+function getClassTotalPaid(className) {
+    if (!latestFeesDate) return 0;
+    
+    const latestDateStr = feesData.find(row => 
+        parseDate(row.Date).getTime() === latestFeesDate.getTime()
+    )?.Date;
+    
+    if (!latestDateStr) return 0;
+    
+    const classRow = feesData.find(row => 
+        row.Date === latestDateStr && 
+        row.Class === className
+    );
+    
+    if (!classRow) return 0;
+    
+    let totalPaid = 0;
+    const studentColumns = Object.keys(classRow).filter(header => 
+        header.includes(' - Fees') && 
+        !['Date', 'Class', 'Timestamp'].includes(header)
+    );
+    
+    studentColumns.forEach(column => {
+        const feeValue = classRow[column];
+        if (feeValue && feeValue.trim() !== '') {
+            totalPaid += extractAmount(feeValue);
+        }
+    });
+    
+    return totalPaid;
+}
+
+// Get total students count across all classes
+function getTotalStudentsCount() {
+    if (!latestFeesDate) return 0;
+    
+    const latestDateStr = feesData.find(row => 
+        parseDate(row.Date).getTime() === latestFeesDate.getTime()
+    )?.Date;
+    
+    if (!latestDateStr) return 0;
+    
+    const latestRows = feesData.filter(row => row.Date === latestDateStr);
+    if (latestRows.length === 0) return 0;
+    
+    let totalStudents = 0;
+    
+    latestRows.forEach(row => {
+        const studentColumns = Object.keys(row).filter(header => 
+            header.includes(' - Fees') && 
+            !['Date', 'Class', 'Timestamp'].includes(header)
+        );
+        
+        studentColumns.forEach(column => {
+            const feeValue = row[column];
+            if (feeValue && feeValue.trim() !== '') {
+                totalStudents++;
+            }
+        });
+    });
+    
+    return totalStudents;
+}
+
+// Get total school paid amount
+function getTotalSchoolPaidAmount() {
+    if (!latestFeesDate) return 0;
+    
+    const latestDateStr = feesData.find(row => 
+        parseDate(row.Date).getTime() === latestFeesDate.getTime()
+    )?.Date;
+    
+    if (!latestDateStr) return 0;
+    
+    const latestRows = feesData.filter(row => row.Date === latestDateStr);
+    if (latestRows.length === 0) return 0;
+    
+    let totalPaid = 0;
+    
+    latestRows.forEach(row => {
+        const studentColumns = Object.keys(row).filter(header => 
+            header.includes(' - Fees') && 
+            !['Date', 'Class', 'Timestamp'].includes(header)
+        );
+        
+        studentColumns.forEach(column => {
+            const feeValue = row[column];
+            if (feeValue && feeValue.trim() !== '') {
+                totalPaid += extractAmount(feeValue);
+            }
+        });
+    });
+    
+    return totalPaid;
+}
+
+// Get total school due amount (Total Annual Amount - Total Paid)
+function getTotalSchoolDueAmount() {
+    let totalAnnualAmount = 0;
+    let totalPaid = getTotalSchoolPaidAmount();
+    
+    // Calculate total annual amount (Total column * number of students in each class)
+    amountData.forEach(row => {
+        const className = row.Class;
+        if (!className) return;
+        
+        const classTotal = parseFloat(row.Total) || 0;
+        const studentCount = getClassStudentCount(className);
+        
+        totalAnnualAmount += (classTotal * studentCount);
+    });
+    
+    return Math.max(totalAnnualAmount - totalPaid, 0);
+}
+
+// Get class due amount (Class Total * Number of Students - Class Total Paid)
+function getClassDueAmount(className) {
+    const classTotal = getTotalAnnualAmount(className);
+    const studentCount = getClassStudentCount(className);
+    const classTotalPaid = getClassTotalPaid(className);
+    
+    const totalClassAmount = classTotal * studentCount;
+    return Math.max(totalClassAmount - classTotalPaid, 0);
+}
+
+// Get latest fees data for a student
+function getStudentCumulativePaid(studentName, className) {
+    if (!latestFeesDate) return 0;
+    
+    const latestDateStr = feesData.find(row => 
+        parseDate(row.Date).getTime() === latestFeesDate.getTime()
+    )?.Date;
+    
+    if (!latestDateStr) return 0;
+    
+    const classRow = feesData.find(row => 
+        row.Date === latestDateStr && 
+        row.Class === className
+    );
+    
+    if (!classRow) return 0;
+    
+    const studentColumn = Object.keys(classRow).find(header => 
+        header.includes(studentName + ' - Fees')
+    );
+    
+    if (!studentColumn) return 0;
+    
+    const feeValue = classRow[studentColumn];
+    return extractAmount(feeValue);
+}
+
+// Calculate total due for a student
+function getStudentTotalDue(studentName, className) {
+    const classTotal = getTotalAnnualAmount(className);
+    const studentPaid = getStudentCumulativePaid(studentName, className);
+    return Math.max(classTotal - studentPaid, 0);
+}
+
+// Render function
+function render() {
+    const month = document.getElementById('monthSelect').value;
+    const classFilter = document.getElementById('classSelect').value;
+    const studentSearch = document.getElementById('studentSearch').value.toLowerCase();
+    const output = document.getElementById('output');
+    
+    output.innerHTML = '';
+    
+    if (!month) {
+        output.innerHTML = `
+            <div class="fees-empty">
+                <i class="fas fa-calendar-alt"></i>
+                <p>Please select a month to view fee status</p>
+            </div>
+        `;
+        filteredData = [];
+        updateStats();
+        return;
+    }
+    
+    // Use latest fees data
+    let rows = [];
+    if (latestFeesDate) {
+        const latestDateStr = feesData.find(row => 
+            parseDate(row.Date).getTime() === latestFeesDate.getTime()
+        )?.Date;
+        
+        if (latestDateStr) {
+            rows = feesData.filter(row => row.Date === latestDateStr);
+        }
+    }
+    
+    // Filter by class if specified
+    if (classFilter) {
+        rows = rows.filter(row => row.Class === classFilter);
+    }
+    
+    filteredData = rows;
+    
+    if (rows.length === 0) {
+        output.innerHTML = `
+            <div class="fees-empty">
+                <i class="fas fa-search"></i>
+                <p>No data found for ${month}${classFilter ? ` in Class ${classFilter}` : ''}</p>
+            </div>
+        `;
+        updateStats();
+        return;
+    }
+    
+    // Group by class
+    const classes = [...new Set(rows.map(row => row.Class))].filter(cls => cls);
+    classes.sort((a, b) => {
+        const order = ["PLAYWAY", "LKG", "UKG", "1st", "2nd", "3rd", "4th", "5th", 
+                      "6th", "7th", "8th", "9th", "10th", "11th", "12th"];
+        return order.indexOf(a) - order.indexOf(b);
+    });
+    
+    classes.forEach(className => {
+        const classRows = rows.filter(row => row.Class === className);
+        if (classRows.length === 0) return;
+        
+        const classRow = classRows[0];
+        
+        // Calculate class statistics
+        const studentCount = getClassStudentCount(className);
+        const classTotalPaid = getClassTotalPaid(className);
+        const classTotalAnnual = getTotalAnnualAmount(className);
+        const cumulativeRequired = getCumulativeRequiredAmount(className, month);
+        const classDueAmount = getClassDueAmount(className);
+        const totalClassAmount = classTotalAnnual * studentCount;
+        const collectionRate = totalClassAmount > 0 ? Math.round((classTotalPaid / totalClassAmount) * 100) : 0;
+        
+        // Find all student columns for this class
+        const studentColumns = headers.filter(header => 
+            header.includes(' - Fees') && 
+            !['Date', 'Class', 'Timestamp'].includes(header)
+        );
+        
+        // Filter by student search if provided
+        let filteredColumns = studentColumns;
+        if (studentSearch) {
+            filteredColumns = studentColumns.filter(column => 
+                column.toLowerCase().includes(studentSearch)
+            );
+        }
+        
+        // Create table HTML
+        let tableHtml = `
+            <div class="fees-mobile-section">
+                <div class="fees-class-title">
+                    <span>Class: ${className} - ${month}</span>
+                    <span class="amount-total">Cumulative (Apr-${month}): ${formatAmount(cumulativeRequired)} | Annual Total: ${formatAmount(classTotalAnnual)}</span>
+                </div>
+                
+                <div class="fees-class-stats">
+                    <div class="fees-class-stat-box">
+                        <div class="fees-class-stat-value">${studentCount}</div>
+                        <div class="fees-class-stat-label">Total Students</div>
+                    </div>
+                    <div class="fees-class-stat-box">
+                        <div class="fees-class-stat-value">${formatAmount(classTotalPaid)}</div>
+                        <div class="fees-class-stat-label">Total Paid</div>
+                    </div>
+                    <div class="fees-class-stat-box">
+                        <div class="fees-class-stat-value">${formatAmount(classDueAmount)}</div>
+                        <div class="fees-class-stat-label">Total Due</div>
+                    </div>
+                    <div class="fees-class-stat-box">
+                        <div class="fees-class-stat-value">${collectionRate}%</div>
+                        <div class="fees-class-stat-label">Collection Rate</div>
+                    </div>
+                </div>
+                
+                <div class="fees-table-container">
+                    <table class="fees-table">
+                        <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Fee Status</th>
+                                <th>Amount Paid</th>
+                                <th>Amount Due (Annual)</th>
+                                <th>Cumulative Due (Apr-${month})</th>
+                            </tr>
+                        </thead>
+                        <tbody>`;
+        
+        filteredColumns.forEach(column => {
+            const feeValue = classRow[column];
+            if (!feeValue || feeValue.trim() === '') return;
+            
+            const studentName = column.replace(' - Fees', '').trim();
+            const studentPaid = getStudentCumulativePaid(studentName, className);
+            const studentTotalDue = getStudentTotalDue(studentName, className);
+            const studentCumulativeDue = Math.max(cumulativeRequired - studentPaid, 0);
+            
+            // Determine status based on cumulative payment
+            let status = 'pending';
+            let badgeClass = 'pending';
+            
+            if (studentPaid >= classTotalAnnual) {
+                status = 'paid';
+                badgeClass = 'paid';
+            } else if (studentPaid >= cumulativeRequired) {
+                status = 'partial';
+                badgeClass = 'partial';
+            } else if (studentPaid > 0) {
+                status = 'partial';
+                badgeClass = 'partial';
+            } else {
+                status = 'pending';
+                badgeClass = 'pending';
+            }
+            
+            // Check if overdue
+            const monthIndex = academicMonthOrder.indexOf(month);
+            const currentMonthIndex = academicMonthOrder.indexOf(getMonthFromDate(latestFeesDate.toLocaleDateString()));
+            
+            if (monthIndex < currentMonthIndex && studentPaid < cumulativeRequired) {
+                badgeClass = 'overdue';
+                status = 'overdue';
+            }
+            
+            // Determine class for total due display
+            let totalDueClass = badgeClass;
+            if (studentTotalDue === 0) {
+                totalDueClass = 'paid';
+            } else if (studentTotalDue === classTotalAnnual) {
+                totalDueClass = 'pending';
+            } else if (studentTotalDue > 0 && studentTotalDue < classTotalAnnual) {
+                totalDueClass = 'partial';
+            }
+            
+            let cumulativeDueClass = 'pending';
+            if (studentCumulativeDue === 0) {
+                cumulativeDueClass = 'paid';
+            } else if (studentCumulativeDue === cumulativeRequired) {
+                cumulativeDueClass = 'pending';
+            } else if (studentCumulativeDue > 0 && studentCumulativeDue < cumulativeRequired) {
+                cumulativeDueClass = 'partial';
+            }
+            
+            tableHtml += `
+                <tr>
+                    <td>
+                        <div class="fees-student-name" onclick="showStudentDetails('${studentName}', '${className}', '${month}', '${feeValue.replace(/'/g, "\\'")}', ${studentPaid}, ${cumulativeRequired}, ${classTotalAnnual})">
+                            ${studentName}
+                        </div>
+                    </td>
+                    <td>
+                        <span class="fees-badge ${badgeClass}">${status.toUpperCase()}</span>
+                    </td>
+                    <td class="amount-display">${formatAmount(studentPaid)}</td>
+                    <td>
+                        <span class="total-due-amount ${totalDueClass}">${formatAmount(studentTotalDue)}</span>
+                    </td>
+                    <td>
+                        <span class="total-due-amount ${cumulativeDueClass}">${formatAmount(studentCumulativeDue)}</span>
+                    </td>
+                </tr>`;
+        });
+        
+        if (filteredColumns.length === 0) {
+            tableHtml += `
+                <tr>
+                    <td colspan="5" style="text-align: center; padding: 30px; color: var(--light-muted);">
+                        <i class="fas fa-search"></i> No students found matching your search
+                    </td>
+                </tr>`;
+        }
+        
+        tableHtml += `
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div style="margin-top: 20px; display: flex; justify-content: flex-end;">
+                    <button class="fees-download-btn" onclick="downloadClassPDF('${className}', '${month}')" style="padding: 8px 15px; font-size: 0.9rem;">
+                        <i class="fas fa-download"></i> Download Class Report
+                    </button>
+                </div>
+            </div>`;
+        
+        output.innerHTML += tableHtml;
+    });
+    
+    updateStats();
+}
+
+// Update statistics
+function updateStats() {
+    const totalStudents = getTotalStudentsCount();
+    const totalPaid = getTotalSchoolPaidAmount();
+    const totalDue = getTotalSchoolDueAmount();
+    const totalAnnualAmount = totalDue + totalPaid;
+    const collectionRate = totalAnnualAmount > 0 ? Math.round((totalPaid / totalAnnualAmount) * 100) : 0;
+    
+    document.getElementById('totalStudents').textContent = totalStudents;
+    document.getElementById('paidAmount').textContent = formatAmount(totalPaid);
+    document.getElementById('pendingAmount').textContent = formatAmount(totalDue);
+    document.getElementById('collectionRate').textContent = collectionRate + '%';
+}
+
+// Show student details in modal
+function showStudentDetails(studentName, className, month, feeDetails, studentPaid, cumulativeRequired, classTotalAnnual) {
+    const modal = document.getElementById('feesModal');
+    const modalContent = document.getElementById('feesModalContent');
+    
+    const studentTotalDue = Math.max(classTotalAnnual - studentPaid, 0);
+    const studentCumulativeDue = Math.max(cumulativeRequired - studentPaid, 0);
+    const progressPercent = classTotalAnnual > 0 ? Math.round((studentPaid / classTotalAnnual) * 100) : 0;
+    const cumulativeProgressPercent = cumulativeRequired > 0 ? Math.round((studentPaid / cumulativeRequired) * 100) : 0;
+    
+    modalContent.innerHTML = `
+        <div style="margin-bottom: 20px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                <div>
+                    <h3 style="color: var(--primary-light); margin-bottom: 5px;">${studentName}</h3>
+                    <p style="color: var(--light-muted); font-size: 0.9rem;">Class: ${className}</p>
+                    <p style="color: var(--light-muted); font-size: 0.9rem;">Month: ${month} (Cumulative till ${month})</p>
+                </div>
+                <button class="fees-download-btn" onclick="downloadStudentPDF('${studentName}', '${className}', '${month}')" style="padding: 8px 15px; font-size: 0.9rem;">
+                    <i class="fas fa-file-pdf"></i> Download Receipt
+                </button>
+            </div>
+            
+            <div style="background: rgba(168, 85, 247, 0.1); padding: 15px; border-radius: 10px; border-left: 4px solid var(--primary); margin-bottom: 20px;">
+                <h4 style="color: var(--primary-light); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-money-bill-wave"></i> Fee Details Summary
+                </h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px;">
+                    <div style="background: rgba(22, 163, 74, 0.1); padding: 10px; border-radius: 6px; border-left: 3px solid var(--success);">
+                        <div style="font-size: 0.8rem; color: var(--light-muted);">Total Paid</div>
+                        <div style="font-size: 1.2rem; font-weight: 700; color: var(--success);">${formatAmount(studentPaid)}</div>
+                    </div>
+                    <div style="background: rgba(245, 158, 11, 0.1); padding: 10px; border-radius: 6px; border-left: 3px solid var(--warning);">
+                        <div style="font-size: 0.8rem; color: var(--light-muted);">Cumulative Due (Apr-${month})</div>
+                        <div style="font-size: 1.2rem; font-weight: 700; color: var(--warning);">${formatAmount(studentCumulativeDue)}</div>
+                    </div>
+                </div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div style="background: rgba(67, 97, 238, 0.1); padding: 10px; border-radius: 6px; border-left: 3px solid #4361ee;">
+                        <div style="font-size: 0.8rem; color: var(--light-muted);">Annual Total Fee</div>
+                        <div style="font-size: 1.2rem; font-weight: 700; color: #4361ee;">${formatAmount(classTotalAnnual)}</div>
+                    </div>
+                    <div style="background: rgba(239, 68, 68, 0.1); padding: 10px; border-radius: 6px; border-left: 3px solid var(--danger);">
+                        <div style="font-size: 0.8rem; color: var(--light-muted);">Total Due (Annual)</div>
+                        <div style="font-size: 1.2rem; font-weight: 700; color: var(--danger);">${formatAmount(studentTotalDue)}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="background: rgba(6, 182, 212, 0.1); padding: 15px; border-radius: 10px; border-left: 4px solid var(--secondary); margin-bottom: 20px;">
+                <h4 style="color: var(--secondary); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-chart-line"></i> Payment Progress
+                </h4>
+                <div style="margin-bottom: 15px;">
+                    <div style="font-size: 0.9rem; color: var(--light); margin-bottom: 5px;">Cumulative (April to ${month}): ${cumulativeProgressPercent}%</div>
+                    <div class="progress-container" style="height: 10px; margin: 5px 0; background: rgba(168, 85, 247, 0.1); border-radius: 5px; overflow: hidden;">
+                        <div style="width: ${cumulativeProgressPercent}%; height: 100%; background: linear-gradient(90deg, var(--primary), var(--primary-dark)); border-radius: 5px;"></div>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-size: 0.9rem; color: var(--light); margin-bottom: 5px;">Annual Progress: ${progressPercent}%</div>
+                    <div class="progress-container" style="height: 10px; margin: 5px 0; background: rgba(6, 182, 212, 0.1); border-radius: 5px; overflow: hidden;">
+                        <div style="width: ${progressPercent}%; height: 100%; background: linear-gradient(90deg, var(--secondary), #0ea5e9); border-radius: 5px;"></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="background: rgba(139, 92, 246, 0.05); padding: 15px; border-radius: 10px; border: 1px dashed var(--card-border);">
+                <h4 style="color: var(--light-muted); margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-info-circle"></i> Additional Information
+                </h4>
+                <p style="color: var(--light); font-size: 0.9rem;">
+                    <strong>Latest Fee Entry:</strong> ${feeDetails}<br><br>
+                    <strong>Note:</strong> Total Due = Annual Total Fee (${formatAmount(classTotalAnnual)}) - Total Paid (${formatAmount(studentPaid)})<br><br>
+                    This cumulative fee report is generated by Saiema Mansoor Public School Fee Management System.
+                    For any queries, please contact the school administration.
+                </p>
+            </div>
+        </div>
+    `;
+    
+    modal.classList.add('active');
+}
+
+// Close fees modal
+function closeFeesModal() {
+    document.getElementById('feesModal').classList.remove('active');
+}
+
+// Download student PDF receipt
+function downloadStudentPDF(studentName, className, month) {
+    const studentPaid = getStudentCumulativePaid(studentName, className);
+    const cumulativeRequired = getCumulativeRequiredAmount(className, month);
+    const classTotalAnnual = getTotalAnnualAmount(className);
+    const studentTotalDue = Math.max(classTotalAnnual - studentPaid, 0);
+    const studentCumulativeDue = Math.max(cumulativeRequired - studentPaid, 0);
+    const progressPercent = classTotalAnnual > 0 ? Math.round((studentPaid / classTotalAnnual) * 100) : 0;
+    const cumulativeProgressPercent = cumulativeRequired > 0 ? Math.round((studentPaid / cumulativeRequired) * 100) : 0;
+    
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    
+    doc.setFontSize(20);
+    doc.setTextColor(67, 97, 238);
+    doc.text('Saiema Mansoor Public School', 105, 20, { align: 'center' });
+    
+    doc.setFontSize(16);
+    doc.setTextColor(0, 0, 0);
+    doc.text('Cumulative Fee Payment Receipt', 105, 30, { align: 'center' });
+    
+    doc.setFontSize(12);
+    doc.text(`April to ${month} | Class: ${className}`, 105, 40, { align: 'center' });
+    
+    doc.setFontSize(14);
+    doc.setTextColor(67, 97, 238);
+    doc.text('Student Information', 20, 55);
+    
+    doc.setFontSize(11);
+    doc.setTextColor(0, 0, 0);
+    doc.text(`Student Name: ${studentName}`, 20, 65);
+    doc.text(`Class: ${className}`, 20, 72);
+    doc.text(`Period: April to ${month}`, 20, 79);
+    doc.text(`Report Date: ${new Date().toLocaleDateString()}`, 20, 86);
+    
+    doc.setFontSize(14);
+    doc.setTextColor(67, 97, 238);
+    doc.text('Fee Details Summary', 20, 100);
+    
+    doc.setFontSize(11);
+    doc.text(`Total Paid: ₹${studentPaid.toLocaleString('en-IN')}`, 20, 110);
+    doc.text(`Annual Total Fee: ₹${classTotalAnnual.toLocaleString('en-IN')}`, 20, 117);
+    doc.text(`Total Due (Annual): ₹${studentTotalDue.toLocaleString('en-IN')}`, 20, 124);
+    doc.text(`Cumulative Required (Apr-${month}): ₹${cumulativeRequired.toLocaleString('en-IN')}`, 20, 131);
+    doc.text(`Cumulative Due (Apr-${month}): ₹${studentCumulativeDue.toLocaleString('en-IN')}`, 20, 138);
+    
+    const receiptNo = `SMPS-CUM-${month.substring(0,3)}-${className}-${Math.random().toString(36).substr(2, 5).toUpperCase()}`;
+    
+    doc.setFontSize(9);
+    doc.setTextColor(100, 100, 100);
+    doc.text(`Receipt No: ${receiptNo}`, 20, 150);
+    doc.text('Generated by SMPS Fee Management System', 105, 155, { align: 'center' });
+    doc.text(`Latest Data Date: ${latestFeesDate ? latestFeesDate.toLocaleDateString() : 'N/A'}`, 105, 160, { align: 'center' });
+    
+    doc.save(`Cumulative_Fee_Receipt_${studentName.replace(/\s+/g, '_')}_Apr-${month}_${className}.pdf`);
+}
+
+// Download class PDF
+function downloadClassPDF(className, month) {
+    const studentCount = getClassStudentCount(className);
+    const classTotalPaid = getClassTotalPaid(className);
+    const classTotalAnnual = getTotalAnnualAmount(className);
+    const cumulativeRequired = getCumulativeRequiredAmount(className, month);
+    const classDueAmount = getClassDueAmount(className);
+    const totalClassAmount = classTotalAnnual * studentCount;
+    const collectionRate = totalClassAmount > 0 ? Math.round((classTotalPaid / totalClassAmount) * 100) : 0;
+    
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    
+    doc.setFontSize(20);
+    doc.setTextColor(67, 97, 238);
+    doc.text('Saiema Mansoor Public School', 105, 20, { align: 'center' });
+    
+    doc.setFontSize(16);
+    doc.setTextColor(0, 0, 0);
+    doc.text(`Class ${className} - Cumulative Fee Report (April to ${month})`, 105, 30, { align: 'center' });
+    
+    doc.setFontSize(12);
+    doc.text(`Total Students: ${studentCount} | Annual Fee per Student: ${formatAmount(classTotalAnnual)}`, 105, 40, { align: 'center' });
+    doc.text(`Total Class Amount: ${formatAmount(totalClassAmount)} | Collected: ${formatAmount(classTotalPaid)}`, 105, 47, { align: 'center' });
+    doc.text(`Due: ${formatAmount(classDueAmount)} | Collection Rate: ${collectionRate}%`, 105, 54, { align: 'center' });
+    doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 105, 61, { align: 'center' });
+    
+    const tableData = [];
+    const studentColumns = headers.filter(header => 
+        header.includes(' - Fees') && 
+        !['Date', 'Class', 'Timestamp'].includes(header)
+    );
+    
+    studentColumns.forEach(column => {
+        const studentName = column.replace(' - Fees', '').trim();
+        const studentPaid = getStudentCumulativePaid(studentName, className);
+        const studentTotalDue = Math.max(classTotalAnnual - studentPaid, 0);
+        const studentCumulativeDue = Math.max(cumulativeRequired - studentPaid, 0);
+        
+        let status = 'Pending';
+        if (studentPaid >= classTotalAnnual) {
+            status = 'Paid';
+        } else if (studentPaid >= cumulativeRequired) {
+            status = 'On Track';
+        } else if (studentPaid > 0) {
+            status = 'Partial';
+        } else {
+            status = 'Pending';
+        }
+        
+        tableData.push([
+            studentName,
+            `₹${studentPaid.toLocaleString('en-IN')}`,
+            `₹${studentTotalDue.toLocaleString('en-IN')}`,
+            `₹${studentCumulativeDue.toLocaleString('en-IN')}`,
+            status
+        ]);
+    });
+    
+    doc.setFontSize(11);
+    doc.text(`Cumulative Required (Apr-${month}) per Student: ${formatAmount(cumulativeRequired)}`, 20, 75);
+    
+    doc.autoTable({
+        startY: 85,
+        head: [['Student Name', 'Amount Paid', 'Annual Due', `Cumulative Due (Apr-${month})`, 'Status']],
+        body: tableData,
+        theme: 'striped',
+        headStyles: { fillColor: [67, 97, 238], textColor: 255 },
+        columnStyles: {
+            0: { cellWidth: 60 },
+            1: { cellWidth: 35 },
+            2: { cellWidth: 35 },
+            3: { cellWidth: 40 },
+            4: { cellWidth: 25 }
+        },
+        margin: { left: 20 }
+    });
+    
+    doc.save(`Class_${className}_Cumulative_Fees_Apr-${month}_Report.pdf`);
+}
+
+// Download full report PDF
+function downloadFullReport() {
+    const month = document.getElementById('monthSelect').value;
+    const classFilter = document.getElementById('classSelect').value;
+    
+    if (!month) {
+        alert('Please select a month first!');
+        return;
+    }
+    
+    const classes = classFilter ? [classFilter] : Object.keys(classAmounts);
+    
+    if (classes.length === 0) {
+        alert('No data to generate report!');
+        return;
+    }
+    
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    
+    doc.setFontSize(20);
+    doc.setTextColor(67, 97, 238);
+    doc.text('Saiema Mansoor Public School', 105, 20, { align: 'center' });
+    
+    doc.setFontSize(16);
+    doc.setTextColor(0, 0, 0);
+    doc.text(`Cumulative Fee Status Report - April to ${month}`, 105, 30, { align: 'center' });
+    
+    doc.setFontSize(12);
+    const filterText = classFilter ? 
+        `Class: ${classFilter}` : 
+        `All Classes`;
+    doc.text(filterText, 105, 40, { align: 'center' });
+    doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 105, 47, { align: 'center' });
+    
+    let totalStudents = 0;
+    let totalPaid = 0;
+    let totalDue = 0;
+    let totalAnnualAmount = 0;
+    
+    classes.forEach(className => {
+        const studentCount = getClassStudentCount(className);
+        const classTotalPaid = getClassTotalPaid(className);
+        const classTotalAnnual = getTotalAnnualAmount(className);
+        const classDueAmount = getClassDueAmount(className);
+        
+        totalStudents += studentCount;
+        totalPaid += classTotalPaid;
+        totalDue += classDueAmount;
+        totalAnnualAmount += (classTotalAnnual * studentCount);
+    });
+    
+    const collectionRate = totalAnnualAmount > 0 ? Math.round((totalPaid / totalAnnualAmount) * 100) : 0;
+    
+    doc.setFontSize(11);
+    doc.text(`Total Students: ${totalStudents} | Total Annual Amount: ${formatAmount(totalAnnualAmount)}`, 20, 60);
+    doc.text(`Total Collected: ${formatAmount(totalPaid)} | Total Due: ${formatAmount(totalDue)} | Collection Rate: ${collectionRate}%`, 20, 67);
+    
+    let startY = 80;
+    
+    classes.forEach(className => {
+        const studentCount = getClassStudentCount(className);
+        const classTotalPaid = getClassTotalPaid(className);
+        const classTotalAnnual = getTotalAnnualAmount(className);
+        const classDueAmount = getClassDueAmount(className);
+        const totalClassAmount = classTotalAnnual * studentCount;
+        const classCollectionRate = totalClassAmount > 0 ? Math.round((classTotalPaid / totalClassAmount) * 100) : 0;
+        
+        if (startY > 250) {
+            doc.addPage();
+            startY = 20;
+        }
+        
+        doc.setFontSize(14);
+        doc.setTextColor(67, 97, 238);
+        doc.text(`Class: ${className}`, 20, startY);
+        startY += 7;
+        
+        doc.setFontSize(11);
+        doc.setTextColor(0, 0, 0);
+        doc.text(`Students: ${studentCount} | Annual Fee per Student: ${formatAmount(classTotalAnnual)}`, 20, startY);
+        startY += 7;
+        doc.text(`Total Class Amount: ${formatAmount(totalClassAmount)} | Collected: ${formatAmount(classTotalPaid)}`, 20, startY);
+        startY += 7;
+        doc.text(`Due: ${formatAmount(classDueAmount)} | Collection Rate: ${classCollectionRate}%`, 20, startY);
+        startY += 10;
+    });
+    
+    const fileName = classFilter ? 
+        `Cumulative_Fees_Report_Apr-${month}_Class_${classFilter}.pdf` :
+        `Cumulative_Fees_Report_Apr-${month}_All_Classes.pdf`;
+    
+    doc.save(fileName);
+}
+
+// Download Excel report
+function downloadExcelReport() {
+    const month = document.getElementById('monthSelect').value;
+    const classFilter = document.getElementById('classSelect').value;
+    
+    if (!month) {
+        alert('Please select a month first!');
+        return;
+    }
+    
+    const classes = classFilter ? [classFilter] : Object.keys(classAmounts);
+    
+    if (classes.length === 0) {
+        alert('No data to generate report!');
+        return;
+    }
+    
+    let csvContent = "data:text/csv;charset=utf-8,";
+    csvContent += "Class,Student Name,Annual Total Fee,Amount Paid,Amount Due (Annual),Cumulative Required (Apr-" + month + "),Cumulative Due (Apr-" + month + "),Status\r\n";
+    
+    classes.forEach(className => {
+        const classTotalAnnual = getTotalAnnualAmount(className);
+        const cumulativeRequired = getCumulativeRequiredAmount(className, month);
+        
+        const studentColumns = headers.filter(header => 
+            header.includes(' - Fees') && 
+            !['Date', 'Class', 'Timestamp'].includes(header)
+        );
+        
+        studentColumns.forEach(column => {
+            const studentName = column.replace(' - Fees', '').trim();
+            const studentPaid = getStudentCumulativePaid(studentName, className);
+            const studentTotalDue = Math.max(classTotalAnnual - studentPaid, 0);
+            const studentCumulativeDue = Math.max(cumulativeRequired - studentPaid, 0);
+            
+            let status = 'Pending';
+            if (studentPaid >= classTotalAnnual) {
+                status = 'Paid';
+            } else if (studentPaid >= cumulativeRequired) {
+                status = 'On Track';
+            } else if (studentPaid > 0) {
+                status = 'Partial';
+            } else {
+                status = 'Pending';
+            }
+            
+            csvContent += `${className},"${studentName}",${classTotalAnnual},${studentPaid},${studentTotalDue},${cumulativeRequired},${studentCumulativeDue},${status}\r\n`;
+        });
+    });
+    
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    
+    const fileName = classFilter ? 
+        `Cumulative_Fees_Report_Apr-${month}_Class_${classFilter}.csv` :
+        `Cumulative_Fees_Report_Apr-${month}_All_Classes.csv`;
+    
+    link.setAttribute("download", fileName);
+    document.body.appendChild(link);
+    
+    link.click();
+    document.body.removeChild(link);
+}
+</script>
+</body>
+</html>

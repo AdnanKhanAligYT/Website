@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>Adnan's Salam · Real Location Only</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: linear-gradient(145deg, #0a5c4a, #0b3b2f);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Amiri', 'Traditional Arabic', 'Scheherazade', 'Segoe UI', serif;
+            padding: 12px;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                radial-gradient(circle at 30% 40%, rgba(255,215,0,0.05) 0%, transparent 25%),
+                repeating-linear-gradient(45deg, rgba(255,240,180,0.03) 0px, rgba(255,240,180,0.03) 2px, transparent 2px, transparent 8px);
+            pointer-events: none;
+        }
+        .salam-card {
+            background: rgba(0, 40, 35, 0.7);
+            backdrop-filter: blur(8px);
+            padding: 2rem 1.2rem;
+            border-radius: 60px 20px 60px 20px;
+            border: 3px solid #e4b138;
+            box-shadow: 0 30px 40px rgba(0,0,0,0.6), 0 0 0 2px #a17d32 inset;
+            text-align: center;
+            width: 100%;
+            max-width: 700px;
+            position: relative;
+            z-index: 10;
+        }
+        .arabic-main {
+            font-size: clamp(3rem, 15vw, 7rem);
+            font-weight: 900;
+            color: #ffdf7e;
+            text-shadow: 4px 4px 0 #8b6b2b, 10px 10px 20px #000;
+            line-height: 1.1;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+        .urdu-style {
+            font-size: clamp(1.8rem, 6vw, 2.8rem);
+            color: #ecd896;
+            background: #0e4f41;
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 60px;
+            border: 2px solid #ffd966;
+            box-shadow: 0 8px 0 #05392d;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .adnan-sign {
+            font-size: clamp(1.3rem, 4vw, 2rem);
+            color: #f2e4b3;
+            border-top: 2px dashed #b38633;
+            padding-top: 1rem;
+            margin-top: 0.8rem;
+            font-style: italic;
+        }
+        
+        .location-container {
+            margin-top: 1.8rem;
+            padding: 1.2rem 1rem;
+            background: rgba(0, 20, 15, 0.6);
+            border-radius: 30px 30px 30px 30px;
+            border: 2px solid #b38633;
+            font-family: 'Segoe UI', 'Courier New', monospace;
+        }
+        .live-badge {
+            display: inline-block;
+            background: #ff5252;
+            color: white;
+            font-size: 0.9rem;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            margin-bottom: 1rem;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0% { opacity: 0.7; }
+            50% { opacity: 1; }
+            100% { opacity: 0.7; }
+        }
+        .coordinate-box {
+            background: rgba(255, 215, 0, 0.1);
+            padding: 0.8rem 0.5rem;
+            border-radius: 15px;
+            margin: 0.7rem 0;
+        }
+        .lat-lng {
+            font-size: clamp(1.5rem, 6vw, 2rem);
+            font-weight: bold;
+            color: #ffd966;
+            word-break: break-word;
+        }
+        .label {
+            font-size: 1rem;
+            color: #a0d6a0;
+            margin-bottom: 0.2rem;
+            letter-spacing: 0.5px;
+        }
+        .status-message {
+            margin-top: 1rem;
+            padding: 0.6rem 0.8rem;
+            border-radius: 50px;
+            background: rgba(255,255,255,0.1);
+            color: #e4b138;
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        .accuracy {
+            color: #bbb;
+            font-size: 0.9rem;
+            margin-top: 0.8rem;
+            border-top: 1px solid #a17d32;
+            padding-top: 0.8rem;
+        }
+        .reload-btn {
+            background: #e4b138;
+            border: none;
+            color: #0a3a2f;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-top: 1.2rem;
+            cursor: pointer;
+            border: 2px solid #ffdf7e;
+            box-shadow: 0 5px 0 #8b6b2b;
+            transition: 0.1s ease;
+            width: 100%;
+            font-family: inherit;
+        }
+        .reload-btn:active {
+            transform: translateY(4px);
+            box-shadow: 0 1px 0 #8b6b2b;
+        }
+        .warning {
+            color: #ffaa66;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="salam-card">
+        <div class="arabic-main">السلام عليكم</div>
+        <div class="urdu-style">"Adnan ki taraf se"</div>
+        <div class="adnan-sign">✦ عدنان رضا ✦</div>
+        
+        <div class="location-container">
+            <div class="live-badge">🔴 EK BAAR LOCATION · PHIR RELOAD</div>
+            
+            <div class="coordinate-box">
+                <div class="label">📍 LATITUDE</div>
+                <div class="lat-lng" id="latitudeValue">--.------</div>
+            </div>
+            
+            <div class="coordinate-box">
+                <div class="label">📍 LONGITUDE</div>
+                <div class="lat-lng" id="longitudeValue">--.------</div>
+            </div>
+            
+            <div id="statusMessage" class="status-message">
+                ⏳ Location on karo aur permission do...
+            </div>
+            
+            <div id="accuracyInfo" class="accuracy"></div>
+
+            <!-- Warning message for location off -->
+            <div id="locationWarning" class="warning" style="display: none;">
+                ⚠️ Location band hai! Kholo aur reload karo.
+            </div>
+
+            <!-- Reload button (dubara bhejne ke liye) -->
+            <button class="reload-btn" id="reloadBtn" onclick="location.reload()">
+                🔄 Naya Location Bhejne Ke Liye Reload Karo
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // ===== CONFIGURATION =====
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbxvEutBk4K5Rjk6TFDXGQ0TIWUXuKqPwivNHfjCjt_G7Hh1BTwF0veC3acAWUPB4ped/exec";
+        
+        // DOM elements
+        const latitudeEl = document.getElementById('latitudeValue');
+        const longitudeEl = document.getElementById('longitudeValue');
+        const statusEl = document.getElementById('statusMessage');
+        const accuracyEl = document.getElementById('accuracyInfo');
+        const warningEl = document.getElementById('locationWarning');
+        
+        let locationSent = false;
+        let sendInProgress = false;
+
+        // ===== CHECK IF LOCATION IS ON =====
+        function checkLocationOn() {
+            if (!navigator.geolocation) {
+                statusEl.innerHTML = '❌ Geolocation support nahi hai';
+                return false;
+            }
+            return true;
+        }
+
+        // ===== GET LOCATION SIRF EK BAAR =====
+        function getLocationOnce() {
+            if (!checkLocationOn()) return;
+
+            navigator.permissions.query({ name: 'geolocation' }).then((result) => {
+                if (result.state === 'denied') {
+                    warningEl.style.display = 'block';
+                    statusEl.innerHTML = '❌ Location band hai. Permission do aur reload karo.';
+                    statusEl.style.background = 'rgba(255, 82, 82, 0.2)';
+                    statusEl.style.color = '#ff5252';
+                } else {
+                    warningEl.style.display = 'none';
+                    requestLocationOnce();
+                }
+            }).catch(() => {
+                requestLocationOnce();
+            });
+        }
+
+        // ===== REQUEST LOCATION (SIRF EK BAAR) =====
+        function requestLocationOnce() {
+            statusEl.innerHTML = '⏳ Location aa rahi hai...';
+            
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    updateLocation(position);
+                    sendLocationToSheet(position);
+                },
+                function(error) {
+                    handleLocationError(error);
+                    
+                    if (error.code === error.PERMISSION_DENIED || error.code === error.POSITION_UNAVAILABLE) {
+                        warningEl.style.display = 'block';
+                    }
+                },
+                {
+                    enableHighAccuracy: true,
+                    timeout: 15000,
+                    maximumAge: 0
+                }
+            );
+        }
+
+        // ===== UPDATE DISPLAY =====
+        function updateLocation(position) {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            const accuracy = position.coords.accuracy;
+            
+            latitudeEl.textContent = lat.toFixed(6) + '°';
+            longitudeEl.textContent = lng.toFixed(6) + '°';
+            
+            statusEl.innerHTML = '✅ Location mil gayi';
+            statusEl.style.background = 'rgba(76, 175, 80, 0.2)';
+            statusEl.style.color = '#4CAF50';
+            
+            if (accuracy < 1) {
+                accuracyEl.innerHTML = `⚡ Ultra High: ±${accuracy.toFixed(1)} meters`;
+            } else if (accuracy < 20) {
+                accuracyEl.innerHTML = `⚡ High accuracy: ±${Math.round(accuracy)} meters`;
+            } else {
+                accuracyEl.innerHTML = `📡 Accuracy: ±${Math.round(accuracy)} meters`;
+            }
+        }
+
+        // ===== ERROR HANDLING =====
+        function handleLocationError(error) {
+            let message = '';
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    message = '❌ Location permission nahi di';
+                    warningEl.style.display = 'block';
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    message = '❌ Location available nahi (network issue)';
+                    warningEl.style.display = 'block';
+                    break;
+                case error.TIMEOUT:
+                    message = '❌ Location timeout (zameen check karo)';
+                    warningEl.style.display = 'block';
+                    break;
+                default:
+                    message = '❌ Unknown error';
+            }
+            
+            statusEl.innerHTML = message;
+            statusEl.style.background = 'rgba(255, 82, 82, 0.2)';
+            statusEl.style.color = '#ff5252';
+            
+            latitudeEl.textContent = '--.------';
+            longitudeEl.textContent = '--.------';
+        }
+
+        // ===== SEND TO GOOGLE SHEET (SIRF EK BAAR) =====
+        function sendLocationToSheet(position) {
+            if (locationSent || sendInProgress) return;
+            
+            sendInProgress = true;
+            
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            
+            const now = new Date();
+            const payload = {
+                name: "Adnan",
+                lat: lat,
+                lng: lng,
+                accuracy: position.coords.accuracy,
+                date: now.toLocaleDateString('en-IN'),
+                time: now.toLocaleTimeString('en-IN', { hour12: false }),
+                timestamp: now.toISOString()
+            };
+            
+            statusEl.innerHTML = '📤 Data sheet mein bhej raha hai...';
+            statusEl.style.background = 'rgba(255, 215, 0, 0.2)';
+            statusEl.style.color = '#FFD700';
+            
+            fetch(WEB_APP_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            })
+            .then(() => {
+                statusEl.innerHTML = '✅ Data sheet mein save ho gaya. Ab reload karo naye location ke liye.';
+                statusEl.style.background = 'rgba(76, 175, 80, 0.2)';
+                statusEl.style.color = '#4CAF50';
+                
+                locationSent = true;
+                sendInProgress = false;
+            })
+            .catch((error) => {
+                console.error('Send error:', error);
+                statusEl.innerHTML = '⚠️ Data send mein problem. Reload karo aur try karo.';
+                statusEl.style.background = 'rgba(255, 140, 0, 0.2)';
+                statusEl.style.color = '#FFA500';
+                sendInProgress = false;
+            });
+        }
+
+        // ===== INIT =====
+        document.addEventListener('DOMContentLoaded', function() {
+            getLocationOnce();
+        });
+    </script>
+</body>
+</html>

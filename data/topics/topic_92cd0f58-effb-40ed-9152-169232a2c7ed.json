@@ -1,0 +1,36 @@
+{
+    "id": "92cd0f58-effb-40ed-9152-169232a2c7ed",
+    "subjectId": "b07f5264-5928-4d06-8577-46ed17bd59f5",
+    "name": "IMPERATIVE SENTENCE → Order, request, advice, command dena",
+    "description": "1. Open the door.\n2. Please help me.\n3. Sit down quietly.\n4. Complete your homework.\n5. Do not make noise.\n6. Speak the truth.\n7. Bring me a glass of water.\n8. Keep the room clean.\n9. Study regularly.\n10. Follow the rules.\n11. Turn off the fan.\n12. Wait for me here.\n13. Never waste time.\n14. Read this chapter carefully.\n15. Call your brother immediately.\n16. Please close the window.\n17. Take care of your health.\n18. Do not touch the wires.\n19. Listen to your teacher.\n20. Write your name clearly.",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "createdAt": "2026-06-08 18:44",
+    "updatedAt": "2026-06-22 04:25:00",
+    "revisionHistory": [
+        {
+            "id": "1f2003c4-92b7-4219-8689-b6d2b20aa6b5",
+            "date": "2026-06-15",
+            "time": "2026-06-15 10:06",
+            "note": "Auto: 7 din baad revision scheduled",
+            "type": "auto-revision"
+        },
+        {
+            "id": "a9248bd7-5624-448e-ac62-09f329eee408",
+            "date": "2026-06-17",
+            "time": "2026-06-17 09:03",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "65a5b6a1-4e0b-4798-8bbb-d163d2a0f11a",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "links": [],
+    "pdfs": []
+}

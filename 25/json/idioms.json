@@ -1,0 +1,42 @@
+[
+  {
+    "title": "Idioms",
+    "icon": "fas fa-brain",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> Idioms are fixed expressions or phrases whose meanings are different from the meanings of the individual words.<br><strong>Hindi:</strong> Muhavare (Idioms) aise sthir vakyaansh hote hain jinka arth pratyek shabd ke arth se alag hota hai.</p><p>They express ideas or emotions in a colorful and creative way.<br>Yeh bhavnaon aur vicharon ko rochak aur prabhavshali tarike se vyakt karte hain.</p><div class='popup-example'><strong>Example:</strong> “Break the ice” means to start a conversation.<br><strong>Hindi:</strong> “Break the ice” ka arth hai baatcheet shuru karna.</div>"
+  },
+  {
+    "title": "Features of Idioms",
+    "icon": "fas fa-lightbulb",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> Idioms are commonly used expressions whose meaning cannot be understood literally.<br><strong>Hindi:</strong> Muhavaron ka arth seedha nahi samjha ja sakta, ve vaakya ke sandarbh se arth dete hain.</p><ul><li>Fixed in form (cannot be changed).</li><li>Figurative meaning, not literal.</li><li>Often cultural or contextual.</li><li>Add color and naturalness to speech.</li></ul><div class='popup-example'><strong>Example:</strong> “Under the weather” means 'feeling sick'.<br><strong>Hindi:</strong> “Under the weather” ka arth hai 'bimar hona'.</div>"
+  },
+  {
+    "title": "Common English Idioms",
+    "icon": "fas fa-comments",
+    "content": "<h3>Popular Examples</h3><ul><li><strong>A piece of cake:</strong> Very easy. / <strong>Hindi:</strong> बहुत आसान।</li><li><strong>Break the ice:</strong> Start a conversation. / <strong>Hindi:</strong> बातचीत शुरू करना।</li><li><strong>Hit the sack:</strong> Go to sleep. / <strong>Hindi:</strong> सोने जाना।</li><li><strong>Under the weather:</strong> Feeling ill. / <strong>Hindi:</strong> बीमार महसूस करना।</li><li><strong>Spill the beans:</strong> Reveal a secret. / <strong>Hindi:</strong> राज खोल देना।</li><li><strong>Once in a blue moon:</strong> Very rarely. / <strong>Hindi:</strong> बहुत कम।</li><li><strong>Cost an arm and a leg:</strong> Very expensive. / <strong>Hindi:</strong> बहुत महंगा।</li><li><strong>Beat around the bush:</strong> Avoid the main topic. / <strong>Hindi:</strong> घुमा-फिरा कर बात करना।</li><li><strong>Let the cat out of the bag:</strong> Leak a secret. / <strong>Hindi:</strong> राज उगल देना।</li><li><strong>Time flies:</strong> Time passes quickly. / <strong>Hindi:</strong> समय तेजी से बीतता है।</li></ul>"
+  },
+  {
+    "title": "Common Hindi Idioms",
+    "icon": "fas fa-language",
+    "content": "<h3>Popular Hindi Idioms</h3><ul><li><strong>ऊँट के मुँह में जीरा:</strong> A very small amount compared to need. / <strong>English:</strong> A drop in the ocean.</li><li><strong>हाथ पर हाथ धरे बैठना:</strong> Sit idle. / <strong>English:</strong> Do nothing.</li><li><strong>दूध का जला छाछ भी फूंक-फूंक कर पीता है:</strong> Once bitten, twice shy. / <strong>English:</strong> Be cautious after a bad experience.</li><li><strong>नाक में दम करना:</strong> Keep bothering someone. / <strong>English:</strong> To annoy someone constantly.</li><li><strong>आसमान से गिरे खजूर में अटके:</strong> Out of the frying pan into the fire. / <strong>English:</strong> One trouble after another.</li><li><strong>नाक कटना:</strong> To lose respect. / <strong>English:</strong> To feel ashamed.</li><li><strong>नाकों चने चबवाना:</strong> To trouble someone badly. / <strong>English:</strong> To make someone struggle.</li></ul>"
+  },
+  {
+    "title": "Idioms by Category",
+    "icon": "fas fa-layer-group",
+    "content": "<h3>Grouped by Themes</h3><p><strong>English:</strong> Idioms can be grouped according to topics such as emotions, time, work, etc.<br><strong>Hindi:</strong> Muhavare vishayon ke anusaar vibhaajit kiye ja sakte hain jaise bhavna, samay, ya kaam se sambandhit.</p><ul><li><strong>Time idioms:</strong> At the eleventh hour (antim samay par)</li><li><strong>Work idioms:</strong> By the book (niyamon ke anusaar)</li><li><strong>Emotion idioms:</strong> All ears (dhyaan se sunna)</li><li><strong>Luck idioms:</strong> Break a leg (good luck)</li><li><strong>Difficulty idioms:</strong> A hard nut to crack (muskhil samasya)</li></ul>"
+  },
+  {
+    "title": "Importance of Idioms",
+    "icon": "fas fa-graduation-cap",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Idioms enrich your language, making communication more natural and expressive.<br><strong>Hindi:</strong> Muhavare aapki bhasha ko samriddh aur prabhavshali banate hain.</p><p>They help learners sound fluent and native-like.<br>Yeh seekhne walon ko prakritik aur pravahmay bolne mein madad karte hain.</p>"
+  },
+  {
+    "title": "Common Challenges",
+    "icon": "fas fa-exclamation-triangle",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> Idioms can be confusing because their meanings aren’t literal.<br><strong>Hindi:</strong> Muhavare kathin lagte hain kyunki unka arth seedha nahi hota.</p><div class='popup-example'><strong>Example:</strong> 'Kick the bucket' doesn’t mean literally kicking; it means 'to die'.<br><strong>Hindi:</strong> 'Kick the bucket' ka arth 'marna' hota hai, na ki 'balti marna'.</div>"
+  },
+  {
+    "title": "How to Learn Idioms",
+    "icon": "fas fa-lightbulb",
+    "content": "<h3>Tips</h3><ul><li>Learn by theme (e.g., time, emotion, work).</li><li>Use idioms in writing and daily speech.</li><li>Make flashcards with Hindi meanings.</li><li>Understand context — don’t translate literally.</li></ul><div class='popup-example'><strong>Example:</strong> Practice sentences like 'It’s a piece of cake' to express ease.</div>"
+  }
+]

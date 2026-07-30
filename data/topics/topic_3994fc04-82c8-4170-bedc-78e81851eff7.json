@@ -1,0 +1,29 @@
+{
+    "id": "3994fc04-82c8-4170-bedc-78e81851eff7",
+    "subjectId": "594ab60f-da93-4cf7-91da-12a1ae3fb73e",
+    "name": "Learning Curve and Plateau (अधिगम वक्र एवं पठार)",
+    "description": "### Topic: Learning Curve and Plateau (अधिगम वक्र एवं पठार)\n\n**Question:** Plateau in learning curve is caused due to : / अधिगम में पठार निम्न में से किस कारण बनता है ?\n1. Fatigue / थकान द्वारा\n2. Motivation / अभिप्रेरणा द्वारा\n3. Interest / रुचि द्वारा\n4. Maturation / परिपक्वता द्वारा\n\n**Correct Answer:** 1. Fatigue / थकान द्वारा (Because physiological limitations like exhaustion stop learning progress temporarily)\n\n---\n\n### 📝 Pointed Options Breakdown (Bilingual)\n\n#### 1. Fatigue (थकान द्वारा) - *Correct Answer*\n* **English:** Fatigue, boredom, or physiological limits create a flat period where zero visible progress happens. This horizontal stretch is called a **Learning Plateau**.\n* **Hindi:** शारीरिक या मानसिक थकान, ऊब, या शारीरिक सीमा के कारण सीखने की गति में ठहराव आ जाता है, जिसे **अधिगम का पठार** कहते हैं।\n\n#### 2. Motivation (अभिप्रेरणा द्वारा)\n* **English:** Motivation boosts the learning speed and helps the curve go upward (Positive acceleration). It eliminates plateaus.\n* **Hindi:** अभिप्रेरणा (Motivation) सीखने की गति को बढ़ाती है और वक्र को ऊपर ले जाती है। यह पठार को समाप्त करने में मदद करती है।\n\n#### 3. Interest (रुचि द्वारा)\n* **English:** High interest ensures continuous active learning and maintains a steady progression curve.\n* **Hindi:** सीखने वाले की रुचि (Interest) होने पर अधिगम लगातार बढ़ता रहता है और पठार बनने की संभावना कम होती है।\n\n#### 4. Maturation (परिपक्वता द्वारा)\n* **English:** Biological readiness that naturally enhances a child's capacity to learn complex skills at a certain age.\n* **Hindi:** यह जैविक तत्परता है जो एक निश्चित आयु में बच्चे के सीखने की क्षमता को स्वाभाविक रूप से बढ़ाती है।\n\n---\n\n### 🌟 Key TET Concepts Related to Learning Curve (अधिगम वक्र):\n\n* **What is a Learning Curve?** Graphical representation of the rate of progress in learning over time (Ebbinghaus worked on it first).\n* **What is a Learning Plateau (अधिगम का पठार)?** A temporary stationary phase where no progress in performance is recorded (एक अस्थायी पड़ाव जहाँ सीखने की उन्नति रुक जाती है).\n* **Types of Learning Curves:**\n  1. **Linear/Straight Line Curve (सरल रेखीय वक्र):** Equal rate of progress (Uniform learning rate).\n  2. **Concave / Positive Acceleration Curve (नतोदर वक्र):** Slow progress initially, speeds up later.\n  3. **Convex / Negative Acceleration Curve (उन्नतोदर वक्र):** Fast progress initially, slows down later (Most common in classroom learning).\n  4. **S-Shaped Curve (मिश्रित वक्र):** Combination of both positive and negative acceleration stages.",
+    "status": "Revision",
+    "completeDate": "2026-06-19",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "d71e1be4-8aea-4204-a73b-469fe3cb72ca",
+            "date": "2026-06-19",
+            "time": "2026-06-19 11:30",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "88a0864d-dc9f-427b-b0bc-491781718e89",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-18 15:44",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

@@ -1,0 +1,29 @@
+{
+    "id": "b83aab4a-44ee-4b2b-97e2-eb802c96e3ec",
+    "subjectId": "349b6112-ad37-421c-ac23-0cedcbf7e23b",
+    "name": "A permanent magnet can be effectively made from which of the following materials?",
+    "description": "Question:\n\nA permanent magnet can be effectively made from which of the following materials?\n\n(a) Steel / Alnico\n(b) Soft Iron\n(c) Copper\n(d) Aluminum\n\nAnswer: (a) Steel / Alnico ✅\n\nConcept:\n\nPermanent Magnet ke liye aisa material chahiye\njo magnetism ko lambe samay tak banaye rakhe.\n\nSteel aur Alnico ki Retentivity aur Coercivity zyada hoti hai,\nisliye ye Permanent Magnet banane ke liye use hote hain.\n\nSoft Iron ki Retentivity kam hoti hai,\nisliye use Electromagnet banane ke liye use karte hain.\n\nTRICK:\n\nPermanent Magnet → Steel / Alnico\n\nElectromagnet → Soft Iron\n\nYaad Rakhne Ki Line:\n\n\"Permanent ko Steel pasand,\nTemporary ko Soft Iron pasand.\"\n\nImportant MCQs:\n\nPermanent Magnet → Steel, Alnico\n\nElectromagnet → Soft Iron\n\nStrong Permanent Magnet → Alnico\n\nTemporary Magnet → Soft Iron",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "9fc1fd14-fed8-496e-84d2-40017fc67537",
+            "date": "2026-06-17",
+            "time": "2026-06-17 20:32",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "e504a120-13be-41e0-ada4-c5b4a6f2c533",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-17 20:31",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

@@ -1,0 +1,2206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMPS Assembly Management System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Beautiful Islamic Preloader Styling */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(139, 69, 19, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(218, 165, 32, 0.4) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(184, 134, 11, 0.2) 0%, transparent 50%),
+                linear-gradient(135deg, #0d2e36 0%, #1a5e63 50%, #0d2e36 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s ease;
+            overflow: hidden;
+        }
+        .preloader::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" opacity="0.1"><path d="M50,20 L60,40 L80,45 L65,60 L70,80 L50,70 L30,80 L35,60 L20,45 L40,40 Z" fill="%23daa520"/></svg>') repeat,
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="80" height="80" opacity="0.05"><circle cx="50" cy="50" r="40" fill="none" stroke="%23daa520" stroke-width="2"/><path d="M50,10 L55,30 L75,35 L60,50 L65,70 L50,60 L35,70 L40,50 L25,35 L45,30 Z" fill="%23daa520"/></svg>') repeat;
+            animation: patternFloat 20s linear infinite;
+            pointer-events: none;
+        }
+        .preloader-content {
+            text-align: center;
+            color: #f8f5e6;
+            padding: 3rem;
+            background: linear-gradient(145deg, 
+                rgba(255, 255, 255, 0.1) 0%, 
+                rgba(218, 165, 32, 0.05) 50%, 
+                rgba(139, 69, 19, 0.1) 100%);
+            border-radius: 25px;
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(218, 165, 32, 0.3);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 60px rgba(218, 165, 32, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+        }
+        .preloader-content::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                transparent, 
+                rgba(218, 165, 32, 0.3), 
+                rgba(139, 69, 19, 0.3), 
+                rgba(218, 165, 32, 0.3), 
+                transparent);
+            border-radius: 27px;
+            z-index: -1;
+            animation: borderGlow 3s ease-in-out infinite;
+        }
+        /* Animated Spinner */
+        .preloader-spinner {
+            width: 80px;
+            height: 80px;
+            border: 3px solid transparent;
+            border-top: 3px solid #daa520;
+            border-right: 3px solid #b8860b;
+            border-bottom: 3px solid #8b4513;
+            border-radius: 50%;
+            animation: islamic-spin 2s linear infinite;
+            margin: 0 auto 2rem;
+            position: relative;
+            box-shadow: 0 0 20px rgba(218, 165, 32, 0.4);
+        }
+        .preloader-spinner::before {
+            content: '☪';
+            position: absolute;
+            top: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 1.5rem;
+            color: #daa520;
+            text-shadow: 0 0 10px rgba(218, 165, 32, 0.8);
+            animation: moonFloat 2s ease-in-out infinite;
+        }
+        .preloader-spinner::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, #daa520, #b8860b);
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(218, 165, 32, 0.6);
+        }
+        /* Beautiful Ayat Container */
+        .ayat-container {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, 
+                rgba(218, 165, 32, 0.15) 0%, 
+                rgba(139, 69, 19, 0.1) 50%, 
+                rgba(184, 134, 11, 0.15) 100%);
+            border-radius: 20px;
+            border: 1px solid rgba(218, 165, 32, 0.4);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        .ayat-container::before {
+            content: '﷽';
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.8rem;
+            color: rgba(218, 165, 32, 0.4);
+            font-family: 'Traditional Arabic', 'Amiri', serif;
+            animation: bismillahPulse 4s ease-in-out infinite;
+        }
+        .ayat-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                #daa520, 
+                #b8860b, 
+                #daa520, 
+                transparent);
+            animation: lineGlow 2s ease-in-out infinite;
+        }
+        /* Arabic Text with Beautiful Typography */
+        .arabic {
+            font-size: 2.2rem;
+            color: #f8f5e6;
+            direction: rtl;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+            font-family: 'Traditional Arabic', 'Amiri', 'Scheherazade New', serif;
+            font-weight: 700;
+            text-shadow: 
+                0 2px 4px rgba(0, 0, 0, 0.5),
+                0 0 10px rgba(218, 165, 32, 0.3);
+            position: relative;
+            background: linear-gradient(45deg, #f8f5e6, #d4af37, #f8f5e6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: textShine 3s ease-in-out infinite;
+        }
+        /* Translation Styling */
+        .translation {
+            font-size: 1.2rem;
+            color: #d4af37;
+            font-style: italic;
+            margin-top: 1rem;
+            font-weight: 500;
+            line-height: 1.6;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            letter-spacing: 0.5px;
+            background: linear-gradient(45deg, #d4af37, #f8f5e6, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% 200%;
+            animation: textShine 4s ease-in-out infinite;
+        }
+        /* Loading Text with Animation - FONT SIZE REDUCED */
+        .preloader-content p {
+            font-size: 1.1rem; /* Changed from 1.3rem to 1.1rem */
+            color: #f8f5e6;
+            margin-top: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+            position: relative;
+            text-transform: uppercase;
+        }
+        .preloader-content p::after {
+            content: '';
+            animation: loadingDots 1.5s infinite;
+            color: #daa520;
+        }
+        /* Floating Islamic Elements */
+        .floating-elements {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+        .floating-element {
+            position: absolute;
+            font-size: 1.5rem;
+            color: rgba(218, 165, 32, 0.6);
+            animation: floatAround 15s linear infinite;
+        }
+        .floating-element:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .floating-element:nth-child(2) { top: 60%; left: 80%; animation-delay: -3s; }
+        .floating-element:nth-child(3) { top: 80%; left: 20%; animation-delay: -6s; }
+        .floating-element:nth-child(4) { top: 40%; left: 90%; animation-delay: -9s; }
+        .floating-element:nth-child(5) { top: 10%; left: 70%; animation-delay: -12s; }
+        /* Enhanced Animations */
+        @keyframes islamic-spin {
+            0% { 
+                transform: rotate(0deg); 
+                box-shadow: 0 0 20px rgba(218, 165, 32, 0.4);
+            }
+            50% { 
+                box-shadow: 
+                    0 0 30px rgba(218, 165, 32, 0.8),
+                    0 0 40px rgba(184, 134, 11, 0.6);
+            }
+            100% { 
+                transform: rotate(360deg); 
+                box-shadow: 0 0 20px rgba(218, 165, 32, 0.4);
+            }
+        }
+        @keyframes moonFloat {
+            0%, 100% { 
+                transform: translateX(-50%) translateY(0px) rotate(0deg);
+            }
+            50% { 
+                transform: translateX(-50%) translateY(-5px) rotate(10deg);
+            }
+        }
+        @keyframes loadingDots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+        @keyframes borderGlow {
+            0%, 100% { 
+                opacity: 0.5;
+                background-position: 0% 50%;
+            }
+            50% { 
+                opacity: 1;
+                background-position: 100% 50%;
+            }
+        }
+        @keyframes patternFloat {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-100px, -100px) rotate(360deg); }
+        }
+        @keyframes bismillahPulse {
+            0%, 100% { 
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.6;
+                transform: scale(1.1);
+            }
+        }
+        @keyframes lineGlow {
+            0%, 100% { 
+                opacity: 0.5;
+                width: 60%;
+            }
+            50% { 
+                opacity: 1;
+                width: 80%;
+            }
+        }
+        @keyframes textShine {
+            0%, 100% { 
+                background-position: 0% 50%;
+            }
+            50% { 
+                background-position: 100% 50%;
+            }
+        }
+        @keyframes floatAround {
+            0% { 
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 0;
+            }
+            10% { 
+                opacity: 0.6;
+            }
+            90% { 
+                opacity: 0.6;
+            }
+            100% { 
+                transform: translate(100px, -100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        /* Base Styling for Compatibility */
+        body {
+            font-family: 'Poppins', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+            color: #333;
+            transition: background-color 0.5s ease-in-out;
+            padding-top: 50px;
+        }
+        
+        /* Navigation Tabs */
+        .nav-tabs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            padding: 10px 15px;
+        }
+        
+        .nav-tab {
+            flex: 1;
+            padding: 10px 15px;
+            text-align: center;
+            background-color: #f0f0f0;
+            border: none;
+            border-radius: 5px;
+            margin: 0 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .nav-tab.active {
+            background-color: #007bff;
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            width: 100%;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        .container {
+            width: 95%;
+            max-width: 550px;
+            margin: 0 auto 15px auto;
+            padding: 20px;
+            box-sizing: border-box;
+            border-radius: 12px;
+            position: relative;
+            transition: all 0.5s ease-in-out;
+            box-shadow: none;
+            background-color: transparent;
+            color: inherit;
+        }
+        /* Header & Info - Centered on Desktop/Default */
+        .header {
+            text-align: center;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            flex-wrap: wrap;
+        }
+        .logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin: 0 0 8px 0;
+        }
+        .school-info {
+            line-height: 1.1;
+            text-align: center;
+        }
+        .school-name {
+            font-size: 1.5em;
+            font-weight: 700;
+            margin: 0;
+            color: #007bff;
+            transition: color 0.5s;
+        }
+        .school-contact {
+            font-size: 0.8em;
+            color: #666;
+            margin: 1px 0 10px 0; /* Increased bottom margin to create more gap below contact */
+        }
+        .header h2 {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #4CAF50;
+            transition: color 0.5s;
+            margin: 3px 0;
+        }
+        /* Assembly Type Header - Added specific styling for better spacing */
+        .assembly-type-header {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin: 0 0 15px 0; /* Increased bottom margin to match the gap in the image */
+            color: #333;
+            text-align: center;
+        }
+        /* Filters and Controls */
+        .filters {
+            width: 95%;
+            max-width: 550px;
+            margin: 0 auto 5px auto;
+            display: flex;
+            gap: 10px;
+            padding: 8px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            justify-content: space-between; /* Space them out */
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        /* Dropdown Styling */
+        .filters label {
+            font-size: 0.95em;
+            color: #555;
+            font-weight: 600;
+        }
+        .filters select {
+            /* Attractive and same size styling */
+            font-family: 'Poppins', Arial, sans-serif;
+            font-size: 0.9em;
+            padding: 8px 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: border-color 0.3s;
+            appearance: none; /* Remove default arrow in some browsers */
+            background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007bff%22%20d%3D%22M287%20197.8L151.2%2062c-1.9-1.9-4.5-2.9-7.2-2.9s-5.3%201-7.2%202.9L5.4%20197.8c-1.9%201.9-2.9%204.5-2.9%207.2s1%205.3%202.9%207.2c3.9%203.9%2010.2%203.9%2014.1%200l128.2-128.3L272.9%20212.2c3.9%203.9%2010.2%203.9%2014.1%200%203.9-3.9%203.9-10.2%200-14.1z%22%2F%3E%3C%2Fsvg%3E');
+            background-repeat: no-repeat;
+            background-position: right 10px top 50%;
+            background-size: 0.6em auto;
+            min-width: 150px; /* Ensure minimum uniform size on desktop */
+            flex-grow: 1; /* Allow stretching within filter container */
+        }
+        .filters select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        .date-filter, .teacher-filter {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        /* Assembly Details Card - DECREASED FONT SIZE */
+        .assembly-details {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            transition: all 0.5s ease-in-out;
+        }
+        .assembly-details h3 {
+            border-bottom: 2px solid;
+            padding-bottom: 8px;
+            margin-top: 0;
+            margin-bottom: 12px;
+            font-size: 1.1em; /* DECREASED from 1.2em */
+            font-weight: 600;
+            text-align: center;
+        }
+        .assembly-details p {
+            font-size: 0.9em; /* DECREASED from 0.95em */
+            margin: 6px 0;
+            line-height: 1.4;
+        }
+        /* Duty Table */
+        .duties-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+        }
+        .duties-table th, .duties-table td {
+            border: 1px solid;
+            padding: 8px;
+            text-align: left;
+            font-size: 0.9em;
+        }
+        .duties-table th {
+            font-weight: 600;
+            background-color: rgba(0,0,0,0.05);
+        }
+        /* Fixed Controls for Desktop/Laptop */
+        .fixed-controls {
+            position: fixed;
+            top: 50px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 10px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: transparent;
+        }
+        /* Switch Assembly Type Button Group */
+        .assembly-type-switcher button {
+            padding: 8px 15px;
+            font-size: 0.95em;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #e0e0e0;
+            transition: background-color 0.3s, transform 0.1s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            /* Added margin-right to prevent overlap with download button on wider screens */
+            margin-right: 10px; 
+        }
+        .assembly-type-switcher button:hover {
+            transform: translateY(-1px);
+        }
+        .assembly-type-switcher button.active {
+            background-color: var(--card-text, #4CAF50);
+            color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background-color 0.5s;
+        }
+/* Student Filter Styling */
+.student-filter {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.student-filter select {
+    font-family: 'Poppins', Arial, sans-serif;
+    font-size: 0.9em;
+    padding: 8px 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: border-color 0.3s;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007bff%22%20d%3D%22M287%20197.8L151.2%2062c-1.9-1.9-4.5-2.9-7.2-2.9s-5.3%201-7.2%202.9L5.4%20197.8c-1.9%201.9-2.9%204.5-2.9%207.2s1%205.3%202.9%207.2c3.9%203.9%2010.2%203.9%2014.1%200l128.2-128.3L272.9%20212.2c3.9%203.9%2010.2%203.9%2014.1%200%203.9-3.9%203.9-10.2%200-14.1z%22%2F%3E%3C%2Fsvg%3E');
+    background-repeat: no-repeat;
+    background-position: right 10px top 50%;
+    background-size: 0.6em auto;
+    min-width: 150px;
+    flex-grow: 1;
+}
+/* Students Section Styling */
+.students-section {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+}
+.students-section h3 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #333;
+}
+.students-filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+.students-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 12px;
+}
+.students-table th, .students-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    font-size: 0.9em;
+}
+.students-table th {
+    background-color: #f2f2f2;
+    font-weight: 600;
+}
+/* Script Generator Styles */
+.controls {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border-left: 4px solid #007bff;
+}
+.control-group {
+    margin-bottom: 15px;
+}
+.buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+button{
+    flex: 1;
+    background: #007bff;
+    color:white;
+    padding:12px 20px;
+    border:none;
+    font-size:16px;
+    border-radius:8px;
+    cursor:pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+button:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    background: #0056b3;
+}
+button.print {
+    background: #daa520;
+    color: #333;
+}
+button.print:hover {
+    background: #b8860b;
+}
+.script-page{
+    padding:25px;
+    background:#fff;
+    border-radius:12px;
+    line-height:1.6;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    border-left: 5px solid var(--card-text, #007bff); /* Uses theme color now */
+    margin-bottom: 20px;
+}
+
+/* Specific Section Styles for Script Output */
+.script-section {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed #eee;
+}
+.script-section:last-child {
+    border-bottom: none;
+}
+.role-title{
+    font-weight:bold;
+    margin-top:20px;
+    margin-bottom: 10px;
+    color: var(--card-text, #0d2e36); /* Uses theme color now */
+    font-size: 20px; /* Heading size 20px */
+    display: flex;
+    align-items: center;
+}
+.role-title:before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    background: var(--icon-color, #daa520); /* Uses theme color now */
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.role-name {
+    color: var(--icon-color, #1a5e63); /* Uses theme color now */
+    font-weight: 600;
+}
+.line{ 
+    margin-bottom:12px; 
+    padding-left: 20px;
+    font-size: 16px; /* Text size 16px */
+}
+.bullet-line{
+    margin-left:20px;
+    margin-bottom:8px;
+    position: relative;
+    padding-left: 10px;
+    font-size: 16px; /* Text size 16px */
+}
+.bullet-line:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--icon-color, #daa520); /* Uses theme color now */
+    font-weight: bold;
+}
+.section-title {
+    font-size: 20px; /* Heading size 20px */
+    color: var(--card-text, #0d2e36); /* Uses theme color now */
+    margin-bottom: 15px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+}
+.section-title:before {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: var(--icon-color, #daa520); /* Uses theme color now */
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.assembly-header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding: 15px;
+    /* Use theme variables for assembly header */
+    background: linear-gradient(to right, var(--card-text, #0d2e36), var(--icon-color, #1a5e63));
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+.assembly-title {
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+.assembly-date {
+    font-size: 18px;
+    opacity: 0.9;
+}
+.today-badge {
+    background: #daa520;
+    color: #333;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-left: 10px;
+}
+        /* Download Button */
+        .download-btn {
+            padding: 10px 18px;
+            font-size: 0.95em;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .download-btn:hover {
+            background-color: #0056b3;
+        }
+        /* Assembly Note */
+        .assembly-note {
+            text-align: center;
+            font-weight: 600;
+            margin-top: 15px;
+            padding: 8px 10px;
+            border-top: 2px dashed var(--card-text, #333);
+            font-size: 0.9em;
+        }
+        /* --- Dynamic Colour Themes (CSS Variables) --- */
+        .theme-Al-Hamrah { 
+            --card-text: #b71c1c; 
+            --card-bg: #fff8f8; 
+            --body-bg: #fde0dc; 
+            --icon-color: #b71c1c;
+        }
+        .theme-Azhar { 
+            --card-text: #0d47a1; 
+            --card-bg: #f8fcff; 
+            --body-bg: #d7e7f7; 
+            --icon-color: #0d47a1;
+        }
+        .theme-Nizamia { 
+            --card-text: #f57f17; 
+            --card-bg: #fffef8; 
+            --body-bg: #fff1cc; 
+            --icon-color: #f57f17;
+        }
+        .theme-Qurtaba { 
+            --card-text: #1b5e20; 
+            --card-bg: #f8fff8; 
+            --body-bg: #dcf8dc; 
+            --icon-color: #1b5e20;
+        }
+        .theme-PlayWay { 
+            --card-text: #880e4f; 
+            --card-bg: #fff8fb; 
+            --body-bg: #fbe0ec; 
+            --icon-color: #880e4f;
+        }
+        .theme-LKG { 
+            --card-text: #4a148c; 
+            --card-bg: #fcf8fd; 
+            --body-bg: #ebdcef; 
+            --icon-color: #4a148c;
+        }
+        .theme-UKG { 
+            --card-text: #01579b; 
+            --card-bg: #f8fdff; 
+            --body-bg: #d8edf7; 
+            --icon-color: #01579b;
+        }
+        .theme-1st { 
+            --card-text: #004d40; 
+            --card-bg: #f8fffe; 
+            --body-bg: #daedec; 
+            --icon-color: #004d40;
+        }
+        .theme-2nd { 
+            --card-text: #e64a19; 
+            --card-bg: #fffbf8; 
+            --body-bg: #f9dcdc; 
+            --icon-color: #e64a19;
+        }
+        .theme-3rd { 
+            --card-text: #4e342e; 
+            --card-bg: #fcfbfa; 
+            --body-bg: #e6e0dd; 
+            --icon-color: #4e342e;
+        }
+        .theme-4th { 
+            --card-text: #311b92; 
+            --card-bg: #f8f8fd; 
+            --body-bg: #d7d7ef; 
+            --icon-color: #311b92;
+        }
+        .theme-5th { 
+            --card-text: #1b5e20; 
+            --card-bg: #f8fff8; 
+            --body-bg: #dcf8dc; 
+            --icon-color: #1b5e20;
+        }
+        .theme-6th { 
+            --card-text: #ff6f00; 
+            --card-bg: #fffdf8; 
+            --body-bg: #fff3d8; 
+            --icon-color: #ff6f00;
+        }
+        .theme-7th { 
+            --card-text: #c62828; 
+            --card-bg: #fff8f9; 
+            --body-bg: #f6dbde; 
+            --icon-color: #c62828;
+        }
+        .theme-8th { 
+            --card-text: #006064; 
+            --card-bg: #f8fdff; 
+            --body-bg: #d6e9ea; 
+            --icon-color: #006064;
+        }
+        .theme-9th { 
+            --card-text: #558b2f; 
+            --card-bg: #f8fcf8; 
+            --body-bg: #e2f0e0; 
+            --icon-color: #558b2f;
+        }
+        .theme-10th { 
+            --card-text: #37474f; 
+            --card-bg: #f8f9fa; 
+            --body-bg: #e1e3e4; 
+            --icon-color: #37474f;
+        }
+        .theme-11th { 
+            --card-text: #1565c0; 
+            --card-bg: #f0f8ff; 
+            --body-bg: #d9e5f3; 
+            --icon-color: #1565c0;
+        }
+        .theme-12th { 
+            --card-text: #333; 
+            --card-bg: #f8f8f8; 
+            --body-bg: #e9e9e9; 
+            --icon-color: #333;
+        }
+        .theme-default { 
+            --card-text: #333; 
+            --card-bg: #f8f8f8; 
+            --body-bg: #f5f5f5; 
+            --icon-color: #333;
+        }
+        /* Apply Variables to Body and Container */
+        body[class*="theme-"] { 
+            background-color: var(--body-bg, #f5f5f5); 
+        }
+        /* Container gets the theme colors */
+        .container[class*="theme-"] {
+            color: var(--card-text);
+            background-color: var(--card-bg);
+            border: 2px solid var(--card-text);
+        }
+        /* Headers and Table borders use theme color */
+        .container[class*="theme-"] .school-name { color: var(--card-text); }
+        .container[class*="theme-"] .header h2 { color: var(--card-text); }
+        .container[class*="theme-"] .assembly-type-header { color: var(--card-text); }
+        .container[class*="theme-"] h3 { border-bottom-color: var(--card-text); }
+        .container[class*="theme-"] .duties-table th,
+        .container[class*="theme-"] .duties-table td { border-color: var(--card-text); }
+        /* Active button uses theme color */
+        .assembly-type-switcher button.active {
+            background-color: var(--card-text, #4CAF50);
+            color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            transition: background-color 0.5s;
+        }
+        /* Font Awesome Icons with theme colors */
+        .fa-icon {
+            color: var(--icon-color, #333);
+            margin-right: 8px;
+        }
+        /* Fixed controls with theme colors */
+        .fixed-controls[class*="theme-"] {
+            background-color: var(--body-bg);
+            border-bottom: 1px solid var(--card-text);
+        }
+        /* Filters with theme colors */
+        .filters[class*="theme-"] {
+            background-color: var(--body-bg);
+            border: 1px solid var(--card-text);
+        }
+        /* Students section with theme colors */
+        .students-section[class*="theme-"] {
+            background-color: var(--body-bg);
+            border: 1px solid var(--card-text);
+        }
+        /* A4 Paper Size Styling */
+        @media screen and (min-width: 800px) {
+            body {
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                background-color: #f0f0f0;
+            }
+            
+            .a4-container {
+                width: 210mm;
+                min-height: 297mm;
+                background: white;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                margin: 0 auto;
+                padding: 15mm;
+                box-sizing: border-box;
+                position: relative;
+            }
+            
+            .page-break {
+                page-break-after: always;
+                break-after: page;
+            }
+        }
+        /* --- MOBILE OPTIMIZATION (Max Width 650px) --- */
+        @media (max-width: 650px) {
+            body {
+                padding-top: 5px;
+            }
+            .container {
+                margin: 5px auto;
+                padding: 12px;
+                max-width: 95%;
+            }
+            .header {
+                flex-direction: column;
+                margin-bottom: 8px;
+            }
+            .logo {
+                margin-right: 0;
+                margin-bottom: 5px;
+                width: 50px;
+                height: 50px;
+            }
+            .school-info {
+                text-align: center;
+            }
+            .school-name {
+                font-size: 1.3em;
+            }
+            .header h2 {
+                font-size: 1.1em;
+                margin: 2px 0;
+            }
+            .assembly-type-header {
+                font-size: 1em;
+                margin: 0 0 12px 0; /* Adjusted for mobile */
+            }
+            .filters {
+                flex-direction: column;
+                align-items: stretch;
+                padding: 6px;
+                gap: 6px;
+            }
+            
+            .date-filter, .teacher-filter {
+                width: 100%; /* Full width on mobile */
+            }
+            .filters select {
+                min-width: 100%; /* Full width on mobile */
+                box-sizing: border-box;
+            }
+            
+            /* Remove fixed positioning for controls on mobile */
+            .fixed-controls {
+                position: static;
+                flex-direction: column;
+                gap: 8px;
+                padding: 0;
+                margin-bottom: 15px;
+            }
+            .download-btn {
+                position: static;
+                width: 100%;
+            }
+            .assembly-type-switcher {
+                width: 100%;
+                justify-content: center;
+                gap: 10px;
+            }
+            .assembly-details {
+                padding: 12px;
+                margin-bottom: 12px;
+            }
+            .assembly-details h3 {
+                font-size: 1.05em; /* DECREASED */
+                padding-bottom: 6px;
+                margin-bottom: 10px;
+            }
+            .assembly-details p {
+                font-size: 0.85em; /* DECREASED */
+                margin: 4px 0;
+            }
+            .duties-table th, .duties-table td {
+                padding: 6px 4px;
+                font-size: 0.8em; /* DECREASED from 0.82em */
+            }
+            .assembly-note {
+                margin-top: 12px;
+                padding: 6px 8px;
+                font-size: 0.85em;
+            }
+            
+            /* Mobile optimization for new filter */
+            .student-filter {
+                width: 100%;
+            }
+            .student-filter select {
+                min-width: 100%;
+                box-sizing: border-box;
+            }
+            
+            .students-filters {
+                flex-direction: column;
+            }
+            
+            .students-table {
+                font-size: 0.8em;
+            }
+            
+            .students-table th, .students-table td {
+                padding: 6px 4px;
+            }
+            
+            /* Script Generator Mobile Styles */
+            .buttons {
+                flex-direction: column;
+            }
+            
+            .role-title, .section-title {
+                font-size: 18px;
+            }
+            
+            .line, .bullet-line {
+                font-size: 14px;
+            }
+        }
+        /* --- PRINT/DOWNLOAD OPTIMIZATION --- */
+        @media print {
+            .download-btn, .fixed-controls, .nav-tabs, .controls {
+                display: none !important;
+            }
+            body {
+                background-color: white !important;
+                color: black !important;
+                padding-top: 0 !important;
+            }
+            .a4-container {
+                width: 210mm;
+                min-height: 297mm;
+                padding: 15mm !important;
+                box-shadow: none;
+                margin: 0 auto;
+            }
+            /* Main container/script-page should not have shadow/border during print */
+            .container, .script-page {
+                box-shadow: none !important;
+                border: none !important;
+                background-color: white !important;
+                color: black !important;
+                max-width: 100% !important;
+                width: 100% !important;
+                margin: 0 auto !important;
+                padding: 0 !important;
+            }
+            /* Ensure text and borders are black for printing */
+            .container *, .script-page * {
+                color: black !important;
+                border-color: #ccc !important;
+            }
+            .assembly-details h3 {
+                border-bottom-color: black !important;
+            }
+            /* School Header on Every Print Page */
+            .school-header-print {
+                display: flex !important;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                text-align: center;
+                margin-bottom: 20px;
+                border-bottom: 2px solid #333; /* Separator */
+                padding-bottom: 10px;
+            }
+            .school-header-print .logo {
+                width: 50px;
+                height: 50px;
+                margin: 0 0 5px 0;
+            }
+            .school-header-print .school-name {
+                font-size: 1.4em !important;
+                font-weight: 700 !important;
+                color: black !important;
+            }
+            .school-header-print .school-contact {
+                font-size: 0.75em !important;
+                color: #666 !important;
+                margin: 1px 0 0 0 !important;
+            }
+            .school-header-print .fa-icon {
+                color: black !important;
+            }
+
+            /* Force page break for each script-page (Thought, News, GK) */
+            .script-page {
+                page-break-before: always;
+                break-before: page;
+                margin: 0 !important;
+                padding-top: 20px !important; /* Top padding for header space */
+            }
+            /* The very first script page should NOT break */
+            .script-page:first-of-type {
+                page-break-before: auto;
+                break-before: auto;
+            }
+            
+            /* Hide controls in print */
+            .controls, button {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="preloader">
+      <div class="floating-elements">
+        <div class="floating-element">☪</div>
+        <div class="floating-element">🕌</div>
+        <div class="floating-element">⭐</div>
+        <div class="floating-element">✸</div>
+        <div class="floating-element">🕋</div>
+      </div>
+      
+      <div class="preloader-content">
+        <div class="preloader-spinner"></div>
+        
+        <div class="ayat-container">
+          <div class="arabic">إِنَّ اللَّهَ مَعَ الصَّابِرِينَ</div>
+          <div class="translation">"Indeed, Allah is with those who are patient."</div>
+        </div>
+        
+        <p>Loading SMPS Assembly</p>
+      </div>
+    </div>
+    <div class="nav-tabs">
+        <button class="nav-tab active" onclick="switchTab('schedule')">Assembly Schedule</button>
+        <button class="nav-tab" onclick="switchTab('script')">Script Generator</button>
+    </div>
+    <div id="schedule-tab" class="tab-content active">
+        <div class="fixed-controls">
+            <div class="assembly-type-switcher">
+                <button id="btn-house" class="active" onclick="switchAssemblyType('house')">
+                    <i class="fas fa-home fa-icon"></i>Housewise Assembly
+                </button>
+                <button id="btn-class" onclick="switchAssemblyType('class')">
+                    <i class="fas fa-users fa-icon"></i>Classwise Assembly
+                </button>
+            </div>
+            <button class="download-btn" onclick="downloadImage()">
+                <i class="fas fa-download"></i> Download Image
+            </button>
+        </div>
+        <div class="filters">
+            <div class="date-filter">
+                <label for="date-select">
+                    <i class="fas fa-calendar-alt fa-icon"></i>Select Date:
+                </label>
+                <select id="date-select" onchange="filterData()"></select>
+            </div>
+            <div class="teacher-filter">
+                <label for="teacher-select">
+                    <i class="fas fa-filter fa-icon"></i>Filter by House:
+                </label>
+                <select id="teacher-select" onchange="filterByType()"></select>
+            </div>
+        </div>
+        <div class="a4-container">
+            <div class="container" id="assembly-content">
+                <div class="header">
+                    <img src="images/smps_logo.jpg" alt="School Logo" class="logo">
+                    <div class="school-info">
+                        <h2 class="school-name">
+                            <i class="fas fa-school fa-icon"></i>Saiema Manssor Public School
+                        </h2>
+                        <p class="school-contact">
+                            <i class="fas fa-map-marker-alt fa-icon"></i>Parsara, Hathras (U.P.)
+                        </p>
+                        <p id="assembly-type-header" class="assembly-type-header">
+                            <i class="fas fa-calendar-day fa-icon"></i>Morning Assembly Schedule
+                        </p>
+                    </div>
+                </div>
+                <div id="assembly-display">
+                    <p style="text-align: center;">
+                        <i class="fas fa-spinner fa-spin fa-icon"></i>Loading data...
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="a4-container page-break">
+            <div class="container" id="students-section">
+                <div class="header">
+                    <img src="images/smps_logo.jpg" alt="School Logo" class="logo">
+                    <div class="school-info">
+                        <h2 class="school-name">
+                            <i class="fas fa-school fa-icon"></i>Saiema Manssor Public School
+                        </h2>
+                        <p class="school-contact">
+                            <i class="fas fa-map-marker-alt fa-icon"></i>Parsara, Hathras (U.P.)
+                        </p>
+                        <p class="assembly-type-header">
+                            <i class="fas fa-user-graduate fa-icon"></i>Students Information
+                        </p>
+                    </div>
+                </div>
+                <div class="students-section">
+                    <h3>
+                        <i class="fas fa-list-alt fa-icon"></i>Student Details
+                    </h3>
+                    
+                    <div class="students-filters">
+                        <div class="student-filter">
+                            <label for="student-house-select">
+                                <i class="fas fa-home fa-icon"></i>Select House:
+                            </label>
+                            <select id="student-house-select" onchange="populateStudentClassFilter()">
+                                <option value="">-- All Houses --</option>
+                            </select>
+                        </div>
+                        
+                        <div class="student-filter">
+                            <label for="student-class-select">
+                                <i class="fas fa-graduation-cap fa-icon"></i>Select Class:
+                            </label>
+                            <select id="student-class-select" onchange="filterStudents()">
+                                <option value="">-- All Classes --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="students-display">
+                        <p style="text-align: center;">
+                            <i class="fas fa-info-circle fa-icon"></i>Select a House to view students
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="script-tab" class="tab-content">
+        <div class="container" style="max-width: 550px; margin-top: 15px;">
+             <div class="controls">
+                <div class="control-group">
+                    <label>Select Assembly Type:</label>
+                    <select id="typeSelect">
+                        <option value="house">Housewise Assembly</option>
+                        <option value="class">Classwise Assembly</option>
+                    </select>
+                </div>
+                
+                <div class="control-group">
+                    <label>Select Date:</label>
+                    <select id="scriptDateSelect"></select>
+                </div>
+                
+                <div class="buttons">
+                    <button class="print" onclick="window.print()">Print / PDF</button>
+                </div>
+            </div>
+        </div>
+       
+        <div id="scriptPagesContainer" style="display: flex; flex-direction: column; align-items: center; margin-bottom: 20px;">
+            <div style="text-align: center; color: #666; padding: 40px;">
+                Loading assembly script...
+            </div>
+        </div>
+
+        <div id="print-header-template" style="display: none;">
+            <div class="school-header-print">
+                <img src="images/assembly.jpg" alt="School Logo" class="logo">
+                <div class="school-info">
+                    <h2 class="school-name">
+                        <i class="fas fa-school fa-icon"></i>Saiema Manssor Public School
+                    </h2>
+                    <p class="school-contact">
+                        <i class="fas fa-map-marker-alt fa-icon"></i>Parsara, Hathras (U.P.)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script>
+        // === Preloader JS ===
+        window.addEventListener('load', function() {
+            const preloader = document.querySelector('.preloader');
+            
+            // Preloader 3 seconds ke baad hide hoga
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 3000);
+        });
+        // ====================
+        // Tab switching function
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            document.getElementById(tabName + '-tab').classList.add('active');
+            
+            // Update active tab button
+            document.querySelectorAll('.nav-tab').forEach(button => {
+                button.classList.remove('active');
+            });
+            // Use event.currentTarget instead of event.target if an icon is clicked
+            document.querySelector(`.nav-tab[onclick="switchTab('${tabName}')"]`).classList.add('active');
+            
+            // If switching to script tab, generate script if data is available
+            if (tabName === 'script' && scriptData.length > 0) {
+                // Apply the theme from the schedule tab to the script tab body
+                const bodyThemeClass = document.body.className;
+                if (!bodyThemeClass || !bodyThemeClass.includes('theme-')) {
+                    // If no theme is set yet (initial load), try to find the last rendered theme
+                    const lastHouse = localStorage.getItem('lastRenderedHouse');
+                    if (lastHouse) {
+                        document.body.className = `theme-${lastHouse.replace(/\s/g, '-')}`;
+                    }
+                }
+                generateScript();
+            }
+        }
+        // --- Configuration ---
+        const SHEET_ID = '1FUpqRyVWcQZGK8bPuXEd12f-4xU7h6M9VUHlG4rMlnw';
+        const HOUSEWISE_URL = `https://opensheet.elk.sh/${SHEET_ID}/Housewise_Assembly`;
+        const CLASSWISE_URL = `https://opensheet.elk.sh/${SHEET_ID}/Classwise_Assembly`;
+        const TEACHERS_URL = `https://opensheet.elk.sh/${SHEET_ID}/Teachers`;
+        const STUDENTS_URL = `https://opensheet.elk.sh/${SHEET_ID}/Attendance`;
+        const SCRIPT_URL = `https://opensheet.elk.sh/${SHEET_ID}/Script`;
+        let housewiseData = [];
+        let classwiseData = [];
+        let teachersData = {};
+        let studentsData = [];
+        let scriptData = [];
+        let currentAssemblyType = 'house';
+        // --- Utility Functions ---
+        function formatDate(dateString) {
+            if (!dateString) return 'N/A';
+            const [mm, dd, yyyy] = dateString.split('/');
+            if (!mm || !dd || !yyyy) return dateString;
+            const monthNames = [
+                "January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+            const day = dd.padStart(2, '0');
+            const monthName = monthNames[parseInt(mm) - 1];
+            return `${day}-${monthName}-${yyyy}`;
+        }
+        // Helper to convert MM/DD/YYYY to Date object
+        function getDateObject(dateString) {
+            if (!dateString) return null;
+            const parts = dateString.split('/');
+            if(parts.length === 3) {
+                // Note: Months are 0-indexed in JS Date (Jan=0, Dec=11)
+                return new Date(parts[2], parts[0] - 1, parts[1]);
+            }
+            return null;
+        }
+        // --- Data Fetching ---
+        async function fetchData(url, dateCol = null) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const data = await response.json();
+                if (dateCol) {
+                    return data.filter(row => row[dateCol] && row[dateCol].trim() !== '');
+                }
+                return data;
+            } catch (error) {
+                console.error("Error fetching data:", error);
+                document.getElementById('assembly-display').innerHTML = `<p style="text-align: center; color: red;">
+                    <i class="fas fa-exclamation-triangle fa-icon"></i>Failed to load data. Please try again later.
+                </p>`;
+                return [];
+            }
+        }
+        /**
+         * Fetches and structures the teacher data.
+         */
+        async function fetchTeachersData() {
+            const rawData = await fetchData(TEACHERS_URL);
+            if (rawData.length === 0) return {};
+            const structuredData = {};
+            const headers = Object.keys(rawData[0]);
+            const leadersRow = rawData[0];
+            headers.forEach(house => {
+                const houseName = house.trim();
+                const leader = leadersRow[house] && leadersRow[house].trim() !== '' ? leadersRow[house].trim() : 'N/A';
+                const supportingTeachers = [];
+                for (let i = 1; i < rawData.length; i++) {
+                    const teacherName = rawData[i][house];
+                    if (teacherName && teacherName.trim() !== '') {
+                        supportingTeachers.push(teacherName.trim());
+                    }
+                }
+                structuredData[houseName] = {
+                    leader: leader,
+                    supporting: supportingTeachers
+                };
+            });
+            // Set global map
+            teachersData = structuredData;
+        }
+        // --- Students Data Functions ---
+        /**
+         * Fetches students data and populates house filter
+         */
+        async function fetchStudentsData() {
+            const data = await fetchData(STUDENTS_URL);
+            studentsData = data;
+            
+            // Populate house filter for students section
+            populateStudentHouseFilter();
+        }
+        /**
+         * Populates the house filter in students section
+         */
+        function populateStudentHouseFilter() {
+            const houseSelect = document.getElementById('student-house-select');
+            
+            // Get unique houses from students data
+            const houseSet = new Set();
+            studentsData.forEach(student => {
+                if (student.House && student.House.trim() !== '') {
+                    houseSet.add(student.House.trim());
+                }
+            });
+            
+            const houses = Array.from(houseSet).sort();
+            
+            houses.forEach(house => {
+                const option = document.createElement('option');
+                option.value = house;
+                option.textContent = house;
+                houseSelect.appendChild(option);
+            });
+        }
+        /**
+         * Populates class filter based on selected house
+         */
+        function populateStudentClassFilter() {
+            const houseSelect = document.getElementById('student-house-select');
+            const classSelect = document.getElementById('student-class-select');
+            const selectedHouse = houseSelect.value;
+            
+            classSelect.innerHTML = '<option value="">-- All Classes --</option>';
+            
+            if (!selectedHouse) {
+                filterStudents();
+                return;
+            }
+            
+            // Get unique classes for selected house
+            const classSet = new Set();
+            studentsData.forEach(student => {
+                if (student.House === selectedHouse && student.Class && student.Class.trim() !== '') {
+                    classSet.add(student.Class.trim());
+                }
+            });
+            
+            // Define class order (descending)
+            const classOrder = [
+                '12th', '11th', '10th', '9th', '8th', '7th', '6th', 
+                '5th', '4th', '3rd', '2nd', '1st', 'UKG', 'LKG', 'Playway'
+            ];
+            
+            const classes = Array.from(classSet).sort((a, b) => {
+                const aIndex = classOrder.indexOf(a);
+                const bIndex = classOrder.indexOf(b);
+                return aIndex - bIndex; // Ascending index = descending class
+            });
+            
+            classes.forEach(className => {
+                const option = document.createElement('option');
+                option.value = className;
+                option.textContent = className;
+                classSelect.appendChild(option);
+            });
+            
+            filterStudents();
+        }
+        /**
+         * Filters and displays students based on selected house and class
+         */
+        function filterStudents() {
+            const houseSelect = document.getElementById('student-house-select');
+            const classSelect = document.getElementById('student-class-select');
+            const selectedHouse = houseSelect.value;
+            const selectedClass = classSelect.value;
+            
+            let filteredStudents = studentsData;
+            
+            // Filter by house
+            if (selectedHouse) {
+                filteredStudents = filteredStudents.filter(student => 
+                    student.House === selectedHouse
+                );
+            }
+            
+            // Filter by class
+            if (selectedClass) {
+                filteredStudents = filteredStudents.filter(student => 
+                    student.Class === selectedClass
+                );
+            }
+            
+            displayStudents(filteredStudents);
+        }
+        /**
+         * Displays students in a table
+         */
+        function displayStudents(students) {
+            const displayDiv = document.getElementById('students-display');
+            
+            if (students.length === 0) {
+                displayDiv.innerHTML = `<p style="text-align: center; color: orange;">
+                    <i class="fas fa-exclamation-circle fa-icon"></i>No students found for the selected filters.
+                </p>`;
+                return;
+            }
+            
+            // Define class order for sorting
+            const classOrder = [
+                '12th', '11th', '10th', '9th', '8th', '7th', '6th', 
+                '5th', '4th', '3rd', '2nd', '1st', 'UKG', 'LKG', 'Playway'
+            ];
+            
+            // Sort students by class in descending order
+            students.sort((a, b) => {
+                const aIndex = classOrder.indexOf(a.Class);
+                const bIndex = classOrder.indexOf(b.Class);
+                return aIndex - bIndex; // Ascending index = descending class
+            });
+            
+            const studentsHTML = students.map(student => `
+                <tr>
+                    <td>${student["Adm. No."] || 'N/A'}</td>
+                    <td>${student.Class || 'N/A'}</td>
+                    <td>${student["Student Name"] || 'N/A'}</td>
+                    <td>${student["Father Name"] || 'N/A'}</td>
+                    <td>${student.House || 'N/A'}</td>
+                </tr>
+            `).join('');
+            
+            displayDiv.innerHTML = `
+                <table class="students-table">
+                    <thead>
+                        <tr>
+                            <th><i class="fas fa-id-card fa-icon"></i>Adm. No.</th>
+                            <th><i class="fas fa-graduation-cap fa-icon"></i>Class</th>
+                            <th><i class="fas fa-user fa-icon"></i>Student Name</th>
+                            <th><i class="fas fa-user-tie fa-icon"></i>Father Name</th>
+                            <th><i class="fas fa-home fa-icon"></i>House</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${studentsHTML}
+                    </tbody>
+                </table>
+            `;
+        }
+        // --- Existing Assembly Functions (unchanged) ---
+        // --- Logic: Find Latest Assembly ---
+        function getLatestAssemblyDateAndType() {
+            let latestDateObj = null;
+            let latestDateStr = null;
+            let latestType = null;
+            // 1. Check Housewise Data
+            const houseDates = housewiseData.map(row => row.Date).filter(d => d);
+            const latestHouseDateStr = houseDates.length > 0 ? Array.from(new Set(houseDates))
+                .map(d => ({ dateStr: d, dateObj: getDateObject(d) }))
+                .filter(d => d.dateObj)
+                .sort((a, b) => b.dateObj - a.dateObj)[0] : null;
+            if (latestHouseDateStr) {
+                latestDateObj = latestHouseDateStr.dateObj;
+                latestDateStr = latestHouseDateStr.dateStr;
+                latestType = 'house';
+            }
+            // 2. Check Classwise Data
+            const classDates = classwiseData.map(row => row['Date of Assembly']).filter(d => d);
+            const latestClassDateStr = classDates.length > 0 ? Array.from(new Set(classDates))
+                .map(d => ({ dateStr: d, dateObj: getDateObject(d) }))
+                .filter(d => d.dateObj)
+                .sort((a, b) => b.dateObj - a.dateObj)[0] : null;
+            if (latestClassDateStr) {
+                if (!latestDateObj || latestClassDateStr.dateObj > latestDateObj) {
+                    latestDateObj = latestClassDateStr.dateObj;
+                    latestDateStr = latestClassDateStr.dateStr;
+                    latestType = 'class';
+                }
+            }
+            return { date: latestDateStr, type: latestType };
+        }
+        async function loadAllData() {
+            document.getElementById('assembly-display').innerHTML = `<p style="text-align: center;">
+                <i class="fas fa-spinner fa-spin fa-icon"></i>Loading data...
+            </p>`;
+            // Fetch all data concurrently including students data
+            const [hwData, cwData, script] = await Promise.all([
+                fetchData(HOUSEWISE_URL, 'Date'),
+                fetchData(CLASSWISE_URL, 'Date of Assembly'),
+                fetchData(SCRIPT_URL),
+                fetchTeachersData(),
+                fetchStudentsData()
+            ]);
+            housewiseData = hwData;
+            classwiseData = cwData;
+            scriptData = script;
+            // Load dates for script generator
+            loadScriptDates();
+            // --- NEW START LOGIC ---
+            const latestAssembly = getLatestAssemblyDateAndType();
+            if (latestAssembly.type) {
+                // 1. Switch the type (false to prevent immediate reload)
+                switchAssemblyType(latestAssembly.type, false);
+                // 2. Populate generic House/Class filter
+                populateTypeFilter();
+                // 3. Populate date filter and set the latest date
+                populateDateFilter(latestAssembly.date);
+                // 4. Filter and render the latest date
+                filterData();
+            } else {
+                // Fallback to default load if no data is found
+                populateTypeFilter();
+                populateDateFilter();
+                filterData();
+            }
+            // --- END NEW START LOGIC ---
+        }
+        // --- Filter Population ---
+        /**
+         * Populates the date filter based on the current assembly type and selected House/Class.
+         */
+        function populateDateFilter(defaultDate = null) {
+            const data = currentAssemblyType === 'house' ? housewiseData : classwiseData;
+            const dateSelect = document.getElementById('date-select');
+            // 'teacher-select' is now the generic Type Selector (House or Class)
+            const selectedType = document.getElementById('teacher-select').value; 
+            let filteredByTypeData = data;
+            // If a type (House/Class) is selected, filter the data pool for dates
+            if (selectedType) {
+                const typeColumn = currentAssemblyType === 'house' ? 'Select House' : 'Class';
+                filteredByTypeData = data.filter(row => row[typeColumn] === selectedType);
+            }
+            dateSelect.innerHTML = '<option value="">-- Select Date --</option>';
+            const dateSet = new Set();
+            filteredByTypeData.forEach(row => {
+                const dateKey = currentAssemblyType === 'house' ? row.Date : row['Date of Assembly'];
+                if (dateKey) dateSet.add(dateKey);
+            });
+            const uniqueDates = Array.from(dateSet)
+                .map(dateStr => {
+                    const parts = dateStr.split('/');
+                    if(parts.length === 3) {
+                        return {
+                            dateStr: dateStr,
+                            dateObj: new Date(parts[2], parts[0] - 1, parts[1])
+                        };
+                    }
+                    return null;
+                })
+                .filter(d => d !== null)
+                .sort((a, b) => b.dateObj - a.dateObj); // Sort descending (latest first)
+            uniqueDates.forEach((d) => {
+                const option = document.createElement('option');
+                option.value = d.dateStr;
+                let displayDate = formatDate(d.dateStr);
+                option.textContent = displayDate;
+                dateSelect.appendChild(option);
+            });
+            // Set the specified default date or the latest one if none is specified
+            if (defaultDate && uniqueDates.some(d => d.dateStr === defaultDate)) {
+                dateSelect.value = defaultDate;
+            } else if (uniqueDates.length > 0) {
+                dateSelect.value = uniqueDates[0].dateStr;
+            }
+        }
+        /**
+         * Populates the House/Class filter dropdown.
+         */
+        function populateTypeFilter() {
+            const typeSelect = document.getElementById('teacher-select');
+            const typeFilterDiv = document.querySelector('.teacher-filter');
+            typeSelect.innerHTML = '<option value="">-- All --</option>';
+            const fragment = document.createDocumentFragment();
+            if (currentAssemblyType === 'house') {
+                typeFilterDiv.querySelector('label').innerHTML = '<i class="fas fa-filter fa-icon"></i>Filter by House:';
+                typeFilterDiv.style.display = 'flex'; 
+                
+                // Get unique house names from the Assembly data
+                const houseSet = new Set();
+                housewiseData.forEach(row => {
+                    if (row['Select House']) {
+                        houseSet.add(row['Select House'].trim());
+                    }
+                });
+                
+                const houses = Array.from(houseSet).sort();
+                houses.forEach(houseName => {
+                    const houseInfo = teachersData[houseName] || {};
+                    const leader = houseInfo.leader && houseInfo.leader !== 'N/A' ? ` (Leader: ${houseInfo.leader})` : '';
+                    
+                    const option = document.createElement('option');
+                    // Store the House Name as the value
+                    option.value = houseName;
+                    option.textContent = `${houseName}${leader}`;
+                    fragment.appendChild(option);
+                });
+                
+            } else { // Classwise Assembly
+                typeFilterDiv.querySelector('label').innerHTML = '<i class="fas fa-filter fa-icon"></i>Filter by Class:';
+                typeFilterDiv.style.display = 'flex';
+                
+                // Get unique Class names from the Assembly data
+                const classSet = new Set();
+                classwiseData.forEach(row => {
+                    if (row.Class) {
+                        classSet.add(row.Class.trim());
+                    }
+                });
+                
+                const classes = Array.from(classSet).sort();
+                classes.forEach(className => {
+                    const option = document.createElement('option');
+                    // Store the Class Name as the value
+                    option.value = className;
+                    option.textContent = className;
+                    fragment.appendChild(option);
+                });
+            }
+            typeSelect.appendChild(fragment);
+        }
+        // --- Main Filter Logic ---
+        function filterData() {
+            const dateSelect = document.getElementById('date-select');
+            // 'teacher-select' is used as the generic type selector
+            const typeSelect = document.getElementById('teacher-select'); 
+            const selectedDate = dateSelect.value;
+            const selectedType = typeSelect.value; // Now filtering by House Name or Class Name
+            const body = document.body;
+            const container = document.getElementById('assembly-content');
+            const fixedControls = document.querySelector('.fixed-controls');
+            const filters = document.querySelector('.filters');
+            const studentsSection = document.getElementById('students-section');
+            // Reset classes
+            body.className = '';
+            container.className = 'container';
+            fixedControls.className = 'fixed-controls';
+            filters.className = 'filters';
+            if (studentsSection) studentsSection.className = 'container';
+            if (!selectedDate) {
+                document.getElementById('assembly-display').innerHTML = `<p style="text-align: center; color: orange;">
+                    <i class="fas fa-exclamation-circle fa-icon"></i>Please select a date to view the assembly schedule.
+                </p>`;
+                return;
+            }
+            let filteredRow = null;
+            const assemblyTypeHeader = document.getElementById('assembly-type-header');
+            let filteredData = [];
+            if (currentAssemblyType === 'house') {
+                assemblyTypeHeader.innerHTML = '<i class="fas fa-home fa-icon"></i>Housewise Assembly Schedule';
+                filteredData = housewiseData.filter(row => row.Date === selectedDate);
+                if (selectedType) {
+                    // Filter the assembly data by the selected House Name
+                    filteredData = filteredData.filter(row => row['Select House'] === selectedType);
+                }
+                filteredRow = filteredData.length > 0 ? filteredData[0] : null;
+                renderHousewise(filteredRow);
+            } else {
+                assemblyTypeHeader.innerHTML = '<i class="fas fa-users fa-icon"></i>Classwise Assembly Schedule';
+                filteredData = classwiseData.filter(row => row['Date of Assembly'] === selectedDate);
+                if (selectedType) {
+                    // Filter the assembly data by the selected Class Name
+                    filteredData = filteredData.filter(row => row.Class === selectedType);
+                }
+                filteredRow = filteredData.length > 0 ? filteredData[0] : null;
+                renderClasswise(filteredRow);
+            }
+            // After setting the theme, update the script generator if it's the active tab
+             if (document.getElementById('script-tab').classList.contains('active')) {
+                // Ensure script is generated with the current theme
+                generateScript(); 
+            }
+            if (!filteredRow) {
+                 document.getElementById('assembly-display').innerHTML = `<p style="text-align: center; color: red;">
+                    <i class="fas fa-exclamation-triangle fa-icon"></i>No Assembly details found for the selected date${selectedType ? ` and selected ${currentAssemblyType}` : ''}.
+                </p>`;
+            }
+        }
+        /**
+         * Triggered when the House/Class filter changes.
+         */
+        function filterByType() {
+            populateDateFilter();
+            filterData();
+        }
+        // --- Assembly Type Switcher ---
+        function switchAssemblyType(type, reloadData = true) {
+            currentAssemblyType = type;
+            document.getElementById('btn-house').classList.remove('active');
+            document.getElementById('btn-class').classList.remove('active');
+            document.getElementById(`btn-${type}`).classList.add('active');
+            
+            // For script generator in other tab
+            document.getElementById('typeSelect').value = type;
+            loadScriptDates();
+
+            // Reset House/Class filter whenever the type is switched
+            document.getElementById('teacher-select').value = "";
+            if (reloadData) {
+                populateTypeFilter();
+                populateDateFilter();
+                filterData();
+            }
+        }
+        // --- Note Generator ---
+        function getAssemblyNote() {
+            return `
+            <div class="assembly-note">
+                <i class="fas fa-info-circle fa-icon"></i>Note: Assembly team members must report 10 minutes prior to the assembly time.
+            </div>
+            `;
+        }
+        // --- HOUSEWISE RENDERING FUNCTION ---
+        function renderHousewise(data) {
+            const displayDiv = document.getElementById('assembly-display');
+            const body = document.body;
+            const container = document.getElementById('assembly-content');
+            const fixedControls = document.querySelector('.fixed-controls');
+            const filters = document.querySelector('.filters');
+            if (!data) {
+                return; // Handled in filterData
+            }
+            const houseName = data['Select House'] || 'N/A';
+            const formattedDate = formatDate(data.Date);
+            const themeClass = `theme-${houseName.replace(/\s/g, '-')}`;
+            // Store the last rendered theme for the script tab
+            localStorage.setItem('lastRenderedHouse', houseName); 
+            // Apply theme class to BODY and other elements
+            body.className = '';
+            body.classList.add(themeClass);
+            container.className = 'container';
+            container.classList.add(themeClass);
+            fixedControls.className = 'fixed-controls';
+            fixedControls.classList.add(themeClass);
+            filters.className = 'filters';
+            filters.classList.add(themeClass);
+            // Fetch Leader and Supporting Teachers ONLY from the teachersData map
+            const houseInfo = teachersData[houseName] || {};
+            const leadingTeacher = houseInfo.leader || 'N/A';
+            const supportingTeachers = houseInfo.supporting && houseInfo.supporting.length > 0
+                ? houseInfo.supporting.join(', ')
+                : 'N/A';
+            // Filter duties to hide empty fields
+            const duties = [
+                { role: 'Assembly Conduct', student: data['Assembly Conduct'], icon: 'fas fa-bullhorn' },
+                { role: 'Qirat', student: data.Qirat, icon: 'fas fa-quran' },
+                { role: 'Daily Prayer', student: data['Daily Prayer'], icon: 'fas fa-pray' },
+                { role: 'Hadith', student: data.Hadith, icon: 'fas fa-book' },
+                { role: 'Thought of the Day', student: data['Thought of the Day'], icon: 'fas fa-lightbulb' },
+                { role: 'English News', student: data['English News'], icon: 'fas fa-newspaper' },
+                { role: 'Hindi News', student: data['Hindi News'], icon: 'fas fa-newspaper' },
+                { role: 'G.K. Questions', student: data['G.K. Questions'], icon: 'fas fa-question-circle' },
+                { role: 'Pledge', student: data.Pledge, icon: 'fas fa-hand-holding-heart' },
+                { role: 'National Anthem', student: data['National Anthem'], icon: 'fas fa-music' },
+            ].filter(d => d.student && d.student.trim() !== ''); // <-- HIDE EMPTY ROLES
+            // Special Comments column
+            const specialComments = data['Special Comments'];
+            if (specialComments && specialComments.trim() !== '') {
+                duties.push({ role: 'Others', student: specialComments, icon: 'fas fa-sticky-note' });
+            }
+            const dutiesHTML = duties.map(item => `
+                <tr>
+                    <td><i class="${item.icon} fa-icon"></i>${item.role}</td>
+                    <td>${item.student}</td>
+                </tr>
+            `).join('');
+            displayDiv.innerHTML = `
+                <div class="assembly-details">
+                    <h3><i class="fas fa-calendar-day fa-icon"></i>Today: ${houseName} House Leads.</h3>
+                    <p><i class="fas fa-calendar-alt fa-icon"></i><strong>Date:</strong> ${formattedDate}</p>
+                    <p><i class="fas fa-chalkboard-teacher fa-icon"></i><strong>House Leader:</strong> ${leadingTeacher}</p>
+                    <p><i class="fas fa-user-friends fa-icon"></i><strong>Supporting Teachers:</strong> ${supportingTeachers}</p>
+                    <table class="duties-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 45%;"><i class="fas fa-tasks fa-icon"></i>Role</th>
+                                <th><i class="fas fa-user-graduate fa-icon"></i>Student Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${dutiesHTML}
+                        </tbody>
+                    </table>
+                </div>
+                ${getAssemblyNote()}
+            `;
+        }
+        // --- CLASSWISE RENDERING FUNCTION ---
+        function renderClasswise(data) {
+            const displayDiv = document.getElementById('assembly-display');
+            const body = document.body;
+            const container = document.getElementById('assembly-content');
+            const fixedControls = document.querySelector('.fixed-controls');
+            const filters = document.querySelector('.filters');
+            if (!data) {
+                return; // Handled in filterData
+            }
+            const className = data.Class || 'N/A';
+            const formattedDate = formatDate(data['Date of Assembly']);
+            const themeClass = `theme-${className.replace(/\s/g, '-')}`;
+            // Store the last rendered theme for the script tab
+            localStorage.setItem('lastRenderedHouse', className); 
+            // Apply theme class to BODY and other elements
+            body.className = '';
+            body.classList.add(themeClass);
+            container.className = 'container';
+            container.classList.add(themeClass);
+            fixedControls.className = 'fixed-controls';
+            fixedControls.classList.add(themeClass);
+            filters.className = 'filters';
+            filters.classList.add(themeClass);
+            const classTeacher = data['Class Teacher'] || 'N/A';
+            // Filter duties to hide empty fields
+            const duties = [
+                { role: 'Conducting Student', student: data['Conducting Student'], icon: 'fas fa-user' },
+                { role: 'Qirat Recitation', student: data['Qirat Recitation'], icon: 'fas fa-quran' },
+                { role: 'Daily Prayer', student: data['Daily Prayer'], icon: 'fas fa-pray' },
+                { role: 'Hadees Presentation', student: data['Hadees Presentation'], icon: 'fas fa-book' },
+                { role: 'Thought Presentation', student: data['Thought Presentation'], icon: 'fas fa-lightbulb' },
+                { role: 'English News', student: data['English News'], icon: 'fas fa-newspaper' },
+                { role: 'Hindi News', student: data['Hindi News'], icon: 'fas fa-newspaper' },
+                { role: 'GK Questions', student: data['GK Questions'], icon: 'fas fa-question-circle' },
+                { role: 'Pledge Leader', student: data['Pledge Leader'], icon: 'fas fa-hand-holding-heart' },
+                { role: 'National Anthem', student: data['National Anthem'], icon: 'fas fa-music' }
+            ].filter(d => d.student && d.student.trim() !== '');
+            // Special Comments column
+            const specialComments = data['Special Comments'];
+            if (specialComments && specialComments.trim() !== '') {
+                duties.push({ role: 'Others', student: specialComments, icon: 'fas fa-sticky-note' });
+            }
+            const dutiesHTML = duties.map(item => `
+                <tr>
+                    <td><i class="${item.icon} fa-icon"></i>${item.role}</td>
+                    <td>${item.student}</td>
+                </tr>
+            `).join('');
+            displayDiv.innerHTML = `
+                <div class="assembly-details">
+                    <h3><i class="fas fa-calendar-day fa-icon"></i>Today: ${className} Leads.</h3>
+                    <p><i class="fas fa-calendar-alt fa-icon"></i><strong>Date:</strong> ${formattedDate}</p>
+                    <p><i class="fas fa-chalkboard-teacher fa-icon"></i><strong>Class Teacher:</strong> ${classTeacher}</p>
+                    <table class="duties-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 45%;"><i class="fas fa-tasks fa-icon"></i>Role</th>
+                                <th><i class="fas fa-user-graduate fa-icon"></i>Student Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${dutiesHTML}
+                        </tbody>
+                    </table>
+                </div>
+                ${getAssemblyNote()}
+            `;
+        }
+        // --- Download Function ---
+        function downloadImage() {
+            const element = document.querySelector('.a4-container');
+            const container = document.querySelector('.container');
+            const downloadBtn = document.querySelector('.download-btn');
+            const originalText = downloadBtn.innerHTML;
+            downloadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Generating...';
+            // 1. Store current styles to revert later
+            const originalContainerWidth = container.style.maxWidth;
+            const originalMargin = container.style.margin;
+            // 2. Temporarily apply A5 size emulation for capture
+            container.style.width = '100%';
+            container.style.margin = '0 auto';
+            html2canvas(element, {
+                scrollY: -window.scrollY,
+                scale: 4,
+                useCORS: true
+            }).then(canvas => {
+                const imageDataURL = canvas.toDataURL('image/png');
+                const link = document.createElement('a');
+                link.href = imageDataURL;
+                link.download = `${currentAssemblyType}_Assembly_${document.getElementById('date-select').options[document.getElementById('date-select').selectedIndex].textContent}.png`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                // 3. Revert styles after capture is complete
+                container.style.maxWidth = originalContainerWidth;
+                container.style.margin = originalMargin;
+                downloadBtn.innerHTML = originalText;
+            });
+        }
+        // --- Script Generator Functions ---
+        // GET ALL UNIQUE DATES FOR SCRIPT GENERATOR
+        function loadScriptDates(){
+            const type = document.getElementById("typeSelect").value;
+            const dateSelect = document.getElementById("scriptDateSelect");
+            dateSelect.innerHTML = "";
+            const arr = type==="house" ? housewiseData : classwiseData;
+            const dateCol = type==="house" ? "Date" : "Date of Assembly";
+            let dates = [...new Set(arr.map(x=>x[dateCol]).filter(Boolean))];
+            // Format today's date to match the format in the data (MM/DD/YYYY)
+            const today = new Date();
+            const todayFormatted = `${today.getMonth()+1}/${today.getDate()}/${today.getFullYear()}`;
+            
+            let todayFound = false;
+            
+            dates.forEach(d=>{
+                let op=document.createElement("option");
+                op.value=d;
+                op.textContent=d;
+                
+                // Check if this date matches today's date
+                if (d === todayFormatted) {
+                    op.textContent += " (Today)";
+                    op.selected = true;
+                    todayFound = true;
+                }
+                
+                dateSelect.appendChild(op);
+            });
+            
+            // If today's date wasn't found, select the first date
+            if (!todayFound && dates.length > 0) {
+                dateSelect.value = dates[0].value; // Corrected: use .value from the option element
+            }
+        }
+        // CONVERT COMMA → BULLET LINES
+        function bullets(text){
+            if(!text) return "";
+            return text.split(",").map(t=>`<div class='bullet-line'>${t.trim()}</div>`).join("");
+        }
+        
+        // HELPER TO CREATE ONE PRINT PAGE
+        function createPrintPage(headerHTML, contentHTML, themeClass) {
+            if (!contentHTML || contentHTML.trim() === '') return '';
+            
+            return `
+                <div class="a4-container script-page ${themeClass}">
+                    ${headerHTML}
+                    <div class="script-section">
+                        ${contentHTML}
+                    </div>
+                </div>
+            `;
+        }
+
+        // MAIN SCRIPT GENERATOR
+        function generateScript(){
+            const container = document.getElementById("scriptPagesContainer");
+            const type = document.getElementById("typeSelect").value;
+            const date = document.getElementById("scriptDateSelect").value;
+
+            // Get the roles data
+            const roles = type==="house"
+                ? housewiseData.find(x=>x.Date===date)
+                : classwiseData.find(x=>x["Date of Assembly"]===date);
+            
+            // Get the script content data
+            const script = scriptData.find(x=>x.Date===date);
+            
+            if(!roles || !script){
+                container.innerHTML=`<div style='text-align:center; color:#d32f2f; padding:40px;'>No assembly details or script found for the selected date (${date}).</div>`;
+                return;
+            }
+            
+            // Apply the appropriate theme
+            let themeClass = '';
+            if (type === "house" && roles["Select House"]) {
+                themeClass = `theme-${roles["Select House"].replace(/\s/g, '-')}`;
+                document.body.className = themeClass; // Apply to body
+            } else if (type === "class" && roles["Class"]) {
+                themeClass = `theme-${roles["Class"].replace(/\s/g, '-')}`;
+                document.body.className = themeClass; // Apply to body
+            } else {
+                document.body.className = '';
+            }
+            
+            // FETCH ROLE NAMES
+            const nameThought = roles["Thought of the Day"] || roles["Thought Presentation"] || "";
+            const nameENews   = roles["English News"] || "";
+            const nameHNews   = roles["Hindi News"] || "";
+            const nameGK      = roles["G.K. Questions"] || roles["GK Questions"] || "";
+            
+            // SCRIPT CONTENT
+            const thoughtContent = bullets(script.Thought);
+            const hindiNewsContent = bullets(script["Hindi News"]);
+            const englishNewsContent = bullets(script["English News"]);
+            const gkContent = bullets(script["GK Questions"]);
+            
+            // Get the base print header (Logo, School Name)
+            const printHeaderHTML = document.getElementById('print-header-template').innerHTML;
+            
+            let allPagesHTML = "";
+            
+            // --- 1. Thought Page ---
+            const thoughtHTML = `<div class="role-title">Thought of the Day – <span class="role-name">${nameThought}</span></div>${thoughtContent}`;
+            allPagesHTML += createPrintPage(printHeaderHTML, thoughtHTML, themeClass);
+
+            // --- 2. Hindi News Page ---
+            const hindiNewsHTML = `<div class="role-title">Hindi News – <span class="role-name">${nameHNews}</span></div>${hindiNewsContent}`;
+            allPagesHTML += createPrintPage(printHeaderHTML, hindiNewsHTML, themeClass);
+            
+            // --- 3. English News Page ---
+            const englishNewsHTML = `<div class="role-title">English News – <span class="role-name">${nameENews}</span></div>${englishNewsContent}`;
+            allPagesHTML += createPrintPage(printHeaderHTML, englishNewsHTML, themeClass);
+
+            // --- 4. GK Questions Page ---
+            const gkHTML = `<div class="role-title">G.K. Questions – <span class="role-name">${nameGK}</span></div>${gkContent}`;
+            allPagesHTML += createPrintPage(printHeaderHTML, gkHTML, themeClass);
+            
+            // Final rendering
+            if (allPagesHTML.trim() === '') {
+                container.innerHTML = `<div style='text-align:center; color:#d32f2f; padding:40px;'>Script is empty for the selected date.</div>`;
+            } else {
+                container.innerHTML = allPagesHTML;
+            }
+        }
+
+        // Event listeners for script generator
+        document.getElementById("typeSelect").addEventListener("change", function() {
+            loadScriptDates();
+            // Wait for dates to load/select before generating
+            setTimeout(generateScript, 50); 
+        });
+        document.getElementById("scriptDateSelect").addEventListener("change", generateScript);
+        
+        // --- Initialization ---
+        loadAllData();
+    </script>
+</body>
+</html>

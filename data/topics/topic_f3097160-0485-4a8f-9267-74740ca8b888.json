@@ -1,0 +1,36 @@
+{
+    "id": "f3097160-0485-4a8f-9267-74740ca8b888",
+    "subjectId": "bbba02a2-49b4-4bf6-9b4b-014fa555e3d6",
+    "name": "RECURRING DECIMAL TRICK",
+    "description": "1. Jo sankhya dikh rahi hai use decimal hata kar likho।\n\n2. Jis number par bar hai,\n   use chhupa do।\n\n3. Ab jo number dikh raha hai,\n   use minus mein likho।\n\n4. Denominator mein:\n   • Jitne digit par bar hai utne 9 likho।\n   • Decimal ke baad aur bar se pehle\n     jitne digit hain utne 0 lagao।\n\n\nEXAMPLE 1:\n0.4̅\n\n4 - 0\n-----\n9\n\n= 4/9\n\n\nEXAMPLE 2:\n3.35̅\n\n335 - 33\n--------\n90\n\n= 302/90\n\n\nEXAMPLE 3:\n3.23̅\n\n323 - 32\n---------\n90\n\n= 291/90\n= 97/30\n\n\nEXAMPLE 4:\n3.257̅\n\n3257 - 32\n----------\n990\n\n= 3225/990\n= 215/66",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "createdAt": "2026-06-08 17:57",
+    "updatedAt": "2026-06-22 04:25:00",
+    "revisionHistory": [
+        {
+            "id": "0852276e-36c5-4de8-9d3a-f369afd16987",
+            "date": "2026-06-15",
+            "time": "2026-06-15 10:06",
+            "note": "Auto: 7 din baad revision scheduled",
+            "type": "auto-revision"
+        },
+        {
+            "id": "1071b1c3-79da-4ecf-9786-d068fe5e6b13",
+            "date": "2026-06-17",
+            "time": "2026-06-17 08:53",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "3c284218-ed47-4b80-bd4d-73a8b8bbcfda",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "links": [],
+    "pdfs": []
+}

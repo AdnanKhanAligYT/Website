@@ -1,0 +1,29 @@
+{
+    "id": "b4ef46ce-6910-4706-8ad0-9a640fe0b38d",
+    "subjectId": "349b6112-ad37-421c-ac23-0cedcbf7e23b",
+    "name": "The resistance of an ideal ammeter and an ideal voltmeter should respectively be:",
+    "description": "Question:\n\nThe resistance of an ideal ammeter and an ideal voltmeter should respectively be:\n\n(a) Zero and Infinite\n(b) Infinite and Zero\n(c) Zero and Zero\n(d) Infinite and Infinite\n\nAnswer: (a) Zero and Infinite ✅\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nIDEAL AMMETER\n\nResistance = 0 Ω\n\nWhy?\n\nAmmeter current measure karta hai.\nIsliye ise Series mein lagaya jata hai.\n\nAgar resistance zyada hua to current kam ho jayega.\n\nIsliye Ideal Ammeter ka Resistance = 0 Ω\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nIDEAL VOLTMETER\n\nResistance = ∞ (Infinite)\n\nWhy?\n\nVoltmeter potential difference measure karta hai.\nIse Parallel mein lagaya jata hai.\n\nAgar resistance kam hua to current khinch lega.\n\nIsliye Ideal Voltmeter ka Resistance = Infinite\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nTRICK\n\nAmmeter → Series → Zero Resistance\n\nVoltmeter → Parallel → Infinite Resistance\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nMEMORY TRICK\n\n\"Ammeter Aaya Series Mein,\nResistance Ho Zero.\n\nVoltmeter Baitha Parallel Mein,\nResistance Ho Hero (∞).\"\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nIMPORTANT FORMULAS\n\nOhm's Law\n\nV = IR\n\nCurrent\n\nI = V/R\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nEXAM FAVORITE MCQs\n\nAmmeter is connected → Series\n\nVoltmeter is connected → Parallel\n\nIdeal Ammeter Resistance → 0 Ω\n\nIdeal Voltmeter Resistance → ∞\n\nIdeal Ammeter Current → Maximum\n\nIdeal Voltmeter Current → Zero\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nONE-LINE REVISION\n\nAmmeter → Series → Zero Ω\n\nVoltmeter → Parallel → Infinite Ω",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "e234f835-8367-4be1-b7a3-1b60b9ba79d4",
+            "date": "2026-06-17",
+            "time": "2026-06-17 20:37",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "6ffb5a32-cf84-4850-9aa3-95c2013262ad",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-17 20:37",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

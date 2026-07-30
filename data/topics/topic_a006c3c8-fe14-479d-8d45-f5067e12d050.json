@@ -1,0 +1,43 @@
+{
+    "id": "a006c3c8-fe14-479d-8d45-f5067e12d050",
+    "subjectId": "bbba02a2-49b4-4bf6-9b4b-014fa555e3d6",
+    "name": "Prime Numbers & Tricks to find",
+    "description": "PRIME NUMBER TRICK\n\n1. √N nikalo.\n\n2. √N tak ke prime numbers se divide karo.\n\n3. Agar divide ho jaye\n   ⇒ Prime nahi\n\n4. Agar divide na ho\n   ⇒ Prime hai\n\n\nEXAMPLE:\n91\n\n√91 ≈ 9\n\nCheck:\n2, 3, 5, 7\n\n91 ÷ 7 = 13\n⇒ 91 Prime nahi hai\n\n\nCONCLUSION:\nPrime number sirf 1 aur khud se divide hota hai.",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [
+        {
+            "id": "e1e5bb75-2f4d-4808-95e9-a237dd186b46",
+            "path": "data/images/a006c3c8-fe14-479d-8d45-f5067e12d050/e1e5bb75-2f4d-4808-95e9-a237dd186b46.png",
+            "mimeType": "image/png",
+            "addedAt": "2026-06-08 17:37"
+        }
+    ],
+    "createdAt": "2026-06-08 17:35",
+    "updatedAt": "2026-06-22 04:25:00",
+    "revisionHistory": [
+        {
+            "id": "ccf90e98-202d-4c38-b8cb-0e0c1703e520",
+            "date": "2026-06-15",
+            "time": "2026-06-15 10:06",
+            "note": "Auto: 7 din baad revision scheduled",
+            "type": "auto-revision"
+        },
+        {
+            "id": "4e0d00e9-fb01-4fb1-826a-dd9aaa1f71da",
+            "date": "2026-06-17",
+            "time": "2026-06-17 08:52",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "c2aa94bb-19bb-41a9-9920-694807908e57",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "links": [],
+    "pdfs": []
+}

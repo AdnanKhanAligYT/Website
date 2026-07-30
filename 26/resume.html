@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohammad Adnan | Resume</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink:   #1c2333;
+    --deep:  #0f1624;
+    --gold:  #c8a94e;
+    --gold2: #e8c96e;
+    --slate: #4a5568;
+    --mist:  #f0f3f9;
+    --bdr:   #d8dde8;
+  }
+
+  body {
+    font-family: 'Outfit', sans-serif;
+    background: #d4d8e2;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 48px 20px;
+  }
+
+  .cv {
+    width: 900px;
+    background: #fff;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    box-shadow: 0 30px 80px rgba(0,0,0,.22);
+    border-radius: 6px;
+    overflow: hidden;
+    animation: rise .65s cubic-bezier(.22,1,.36,1) both;
+  }
+  @keyframes rise {
+    from { opacity:0; transform:translateY(40px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* HEADER */
+  .cv-header {
+    background: var(--deep);
+    display: grid;
+    grid-template-columns: 6px 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+  .cv-header::before {
+    content:''; position:absolute;
+    right:-80px; top:-80px;
+    width:300px; height:300px;
+    border-radius:50%;
+    border:55px solid rgba(200,169,78,.07);
+    pointer-events:none;
+  }
+  .cv-header::after {
+    content:''; position:absolute;
+    right:80px; bottom:-60px;
+    width:180px; height:180px;
+    border-radius:50%;
+    border:35px solid rgba(200,169,78,.05);
+    pointer-events:none;
+  }
+  .header-stripe {
+    background: linear-gradient(to bottom, var(--gold), var(--gold2), var(--gold));
+  }
+  .header-content {
+    padding: 44px 48px 44px 40px;
+    display: flex;
+    align-items: center;
+    gap: 36px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Photo */
+  .photo-ring {
+    flex-shrink: 0;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gold), var(--gold2));
+    padding: 3px;
+    box-shadow: 0 8px 30px rgba(200,169,78,.35);
+  }
+  .photo-inner {
+    width:100%; height:100%;
+    border-radius:50%;
+    overflow:hidden;
+    background:#2a3550;
+    display:flex; align-items:center; justify-content:center;
+    font-size:44px; color:rgba(255,255,255,.25);
+  }
+  .photo-inner img { width:100%; height:100%; object-fit:cover; display:block; }
+
+  /* Name */
+  .name-block h1 {
+    font-family:'Cormorant Garamond',serif;
+    font-size:42px; font-weight:700;
+    color:#fff; letter-spacing:1px; line-height:1.1;
+  }
+  .name-block .tagline {
+    font-size:11.5px; font-weight:400;
+    letter-spacing:3.5px; text-transform:uppercase;
+    color:var(--gold); margin:8px 0 22px;
+  }
+  .contacts { display:flex; flex-wrap:wrap; gap:8px 20px; }
+  .contacts a, .contacts span {
+    color:rgba(255,255,255,.65);
+    font-size:12.5px; font-weight:300;
+    text-decoration:none;
+    display:flex; align-items:center; gap:7px;
+    transition:color .2s;
+  }
+  .contacts a:hover { color:var(--gold); }
+  .ico { width:13px; height:13px; fill:var(--gold); flex-shrink:0; }
+
+  /* BODY */
+  .cv-body { display:grid; grid-template-columns:270px 1fr; }
+
+  /* SIDEBAR */
+  .sidebar { background:var(--mist); padding:40px 28px; border-right:1px solid var(--bdr); }
+  .sidebar-section { margin-bottom:36px; }
+
+  .s-title {
+    font-family:'Cormorant Garamond',serif;
+    font-size:17px; font-weight:600; color:var(--ink);
+    display:flex; align-items:center; gap:10px; margin-bottom:16px;
+  }
+  .s-title::after {
+    content:''; flex:1; height:1px;
+    background:linear-gradient(to right, var(--gold), transparent);
+  }
+
+  .obj-text { font-size:13px; line-height:1.75; color:var(--slate); }
+
+  .skill-grid { display:flex; flex-direction:column; gap:7px; }
+  .skill-tag {
+    font-size:12.5px; color:var(--ink);
+    background:#fff; border:1px solid var(--bdr);
+    border-left:3px solid var(--gold);
+    padding:5px 10px; border-radius:3px;
+    transition:background .2s;
+  }
+  .skill-tag:hover { background:#fff9ee; }
+
+  .addr-text { font-size:12.5px; color:var(--slate); line-height:1.7; }
+  .addr-text a { color:#2d5fa6; text-decoration:none; }
+  .addr-text a:hover { text-decoration:underline; }
+
+  /* MAIN */
+  .main { padding:40px 44px; }
+  .main-section { margin-bottom:38px; }
+
+  .m-title {
+    font-family:'Cormorant Garamond',serif;
+    font-size:19px; font-weight:600; color:var(--ink);
+    display:flex; align-items:center; gap:12px; margin-bottom:22px;
+  }
+  .m-title::after {
+    content:''; flex:1; height:1.5px;
+    background:linear-gradient(to right, var(--gold), transparent);
+  }
+
+  /* Education */
+  .edu-list { display:flex; flex-direction:column; gap:16px; }
+  .edu-item { display:grid; grid-template-columns:56px 1fr; gap:0 16px; align-items:start; }
+  .edu-year {
+    font-size:11px; font-weight:600; letter-spacing:1px;
+    color:var(--gold); text-transform:uppercase; padding-top:3px; text-align:right;
+  }
+  .edu-degree { font-weight:600; font-size:14.5px; color:var(--ink); margin-bottom:2px; }
+  .edu-inst { font-size:12.5px; color:var(--slate); }
+
+  /* Work */
+  .work-list { display:flex; flex-direction:column; gap:28px; }
+  .work-item { position:relative; padding-left:22px; }
+  .work-item::before {
+    content:''; position:absolute;
+    left:5px; top:22px; bottom:-14px; width:2px;
+    background:linear-gradient(to bottom, var(--gold), transparent);
+  }
+  .work-item:last-child::before { display:none; }
+  .work-item::after {
+    content:''; position:absolute;
+    left:0; top:5px; width:12px; height:12px;
+    border-radius:50%; background:var(--gold);
+    box-shadow:0 0 0 3px #fff, 0 0 0 5px rgba(200,169,78,.25);
+  }
+  .w-period {
+    font-size:11px; font-weight:600; letter-spacing:1.5px;
+    text-transform:uppercase; color:var(--gold); margin-bottom:4px;
+  }
+  .w-title {
+    font-family:'Cormorant Garamond',serif;
+    font-size:18px; font-weight:700; color:var(--ink); line-height:1.2;
+  }
+  .w-org { font-size:13px; color:var(--slate); margin:2px 0 12px; }
+  .w-points { padding-left:14px; list-style:none; display:flex; flex-direction:column; gap:5px; }
+  .w-points li { font-size:13px; color:#3a4558; line-height:1.6; position:relative; }
+  .w-points li::before {
+    content:'›'; position:absolute; left:-14px;
+    color:var(--gold); font-size:16px; line-height:1.4;
+  }
+
+  @media print {
+    body { background:#fff; padding:0; }
+    .cv { box-shadow:none; width:100%; border-radius:0; }
+  }
+</style>
+</head>
+<body>
+<div class="cv">
+
+  <!-- HEADER -->
+  <header class="cv-header">
+    <div class="header-stripe"></div>
+    <div class="header-content">
+      <div class="photo-ring">
+        <div class="photo-inner">
+          <img src="images/cv.jpg" alt="Mohammad Adnan" onerror="this.style.display='none'">
+        </div>
+      </div>
+      <div class="name-block">
+        <h1>Mohammad Adnan</h1>
+        <div class="tagline">Mathematics Educator &amp; Digital Content Developer</div>
+        <div class="contacts">
+          <a href="mailto:mohammadadnan7275@gmail.com">
+            <svg class="ico" viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            mohammadadnan7275@gmail.com
+          </a>
+          <span>
+            <svg class="ico" viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C10.61 21 3 13.39 3 4c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+            7275126421
+          </span>
+          <span>
+            <svg class="ico" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"/></svg>
+            Gola Gokarannath, Uttar Pradesh
+          </span>
+          <a href="http://adnansmps.free.nf" target="_blank">
+            <svg class="ico" viewBox="0 0 24 24"><path d="M12 2a10 10 0 100 20A10 10 0 0012 2zm6.93 6h-2.95a15.65 15.65 0 00-1.38-3.56A8.03 8.03 0 0118.93 8zM12 4.04c.83 1.2 1.48 2.53 1.91 3.96h-3.82c.43-1.43 1.08-2.76 1.91-3.96zM4.26 14a7.8 7.8 0 010-4h3.38c-.09.65-.14 1.32-.14 2s.05 1.35.14 2H4.26zm.81 2h2.95c.32 1.25.78 2.44 1.38 3.56A8.01 8.01 0 015.07 16zm2.95-8H5.07a8.01 8.01 0 014.33-3.56A15.65 15.65 0 008.02 8zM12 19.96c-.83-1.2-1.48-2.53-1.91-3.96h3.82c-.43 1.43-1.08 2.76-1.91 3.96zM14.34 14H9.66c-.1-.64-.16-1.31-.16-2s.06-1.36.16-2h4.68c.1.64.16 1.31.16 2s-.06 1.36-.16 2zm.25 5.56a15.65 15.65 0 001.38-3.56h2.95a8.03 8.03 0 01-4.33 3.56zM16.36 14c.09-.65.14-1.32.14-2s-.05-1.35-.14-2h3.38a7.8 7.8 0 010 4h-3.38z"/></svg>
+            adnansmps.free.nf
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- BODY -->
+  <div class="cv-body">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+      <div class="sidebar-section">
+        <div class="s-title">Objective</div>
+        <p class="obj-text">Dedicated mathematics educator with a passion for making complex concepts accessible to all students. I combine traditional teaching methods with modern digital tools to create engaging learning experiences. My goal is to empower students with problem-solving skills and mathematical thinking that extends beyond the classroom.</p>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="s-title">Skills</div>
+        <div class="skill-grid">
+          <div class="skill-tag">Educational Technology Integration</div>
+          <div class="skill-tag">AI Tools for Education</div>
+          <div class="skill-tag">Basic Web Development</div>
+          <div class="skill-tag">Website Creation &amp; Management</div>
+          <div class="skill-tag">Multilingual Exam Paper Prep</div>
+          <div class="skill-tag">Clear Communication</div>
+          <div class="skill-tag">Student Engagement Strategies</div>
+          <div class="skill-tag">Creative Problem Solving</div>
+          <div class="skill-tag">Individualized Instruction</div>
+          <div class="skill-tag">Data-Driven Instruction</div>
+          <div class="skill-tag">Multilingual Content Creation</div>
+          <div class="skill-tag">Curriculum Development</div>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="s-title">Address</div>
+        <p class="addr-text">Mohalla Eidgaah, Ward No. 2<br>Gola Gokarannath<br>Lakhimpur Kheri, U.P. – 262802</p>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="s-title">Website</div>
+        <p class="addr-text">
+          <a href="http://www.adnansmps.free.nf" target="_blank">www.adnansmps.free.nf</a><br>
+          Educational resources &amp; teaching materials
+        </p>
+      </div>
+
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <section class="main-section">
+        <div class="m-title">Education</div>
+        <div class="edu-list">
+          <div class="edu-item">
+            <div class="edu-year">2021</div>
+            <div><div class="edu-degree">M.Sc. Mathematics</div><div class="edu-inst">Aligarh Muslim University · 62%</div></div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-year">2018</div>
+            <div><div class="edu-degree">B.Sc. (Hons) Mathematics</div><div class="edu-inst">Aligarh Muslim University · 62%</div></div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-year">Now</div>
+            <div><div class="edu-degree">B.Ed. (Pursuing)</div><div class="edu-inst">Specializing in Mathematics Education</div></div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-year">2015</div>
+            <div><div class="edu-degree">12th – UP Board</div><div class="edu-inst">80%</div></div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-year">2013</div>
+            <div><div class="edu-degree">10th – UP Board</div><div class="edu-inst">72%</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="main-section">
+        <div class="m-title">Work Experience</div>
+        <div class="work-list">
+
+          <div class="work-item">
+            <div class="w-period">April 2023 – Present</div>
+            <div class="w-title">Mathematics Teacher (PGT)</div>
+            <div class="w-org">Saiema Mansoor Public School, Parsara, Hathras</div>
+            <ul class="w-points">
+              <li>Teach Mathematics to students across various grade levels.</li>
+              <li>Develop comprehensive lesson plans and assessment materials.</li>
+              <li>Participate in school programs, meetings, and curriculum development.</li>
+              <li>Integrate technology and AI tools to enhance learning experiences.</li>
+              <li>Create digital learning resources and interactive content.</li>
+            </ul>
+          </div>
+
+          <div class="work-item">
+            <div class="w-period">April 2021 – March 2023</div>
+            <div class="w-title">Helping Teacher</div>
+            <div class="w-org">T.K' Board School, Gola Gokarannath</div>
+            <ul class="w-points">
+              <li>Provided academic support to students in Mathematics classes.</li>
+              <li>Assisted teachers with classwork and homework management.</li>
+              <li>Developed tailored practice materials for students needing extra support.</li>
+              <li>Implemented innovative teaching aids to enhance conceptual understanding.</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+</div>
+</body>
+</html>

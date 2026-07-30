@@ -1,0 +1,36 @@
+{
+    "id": "abfe52a8-83ac-40c9-89d0-dcaf5b4256ed",
+    "subjectId": "bbba02a2-49b4-4bf6-9b4b-014fa555e3d6",
+    "name": "📚 Math – Number System (Unit Digit nikalne ki Shortcut Bilingual Tricks)",
+    "description": "<h2>📚 Math – Number System (Unit Digit nikalne ki Short Tricks)</h2>\n\n<p style=\"background-color:#FFF3E0;padding:10px;border-left:6px solid #FF9800;margin-bottom:15px;\">\n<strong>📝 Chapter Summary:</strong><br>\nKisi bhi number ke घातांक (Powers) ka **Unit Digit (इकाई का अंक)** ya **Last Digit** chuktiyon mein find karne ke liye math ke rules ko 3 magic super-groups mein divide kiya gaya hai. Inhe yaad rakhkar aap exam mein bina pen uthaye answer de sakte hain.\n</p>\n\n<hr>\n\n<h3 style=\"color:#009688;\">🔥 Super Group 1: \"No Change\" Gang (0, 1, 5, 6 Rules)</h3>\n<p>Agar kisi number ke end (unit place) par niche diye gaye digits hon, to uski power chahe kitni bhi badi kyu na ho, **Unit Digit kabhi nahi badalta (Always remains same)**:</p>\n\n<ul>\n<li>🎯 <b>Digit [0] ➔</b> Every power ends with <b>0</b>. <br><i>Example:</i> 10<sup>2</sup> ➔ 0, 30<sup>5</sup> ➔ 0</li>\n<li>🎯 <b>Digit [1] ➔</b> Every power ends with <b>1</b>. <br><i>Example:</i> 11<sup>7</sup> ➔ 1</li>\n<li>🎯 <b>Digit [5] ➔</b> Every power ends with <b>5</b>. <br><i>Example:</i> 25<sup>9</sup> ➔ 5</li>\n<li>🎯 <b>Digit [6] ➔</b> Every power ends with <b>6</b>. <br><i>Example:</i> 16<sup>10</sup> ➔ 6</li>\n</ul>\n\n<blockquote style=\"background-color:#E8F5E9; padding:10px; border-left:5px solid #4CAF50;\">\n<b>💡 Super Memory Code: \"0156 No Change\"</b> Yaani dimag mein bitha lijiye ki 0, 1, 5, 6 ki power kuch bhi ho, answer same to same rahega!\n</blockquote>\n\n<hr>\n\n<h3 style=\"color:#E91E63;\">🔥 Super Group 2: \"Odd / Even\" Gang (4 & 9 Shortcuts)</h3>\n<p>Digits <b>4</b> aur <b>9</b> ka cyclicity (चक्र) sirf 2 ka hota hai. Inke liye power ka **Odd (विषम)** ya **Even (सम)** check karna hi kafi hai:</p>\n\n<table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse:collapse;width:100%;margin-top:10px;\">\n<tr style=\"background-color:#E91E63;color:white;\">\n<th style=\"text-align:left;\">Base Unit Digit</th>\n<th style=\"text-align:left;\">If Power is Odd (विषम घात)</th>\n<th style=\"text-align:left;\">If Power is Even (सम घात)</th>\n<th style=\"text-align:left;\">Quick Examples</th>\n</tr>\n<tr>\n<td><b style=\"font-size:16px; color:#3F51B5;\">Digit 4</b></td>\n<td><span style=\"color:red;\"><b>Answer always 4</b></span></td>\n<td><span style=\"color:green;\"><b>Answer always 6</b></span></td>\n<td>4<sup>1</sup> ➔ 4, 4<sup>3</sup> ➔ 4<br>4<sup>2</sup> ➔ 6, 4<sup>4</sup> ➔ 6</td>\n</tr>\n<tr style=\"background-color:#F5F5F5;\">\n<td><b style=\"font-size:16px; color:#3F51B5;\">Digit 9</b></td>\n<td><span style=\"color:red;\"><b>Answer always 9</b></span></td>\n<td><span style=\"color:green;\"><b>Answer always 1</b></span></td>\n<td>9<sup>1</sup> ➔ 9, 9<sup>3</sup> ➔ 9<br>9<sup>2</sup> ➔ 1, 9<sup>4</sup> ➔ 1</td>\n</tr>\n</table>\n\n<hr>\n\n<h3 style=\"color:#3F51B5;\">🔄 Super Group 3: \"Cyclicity of 4\" Gang (2, 3, 7, 8 Rules)</h3>\n<p>Digits <b>2, 3, 7, aur 8</b> ka cycle 4 ka hota hai, yaani har 4 powers ke baad unit digit repeat hota hai.</p>\n\n<ul>\n<li>⚙️ <b>Master Rule:</b> Simply perform <b>(Power ÷ 4)</b> aur jo <b>Remainder (शेषफल)</b> bache, use hi new power mankar answer nikal lo.</li>\n<li>⚠️ <i>Special Note:</i> Agar power 4 se fully divide ho jaye (Remainder = 0), to power ki jagah hamesha <b>4</b> use karein.</li>\n</ul>\n\n<table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse:collapse;width:100%;margin-top:10px;\">\n<tr style=\"background-color:#3F51B5;color:white;\">\n<th style=\"text-align:left;\">Unit Digit</th>\n<th style=\"text-align:left;\">Power 1 (Remainder = 1)</th>\n<th style=\"text-align:left;\">Power 2 (Remainder = 2)</th>\n<th style=\"text-align:left;\">Power 3 (Remainder = 3)</th>\n<th style=\"text-align:left;\">Power 4 (Remainder = 0)</th>\n</tr>\n<tr>\n<td><b>Powers of 2</b></td>\n<td>2<sup>1</sup> ➔ <b>2</b></td>\n<td>2<sup>2</sup> ➔ <b>4</b></td>\n<td>2<sup>3</sup> ➔ <b>8</b></td>\n<td>2<sup>4</sup> ➔ <b>6</b></td>\n</tr>\n<tr style=\"background-color:#F5F5F5;\">\n<td><b>Powers of 3</b></td>\n<td>3<sup>1</sup> ➔ <b>3</b></td>\n<td>3<sup>2</sup> ➔ <b>9</b></td>\n<td>3<sup>3</sup> ➔ <b>7</b></td>\n<td>3<sup>4</sup> ➔ <b>1</b></td>\n</tr>\n<tr>\n<td><b>Powers of 7</b></td>\n<td>7<sup>1</sup> ➔ <b>7</b></td>\n<td>7<sup>2</sup> ➔ <b>9</b></td>\n<td>7<sup>3</sup> ➔ <b>3</b></td>\n<td>7<sup>4</sup> ➔ <b>1</b></td>\n</tr>\n<tr style=\"background-color:#F5F5F5;\">\n<td><b>Powers of 8</b></td>\n<td>8<sup>1</sup> ➔ <b>8</b></td>\n<td>8<sup>2</sup> ➔ <b>4</b></td>\n<td>8<sup>3</sup> ➔ <b>2</b></td>\n<td>8<sup>4</sup> ➔ <b>6</b></td>\n</tr>\n</table>\n\n<hr>\n\n<h3 style=\"color:#9C27B0;\">📐 Mod Trick Matrix (a<sup>n</sup> mod 10 Method)</h3>\n<p>Mathematical term mein last digit search karna aur <b>mod 10</b> (10 se divide karke remainder nikalna) bilkul same chiz hai.</p>\n\n<table border=\"1\" cellpadding=\"8\" cellspacing=\"0\" style=\"border-collapse:collapse;width:100%;margin-top:10px;\">\n<tr style=\"background-color:#009688;color:white;\">\n<th style=\"text-align:left;\">Evaluation Dimension</th>\n<th style=\"text-align:left;\">Logical Modulus Step-by-Step Formula</th>\n</tr>\n<tr>\n<td><b>a<sup>n</sup> mod 10 Rule</b></td>\n<td><b>Number ka sirf last digit lo ➔ Power ke last 2 digits ko 4 se divide karo ➔ Remainder apply karke value nikal lo.</b></td>\n</tr>\n</table>\n\n<p style=\"background-color:#ECEFF1; padding:10px; border-radius:4px; font-family:monospace;\">\n<b>🚀 Live Solved Example: Find last digit of 122<sup>173</sup></b><br><br>\nStep 1: 122 ≡ 2 (mod 10) -> Baaki numbers chodo, sirf unit digit '2' lo.<br>\nStep 2: Power 173 ke last two digits (73) ko 4 se divide karo -> 73 ÷ 4 = 18 (Remainder = 1)<br>\nStep 3: Now apply remainder as power: 2<sup>1</sup> = <b>2</b><br>\n<b>🎯 Final Answer = 2</b>\n</p>\n\n<hr>\n\n<h3 style=\"color:#F44336;\">🧠 Quick Revision Checklist (Mind Tool)</h3>\n\n<ul>\n<li>✅ <b>0, 1, 5, 6</b> dekhte hi bina soche same to same digit likh do.</li>\n<li>✅ <b>4</b> ki power Odd to 4, Even to 6.</li>\n<li>✅ <b>9</b> की power Odd to 9, Even to 1.</li>\n<li>✅ <b>2, 3, 7, 8</b> aane par power ke last 2 digits ko 4 se kato aur remainder ko power bana do!</li>\n</ul>\n",
+    "status": "Revision",
+    "completeDate": "2026-06-21",
+    "images": [],
+    "createdAt": "2026-06-13 10:30",
+    "updatedAt": "2026-07-01 08:50:46",
+    "revisionHistory": [
+        {
+            "id": "5ee90c03-55e6-4d76-a5d3-c82328fbf001",
+            "date": "2026-06-21",
+            "time": "2026-06-21 01:15:28",
+            "note": "Auto: 7 din baad revision scheduled",
+            "type": "auto-revision"
+        },
+        {
+            "id": "8b139e57-08e7-4564-9334-a962116a0420",
+            "date": "2026-06-21",
+            "time": "2026-06-21 09:58:30",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "5ac3e162-e3b3-4c23-8c7c-3ab7d8be5687",
+            "date": "2026-07-01",
+            "time": "2026-07-01 08:50:46",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "links": [],
+    "pdfs": []
+}

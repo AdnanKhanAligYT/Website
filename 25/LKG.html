@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class LKG Dashboard</title>
+    
+    <!-- Default CSS (अगर आज कोई assembly नहीं है) -->
+    <link rel="stylesheet" href="css/class.css" id="theme-css">
+    
+    <!-- Assembly Status Banner CSS -->
+    
+    <!-- Font Awesome & Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Theme Toggle CSS -->
+</head>
+<body>
+    <!-- Assembly Logo Popup -->
+    <div class="logo-popup" id="logoPopup">
+        <img src="images/smps_logo.jpg" alt="School Logo" class="logo-popup-logo" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iNDAiIGN5PSI0MCIgcj0iNDAiIGZpbGw9IiM0MzYxZWUiLz4KPHBhdGggZD0iTTQwIDQ0QzQ0LjQxODMgNDQgNDggNDAuNDE4MyA0OCAzNkM0OCAzMS41ODE3IDQ0LjQxODMgMjggNDAgMjhDMzUuNTgxNyAyOCAzMiAzMS41ODE3IDMyIDM2QzMyIDQwLjQxODMgMzUuNTgxNyA0NCA0MCA0NFoiIGZpbGw9IiNmOGZhZmMiLz4KPC9zdmc+Cg=='">
+        <div class="logo-popup-house" id="logoPopupHouse">Today's Assembly</div>
+        <div class="logo-popup-text" id="logoPopupText">Loading...</div>
+        <div class="logo-popup-notice" id="logoPopupNotice"></div>
+        <div class="notice-date-badge" id="logoPopupDate"></div>
+    </div>
+    
+    <!-- No Assembly Popup -->
+    <div class="no-assembly-popup" id="noAssemblyPopup">
+        <div class="no-assembly-icon">
+            <i class="fas fa-calendar-times"></i>
+        </div>
+        <div class="no-assembly-title">No Assembly Today</div>
+        <div class="no-assembly-text" id="noAssemblyText">Enjoy your regular classes</div>
+    </div>
+    
+    <!-- Notice Popup -->
+    <div class="notice-popup" id="noticePopup">
+        <div class="notice-header">
+            <div class="notice-icon">
+                <i class="fas fa-bullhorn"></i>
+            </div>
+            <div class="notice-title">Important Notice</div>
+            <button class="notice-close" onclick="closeNoticePopup()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="notice-content" id="noticeContent">
+            Loading notice...
+        </div>
+        <div class="notice-date" id="noticeDate"></div>
+    </div>
+    
+    <!-- Assembly Status Banner -->
+    <a href="assembly.html" style="text-decoration: none; display: none;" id="assemblyBannerLink">
+        <div class="assembly-banner" id="assemblyBanner" style="display: none;">
+            <i class="fas fa-calendar-day"></i>
+            <span class="today-text">Today's Assembly:</span>
+            <span class="house-name" id="assemblyHouseName">Loading...</span>
+            <span class="countdown-timer" id="bannerTimer">10s</span>
+        </div>
+    </a>
+    
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <img src="images/smps_logo.jpg" alt="School Logo" class="logo" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iODAiIGhlaWdodD0iODAiIHZpZXdCb3g9IjAgMCA4MCA4MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iNDAiIGN5PSI0MCIgcj0iNDAiIGZpbGw9IiM0MzYxZWUiLz4KPHBhdGggZD0iTTQwIDQ0QzQ0LjQxODMgNDQgNDggNDAuNDE4MiA0OCAzNiQ0OCAzMS41ODE3IDQ0LjQxODMgMjggNDAgMjhDMzUuNTgxNyAyOCAzMiAzMS41ODE3IDMyIDM2QzMyIDQwLjQxODIgMzUuNTgxNyA0NCA0MCA0NFoiIGZpbGw9IiNmOGZhZmMiLz4KPHBhdGggZD0iTTUyIDU2QzUyIDUxLjU4MTcgNDguNDE4MyA0OCA0NCA0OEgzNkMzMS41ODE3IDQ4IDI4IDUxLjU4MTcgMjggNTZWNjBINTJWNjBINTJWNjBINTJWNTVaIiBmaWxsPSIjZjhmYWZjIi8+Cjx0ZXh0IHg9IjQwIiB5PSI3MCIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZmlsbD0iI2Y4ZmFmYyIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjEwIj5TTVBTPC90ZXh0Pgo8L3N2Zz4K'">
+            </div>
+            
+            <h1>Class LKG Dashboard</h1>
+            <p>Designed & Developed by Adnan</p>
+            
+            <div class="teacher-info">
+                <strong><i class="fas fa-user-tie"></i> Your Class Teacher: <span id="teacherName">Loading...</span></strong>
+                <div class="countdown" id="teacherDobCountdown"></div>
+            </div>
+            
+            <!-- NOTICE BOARD BUTTON -->
+            <a href="#" class="notice-btn" onclick="openNoticeBoard()"><i class="fas fa-bullhorn"></i> Notice Board</a>
+        </div>
+        
+        <!-- BIRTHDAY SECTION -->
+        <section class="birthday-section" id="birthday-section" style="display: none;">
+            <div class="birthday-header">
+                <i class="fas fa-birthday-cake birthday-icon"></i>
+                <h2>Today's Birthday</h2>
+            </div>
+            <div id="birthday-list" class="birthday-list">Loading birthdays...</div>
+        </section>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-book"></i> Study Material</h2>
+            <div class="buttons-grid">
+                <button class="dashboard-btn" onclick="showStudyMaterial('ncert')" id="ncertBtn">
+                    <i class="fas fa-book-open"></i>
+                    <span>NCERT Book</span>
+                </button>
+                <button class="dashboard-btn" onclick="showStudyMaterial('notes')" id="notesBtn">
+                    <i class="fas fa-sticky-note"></i>
+                    <span>Notes</span>
+                </button>
+                <button class="dashboard-btn" onclick="showPPT()" id="pptBtn">
+                    <i class="fas fa-file-powerpoint"></i>
+                    <span>PPT Materials</span>
+                </button>
+                <button class="dashboard-btn" onclick="showResources()" id="resourcesBtn">
+                    <i class="fas fa-folder-open"></i>
+                    <span>Resources Hub</span>
+                </button>
+                <button class="dashboard-btn" onclick="showActivityPopup()" id="activityBtn">
+                    <i class="fas fa-flask"></i>
+                    <span>Activity</span>
+                </button>
+                <button class="dashboard-btn" onclick="showSMPSViewer()" id="smpsBtn">
+                    <i class="fas fa-table"></i>
+                    <span>SMPS Sheet Viewer</span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-chart-line"></i> Performance & Assessment</h2>
+            <div class="buttons-grid">
+                <button class="dashboard-btn" onclick="showProjects()" id="projectsBtn">
+                    <i class="fas fa-project-diagram"></i>
+                    <span>Projects</span>
+                </button>
+                <button class="dashboard-btn" onclick="showTestMarks()" id="testMarksBtn">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>All Subject Marks</span>
+                </button>
+                <button class="dashboard-btn" onclick="showMathsMarks()" id="mathsMarksBtn">
+                    <i class="fas fa-calculator"></i>
+                    <span>Maths Marks</span>
+                </button>
+                <button class="dashboard-btn" onclick="showNotebookTracker()" id="notebookBtn">
+                    <i class="fas fa-book"></i>
+                    <span>Notebook Tracker</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-book"></i> Rd Sharma, PYQs & Others</h2>
+            <div class="buttons-grid">
+                <button class="dashboard-btn" onclick="showStudyMaterial('rdSharma')" id="rdSharmaBtn">
+                    <i class="fas fa-calculator"></i>
+                    <span>RD Sharma</span>
+                </button>
+                <button class="dashboard-btn" onclick="showStudyMaterial('rdSharmaMCQ')" id="rdSharmaMCQBtn">
+                    <i class="fas fa-list-ol"></i>
+                    <span>RD Sharma (MCQs)</span>
+                </button>
+                <button class="dashboard-btn" onclick="showStudyMaterial('pyqs')" id="pyqsBtn">
+                    <i class="fas fa-file-alt"></i>
+                    <span>PYQs & Sample Papers</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title"><i class="fas fa-rocket"></i> Quick Actions</h2>
+            <div class="buttons-grid" id="quick-actions-grid">
+                Loading quick actions...
+            </div>
+        </div>
+    </div>
+
+    <!-- Theme Toggle Button - MOVED TO BOTTOM -->
+    <div class="theme-toggle-container-bottom">
+        <button class="theme-toggle-btn" onclick="toggleThemeSelector()">
+            <i class="fas fa-palette"></i>
+        </button>
+        <div class="theme-selector-popup" id="themeSelectorPopup">
+            <div class="theme-option" onclick="switchTheme('class.css')">
+                <i class="fas fa-moon"></i> Dark Mode
+            </div>
+            <div class="theme-option" onclick="switchTheme('light.css')">
+                <i class="fas fa-sun"></i> Light Mode
+            </div>
+            <div class="theme-option" onclick="switchTheme('alhamrah.css')">
+                <i class="fas fa-home"></i> Al-Hamrah
+            </div>
+            <div class="theme-option" onclick="switchTheme('azhar.css')">
+                <i class="fas fa-school"></i> Azhar
+            </div>
+            <div class="theme-option" onclick="switchTheme('nizamia.css')">
+                <i class="fas fa-university"></i> Nizamia
+            </div>
+            <div class="theme-option" onclick="switchTheme('qurtaba.css')">
+                <i class="fas fa-landmark"></i> Qurtaba
+            </div>
+        </div>
+    </div>
+
+    <!-- BIRTHDAY POPUP -->
+    <div class="birthday-popup" id="birthday-popup">
+        <div class="birthday-popup-content">
+            <span class="close-birthday-popup" onclick="closeBirthdayPopup()">&times;</span>
+            <h2 class="birthday-popup-title"><i class="fas fa-birthday-cake"></i> Current Month Birthdays</h2>
+            <div class="popup-stats">
+                <div class="popup-stat" id="total-month-birthdays">0 Students</div>
+            </div>
+            <div id="month-birthdays-container" class="month-birthdays-grid">
+                <!-- Current month birthdays will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTICE BOARD POPUP -->
+    <div class="popup-modal" id="notices-popup" style="display: none;">
+        <div class="popup-content" style="max-width: 900px; max-height: 90vh;">
+            <div class="popup-header">
+                <h2 class="popup-title"><i class="fas fa-bullhorn"></i> Notice Board</h2>
+                <button class="close-popup" onclick="closeNoticeBoard()">&times;</button>
+            </div>
+            
+            <div class="notices-container">
+                <!-- Stats Row -->
+                <div class="notice-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-list"></i></div>
+                        <div class="stat-number" id="total-notices">0</div>
+                        <div class="stat-label">Total Notices</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-calendar-day"></i></div>
+                        <div class="stat-number" id="today-notices">0</div>
+                        <div class="stat-label">Today</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-file-pdf"></i></div>
+                        <div class="stat-number" id="file-notices">0</div>
+                        <div class="stat-label">With Files</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><i class="fas fa-image"></i></div>
+                        <div class="stat-number" id="image-notices">0</div>
+                        <div class="stat-label">With Images</div>
+                    </div>
+                </div>
+                
+                <!-- Controls -->
+                <div class="notice-controls">
+                    <div class="filter-group">
+                        <label for="monthFilter"><i class="fas fa-filter"></i> Filter by Month:</label>
+                        <select id="monthFilter" onchange="filterNoticesByMonth()">
+                            <option value="all">All Months</option>
+                            <option value="0">January</option>
+                            <option value="1">February</option>
+                            <option value="2">March</option>
+                            <option value="3">April</option>
+                            <option value="4">May</option>
+                            <option value="5">June</option>
+                            <option value="6">July</option>
+                            <option value="7">August</option>
+                            <option value="8">September</option>
+                            <option value="9">October</option>
+                            <option value="10">November</option>
+                            <option value="11">December</option>
+                        </select>
+                    </div>
+                    <button class="notice-btn" onclick="toggleShowAllNotices()" id="showAllBtn">
+                        <i class="fas fa-eye"></i> Show All Notices
+                    </button>
+                </div>
+                
+                <!-- Notices Grid -->
+                <div class="notices-grid" id="notices-container">
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i> Loading notices...
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="popup-overlay" id="popupOverlay"></div>
+    
+    <div class="popup-container" id="popupContainer">
+        <div class="popup-header">
+            <h3 class="popup-title" id="popupTitle">Popup Title</h3>
+            <button class="close-popup" onclick="closePopup()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="popupContent"></div>
+    </div>
+    
+    <div class="holiday-popup" id="holidayPopup">
+        <h3><i class="fas fa-umbrella-beach"></i> Today is a Holiday!</h3>
+        <p id="holidayName">Holiday Name</p>
+        <p id="holidayDate">Date Range</p>
+    </div>
+    
+    <div class="holiday-notification-popup" id="attend-popup-container"></div>
+    
+    <div id="activityPopup" class="popup-modal">
+        <div class="popup-content chapter-popup-content">
+            <button class="close-popup" onclick="closeActivityPopup()">&times;</button>
+            <h2 class="popup-title">
+                <i class="fas fa-flask"></i>
+                Class Activities
+            </h2>
+            <p class="popup-subtitle">Learning activities and resources for Class LKG</p>
+            
+            <div id="activityContent">
+                <div class="loading-chapters">
+                    <i class="fas fa-spinner fa-spin"></i> Loading activities...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SMPS Password Modal with Close Button -->
+    <div id="smpsModal" style="display: none;">
+        <div class="smps-modal-content">
+            <button class="smps-close-btn" onclick="closeSMPSModal()">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2><i class="fas fa-lock"></i> Secure Access</h2>
+            <p>Please enter the password to access the SMPS Sheet Viewer.</p>
+            <input type="password" id="smpsPasswordInput" class="smps-password-input" placeholder="Enter password" autocomplete="off">
+            <button class="smps-submit-btn" onclick="checkSMPSPassword()">
+                <i class="fas fa-unlock"></i> Access Data
+            </button>
+            <div id="smpsErrorMessage" class="smps-error-message"></div>
+        </div>
+    </div>
+
+    <div class="popup-container" id="smpsPopupContainer" style="display: none; max-width: 95%; max-height: 95vh;">
+        <div class="popup-header">
+            <h3 class="popup-title">SMPS Sheet Viewer - Class LKG</h3>
+            <button class="close-popup" onclick="closeSMPSViewer()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div id="smpsPopupContent">
+            <div class="smps-container">
+                <div class="smps-header">
+                    <h1>SMPS Sheet Viewer</h1>
+                    <p>View, customize, and print your SMPS data. Select columns and rows to include in your printout.</p>
+                </div>
+
+                <div class="smps-print-area-container">
+                    <div class="smps-print-area-header smps-no-print">
+                        <h2><i class="fas fa-table"></i> Data Preview</h2>
+                        <div class="smps-print-hint">
+                            <i class="fas fa-lightbulb"></i> This section will be printed as shown
+                        </div>
+                    </div>
+                    <div id="smpsPrintArea">
+                        <table class="smps-table" id="smpsDataTable"></table>
+                    </div>
+                </div>
+                
+                <div class="smps-control-panel smps-no-print">
+                    <div class="smps-panel-title">
+                        <i class="fas fa-sliders-h"></i>
+                        <h2>Data Control Panel</h2>
+                    </div>
+                    
+                    <div class="smps-checkbox-section">
+                        <h3><i class="fas fa-columns"></i> Select Columns to Display</h3>
+                        <div class="smps-checkbox-container" id="smpsCheckboxes"></div>
+                        
+                        <div class="smps-select-all-buttons">
+                            <button class="smps-select-btn" onclick="toggleAllSMPSColumns(true)">
+                                <i class="fas fa-check-circle"></i> Select All Columns
+                            </button>
+                            <button class="smps-select-btn" onclick="toggleAllSMPSColumns(false)">
+                                <i class="fas fa-times-circle"></i> Deselect All Columns
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="smps-checkbox-section">
+                        <h3><i class="fas fa-list"></i> Select Rows to Display</h3>
+                        <div class="smps-row-checkbox-container" id="smpsRowCheckboxes"></div>
+                        
+                        <div class="smps-select-all-buttons">
+                            <button class="smps-select-btn" onclick="toggleAllSMPSRows(true)">
+                                <i class="fas fa-check-circle"></i> Select All Rows
+                            </button>
+                            <button class="smps-select-btn" onclick="toggleAllSMPSRows(false)">
+                                <i class="fas fa-times-circle"></i> Deselect All Rows
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="smps-actions">
+                        <div class="smps-stats">
+                            <i class="fas fa-info-circle"></i>
+                            <span>
+                                Columns: <span id="smpsSelectedCount">0</span>/<span id="smpsTotalCount">0</span> | 
+                                Rows: <span id="smpsSelectedRowCount">0</span>/<span id="smpsTotalRowCount">0</span>
+                            </span>
+                        </div>
+                        <button class="excel-download-btn" onclick="downloadSMPSExcel()">
+                            <i class="fas fa-file-excel"></i> Download Excel
+                        </button>
+                        <button class="smps-print-button" onclick="window.print()">
+                            <i class="fas fa-print"></i> Print Document
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="smps-footer smps-no-print">
+                    <p>SMPS Sheet Viewer &copy; 2023 | Data loaded from Google Sheets</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="social-icons">
+        <a href="https://facebook.com/luvussk786" target="_blank" class="social-icon facebook">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://instagram.com/adnanalig775/" target="_blank" class="social-icon instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://x.com/adnanrazaalig" target="_blank" class="social-icon x-twitter">
+            <svg class="x-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+        </a>
+        <a href="https://youtube.com/@AdnanKhanAligYT" target="_blank" class="social-icon youtube">
+            <i class="fab fa-youtube"></i>
+        </a>
+        <a href="https://wa.me/7275126421" target="_blank" class="social-icon whatsapp">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+    </div>
+
+    <!-- External JavaScript Files -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        window.jsPDF = window.jspdf.jsPDF;
+    </script>
+    <script src="json/class.json"></script>
+    <script src="js/LKG.js"></script>
+</body>
+</html>

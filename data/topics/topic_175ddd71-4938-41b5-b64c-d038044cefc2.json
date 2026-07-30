@@ -1,0 +1,29 @@
+{
+    "id": "175ddd71-4938-41b5-b64c-d038044cefc2",
+    "subjectId": "bbba02a2-49b4-4bf6-9b4b-014fa555e3d6",
+    "name": "Trapezium (Trapezoid) Area Formula",
+    "description": "Area = ½ × (Sum of Parallel Sides) × Height\n\nA = ½ (a + b)h",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "5bd8be7c-cf1f-4d8b-b64a-433ed0563889",
+            "date": "2026-06-17",
+            "time": "2026-06-17 18:16",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "9dcd8aed-f37a-4ae6-947b-0900c35e522d",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-17 18:15",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

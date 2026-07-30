@@ -1,0 +1,36 @@
+{
+    "id": "5a60478a-286c-4bf1-a668-eee38171f662",
+    "subjectId": "38fe1eb2-f38f-4dc6-9e65-8711d6af8f11",
+    "name": "हिंदी शब्दकोश",
+    "description": "1. हिंदी शब्दकोश का क्रम 12 खड़ियों के अनुसार होता है।\n\n2. 12 खड़ियाँ इस प्रकार हैं –\nकं, कः, क, का, कि, की, कु, कू, के, कै, को, कौ\n\n3. 12 खड़ियों का सुझाव सावरकर बंधुओं ने दिया था।",
+    "status": "Revision",
+    "completeDate": "2026-06-21",
+    "createdAt": "2026-06-07",
+    "updatedAt": "2026-07-01 08:50:46",
+    "revisionHistory": [
+        {
+            "id": "b0760426-7b7a-4d02-9816-5e11278e0a0a",
+            "date": "2026-06-21",
+            "time": "2026-06-21 01:15:28",
+            "note": "Auto: 7 din baad revision scheduled",
+            "type": "auto-revision"
+        },
+        {
+            "id": "96d15815-e44e-4bae-ad03-a12113c6d1b7",
+            "date": "2026-06-21",
+            "time": "2026-06-21 09:51:52",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "4f4d47fb-a7b2-4120-83e6-6098af67f6ac",
+            "date": "2026-07-01",
+            "time": "2026-07-01 08:50:46",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "images": [],
+    "links": [],
+    "pdfs": []
+}

@@ -1,0 +1,47 @@
+[
+  {
+    "title": "English Practice Exercises",
+    "icon": "fas fa-book",
+    "content": "<h3>Overview</h3><p><strong>English:</strong> These exercises cover all major components of English—grammar, vocabulary, reading, writing, and speaking—to improve overall fluency.<br><strong>Hindi:</strong> Ye abhyas English ke sabhi mool tatvon—vyakaran, shabdawali, pathan, lekhan, aur bolne—par aadharit hain, taaki aapki bhasha ki pakad majboot ho.</p><div class='popup-example'><strong>Example:</strong> Practice filling in blanks, identifying tenses, creating sentences, or matching idioms.<br><strong>Hindi:</strong> Jaise khali sthal bharna, kaal pehchanna, vaakya banana, ya muhavare jodna.</div>"
+  },
+  {
+    "title": "Grammar Exercises",
+    "icon": "fas fa-pencil-alt",
+    "content": "<h3>Focus Areas</h3><p><strong>English:</strong> Strengthen your grammar skills with tense, preposition, modal, and voice exercises.<br><strong>Hindi:</strong> Kaal, sambandh suchak shabd, modals, aur kriya roop (voice) ke abhyas se vyaakaran majboot banaiye.</p><ul><li>Fill in the blanks: using correct tenses.</li><li>Choose the correct preposition.</li><li>Transform active to passive voice.</li><li>Use correct modal verbs (can, may, should).</li></ul><div class='popup-example'><strong>Example:</strong> She ______ (go) to school every day. → She <em>goes</em> to school every day.<br><strong>Hindi:</strong> Wah roz school ______ (jaana) hai → Wah roz school <em>jaati</em> hai.</div>"
+  },
+  {
+    "title": "Vocabulary Exercises",
+    "icon": "fas fa-book-open",
+    "content": "<h3>Focus Areas</h3><p><strong>English:</strong> Build word power with synonym, antonym, and word meaning quizzes.<br><strong>Hindi:</strong> Parayavachi (synonym), vilom (antonym), aur shabdarth (word meaning) ke quiz se apna shabd gyaan badhaiye.</p><ul><li>Match words with meanings.</li><li>Find synonyms and antonyms.</li><li>Choose correct word usage in a sentence.</li></ul><div class='popup-example'><strong>Example:</strong> Choose the synonym of ‘happy’. (a) sad (b) glad (c) angry → <em>glad</em>.<br><strong>Hindi:</strong> ‘Happy’ ka paryayavachi chunein: (a) sad (b) glad (c) angry → <em>glad</em>.</div>"
+  },
+  {
+    "title": "Reading Comprehension",
+    "icon": "fas fa-book-reader",
+    "content": "<h3>Focus Areas</h3><p><strong>English:</strong> Improve understanding through short paragraphs and question-based exercises.<br><strong>Hindi:</strong> Chhoti pathan kahaniyon aur prashnottar ke madhyam se samajhne ki kshamata badhaiye.</p><ul><li>Read a passage and answer questions.</li><li>Identify the main idea and supporting details.</li><li>Guess word meanings from context.</li></ul><div class='popup-example'><strong>Example:</strong> Passage: ‘The sun rises in the east.’ Question: Where does the sun rise? → In the east.<br><strong>Hindi:</strong> Prashn: Surya kahan se ugta hai? → Purva disha se.</div>"
+  },
+  {
+    "title": "Writing Practice",
+    "icon": "fas fa-keyboard",
+    "content": "<h3>Focus Areas</h3><p><strong>English:</strong> Strengthen writing by completing sentence starters, essays, and emails.<br><strong>Hindi:</strong> Apni lekhan kaushal badhaiye vaakya poora karne, nibandh aur email likhne ke madhyam se.</p><ul><li>Complete the sentence logically.</li><li>Write a short paragraph on a topic.</li><li>Correct grammatical errors in sentences.</li></ul><div class='popup-example'><strong>Example:</strong> Start with: ‘If I were a bird, ...’ → If I were a bird, I would fly everywhere.<br><strong>Hindi:</strong> ‘Agar main pakshi hota, ...’ → Toh main har jagah udta.</div>"
+  },
+  {
+    "title": "Speaking Exercises",
+    "icon": "fas fa-microphone",
+    "content": "<h3>Focus Areas</h3><p><strong>English:</strong> Build fluency and pronunciation through dialogues and role-plays.<br><strong>Hindi:</strong> Sanvaad aur abhinay ke madhyam se apni pravahmay bolne ki kshamata aur ucharan sudhariye.</p><ul><li>Practice introducing yourself.</li><li>Talk about daily routine and hobbies.</li><li>Use idioms naturally in speech.</li></ul><div class='popup-example'><strong>Example:</strong> A: How are you?<br>B: I’m on cloud nine! (very happy)<br><strong>Hindi:</strong> A: Aap kaise hain?<br>B: Main bahut khush hoon!</div>"
+  },
+  {
+    "title": "Listening Exercises",
+    "icon": "fas fa-headphones",
+    "content": "<h3>Focus Areas</h3><p><strong>English:</strong> Improve listening through stories, podcasts, and dictations.<br><strong>Hindi:</strong> Kahani, podcast, aur dictation ke dwara apne sunne ke kaushal par kaam kijiye.</p><ul><li>Listen to short audios and write answers.</li><li>Fill in missing words from audio clips.</li><li>Repeat and shadow sentences for pronunciation.</li></ul><div class='popup-example'><strong>Example:</strong> Audio: ‘The boy is reading.’ → Write what you hear.<br><strong>Hindi:</strong> Audio sunkar likhiye: ‘The boy is reading.’ → ‘Ladka padh raha hai.’</div>"
+  },
+  {
+    "title": "Mixed Practice Tests",
+    "icon": "fas fa-check-circle",
+    "content": "<h3>Combine All Skills</h3><p><strong>English:</strong> Integrated exercises test grammar, vocabulary, comprehension, and usage together.<br><strong>Hindi:</strong> Milijuli prashnavali se aapka vyakaran, shabdawali, samajh, aur prayog sabhi ka parikshan hota hai.</p><ul><li>Multiple-choice grammar questions.</li><li>Reading passage with fill-in-the-blanks.</li><li>Choose idioms, phrasal verbs, or correct tense forms.</li></ul><div class='popup-example'><strong>Example:</strong> She ______ her homework before dinner. (a) finish (b) finishes (c) finished → <em>finished</em>.<br><strong>Hindi:</strong> Usne khane se pehle apna kaam ______. (a) kiya (b) karti (c) karna → <em>kiya</em>.</div>"
+  },
+  {
+    "title": "Self-Improvement Tips",
+    "icon": "fas fa-lightbulb",
+    "content": "<h3>Tips</h3><ul><li>Practice English 20 minutes daily.</li><li>Watch English movies with subtitles.</li><li>Read aloud to improve pronunciation.</li><li>Keep a vocabulary journal.</li><li>Review your mistakes and correct them.</li></ul><div class='popup-example'><strong>Example:</strong> Create a daily goal like learning 5 new words.<br><strong>Hindi:</strong> Har din 5 naye shabd seekhne ka lakshya rakhiye.</div>"
+  }
+]

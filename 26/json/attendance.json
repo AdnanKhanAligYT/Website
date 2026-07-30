@@ -1,0 +1,38 @@
+[
+    {
+        "Name": "Mr. Mohammad Salman Qidwai",
+        "Date": "7/1/2026",
+        "Time": "11:36:28 PM",
+        "School_Time": "08:00 AM",
+        "Image Link": "images/attendance/Mr_Mohammad_Salman_Qidwai_20260701_140628_1ada.jpg",
+        "Lat": 28.08097479999999990241121849976480007171630859375,
+        "Lng": 80.4601738000000068495864979922771453857421875
+    },
+    {
+        "Name": "Miss Khushi",
+        "Date": "7/3/2026",
+        "Time": "12:19:05 PM",
+        "School_Time": "07:31 AM",
+        "Image Link": "images/attendance/Miss_Khushi_20260703_024906_d183.jpg",
+        "Lat": 28.081025000000000346744855050928890705108642578125,
+        "Lng": 80.460326100000003179957275278866291046142578125
+    },
+    {
+        "Name": "Mr. Mudassir Sherwani",
+        "Date": "7/17/2026",
+        "Time": "05:57:31 PM",
+        "School_Time": "07:31 AM",
+        "Image Link": "images/attendance/Mr_Mudassir_Sherwani_20260717_082721_b4a7.jpg",
+        "Lat": 4.53536900000000020583001969498582184314727783203125,
+        "Lng": -76.1045299999999969031705404631793498992919921875
+    },
+    {
+        "Name": "Mrs. Nazma",
+        "Date": "7/17/2026",
+        "Time": "06:04:55 PM",
+        "School_Time": "08:04 AM",
+        "Image Link": "images/attendance/Mrs_Nazma_20260717_083446_555f.jpg",
+        "Lat": 4.53536900000000020583001969498582184314727783203125,
+        "Lng": -76.1045299999999969031705404631793498992919921875
+    }
+]

@@ -1,0 +1,29 @@
+{
+    "id": "b2f5f29c-eead-41e6-9781-0db3be603a4b",
+    "subjectId": "594ab60f-da93-4cf7-91da-12a1ae3fb73e",
+    "name": "Theories of Intelligence (बुद्धि के सिद्धान्त)",
+    "description": "### Topic: Theories of Intelligence (बुद्धि के सिद्धान्त)\n\n**Question:** Which of the following is not a theory of intelligence? / निम्न में से कौन-सा बुद्धि का सिद्धान्त नहीं है?\n1. Theory of regression / प्रत्यागमन का सिद्धान्त\n2. Two factor theory / द्वितत्व का सिद्धान्त\n3. Multifactor theory / बहुतत्व का सिद्धान्त\n4. Unifactor theory / एक तत्व का सिद्धान्त\n\n**Correct Answer:** 1. Theory of regression / प्रत्यागमन का सिद्धान्त\n\n---\n\n### 📝 Options Breakdown & Short Notes (Bilingual)\n\n#### 1. Theory of Regression (प्रत्यागमन का सिद्धान्त)\n* **English:** This is NOT a theory of intelligence. It is a Law of Heredity proposed by Francis Galton. It states that children can tend to have traits opposite to their parents (e.g., highly intelligent parents having an average intelligence child).\n* **Hindi:** यह बुद्धि का सिद्धान्त नहीं है, बल्कि यह अनुवांशिकता का एक नियम है जिसे फ्रांसिस गाल्टन ने दिया था। इसके अनुसार, बच्चों में अपने माता-पिता के विपरीत गुण होने की प्रवृत्ति हो सकती है (जैसे तीव्र बुद्धि माता-पिता के औसत बुद्धि वाले बच्चे)।\n\n#### 2. Two-Factor Theory (द्वि-तत्व का सिद्धान्त)\n* **Psychologist:** Charles Spearman (1904)\n* **English:** Spearman stated that intelligence consists of two factors:\n  - G-factor (General Intelligence): Inborn and universal ability used in daily tasks.\n  - S-factor (Specific Intelligence): Acquired from the environment, specific to a particular field (e.g., music, math).\n* **Hindi:** चार्ल्स स्पीयरमैन ने कहा कि बुद्धि दो कारकों से मिलकर बनी है:\n  - G-कारक (सामान्य बुद्धि): जन्मजात और सार्वभौमिक योग्यता जो हर कार्य में काम आती है।\n  - S-कारक (विशिष्ट बुद्धि): पर्यावरण से अर्जित; किसी खास क्षेत्र के लिए (जैसे संगीत, गणित)।\n* **TET Exam Key Point:** Spearman also gave the Three-Factor Theory later. (स्पीयरमैन ने बाद में त्रि-तत्व सिद्धान्त भी दिया था)।\n\n#### 3. Multi-Factor Theory (बहु-तत्व का सिद्धान्त)\n* **Psychologist:** Edward Lee Thorndike\n* **English:** Thorndike rejected Spearman’s G-factor. He believed intelligence is a cluster of independent factors. It is also called the Anarchic Theory or Sand theory (बालू का सिद्धान्त).\n* **Hindi:** थॉर्नडाइक ने स्पीयरमैन के G-कारक का विरोध किया। उनका मानना था कि बुद्धि कई स्वतंत्र तत्वों का समूह है। इसे परमाणुवादी सिद्धान्त या बालू का सिद्धान्त भी कहा जाता है।\n* **Thorndike's Famous TET Facts:**\n  - Known as the Father of Educational Psychology (शिक्षा मनोविज्ञान के जनक).\n  - He gave the Trial and Error Theory of Learning (प्रयास एवं त्रुटि का सिद्धान्त) using a cat.\n\n#### 4. Uni-Factor / Mono-Factor Theory (एक-तत्व / एक-कारक सिद्धान्त)\n* **Psychologist:** Alfred Binet (Supported by Terman and Stern)\n* **English:** The oldest theory of intelligence. It considers intelligence as one single indivisible unit.\n* **Hindi:** यह बुद्धि का सबसे प्राचीन सिद्धान्त है। इसके अनुसार बुद्धि एक अखंड और अविभाज्य इकाई है।\n* **Alfred Binet's Famous TET Facts:**\n  - Developed the First Intelligence Test (प्रथम बुद्धि परीक्षण) in 1905 with Theodore Simon.\n  - Introduced the concept of Mental Age (मानसिक आयु) in 1908.\n\n---\n\n### 🌟 Extra Famous TET Concepts Related to Intelligence:\n\n* **IQ Formula (बुद्धि लब्धि सूत्र):** Given by William Stern, but completed by Lewis Terman (1916):\n  IQ = (Mental Age / Chronological Age) * 100\n  [बुद्धि लब्धि (IQ) = (मानसिक आयु / वास्तविक आयु) * 100]\n\n* **Group Factor Theory (समूह कारक सिद्धान्त):** Given by Louis Thurstone (Primary Mental Abilities - PMA).\n\n* **Multiple Intelligence Theory (बहु-बुद्धि सिद्धान्त):** Given by Howard Gardner (Framed 8-9 types of intelligence, very famous for CTET/TET exams).",
+    "status": "Revision",
+    "completeDate": "2026-06-19",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "32d60517-708a-4b55-b58e-3dd1d36f8446",
+            "date": "2026-06-19",
+            "time": "2026-06-19 11:31",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "f104505c-668a-45a1-9e27-5800fa0f7367",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-18 15:12",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

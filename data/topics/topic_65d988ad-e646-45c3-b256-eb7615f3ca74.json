@@ -1,0 +1,29 @@
+{
+    "id": "65d988ad-e646-45c3-b256-eb7615f3ca74",
+    "subjectId": "bbba02a2-49b4-4bf6-9b4b-014fa555e3d6",
+    "name": "Question:  Marked Price of an article is Rs. 1000. A shopkeeper gives two successive discounts on the M.P. If one discount is 10% and second discount is x%. If the selling price is Rs. 720, find the second discount.  Hindi: किसी वस्तु का अंकित मूल्य ₹1000 है। उस पर लगातार दो छूट दी जाती हैं। पहली छूट 10% तथा दूसरी छूट x% है। यदि विक्रय मूल्य ₹720 है, तो दूसरी छूट ज्ञात कीजिए।",
+    "description": "TRICK:\n\nMP = 1000\n\n1st Discount = 10%\n\n1000 → 900\n\nAb 900 se 720 ho gaya.\n\nDiscount = 900 - 720\n         = 180\n\nSecond Discount % = (180/900) × 100\n                   = 20%\n\nAnswer = 20%\n\nShortcut Trick:\n\n1000 × (100-10)% = 900\n\nAb dekho:\n900 → 720\n\nJo kam hua = 180\n\nx% = (180/900) × 100\n   = 20%\n\nYaad Rakhne Ki Line:\n\n\"Pehli chhoot hatao,\nNayi price pao,\nNayi price se jo ghata,\nWahi doosri discount bata.\"",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "f3e6a2c3-9135-4941-bc57-4ef19838f07d",
+            "date": "2026-06-17",
+            "time": "2026-06-17 18:02",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "cd1ad634-9230-4daf-af51-fe2f35b652eb",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-17 17:56",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

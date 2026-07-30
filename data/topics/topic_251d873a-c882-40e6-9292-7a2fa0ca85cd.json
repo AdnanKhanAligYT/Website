@@ -1,0 +1,36 @@
+{
+    "id": "251d873a-c882-40e6-9292-7a2fa0ca85cd",
+    "subjectId": "bbba02a2-49b4-4bf6-9b4b-014fa555e3d6",
+    "name": "Divisibility MOD (Congruence) Properties",
+    "description": "MOD (Congruence) Properties\n\n1. a ≡ b (mod m)\n   ⇒ a and b give same remainder when divided by m\n\n2. If a ≡ b (mod m)\n   ⇒ a + c ≡ b + c (mod m)\n\n3. If a ≡ b (mod m)\n   ⇒ a − c ≡ b − c (mod m)\n\n4. If a ≡ b (mod m)\n   ⇒ ac ≡ bc (mod m)\n\n5. If a ≡ b (mod m)\n   ⇒ aⁿ ≡ bⁿ (mod m)\n\n6. (a + b) mod m\n   = [(a mod m) + (b mod m)] mod m\n\n7. (a − b) mod m\n   = [(a mod m) − (b mod m)] mod m\n\n8. (ab) mod m\n   = [(a mod m)(b mod m)] mod m\n\n9. If a ≡ −1 (mod m)\n   ⇒ a² ≡ 1 (mod m)\n   ⇒ a⁴ ≡ 1 (mod m)\n   Even power ⇒ 1\n   Odd power ⇒ −1\n\n\nQ3.\n49¹⁵ − 1 = 49¹⁵ − 1¹⁵\n\nUsing:\naⁿ − bⁿ is divisible by (a − b)\n\n∴ divisible by (49 − 1) = 48\n\n48 ke factor:\n48, 24, 12, 8 ...\n\n∴ divisible by 48 and 8\nAnswer = (A)\n\n\nQ4.\n13 ≡ −1 (mod 14)\n\nUsing:\nIf a ≡ b (mod m)\n⇒ aⁿ ≡ bⁿ (mod m)\n\n∴ 13⁵⁰ ≡ (−1)⁵⁰\n\nEven power ⇒ (−1)⁵⁰ = 1\n\nRemainder = 1\nAnswer = (C)",
+    "status": "Revision",
+    "completeDate": "2026-06-21",
+    "images": [],
+    "createdAt": "2026-06-13 08:40",
+    "updatedAt": "2026-07-01 08:50:46",
+    "revisionHistory": [
+        {
+            "id": "d266c66f-4956-459f-92cc-e235fdde15b9",
+            "date": "2026-06-21",
+            "time": "2026-06-21 01:15:28",
+            "note": "Auto: 7 din baad revision scheduled",
+            "type": "auto-revision"
+        },
+        {
+            "id": "fdfc47d7-863c-4b09-b068-d58bee570621",
+            "date": "2026-06-21",
+            "time": "2026-06-21 09:53:32",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "59bd2476-8cbc-411a-b9b7-9ffcc24571f1",
+            "date": "2026-07-01",
+            "time": "2026-07-01 08:50:46",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "links": [],
+    "pdfs": []
+}

@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>SMPS Portal</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&family=Caveat:wght@500;600;700&family=Pacifico&family=Noto+Nastaliq+Urdu:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+
+:root {
+  --bg: #0a0a1a;
+  --surface: #13132a;
+  --surface2: #1c1c38;
+  --border: #252540;
+  --text: #e0e0ff;
+  --muted: #8888aa;
+  --red:    #e63946;
+  --blue:   #2563eb;
+  --yellow: #f59e0b;
+  --green:  #059669;
+  --purple: #7c3aed;
+  --teal:   #0891b2;
+  --orange: #ea580c;
+  --pink:   #db2777;
+  --lime:   #65a30d;
+}
+
+html { font-size: 15px; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-image:
+    radial-gradient(ellipse at 20% 10%, rgba(124,58,237,0.18) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(230,57,70,0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 40%, rgba(37,99,235,0.08) 0%, transparent 40%);
+}
+
+/* noise texture */
+body::after {
+  content:'';
+  position:fixed;inset:0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;opacity:.4;
+}
+
+/* dot grid bg */
+body::before {
+  content:'';
+  position:fixed;inset:0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px);
+  background-size: 28px 28px;
+  pointer-events:none;z-index:0;
+}
+
+/* ── LOADER ── */
+#loader {
+  position:fixed;inset:0;
+  background:linear-gradient(135deg,#07071a 0%,#150d30 50%,#07071a 100%);
+  z-index:9999;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
+  transition:opacity 0.6s ease;
+}
+#loader.fade-out{opacity:0;pointer-events:none;}
+.sin-wrap{width:min(300px,85vw);}
+#sinCanvas{width:100%;display:block;}
+.loader-arabic {
+  font-family:'Noto Nastaliq Urdu',serif;
+  font-size:clamp(1.3rem,5vw,1.8rem);
+  font-weight:700;direction:rtl;text-align:center;line-height:1.8;
+  background:linear-gradient(90deg,#fde68a,#f59e0b,#fde68a,#e63946,#fde68a);
+  background-size:250% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shimmer 2.5s linear infinite;
+  filter:drop-shadow(0 0 10px rgba(253,230,138,0.6));
+}
+.loader-hint{font-size:0.65rem;color:rgba(255,255,255,0.6);letter-spacing:5px;text-transform:uppercase;}
+@keyframes shimmer{0%{background-position:200% center}100%{background-position:0% center}}
+
+/* ── HEADER ── */
+.header {
+  position:relative;z-index:1;
+  background:linear-gradient(180deg,#100d28 0%,#1a1640 100%);
+  padding:18px 16px 16px;
+  text-align:center;
+  overflow:hidden;
+}
+.header::after {
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,#e63946,#f59e0b,#059669,#2563eb,#7c3aed,#e63946);
+  background-size:200% auto;animation:shimmer 3s linear infinite;
+}
+
+/* floating orbs in header */
+.orb {
+  position:absolute;border-radius:50%;filter:blur(60px);pointer-events:none;
+}
+.orb1{width:160px;height:160px;background:rgba(124,58,237,0.25);top:-60px;left:-40px;}
+.orb2{width:120px;height:120px;background:rgba(230,57,70,0.2);top:-40px;right:-20px;}
+
+.school-name {
+  font-family:'Noto Nastaliq Urdu',serif;
+  font-size:clamp(0.9rem,3.5vw,1.1rem);
+  color:rgba(253,230,138,0.7);
+  direction:rtl;margin-bottom:4px;
+  position:relative;z-index:1;
+}
+.header-title {
+  font-family:'Pacifico',cursive;
+  font-size:clamp(1.3rem,5vw,1.7rem);
+  background:linear-gradient(135deg,#f59e0b 0%,#e63946 40%,#7c3aed 80%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  position:relative;z-index:1;
+  text-shadow:none;
+  filter:drop-shadow(0 2px 12px rgba(230,57,70,0.4));
+}
+.header-sub {
+  font-size:0.6rem;color:rgba(255,255,255,0.5);
+  letter-spacing:3.5px;text-transform:uppercase;margin-top:3px;
+  position:relative;z-index:1;
+}
+
+.arabic-pill {
+  margin:12px auto 0;display:inline-block;
+  padding:3px;border-radius:50px;
+  background:linear-gradient(90deg,#fde68a,#f59e0b,#e63946,#a855f7,#2563eb,#fde68a);
+  background-size:300% auto;animation:shimmer 3s linear infinite;
+  box-shadow:0 0 24px rgba(245,158,11,0.3),0 0 60px rgba(168,85,247,0.15);
+  position:relative;z-index:1;
+}
+.arabic-pill-inner {
+  font-family:'Noto Nastaliq Urdu',serif;
+  font-size:clamp(1.1rem,4.5vw,1.4rem);
+  font-weight:700;direction:rtl;
+  padding:10px 24px 7px;
+  border-radius:47px;
+  background:linear-gradient(135deg,#1c0a3c,#2d1060);
+  color:#fde68a;
+  text-shadow:0 0 14px rgba(253,230,138,0.8);
+  display:block;white-space:nowrap;
+}
+
+.datetime-strip {
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  margin:12px auto 0;
+  padding:6px 18px;
+  border-radius:30px;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.09);
+  max-width:fit-content;position:relative;z-index:1;
+}
+.dt-date{font-family:'Syne',sans-serif;font-size:0.68rem;font-weight:700;color:#f59e0b;letter-spacing:1.5px;text-transform:uppercase;}
+.dt-sep{width:1px;height:16px;background:rgba(255,255,255,0.18);}
+.dt-time{font-family:'DM Mono',monospace;font-size:0.75rem;font-weight:600;color:#a5f3fc;letter-spacing:2px;min-width:64px;text-align:center;}
+
+/* ── MAIN ── */
+main {
+  position:relative;z-index:1;
+  padding:18px 14px 32px;
+  max-width:540px;margin:0 auto;
+  display:flex;flex-direction:column;gap:14px;
+}
+
+/* ── SECTION HEADER ── */
+.sec-head {
+  display:flex;align-items:center;gap:10px;
+  padding:4px 0;
+  margin-top:4px;
+}
+.sec-head-line {
+  flex:1;height:1.5px;
+  background:linear-gradient(90deg,currentColor,transparent);
+  opacity:0.35;
+}
+.sec-head-label {
+  font-family:'Caveat',cursive;
+  font-size:1rem;font-weight:700;
+  letter-spacing:1px;
+  display:flex;align-items:center;gap:6px;
+}
+
+/* ── PANEL (section wrapper) ── */
+.panel {
+  background:var(--surface);
+  border-radius:20px;
+  border:1.5px solid var(--border);
+  overflow:hidden;
+  box-shadow:0 8px 40px rgba(0,0,0,0.5);
+  position:relative;
+  opacity:0;
+  animation:panelUp 0.55s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+.panel:nth-child(1){animation-delay:.08s}
+.panel:nth-child(2){animation-delay:.16s}
+.panel:nth-child(3){animation-delay:.24s}
+.panel:nth-child(4){animation-delay:.32s}
+.panel:nth-child(5){animation-delay:.40s}
+.panel:nth-child(6){animation-delay:.48s}
+.panel:nth-child(7){animation-delay:.56s}
+@keyframes panelUp{
+  from{opacity:0;transform:translateY(22px) scale(0.97)}
+  to{opacity:1;transform:translateY(0) scale(1)}
+}
+
+/* colored left accent bar */
+.panel-bar {
+  position:absolute;left:0;top:0;bottom:0;width:4px;
+  background:var(--p-bar,#7c3aed);
+  box-shadow:2px 0 14px var(--p-glow,rgba(124,58,237,0.5));
+}
+
+/* ── PANEL TOP (icon + title + description) ── */
+.panel-top {
+  padding:16px 16px 14px 20px;
+  display:flex;align-items:flex-start;gap:14px;
+}
+.panel-icon {
+  width:52px;height:52px;
+  border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.5rem;flex-shrink:0;
+  position:relative;overflow:hidden;
+  box-shadow:0 4px 20px rgba(0,0,0,0.4);
+}
+.panel-icon::after {
+  content:'';position:absolute;inset:0;border-radius:16px;
+  background:linear-gradient(135deg,rgba(255,255,255,0.15) 0%,transparent 60%);
+}
+.panel-info { flex:1; }
+.panel-title {
+  font-family:'Syne',sans-serif;
+  font-size:1.05rem;font-weight:800;
+  line-height:1.3;
+}
+.panel-title .badge {
+  display:inline-block;
+  font-size:0.55rem;font-weight:700;
+  padding:3px 8px;border-radius:20px;
+  color:#fff;letter-spacing:1px;text-transform:uppercase;
+  vertical-align:middle;margin-left:6px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.5);
+}
+.panel-desc {
+  font-size:0.76rem;color:var(--muted);
+  line-height:1.55;margin-top:5px;
+}
+
+/* ── BUTTON GRID ── */
+.btn-grid {
+  display:flex;flex-wrap:wrap;gap:10px;
+  padding:0 16px 16px 20px;
+}
+.btn-grid.center { justify-content:center; }
+.btn-grid.wide .app-btn { flex:1;min-width:120px; }
+
+/* ── APP BUTTON (icon on top, text below) ── */
+.app-btn {
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;
+  text-decoration:none;
+  padding:14px 12px 12px;
+  border-radius:16px;
+  border:2px solid var(--b-border,rgba(255,255,255,0.12));
+  background:var(--b-bg,rgba(255,255,255,0.05));
+  color:#fff;
+  cursor:pointer;
+  transition:all 0.28s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow:0 4px 20px rgba(0,0,0,0.35);
+  position:relative;overflow:hidden;
+  min-width:90px;
+}
+.app-btn::before {
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.1),transparent 60%);
+  opacity:0;transition:opacity 0.25s;
+}
+.app-btn:hover::before{opacity:1;}
+.app-btn:hover{
+  transform:translateY(-4px) scale(1.06);
+  box-shadow:0 10px 32px rgba(0,0,0,0.6);
+  border-color:rgba(255,255,255,0.28);
+}
+.app-btn:active{transform:scale(0.95);}
+
+.btn-icon-wrap {
+  width:44px;height:44px;
+  border-radius:13px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;
+  background:var(--bi-bg,rgba(255,255,255,0.12));
+  box-shadow:0 3px 12px rgba(0,0,0,0.4);
+  position:relative;overflow:hidden;flex-shrink:0;
+}
+.btn-icon-wrap::after {
+  content:'';position:absolute;inset:0;border-radius:13px;
+  background:linear-gradient(135deg,rgba(255,255,255,0.18) 0%,transparent 55%);
+}
+.btn-label {
+  font-family:'Syne',sans-serif;
+  font-size:0.72rem;font-weight:700;
+  text-align:center;line-height:1.3;
+  letter-spacing:0.3px;
+  color:rgba(255,255,255,0.92);
+  text-shadow:0 1px 3px rgba(0,0,0,0.7);
+  max-width:90px;
+}
+
+/* ── SOLO BIG BUTTON (full width tap) ── */
+.solo-btn {
+  display:flex;align-items:center;gap:14px;
+  text-decoration:none;
+  margin:0 16px 16px 20px;
+  padding:14px 18px;
+  border-radius:16px;
+  border:2px solid var(--b-border,rgba(255,255,255,0.12));
+  background:var(--b-bg,rgba(255,255,255,0.04));
+  color:#fff;
+  cursor:pointer;
+  transition:all 0.28s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow:0 4px 20px rgba(0,0,0,0.35);
+  position:relative;overflow:hidden;
+}
+.solo-btn::before {
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,0.08),transparent);
+  opacity:0;transition:opacity 0.25s;
+}
+.solo-btn:hover::before{opacity:1;}
+.solo-btn:hover{transform:translateY(-3px);box-shadow:0 10px 32px rgba(0,0,0,0.55);border-color:rgba(255,255,255,0.22);}
+.solo-btn:active{transform:scale(0.98);}
+.solo-btn .btn-icon-wrap{width:46px;height:46px;font-size:1.35rem;}
+.solo-btn-info{flex:1;}
+.solo-btn-title{font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:800;line-height:1.25;}
+.solo-btn-sub{font-size:0.7rem;color:rgba(255,255,255,0.55);margin-top:3px;line-height:1.4;}
+.solo-btn-arrow{font-size:0.85rem;color:rgba(255,255,255,0.35);}
+
+/* ── HOUSE PILLS ── */
+.house-row {
+  display:flex;flex-wrap:wrap;gap:8px;
+  padding:0 16px 16px 20px;
+}
+.h-pill {
+  font-family:'Caveat',cursive;
+  font-size:0.88rem;font-weight:700;
+  padding:5px 14px;border-radius:20px;
+  color:#fff;
+  border:1.5px solid rgba(255,255,255,0.25);
+  text-shadow:0 1px 3px rgba(0,0,0,0.8);
+  box-shadow:0 3px 10px rgba(0,0,0,0.5);
+}
+
+/* ── BLINK DOT ── */
+.blink-dot {
+  display:inline-block;width:7px;height:7px;
+  background:#ff6b6b;border-radius:50%;
+  margin-left:5px;vertical-align:middle;
+  box-shadow:0 0 6px #ff6b6b;
+  animation:blink 1.1s ease-in-out infinite;
+}
+@keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.2;transform:scale(0.7)}}
+
+/* LIVE badge */
+.live-badge {
+  display:inline-flex;align-items:center;gap:4px;
+  font-size:0.55rem;font-weight:700;
+  padding:3px 9px;border-radius:20px;
+  background:linear-gradient(90deg,#dc2626,#991b1b);
+  color:#fff;letter-spacing:1.5px;text-transform:uppercase;
+  vertical-align:middle;margin-left:6px;
+  box-shadow:0 0 10px rgba(220,38,38,0.5);
+  animation:pulseBadge 1.5s ease-in-out infinite;
+}
+@keyframes pulseBadge{0%,100%{box-shadow:0 0 10px rgba(220,38,38,0.5)}50%{box-shadow:0 0 20px rgba(220,38,38,0.8)}}
+
+/* ── FOOTER ── */
+footer {
+  position:relative;z-index:1;
+  text-align:center;
+  padding:20px;
+  font-family:'Caveat',cursive;
+  font-size:1rem;font-weight:700;
+  color:#7c3aed;letter-spacing:1.5px;
+  background:linear-gradient(180deg,rgba(19,19,42,0.95),rgba(26,26,46,0.98));
+  border-top:2px solid rgba(124,58,237,0.25);
+  margin-top:8px;
+}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="sin-wrap"><canvas id="sinCanvas" width="300" height="72"></canvas></div>
+  <div class="loader-arabic">إِنَّ اللَّهَ مَعَ الصَّابِرِينَ</div>
+  <div class="loader-hint">Loading SMPS Portal…</div>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="school-name">سائمہ منصور پبلک اسکول</div>
+  <div class="header-title">SMPS Portal ✦</div>
+  <div class="header-sub">Saiema Mansoor Public School · Hathras</div>
+  <div class="arabic-pill">
+    <span class="arabic-pill-inner">السَّلَامُ عَلَيْكُمْ مُحْتَرَمْ حُضَرَات</span>
+  </div>
+  <div class="datetime-strip">
+    <span class="dt-date" id="dtDate">—</span>
+    <div class="dt-sep"></div>
+    <span class="dt-time" id="dtTime">00:00:00</span>
+  </div>
+</div>
+
+<main>
+
+  <!-- ① ATTENDANCE -->
+  <div class="sec-head" style="color:#e63946">
+    <span class="sec-head-label"><i class="fa-solid fa-circle-dot fa-xs"></i> Attendance</span>
+    <div class="sec-head-line"></div>
+  </div>
+
+  <div class="panel" style="--p-bar:linear-gradient(180deg,#e63946,#991b1b);--p-glow:rgba(230,57,70,0.5); background:linear-gradient(135deg,#1a0d0f,#240e12);">
+    <div class="panel-bar"></div>
+    <div class="panel-top">
+      <div class="panel-icon" style="background:linear-gradient(135deg,#3a0a10,#7f1d1d)">
+        <i class="fa-solid fa-user-slash" style="color:#fca5a5"></i>
+      </div>
+      <div class="panel-info">
+        <div class="panel-title" style="color:#fca5a5">
+          Today's Absentees
+          <span class="blink-dot"></span>
+          <span class="live-badge">● Live</span>
+        </div>
+        <div class="panel-desc">Students absent today — updated in real time from attendance data.</div>
+      </div>
+    </div>
+    <div class="btn-grid">
+      <a href="https://script.google.com/macros/s/AKfycbwEokVe1Wq1KJOWAbRsAe6dwvjP-CMSJT862AgXwrGv_cPzl4VKiRGn15GdtbJJ9Imc/exec" target="_blank" class="app-btn" style="--b-bg:rgba(220,38,38,0.2);--b-border:rgba(220,38,38,0.5);">
+        <div class="btn-icon-wrap" style="--bi-bg:rgba(220,38,38,0.3)"><i class="fa-solid fa-user-slash" style="color:#fca5a5"></i></div>
+        <span class="btn-label">View<br>Absentees</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ② ASSEMBLY & HOUSE -->
+  <div class="sec-head" style="color:#a855f7">
+    <span class="sec-head-label">🏛️ Assembly & House</span>
+    <div class="sec-head-line"></div>
+  </div>
+
+  <div class="panel" style="--p-bar:linear-gradient(180deg,#7c3aed,#a855f7);--p-glow:rgba(124,58,237,0.5);background:linear-gradient(135deg,#120d22,#1e1438);">
+    <div class="panel-bar"></div>
+    <div class="panel-top">
+      <div class="panel-icon" style="background:linear-gradient(135deg,#2a1460,#3b1f7a)">🏆</div>
+      <div class="panel-info">
+        <div class="panel-title" style="color:#c084fc">House Activity & Assembly</div>
+        <div class="panel-desc">Marks, scores and assembly entries across all four houses.</div>
+        <div class="house-row" style="padding:8px 0 0 0;">
+          <span class="h-pill" style="background:rgba(220,38,38,0.7)">Al-Hamrah 🔴</span>
+          <span class="h-pill" style="background:rgba(37,99,235,0.7)">Azhar 🔵</span>
+          <span class="h-pill" style="background:rgba(180,130,0,0.75)">Nizamia 🟡</span>
+          <span class="h-pill" style="background:rgba(5,120,80,0.75)">Qurtaba 🟢</span>
+        </div>
+      </div>
+    </div>
+    <div class="btn-grid">
+      <a href="https://script.google.com/macros/s/AKfycbzGgr116giv8FwDfdveT0u-ODCHJfw-1kt4CrAsRPvqmYCC05dtNtU8cE7_IGFb7kPi/exec" target="_blank" class="app-btn" style="--b-bg:rgba(124,58,237,0.2);--b-border:rgba(168,85,247,0.5);">
+        <div class="btn-icon-wrap" style="--bi-bg:rgba(124,58,237,0.35)">📊</div>
+        <span class="btn-label">House<br>Dashboard</span>
+      </a>
+      <a href="https://script.google.com/macros/s/AKfycbxA3hbKP7gYypMB1p8vBgHnRQf4B55ecxSG3K5YGNTQB26TKi4Z7-y5XfVJYCWXnSa6iA/exec" target="_blank" class="app-btn" style="--b-bg:rgba(124,58,237,0.2);--b-border:rgba(168,85,247,0.5);">
+        <div class="btn-icon-wrap" style="--bi-bg:rgba(124,58,237,0.35)">🕌</div>
+        <span class="btn-label">Assembly<br>Entry Form</span>
+      </a>
+      <a href="https://script.google.com/macros/s/AKfycbzBiRGz73BcAur1dKqTgIfCUqONA6xaYg2FNZ4b8WXZWZ-8Fi0YFUwlJ-Yyc3W_66RH/exec" target="_blank" class="app-btn" style="--b-bg:rgba(124,58,237,0.2);--b-border:rgba(168,85,247,0.5);">
+        <div class="btn-icon-wrap" style="--bi-bg:rgba(124,58,237,0.35)"><i class="fa-solid fa-database" style="color:#c084fc;font-size:1rem"></i></div>
+        <span class="btn-label">Student &<br>Teacher Data</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ③ EXAM MARKS -->
+  <div class="sec-head" style="color:#0891b2">
+    <span class="sec-head-label">📚 Exam Marks</span>
+    <div class="sec-head-line"></div>
+  </div>
+
+  <div class="panel" style="--p-bar:linear-gradient(180deg,#0891b2,#0e7490);--p-glow:rgba(8,145,178,0.5);background:linear-gradient(135deg,#061520,#0a2030);">
+    <div class="panel-bar"></div>
+    <div class="panel-top">
+      <div class="panel-icon" style="background:linear-gradient(135deg,#0c3044,#0e4060)">📝</div>
+      <div class="panel-info">
+        <div class="panel-title" style="color:#22d3ee">
+          Exam Marks Suite
+          <span class="badge" style="background:linear-gradient(90deg,#0891b2,#0e7490)">PT1·SA1·PT2·SA2</span>
+        </div>
+        <div class="panel-desc">Fill marks for Test (PT) and Exam (SA). View both together in the marks viewer.</div>
+      </div>
+    </div>
+    <div class="btn-grid">
+      <a href="https://script.google.com/macros/s/AKfycbzhTIfxHiOU3Wo4V8VoQryJz66FT1z3NgH_-DBEQUTnF3FwfKRYMrBj4sfVz5feJt0C/exec" target="_blank" class="app-btn" style="--b-bg:rgba(8,145,178,0.2);--b-border:rgba(34,211,238,0.45);">
+        <div class="btn-icon-wrap" style="--bi-bg:rgba(8,145,178,0.35)"><i class="fa-solid fa-pencil" style="color:#67e8f9;font-size:1.05rem"></i></div>
+        <span class="btn-label">Fill Test/<br>Exam Marks</span>
+      </a>
+      <a href="https://script.google.com/macros/s/AKfycbxBudNggr1LnKwgvg1cOgi1Su0jKjMwrLf7848_H5sf4m2ljxvrKgxFT18bC70Jsjmsag/exec" target="_blank" class="app-btn" style="--b-bg:rgba(8,145,178,0.2);--b-border:rgba(34,211,238,0.45);">
+        <div class="btn-icon-wrap" style="--bi-bg:rgba(8,145,178,0.35)"><i class="fa-solid fa-eye" style="color:#67e8f9;font-size:1.05rem"></i></div>
+        <span class="btn-label">View Test+<br>Exam Marks</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ④ STUDENT RESULT -->
+  <div class="sec-head" style="color:#f59e0b">
+    <span class="sec-head-label">🎓 Student Result</span>
+    <div class="sec-head-line"></div>
+  </div>
+
+  <div class="panel" style="--p-bar:linear-gradient(180deg,#f59e0b,#d97706);--p-glow:rgba(245,158,11,0.5);background:linear-gradient(135deg,#1a1000,#241800);">
+    <div class="panel-bar"></div>
+    <div class="panel-top">
+      <div class="panel-icon" style="background:linear-gradient(135deg,#451f00,#713200)">🎓</div>
+      <div class="panel-info">
+        <div class="panel-title" style="color:#fbbf24">Student Result Portal</div>
+        <div class="panel-desc">Students apna Admission No. daal ke apne results dekh sakte hain — marks aur performance ek jagah.</div>
+      </div>
+    </div>
+    <div class="btn-grid">
+      <a href="https://adnansmps.free.nf/26/result.html" target="_blank" class="app-btn" style="--b-bg:rgba(245,158,11,0.2);--b-border:rgba(251,191,36,0.5);">
+        <div class="btn-icon-wrap" style="--bi-bg:rgba(245,158,11,0.35)"><i class="fa-solid fa-graduation-cap" style="color:#fde68a;font-size:1.1rem"></i></div>
+        <span class="btn-label">View<br>My Result</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ⑤ STAFF & ADMIN -->
+  <div class="sec-head" style="color:#10b981">
+    <span class="sec-head-label">👥 Staff & Administration</span>
+    <div class="sec-head-line"></div>
+  </div>
+
+  <div class="panel" style="--p-bar:linear-gradient(180deg,#10b981,#059669);--p-glow:rgba(16,185,129,0.4);background:linear-gradient(135deg,#071a10,#0a2416);">
+    <div class="panel-bar"></div>
+    <div class="panel-top">
+      <div class="panel-icon" style="background:linear-gradient(135deg,#14532d,#166534)">📸</div>
+      <div class="panel-info">
+        <div class="panel-title" style="color:#34d399">Teacher Attendance Suite</div>
+        <div class="panel-desc">Live camera se attendance mark karo ya aaj ke present/absent dashboard check karo.</div>
+      </div>
+    </div>
+    <div class="btn-grid">
+      <a href="https://adnansmps.free.nf/26/smps.html" target="_blank" class="app-btn" style="--b-bg:rgba(16,185,129,0.18);--b-border:rgba(52,211,153,0.45);">
+        <div class="btn-icon-wrap" style="--bi-bg:rgba(16,185,129,0.3)"><i class="fa-solid fa-camera" style="color:#6ee7b7;font-size:1.05rem"></i></div>
+        <span class="btn-label">Mark<br>Attendance</span>
+      </a>
+      <a href="https://adnansmps.free.nf/26/Dashboard.html" target="_blank" class="app-btn" style="--b-bg:rgba(16,185,129,0.18);--b-border:rgba(52,211,153,0.45);">
+        <div class="btn-icon-wrap" style="--bi-bg:rgba(16,185,129,0.3)"><i class="fa-solid fa-chart-bar" style="color:#6ee7b7;font-size:1.05rem"></i></div>
+        <span class="btn-label">Attendance<br>Dashboard</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- ⑥ SCHOOL SETTINGS -->
+  <div class="panel" style="--p-bar:linear-gradient(180deg,#f97316,#c2410c);--p-glow:rgba(249,115,22,0.4);background:linear-gradient(135deg,#1a0c04,#24100a);">
+    <div class="panel-bar"></div>
+    <div class="panel-top">
+      <div class="panel-icon" style="background:linear-gradient(135deg,#431407,#7c2d12)">⚙️</div>
+      <div class="panel-info">
+        <div class="panel-title" style="color:#fb923c">
+          School Settings
+          <span class="badge" style="background:linear-gradient(90deg,#ea580c,#c2410c)">Admin</span>
+        </div>
+        <div class="panel-desc">School timing change karo aur attendance system ka password update karo.</div>
+      </div>
+    </div>
+    <div class="btn-grid">
+      <a href="https://script.google.com/macros/s/AKfycbxzrdMT7u-NlRVlhmh8pQUz-RTe9vImVeFT9tEqyCpSTN6k58BFe6hQnDS47W8UW_Em/exec" target="_blank" class="app-btn" style="--b-bg:rgba(249,115,22,0.2);--b-border:rgba(251,146,60,0.5);">
+        <div class="btn-icon-wrap" style="--bi-bg:rgba(249,115,22,0.3)"><i class="fa-solid fa-gear" style="color:#fdba74;font-size:1.1rem"></i></div>
+        <span class="btn-label">Open<br>Settings</span>
+      </a>
+    </div>
+  </div>
+
+</main>
+
+<footer>🌙 SMPS · No More Coding · Built with ❤️ by Adnan</footer>
+
+<script>
+/* SIN WAVE LOADER */
+const canvas = document.getElementById('sinCanvas');
+const ctx = canvas.getContext('2d');
+const W = canvas.width, H = canvas.height;
+let t = 0, animId;
+const colors = ['#e63946','#f59e0b','#059669','#2563eb','#7c3aed'];
+function drawSin() {
+  ctx.clearRect(0,0,W,H);
+  const seg = W / (colors.length - 1);
+  colors.forEach((col,i) => {
+    if (i === colors.length-1) return;
+    ctx.beginPath();ctx.strokeStyle=col;ctx.lineWidth=3;
+    ctx.shadowBlur=18;ctx.shadowColor=col;
+    const x0=i*seg,x1=(i+1)*seg;
+    for(let x=x0;x<=x1;x++){
+      const y=H/2-Math.sin((x/W)*4*Math.PI+t)*(H/2-10);
+      x===x0?ctx.moveTo(x,y):ctx.lineTo(x,y);
+    }
+    ctx.stroke();ctx.shadowBlur=0;
+  });
+  const pct=(t*0.3%(2*Math.PI))/(2*Math.PI);
+  const dotX=pct*W;
+  const dotY=H/2-Math.sin((dotX/W)*4*Math.PI+t)*(H/2-10);
+  const ci=Math.min(Math.floor(pct*colors.length),colors.length-1);
+  ctx.beginPath();ctx.arc(dotX,dotY,6,0,Math.PI*2);
+  ctx.fillStyle=colors[ci];ctx.shadowBlur=22;ctx.shadowColor=colors[ci];
+  ctx.fill();ctx.shadowBlur=0;
+  t+=0.06;
+  animId=requestAnimationFrame(drawSin);
+}
+drawSin();
+setTimeout(()=>{
+  document.getElementById('loader').classList.add('fade-out');
+  cancelAnimationFrame(animId);
+  setTimeout(()=>document.getElementById('loader').style.display='none',600);
+},2000);
+
+/* CLOCK */
+function updateClock(){
+  const now=new Date();
+  const days=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  const months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const d=now.getDate().toString().padStart(2,'0');
+  document.getElementById('dtDate').textContent=`${days[now.getDay()]}, ${d} ${months[now.getMonth()]} ${now.getFullYear()}`;
+  const hh=now.getHours().toString().padStart(2,'0');
+  const mm=now.getMinutes().toString().padStart(2,'0');
+  const ss=now.getSeconds().toString().padStart(2,'0');
+  document.getElementById('dtTime').textContent=`${hh}:${mm}:${ss}`;
+}
+updateClock();setInterval(updateClock,1000);
+</script>
+</body>
+</html>

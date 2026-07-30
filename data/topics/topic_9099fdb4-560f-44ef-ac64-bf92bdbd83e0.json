@@ -1,0 +1,29 @@
+{
+    "id": "9099fdb4-560f-44ef-ac64-bf92bdbd83e0",
+    "subjectId": "349b6112-ad37-421c-ac23-0cedcbf7e23b",
+    "name": "In a hydraulic lift or hydraulic brake system, which scientist's law/principle is applied?",
+    "description": "Question:\n\nIn a hydraulic lift or hydraulic brake system,\nwhich scientist's law/principle is applied?\n\n(a) Archimedes' Principle\n(b) Pascal's Law\n(c) Bernoulli's Principle\n(d) Newton's Law of Viscosity\n\nAnswer: (b) Pascal's Law ✅\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n1. PASCAL'S LAW (Blaise Pascal)\n\nStatement:\n\n\"Enclosed liquid par lagaya gaya pressure\nhar direction mein equally transmit hota hai.\"\n\nApplication:\n\n✓ Hydraulic Lift\n✓ Hydraulic Brake\n✓ Hydraulic Press\n✓ Hydraulic Jack\n\nFormula:\n\nP = F/A\n\nHydraulic System:\n\nF₁/A₁ = F₂/A₂\n\nTRICK:\n\n\"Pascal = Pressure\"\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n2. ARCHIMEDES' PRINCIPLE\n\nStatement:\n\n\"Buoyant Force = Weight of displaced liquid\"\n\nApplication:\n\n✓ Floating of Ships\n✓ Submarine\n✓ Hydrometer\n\nFormula:\n\nFB = ρgV\n\nTRICK:\n\n\"Archimedes = Upthrust\"\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n3. BERNOULLI'S PRINCIPLE\n\nStatement:\n\n\"Jahan fluid speed zyada,\nwahan pressure kam.\"\n\nApplication:\n\n✓ Aeroplane Wing\n✓ Perfume Sprayer\n✓ Carburetor\n✓ Atomizer\n\nFormula:\n\nP + ½ρv² + ρgh = Constant\n\nTRICK:\n\n\"Bernoulli = Speed ↑ Pressure ↓\"\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n4. NEWTON'S LAW OF VISCOSITY\n\nStatement:\n\n\"Viscous force velocity gradient ke proportional hota hai.\"\n\nFormula:\n\nF = ηA(dv/dx)\n\nApplication:\n\n✓ Fluid Flow\n✓ Lubrication\n✓ Oil Movement\n\nTRICK:\n\n\"Viscosity = Internal Friction\"\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nMOST IMPORTANT SCIENTISTS & THEIR LAWS\n\nNewton → Laws of Motion, Gravitation\n\nPascal → Hydraulic Lift, Hydraulic Brake\n\nArchimedes → Buoyancy, Floating\n\nBernoulli → Aeroplane, Fluid Flow\n\nOhm → V = IR\n\nFaraday → Electromagnetic Induction\n\nCoulomb → Electrostatic Force\n\nHooke → F = -kx\n\nBoyle → PV = Constant\n\nCharles → V/T = Constant\n\nAvogadro → Equal Volumes Equal Molecules\n\nKepler → Planetary Motion\n\nSnell → Refraction Law\n\nKirchhoff → Current & Voltage Laws\n\nJoule → Heat Produced\n\nGauss → Electric Flux\n\nTorricelli → Velocity of Efflux\n\nHuygens → Wave Theory of Light\n\nEinstein → Photoelectric Effect, Relativity\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nSUPER EXAM TRICK\n\nHydraulic Lift/Brake → Pascal\n\nFloating Ship → Archimedes\n\nAeroplane Wing → Bernoulli\n\nFluid Friction → Newton Viscosity",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "ee5cf8e4-6989-4235-b2d1-fdb19920e2ea",
+            "date": "2026-06-17",
+            "time": "2026-06-17 20:44",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "51dc7c48-daad-492f-9109-2a2b3c82e8e3",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-17 20:41",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

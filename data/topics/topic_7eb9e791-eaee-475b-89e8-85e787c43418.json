@@ -1,0 +1,36 @@
+{
+    "id": "7eb9e791-eaee-475b-89e8-85e787c43418",
+    "subjectId": "38fe1eb2-f38f-4dc6-9e65-8711d6af8f11",
+    "name": "मात्रा के आधार पर स्वर का वर्गीकरण",
+    "description": "1. ह्रस्व स्वर – अ, इ, उ, ऋ\n\n2. दीर्घ स्वर – आ, ई, ऊ, ए, ऐ, ओ, औ\n\n3. प्लुत स्वर – तीन मात्रा वाले स्वर",
+    "status": "Revision",
+    "completeDate": "2026-06-21",
+    "createdAt": "2026-06-07",
+    "updatedAt": "2026-07-01 08:50:46",
+    "revisionHistory": [
+        {
+            "id": "1bd14d19-5bcf-4a62-bf85-dffbc5b6ea26",
+            "date": "2026-06-21",
+            "time": "2026-06-21 01:15:28",
+            "note": "Auto: 7 din baad revision scheduled",
+            "type": "auto-revision"
+        },
+        {
+            "id": "c8d86253-db0e-4dc6-a56b-421d441105d6",
+            "date": "2026-06-21",
+            "time": "2026-06-21 09:52:18",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "ffdbb036-ccaa-4064-91a1-3eed9c220bd0",
+            "date": "2026-07-01",
+            "time": "2026-07-01 08:50:46",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "images": [],
+    "links": [],
+    "pdfs": []
+}

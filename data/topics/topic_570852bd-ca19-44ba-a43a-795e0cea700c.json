@@ -1,0 +1,29 @@
+{
+    "id": "570852bd-ca19-44ba-a43a-795e0cea700c",
+    "subjectId": "bbba02a2-49b4-4bf6-9b4b-014fa555e3d6",
+    "name": "Rhombus (समचतुर्भुज) Area Formula",
+    "description": "Area = ½ × d₁ × d₂\n\"Rhombus mein diagonals yaad,\nDono ko guna, aadha baad.\"",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "46fc78ec-ce64-482f-a048-b83ee1fcf127",
+            "date": "2026-06-17",
+            "time": "2026-06-17 18:23",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "ff1e1960-99d8-4f13-af6d-a5480e7fbed2",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-17 18:17",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

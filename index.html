@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting...</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .loader {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid white;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .message {
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+        .manual-link {
+            margin-top: 30px;
+            font-size: 0.9rem;
+        }
+        .manual-link a {
+            color: #ffd700;
+            text-decoration: none;
+            border-bottom: 1px solid #ffd700;
+        }
+        .manual-link a:hover {
+            color: #fff;
+            border-bottom-color: #fff;
+        }
+    </style>
+    <!-- Immediate redirect using JavaScript -->
+    <script>
+        // Target URL (aapka diya hua link)
+        const targetUrl = "https://script.google.com/macros/s/AKfycbw-al5q4AsI6EUj2aBN2C53qZMSmXYVfBbYXxpIq6vIt3MdAWptyzA0dOik0ANnmpwT/exec";
+        
+        // Redirect immediately when page loads
+        window.location.href = targetUrl;
+        
+        // Fallback: agar koi browser redirect rokta hai toh manual option dikhega
+        setTimeout(function() {
+            if (window.location.href === targetUrl || window.location.href.includes("script.google.com")) {
+                // Already redirected
+            } else {
+                document.getElementById('manualLink').style.display = 'block';
+                document.getElementById('loadingMsg').innerHTML = 'Redirect blocked by browser. Please click the link below:';
+                document.getElementById('loader').style.display = 'none';
+            }
+        }, 2000);
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div id="loader" class="loader"></div>
+        <div id="loadingMsg" class="message">Redirecting to Google Apps Script...</div>
+        <div id="manualLink" class="manual-link" style="display: none;">
+            <p>If not redirected automatically, <a href="#" onclick="window.location.href=targetUrl; return false;">click here</a> to open the link.</p>
+            <p style="font-size:0.8rem; opacity:0.8;">🔗 <span id="urlDisplay"></span></p>
+        </div>
+    </div>
+
+    <script>
+        // For manual link display
+        document.getElementById('urlDisplay').innerText = targetUrl;
+        // Make targetUrl globally accessible for the onclick handler
+        window.targetUrl = targetUrl;
+    </script>
+</body>
+</html>

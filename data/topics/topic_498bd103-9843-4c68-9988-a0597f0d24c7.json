@@ -1,0 +1,29 @@
+{
+    "id": "498bd103-9843-4c68-9988-a0597f0d24c7",
+    "subjectId": "bbba02a2-49b4-4bf6-9b4b-014fa555e3d6",
+    "name": "Question:  A seller buys a certain number of bananas at the rate of 8 for Rs. 5 and sells them at the rate of 5 for Rs. 8. What will be his profit percentage?  Hindi: एक विक्रेता केले 8 के लिए ₹5 की दर से खरीदता है और 5 के लिए ₹8 की दर से बेचता है। उसका लाभ प्रतिशत ज्ञात कीजिए।",
+    "description": "Trick:\n\nBuy Quantity = 8\nSell Quantity = 5\n\nCross Multiply:\n\nCP Ratio = 5 × 5 = 25\nSP Ratio = 8 × 8 = 64\n\nProfit = 64 - 25 = 39\n\nProfit % = (39/25) × 100\n         = 156%\n\nAnswer = 156%\n\nYaad Rakhne Ki Line:\n\"8 ka 5 mein kharida,\n5 ka 8 mein becha,\nCross multiply kiya,\n156% profit nikla.\"",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "48d10a89-cdde-405a-a911-6750983cc760",
+            "date": "2026-06-17",
+            "time": "2026-06-17 18:02",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "9cb19c61-2566-4f29-8e40-1f0dc83a494b",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-17 17:46",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

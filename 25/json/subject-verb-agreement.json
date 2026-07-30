@@ -1,0 +1,52 @@
+[
+  {
+    "title": "Subject-Verb Agreement (क्रिया का सहमति)",
+    "icon": "fas fa-handshake",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> Subject-verb agreement means the subject and verb must match in number (singular/plural).<br><strong>Hindi:</strong> कर्ता और क्रिया का सहमति का मतलब है कि कर्ता और क्रिया को वचन (एकवचन/बहुवचन) में मेल खाना चाहिए।</p><p>A singular subject takes a singular verb; a plural subject takes a plural verb.<br>एकवचन कर्ता एकवचन क्रिया लेता है; बहुवचन कर्ता बहुवचन क्रिया लेता है।</p><div class='popup-example'><strong>Example:</strong> She <strong>plays</strong> tennis.<br><strong>Hindi:</strong> वह टेनिस <strong>खेलती है</strong>।</div>"
+  },
+  {
+    "title": "Basic Rule - Singular Subjects",
+    "icon": "fas fa-user",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> Singular subjects (he, she, it, single person/thing) use verbs ending with 's' or 'es' in present tense.<br><strong>Hindi:</strong> एकवचन कर्ता (वह, कोई एक व्यक्ति/चीज़) वर्तमान काल में 's' या 'es' ending वाली क्रियाओं का उपयोग करते हैं।</p><h3>Rules</h3><ul><li><strong>He/She/It:</strong> always takes singular verb</li><li><strong>Singular nouns:</strong> boy, girl, book, car</li><li><strong>Uncountable nouns:</strong> water, information</li></ul><div class='popup-example'><strong>Example:</strong> The boy <strong>reads</strong> a book.<br><strong>Hindi:</strong> लड़का किताब <strong>पढ़ता है</strong>।</div>"
+  },
+  {
+    "title": "Basic Rule - Plural Subjects",
+    "icon": "fas fa-users",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> Plural subjects (they, we, you, multiple people/things) use base form of verb without 's' in present tense.<br><strong>Hindi:</strong> बहुवचन कर्ता (वे, हम, तुम, कई लोग/चीज़ें) वर्तमान काल में बिना 's' वाली क्रियाओं का उपयोग करते हैं।</p><h3>Rules</h3><ul><li><strong>They/We/You:</strong> always take plural verb</li><li><strong>Plural nouns:</strong> boys, girls, books, cars</li><li><strong>Multiple subjects:</strong> joined by 'and'</li></ul><div class='popup-example'><strong>Example:</strong> The boys <strong>read</strong> books.<br><strong>Hindi:</strong> लड़के किताबें <strong>पढ़ते हैं</strong>।</div>"
+  },
+  {
+    "title": "Rule: Ignore Prepositional Phrases",
+    "icon": "fas fa-filter",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> Ignore words that come between subject and verb (prepositional phrases). Focus on the main subject.<br><strong>Hindi:</strong> कर्ता और क्रिया के बीच आने वाले शब्दों (prepositional phrases) को नज़रअंदाज़ करें। मुख्य कर्ता पर ध्यान दें।</p><h3>Common Prepositions</h3><ul><li><strong>of, with, together with, along with</strong></li><li><strong>as well as, in addition to</strong></li></ul><div class='popup-example'><strong>Example:</strong> The <strong>box</strong> of chocolates <strong>is</strong> on the table.<br><strong>Hindi:</strong> चॉकलेटों का <strong>डब्बा</strong> मेज़ पर <strong>है</strong>।</div>"
+  },
+  {
+    "title": "Rule: Either/Or, Neither/Nor",
+    "icon": "fas fa-balance-scale",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> When subjects are joined by 'either...or' or 'neither...nor', the verb agrees with the subject closest to it.<br><strong>Hindi:</strong> जब कर्ता 'either...or' या 'neither...nor' से जुड़े होते हैं, तो क्रिया उस कर्ता से सहमत होती है जो उसके सबसे करीब होता है।</p><h3>Pattern</h3><ul><li><strong>Either A or B:</strong> verb agrees with B</li><li><strong>Neither A nor B:</strong> verb agrees with B</li></ul><div class='popup-example'><strong>Example:</strong> Neither the students nor the <strong>teacher is</strong> coming.<br><strong>Hindi:</strong> न तो विद्यार्थी और न ही <strong>शिक्षक आ रहा है</strong>।</div>"
+  },
+  {
+    "title": "Rule: Collective Nouns",
+    "icon": "fas fa-people-arrows",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> Collective nouns (team, family, class) can be singular or plural depending on whether the group acts as one unit or individuals.<br><strong>Hindi:</strong> Collective nouns (टीम, परिवार, कक्षा) एकवचन या बहुवचन हो सकते हैं, यह इस पर निर्भर करता है कि समूह एक इकाई के रूप में कार्य कर रहा है या व्यक्तियों के रूप में।</p><h3>Common Collective Nouns</h3><ul><li><strong>Team, family, class, committee</strong></li><li><strong>Group, audience, government</strong></li></ul><div class='popup-example'><strong>Example:</strong> My <strong>family is</strong> going on vacation.<br><strong>Hindi:</strong> मेरा <strong>परिवार छुट्टी पर जा रहा है</strong>।</div>"
+  },
+  {
+    "title": "Rule: Indefinite Pronouns",
+    "icon": "fas fa-question",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> Some indefinite pronouns are always singular, some always plural, and some can be both.<br><strong>Hindi:</strong> कुछ indefinite pronouns हमेशा एकवचन होते हैं, कुछ हमेशा बहुवचन, और कुछ दोनों हो सकते हैं।</p><h3>Categories</h3><ul><li><strong>Always singular:</strong> everyone, someone, nobody, each</li><li><strong>Always plural:</strong> both, few, many, several</li><li><strong>Can be both:</strong> all, some, most, none</li></ul><div class='popup-example'><strong>Example:</strong> <strong>Everyone has</strong> finished their work.<br><strong>Hindi:</strong> <strong>हर किसी ने अपना काम पूरा कर लिया है</strong>।</div>"
+  },
+  {
+    "title": "Rule: There/Here Sentences",
+    "icon": "fas fa-arrows-alt",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> In sentences beginning with 'there' or 'here', the verb agrees with the subject that comes after it.<br><strong>Hindi:</strong> 'there' या 'here' से शुरू होने वाले वाक्यों में, क्रिया उस कर्ता से सहमत होती है जो इसके बाद आता है।</p><h3>Pattern</h3><ul><li><strong>There + verb + subject</strong></li><li><strong>Here + verb + subject</strong></li></ul><div class='popup-example'><strong>Example:</strong> There <strong>are many books</strong> on the shelf.<br><strong>Hindi:</strong> शेल्फ पर <strong>बहुत सारी किताबें हैं</strong>।</div>"
+  },
+  {
+    "title": "Rule: Titles and Names",
+    "icon": "fas fa-book",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> Titles of books, movies, countries, or organizations are always singular even if they look plural.<br><strong>Hindi:</strong> किताबों, फिल्मों, देशों, या संगठनों के शीर्षक हमेशा एकवचन होते हैं भले ही वे बहुवचन दिखते हों।</p><h3>Examples</h3><ul><li><strong>Book titles:</strong> \"The Chronicles of Narnia\"</li><li><strong>Country names:</strong> The United States</li><li><strong>Company names:</strong> Microsoft Corporation</li></ul><div class='popup-example'><strong>Example:</strong> \"The Avengers\" <strong>is</strong> my favorite movie.<br><strong>Hindi:</strong> \"द अवेंजर्स\" मेरी पसंदीदा फिल्म <strong>है</strong>।</div>"
+  },
+  {
+    "title": "Common Mistakes and Practice",
+    "icon": "fas fa-exclamation-triangle",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> Common mistakes include confusing subjects with words that come between them, and misusing 'there is/there are'.<br><strong>Hindi:</strong> आम गलतियों में कर्ता और उनके बीच आने वाले शब्दों को भ्रमित करना, और 'there is/there are' का गलत उपयोग करना शामिल है।</p><div class='popup-example'><strong>Incorrect:</strong> The list of items are long.<br><strong>Correct:</strong> The <strong>list</strong> of items <strong>is</strong> long.<br><strong>Hindi:</strong> चीज़ों की <strong>सूची लंबी है</strong>।</div>"
+  }
+]

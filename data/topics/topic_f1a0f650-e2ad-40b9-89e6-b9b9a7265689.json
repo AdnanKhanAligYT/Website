@@ -1,0 +1,36 @@
+{
+    "id": "f1a0f650-e2ad-40b9-89e6-b9b9a7265689",
+    "subjectId": "b07f5264-5928-4d06-8577-46ed17bd59f5",
+    "name": "FUNCTION OF SENTENCES",
+    "description": "1. Assertive / Declarative Sentence\n→ Statement / Information dena\n\nExample:\nHe is a doctor.\n\n\n2. Interrogative Sentence\n→ Question puchhna\n\nExample:\nAre you ready?\n\n\n3. Imperative Sentence\n→ Order, request, advice, command dena\n\nExample:\nPlease help me.\n\n\n4. Exclamatory Sentence\n→ Strong feeling / emotion dikhana\n\nExample:\nWhat a beautiful day!\n\n\n5. Optative Sentence\n→ Wish / prayer / curse dikhana\n\nExample:\nMay you succeed in life!",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "createdAt": "2026-06-08 18:41",
+    "updatedAt": "2026-06-22 04:25:00",
+    "revisionHistory": [
+        {
+            "id": "d06e9d77-57bf-4ebd-8816-575726b52ec3",
+            "date": "2026-06-15",
+            "time": "2026-06-15 10:06",
+            "note": "Auto: 7 din baad revision scheduled",
+            "type": "auto-revision"
+        },
+        {
+            "id": "11e6820f-2a58-419c-bbda-29b686b651f1",
+            "date": "2026-06-17",
+            "time": "2026-06-17 09:01",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "45862ae1-3c79-4548-81bb-337ae997fe04",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "links": [],
+    "pdfs": []
+}

@@ -1,0 +1,29 @@
+{
+    "id": "6b72ae0b-fd3c-493e-9a38-6b02099a3afc",
+    "subjectId": "349b6112-ad37-421c-ac23-0cedcbf7e23b",
+    "name": "🔴 CONCAVE MIRROR – OBJECT POSITION vs IMAGE",
+    "description": "🔴 CONCAVE MIRROR – OBJECT POSITION vs IMAGE\n\nPole = P\nFocus = F\nCenter of Curvature = C\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n1. Object at Infinity (∞)\n\nImage Position → Focus (F)\n\nNature:\n✓ Real\n✓ Inverted\n✓ Highly Diminished (Point Sized)\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n2. Object Beyond C\n\nImage Position → Between C and F\n\nNature:\n✓ Real\n✓ Inverted\n✓ Diminished\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n3. Object at C\n\nImage Position → At C\n\nNature:\n✓ Real\n✓ Inverted\n✓ Same Size\n\n👉 Isi question ka answer hai.\n\nAnswer:\nReal, Inverted and Same Size ✅\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n4. Object Between C and F\n\nImage Position → Beyond C\n\nNature:\n✓ Real\n✓ Inverted\n✓ Magnified (Enlarged)\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n5. Object at Focus (F)\n\nImage Position → Infinity (∞)\n\nNature:\n✓ Real\n✓ Inverted\n✓ Highly Enlarged\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n6. Object Between F and P\n\nImage Position → Behind Mirror\n\nNature:\n✓ Virtual\n✓ Erect\n✓ Magnified\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nSUPER TRICK\n\nObject → Image\n\n∞      → F\nBeyond C → Between C & F\nC      → C\nBetween C,F → Beyond C\nF      → ∞\nBetween F,P → Behind Mirror\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nMEMORY TRICK\n\n\"BCF – FCB\"\n\nBeyond C → F aur C ke beech\n\nC → C\n\nF aur C ke beech → Beyond C\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nEXAM FAVORITE MCQs\n\nAt C\n→ Real, Inverted, Same Size\n\nAt F\n→ Image at Infinity\n\nBetween F and P\n→ Virtual, Erect, Magnified\n\nAt Infinity\n→ Image at Focus\n\nBeyond C\n→ Diminished\n\nBetween C and F\n→ Magnified\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nONE-LINE REVISION\n\n∞  → F  → Point Size\n\nBeyond C → Diminished\n\nC → Same Size\n\nBetween C & F → Enlarged\n\nF → Infinity\n\nBetween F & P → Virtual + Erect + Enlarged",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "b7aacdc4-8e64-4dd5-8d6d-35c93a0a3bad",
+            "date": "2026-06-17",
+            "time": "2026-06-17 20:36",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "c57a1ad1-93a0-42e2-bd3f-4cdc42093af1",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-17 20:36",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

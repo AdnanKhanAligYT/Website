@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Voice",
+    "icon": "fas fa-microphone",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> Voice refers to the form of a verb that indicates whether the subject performs the action (active voice) or receives the action (passive voice).<br><strong>Hindi:</strong> Voice verb ka woh roop hai jo yeh batata hai ki karta karya karta hai (active voice) ya karta par karya kiya jata hai (passive voice).</p><p>There are two types: <strong>Active Voice</strong> and <strong>Passive Voice</strong>.<br>Do prakar hote hain: <strong>Active Voice</strong> aur <strong>Passive Voice</strong>.</p><div class='popup-example'><strong>Example:</strong> Active: She <strong>writes</strong> a letter. Passive: A letter <strong>is written</strong> by her.<br><strong>Hindi:</strong> Active: Woh ek patra <strong>likhti hai</strong>. Passive: Ek patra uske dwara <strong>likha jata hai</strong>.</div>"
+  },
+  {
+    "title": "Active Voice",
+    "icon": "fas fa-running",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> In active voice, the subject performs the action expressed by the verb.<br><strong>Hindi:</strong> Active voice mein karta verb dwara vyakt karya ko karta hai.</p><h3>Use</h3><p>Used to emphasize the doer of the action and make sentences direct and lively.<br>Karta par zor dene aur vakyas ko saral aur jeevant banane ke liye.</p><h3>Structure</h3><p><strong>Subject + Verb + Object</strong></p><div class='popup-example'><strong>Example:</strong> They <strong>play</strong> football.<br><strong>Hindi:</strong> Ve <strong>khelte hain</strong> football.</div>"
+  },
+  {
+    "title": "Passive Voice",
+    "icon": "fas fa-hand-holding",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> In passive voice, the subject receives the action expressed by the verb.<br><strong>Hindi:</strong> Passive voice mein karta verb dwara vyakt karya ka grahakta hota hai.</p><h3>Use</h3><p>Used to emphasize the action or the object rather than the doer, or when the doer is unknown or unimportant.<br>Karya ya object par zor dene ke liye, ya jab karta anjan ya kam mahatvapurna ho.</p><h3>Structure</h3><p><strong>Subject (Object of Active) + Helping Verb (is/are/was/were) + Past Participle (V3) + by + Agent (Subject of Active)</strong></p><div class='popup-example'><strong>Example:</strong> The cake <strong>was eaten</strong> by the children.<br><strong>Hindi:</strong> Cake bachchon dwara <strong>khaya gaya</strong>.</div>"
+  },
+  {
+    "title": "Rules for Changing Active to Passive Voice",
+    "icon": "fas fa-exchange-alt",
+    "content": "<h3>Guidelines</h3><p><strong>English:</strong> To convert active voice to passive voice: 1) Make the object of the active sentence the subject of the passive sentence, 2) Use appropriate helping verb (is/are/was/were) based on tense, 3) Use the past participle (V3) of the main verb, 4) Add 'by' followed by the subject of the active sentence (if needed).<br><strong>Hindi:</strong> Active se passive voice mein badalne ke niyam: 1) Active vakya ka object passive vakya ka subject banta hai, 2) Tense ke anusaar sahi helping verb (is/are/was/were) ka prayog, 3) Mukhya verb ka past participle (V3) roop, 4) 'Dwara' ke saath active ka subject joda jata hai (agar zaruri ho).</p><div class='popup-example'><strong>Example:</strong> Active: He <strong>paints</strong> the house. Passive: The house <strong>is painted</strong> by him.<br><strong>Hindi:</strong> Active: Woh ghar <strong>rangta hai</strong>. Passive: Ghar uske dwara <strong>ranga jata hai</strong>.</div>"
+  },
+  {
+    "title": "Voice in Different Tenses",
+    "icon": "fas fa-clock",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> Voice can be applied to all tenses, with the structure changing based on the tense of the verb.<br><strong>Hindi:</strong> Voice ko sabhi tenses mein prayog kiya ja sakta hai, jismein structure verb ke tense ke anusaar badalta hai.</p><h3>Examples by Tense</h3><ul><li><strong>Simple Present:</strong> Active: She <strong>cooks</strong> food. Passive: Food <strong>is cooked</strong> by her.<br>Hindi: Active: Woh khana <strong>pakati hai</strong>. Passive: Khana uske dwara <strong>paka jata hai</strong>.</li><li><strong>Simple Past:</strong> Active: They <strong>built</strong> a house. Passive: A house <strong>was built</strong> by them.<br>Hindi: Active: Unhone ek ghar <strong>banaya</strong>. Passive: Ek ghar unke dwara <strong>banaya gaya</strong>.</li><li><strong>Simple Future:</strong> Active: He <strong>will write</strong> a letter. Passive: A letter <strong>will be written</strong> by him.<br>Hindi: Active: Woh ek patra <strong>likhega</strong>. Passive: Ek patra uske dwara <strong>likha jayega</strong>.</li></ul><div class='popup-example'><strong>Example (Present Continuous):</strong> Active: They <strong>are watching</strong> a movie. Passive: A movie <strong>is being watched</strong> by them.<br><strong>Hindi:</strong> Active: Ve ek film <strong>dekh rahe hain</strong>. Passive: Ek film unke dwara <strong>dekhi ja rahi hai</strong>.</div>"
+  },
+  {
+    "title": "When to Use Passive Voice",
+    "icon": "fas fa-info-circle",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Passive voice is used when: 1) The doer is unknown, 2) The action or object is more important than the doer, 3) To sound formal or objective.<br><strong>Hindi:</strong> Passive voice ka prayog tab hota hai jab: 1) Karta anjan ho, 2) Karya ya object karta se zyada mahatvapurna ho, 3) Formal ya nishpaksh dikhne ke liye.</p><div class='popup-example'><strong>Example:</strong> The room <strong>was cleaned</strong>. (Doer unknown)<br><strong>Hindi:</strong> Kamra <strong>saaf kiya gaya</strong>. (Karta anjan)</div>"
+  },
+  {
+    "title": "Challenges with Passive Voice",
+    "icon": "fas fa-exclamation-triangle",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> Not all active voice sentences can be converted to passive voice, especially those with intransitive verbs (verbs without an object). Also, passive voice can make sentences less direct or harder to read.<br><strong>Hindi:</strong> Sabhi active voice vakyas ko passive voice mein nahi badla ja sakta, khaas kar jinke verb intransitive hote hain (jinka koi object nahi hota). Passive voice vakya ko kam saral ya padhne mein mushkil bana sakta hai.</p><div class='popup-example'><strong>Example (Not Possible):</strong> Active: She <strong>sleeps</strong>. Passive: Not possible (no object).<br><strong>Hindi:</strong> Active: Woh <strong>soti hai</strong>. Passive: Sambhav nahi (koi object nahi).</div>"
+  }
+]

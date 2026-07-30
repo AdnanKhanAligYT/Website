@@ -1,0 +1,29 @@
+{
+    "id": "3265866a-b4ea-44f5-aaa2-3be1fa2b23f2",
+    "subjectId": "349b6112-ad37-421c-ac23-0cedcbf7e23b",
+    "name": "The escape velocity on the surface of the Earth depends on:",
+    "description": "Question:\nThe escape velocity on the surface of the Earth depends on:\n\n\n(a) Mass and radius of the Earth\n(b) Mass of the escaping body\n(c) Direction of projection\n(d) Angle of projection\n\nAnswer: (a) Mass and Radius of the Earth ✅\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nEscape Velocity Formula\n\nVe = √(2GM/R)\n\nWhere,\n\nVe = Escape Velocity\nG  = Universal Gravitational Constant\nM  = Mass of Earth\nR  = Radius of Earth\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nImportant Point\n\nEscape Velocity depends on:\n\n✓ Mass of Earth (M)\n✓ Radius of Earth (R)\n\nEscape Velocity does NOT depend on:\n\n✗ Mass of body\n✗ Direction of projection\n✗ Angle of projection\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nFor Earth\n\nVe = 11.2 km/s\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nRELATION BETWEEN G and g\n\nUniversal Gravitational Constant\n\nG = 6.67 × 10⁻¹¹ N m²/kg²\n\nAcceleration due to Gravity\n\ng = GM/R²\n\nWhere,\n\nG = Universal Constant\nM = Mass of Earth\nR = Radius of Earth\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nIMPORTANT RELATIONS\n\ng = GM/R²\n\nVe = √(2GM/R)\n\nUsing g = GM/R²\n\nVe = √(2gR)\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nTRICK\n\n\"Escape Velocity yaad karo:\n\nV = Root(2gR)\n\nMass of body nahi,\nEarth ke M aur R par hi sahi.\"\n\n━━━━━━━━━━━━━━━━━━━━━━\n\nONE-LINE REVISION\n\ng = GM/R²\n\nVe = √(2GM/R)\n\nVe = √(2gR)\n\nEarth ki Escape Velocity\n= 11.2 km/s",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "adc4d45b-79c2-4bfa-95fe-1c7730042eee",
+            "date": "2026-06-17",
+            "time": "2026-06-17 20:36",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "2494ad6b-4410-4d76-85c0-2bf73bb91246",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-17 20:34",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

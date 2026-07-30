@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Types of Sentences",
+    "icon": "fas fa-align-left",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> Sentences are classified based on their purpose or structure, expressing statements, questions, commands, or emotions.<br><strong>Hindi:</strong> Vakya apne uddeshya ya sanrachna ke adhaar par vargikrit kiye jate hain, jo kathan, prashn, aadesh, ya bhavna vyakt karte hain.</p><p>There are four main types: <strong>Declarative, Interrogative, Imperative, Exclamatory</strong>.<br>Char mukhya prakar hote hain: <strong>Vivaranatmak, Prashnavachak, Aadeshvachak, Vismayadibodhak</strong>.</p><div class='popup-example'><strong>Example:</strong> Declarative: The sun rises. Interrogative: Does the sun rise? Imperative: Watch the sunrise. Exclamatory: What a beautiful sunrise!<br><strong>Hindi:</strong> Vivaranatmak: Suraj ugta hai. Prashnavachak: Kya suraj ugta hai? Aadeshvachak: Suraj ka uday dekho. Vismayadibodhak: Kya sundar suryoday hai!</div>"
+  },
+  {
+    "title": "Declarative Sentences",
+    "icon": "fas fa-info-circle",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> Declarative sentences express statements, facts, or information and convey a complete thought.<br><strong>Hindi:</strong> Vivaranatmak vakya kathan, tathya, ya jankari vyakt karte hain aur ek poorn vichar prakat karte hain.</p><h3>Use</h3><p>Used to inform or state something.<br>Jankari dene ya kisi baat ko batane ke liye.</p><h3>Structure</h3><p><strong>Subject + Verb + Object/Complement (if any)</strong></p><div class='popup-example'><strong>Example:</strong> She <strong>reads</strong> books daily.<br><strong>Hindi:</strong> Woh roz kitaabein <strong>padhti</strong> hai.</div>"
+  },
+  {
+    "title": "Interrogative Sentences",
+    "icon": "fas fa-question-circle",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> Interrogative sentences ask questions to seek information or clarification.<br><strong>Hindi:</strong> Prashnavachak vakya prashn puchhte hain jankari ya spashtikaran ke liye.</p><h3>Use</h3><p>Used to inquire or seek answers.<br>Poochhtachh ya jawab mangne ke liye.</p><h3>Structure</h3><p><strong>Auxiliary Verb/Question Word + Subject + Main Verb + Object/Complement (if any)</strong></p><div class='popup-example'><strong>Example:</strong> <strong>Where does</strong> he <strong>live</strong>?<br><strong>Hindi:</strong> Woh <strong>kahan rehta</strong> hai?</div>"
+  },
+  {
+    "title": "Imperative Sentences",
+    "icon": "fas fa-hand-point-up",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> Imperative sentences give commands, instructions, or requests.<br><strong>Hindi:</strong> Aadeshvachak vakya aadesh, nirdesh, ya anurodh dete hain.</p><h3>Use</h3><p>Used to direct or request someone to do something.<br>Kisi ko kuch karne ka nirdesh ya anurodh karne ke liye.</p><h3>Structure</h3><p><strong>Verb + Object/Complement (Subject 'you' is implied)</strong></p><div class='popup-example'><strong>Example:</strong> <strong>Close</strong> the door.<br><strong>Hindi:</strong> Darwaza <strong>band karo</strong>.</div>"
+  },
+  {
+    "title": "Exclamatory Sentences",
+    "icon": "fas fa-exclamation",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> Exclamatory sentences express strong emotions, surprise, or excitement.<br><strong>Hindi:</strong> Vismayadibodhak vakya tez bhavna, ashcharya, ya uttejana vyakt karte hain.</p><h3>Use</h3><p>Used to show intense feelings or reactions.<br>Teez bhavna ya prativikriya dikhane ke liye.</p><h3>Structure</h3><p><strong>What/How + Adjective/Adverb + Subject + Verb OR Exclamation + Phrase</strong></p><div class='popup-example'><strong>Example:</strong> <strong>What a</strong> lovely day!<br><strong>Hindi:</strong> <strong>Kya</strong> sundar din hai!</div>"
+  },
+  {
+    "title": "Sentence Types Based on Structure",
+    "icon": "fas fa-sitemap",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> Sentences can also be classified by structure: Simple, Compound, Complex, and Compound-Complex.<br><strong>Hindi:</strong> Vakya sanrachna ke adhaar par bhi vargikrit hote hain: Saral, Samyukt, Mishrit, aur Samyukt-Mishrit.</p><h3>Types</h3><ul><li><strong>Simple:</strong> One independent clause. Example: She sings.<br>Hindi: Ek swatantra upvakya. Woh gaati hai.</li><li><strong>Compound:</strong> Two or more independent clauses joined by conjunctions. Example: She sings, and he dances.<br>Hindi: Do ya zyada swatantra upvakya samuchchay bodhak se jude. Woh gaati hai, aur woh narta hai.</li><li><strong>Complex:</strong> One independent clause and at least one dependent clause. Example: She sings because she loves music.<br>Hindi: Ek swatantra aur kam se kam ek ashrit upvakya. Woh gaati hai kyunki use sangeet pasand hai.</li><li><strong>Compound-Complex:</strong> At least two independent clauses and one dependent clause. Example: She sings, and he dances because they love music.<br>Hindi: Kam se kam do swatantra aur ek ashrit upvakya. Woh gaati hai, aur woh narta hai kyunki unhe sangeet pasand hai.</li></ul><div class='popup-example'><strong>Example:</strong> Complex: When it rains, I <strong>stay</strong> inside.<br><strong>Hindi:</strong> Jab baarish hoti hai, main <strong>andar rehta</strong> hoon.</div>"
+  },
+  {
+    "title": "Using Sentence Types Effectively",
+    "icon": "fas fa-info-circle",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Different sentence types serve specific purposes: Declarative for information, Interrogative for questions, Imperative for commands, and Exclamatory for emotions.<br><strong>Hindi:</strong> Alag-alag vakya prakar vishesh uddeshyon ke liye hote hain: Vivaranatmak jankari ke liye, Prashnavachak prashnon ke liye, Aadeshvachak aadesh ke liye, aur Vismayadibodhak bhavna ke liye.</p><div class='popup-example'><strong>Example:</strong> Declarative: The movie was great. Interrogative: Was the movie great? Imperative: Watch the movie. Exclamatory: What a great movie!<br><strong>Hindi:</strong> Vivaranatmak: Film shandar thi. Prashnavachak: Kya film shandar thi? Aadeshvachak: Film dekho. Vismayadibodhak: Kya shandar film hai!</div>"
+  }
+]

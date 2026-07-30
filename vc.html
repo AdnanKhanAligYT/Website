@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Direct Call</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/peerjs/1.5.2/peerjs.min.js"></script>
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --panel: #161616;
+    --red: #e0263d;
+    --red-dim: #5a1620;
+    --text: #f2f2f2;
+    --muted-text: #8a8a8a;
+    --border: #262626;
+  }
+  * { box-sizing: border-box; margin:0; padding:0; }
+  html, body { height:100%; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    min-height: 100vh;
+    display:flex; flex-direction:column;
+  }
+  header {
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  header h1 { font-size: 18px; letter-spacing:0.3px; font-weight:600; }
+  header h1 span { color: var(--red); }
+  #status {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: var(--panel);
+    color: var(--muted-text);
+    border: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  #status.live { color:#3ecf6a; border-color:#1e4a2a; }
+  #status.connecting { color:#e0a82e; border-color:#4a3a14; }
+
+  main { flex:1; display:flex; flex-direction:column; padding: 14px; gap:12px; min-height:0; }
+
+  .setup-card {
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px;
+  }
+  .setup-card label { font-size:12px; color: var(--muted-text); display:block; margin-bottom:6px; }
+  .id-row { display:flex; gap:8px; align-items:center; }
+  .id-box {
+    flex:1;
+    background:#000;
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:10px 12px;
+    font-family: monospace;
+    font-size:13px;
+    letter-spacing:0.5px;
+    word-break: break-all;
+  }
+  .icon-btn-small {
+    background: var(--red-dim);
+    border:none; color:var(--text);
+    width:38px; height:38px; min-width:38px; border-radius:8px;
+    font-size:16px; cursor:pointer;
+  }
+  .connect-row { display:flex; gap:8px; margin-top:12px; }
+  .connect-row input {
+    flex:1; min-width:0;
+    background:#000; border:1px solid var(--border); border-radius:8px;
+    padding:10px 12px; color:var(--text); font-size:14px;
+  }
+  .connect-row input::placeholder { color:#555; }
+  .btn-primary {
+    background: var(--red); border:none; color:#fff;
+    padding: 10px 16px; border-radius:8px; font-size:14px; font-weight:600; cursor:pointer;
+  }
+  .btn-primary:disabled { background:#3a3a3a; color:#777; }
+
+  .video-stage {
+    flex:1;
+    position:relative;
+    background:#000;
+    border-radius:14px;
+    overflow:hidden;
+    min-height: 240px;
+    display:flex; align-items:center; justify-content:center;
+  }
+  #remoteVideo { width:100%; height:100%; object-fit:cover; background:#000; }
+  #remotePlaceholder {
+    position:absolute; color:var(--muted-text); font-size:13px; text-align:center; padding: 0 20px;
+  }
+  #localVideo {
+    position:absolute; bottom:12px; right:12px;
+    width:96px; height:130px; object-fit:cover;
+    border-radius:10px; border:2px solid var(--border);
+    background:#111;
+  }
+  #localOffOverlay {
+    position:absolute; bottom:12px; right:12px;
+    width:96px; height:130px; border-radius:10px;
+    background:#111; border:2px solid var(--border);
+    display:none; align-items:center; justify-content:center;
+    font-size:10px; color:var(--muted-text); text-align:center; padding:4px;
+  }
+
+  .incoming-banner {
+    display:none;
+    background: var(--panel); border:1px solid var(--red);
+    border-radius:12px; padding:12px 14px; align-items:center; justify-content:space-between; gap:10px;
+  }
+  .incoming-banner.show { display:flex; }
+  .incoming-banner .who { font-size:14px; }
+  .incoming-actions { display:flex; gap:8px; }
+  .accept-btn { background:#1f8f4a; border:none; color:#fff; padding:8px 14px; border-radius:8px; cursor:pointer; font-weight:600; }
+  .reject-btn { background:var(--red); border:none; color:#fff; padding:8px 14px; border-radius:8px; cursor:pointer; font-weight:600; }
+
+  .controls {
+    display:flex; justify-content:center; gap:18px; padding: 6px 0 2px;
+  }
+  .ctrl-btn {
+    width:54px; height:54px; border-radius:50%;
+    border:1px solid var(--border); background: var(--panel); color:var(--text);
+    font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+  }
+  .ctrl-btn.off { background: var(--red); border-color: var(--red); }
+  .ctrl-btn.end { background: var(--red); border-color: var(--red); }
+
+  .hint { font-size:11px; color:var(--muted-text); text-align:center; line-height:1.5; }
+  .hint b { color:var(--text); }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Direct<span>Call</span></h1>
+  <div id="status">Loading...</div>
+</header>
+
+<main>
+  <div class="setup-card">
+    <label>Aapki Call ID (doosre ko bhejo)</label>
+    <div class="id-row">
+      <div class="id-box" id="myId">...</div>
+      <button class="icon-btn-small" id="copyBtn" title="Copy">⧉</button>
+      <button class="icon-btn-small" id="shareBtn" title="Share">↗</button>
+    </div>
+    <div class="connect-row">
+      <input id="remoteIdInput" placeholder="Doosre ki Call ID paste karo" />
+      <button class="btn-primary" id="callBtn" disabled>Call</button>
+    </div>
+  </div>
+
+  <div class="incoming-banner" id="incomingBanner">
+    <div class="who">📞 Incoming call...</div>
+    <div class="incoming-actions">
+      <button class="accept-btn" id="acceptBtn">Accept</button>
+      <button class="reject-btn" id="rejectBtn">Reject</button>
+    </div>
+  </div>
+
+  <div class="video-stage">
+    <div id="remotePlaceholder">Connect hone ka wait kar rahe hain...</div>
+    <video id="remoteVideo" autoplay playsinline></video>
+    <video id="localVideo" autoplay playsinline muted></video>
+    <div id="localOffOverlay">Camera Off</div>
+  </div>
+
+  <div class="controls">
+    <button class="ctrl-btn" id="muteBtn" title="Mute/Unmute">🎤</button>
+    <button class="ctrl-btn end" id="endBtn" title="End Call">📞</button>
+    <button class="ctrl-btn" id="camBtn" title="Camera On/Off">📷</button>
+  </div>
+
+  <div class="hint">Dono devices par yeh page kholo (HTTPS link). Ek <b>Call ID copy/share</b> kare, doosra paste karke <b>Call</b> dabaye.</div>
+</main>
+
+<script>
+let peer, localStream, currentCall, incomingCallObj = null;
+let isMuted = false, isCamOff = false;
+
+const myIdEl = document.getElementById('myId');
+const statusEl = document.getElementById('status');
+const callBtn = document.getElementById('callBtn');
+const remoteIdInput = document.getElementById('remoteIdInput');
+const remoteVideo = document.getElementById('remoteVideo');
+const localVideo = document.getElementById('localVideo');
+const remotePlaceholder = document.getElementById('remotePlaceholder');
+const incomingBanner = document.getElementById('incomingBanner');
+const muteBtn = document.getElementById('muteBtn');
+const camBtn = document.getElementById('camBtn');
+const endBtn = document.getElementById('endBtn');
+const localOffOverlay = document.getElementById('localOffOverlay');
+const copyBtn = document.getElementById('copyBtn');
+const shareBtn = document.getElementById('shareBtn');
+
+function setStatus(text, cls){
+  statusEl.textContent = text;
+  statusEl.className = cls || '';
+}
+
+async function init(){
+  try {
+    localStream = await navigator.mediaDevices.getUserMedia({ video:true, audio:true });
+    localVideo.srcObject = localStream;
+  } catch(e){
+    setStatus('Camera/Mic blocked', '');
+    alert('Camera ya microphone access nahi mila. Browser permission allow karo aur page reload karo. (HTTPS link se kholna zaroori hai)');
+    return;
+  }
+
+  peer = new Peer();
+
+  peer.on('open', id => {
+    myIdEl.textContent = id;
+    callBtn.disabled = false;
+    setStatus('Ready', 'live');
+  });
+
+  peer.on('call', call => {
+    incomingCallObj = call;
+    incomingBanner.classList.add('show');
+  });
+
+  peer.on('error', err => {
+    console.error(err);
+    setStatus('Error', '');
+  });
+
+  peer.on('disconnected', () => {
+    setStatus('Reconnecting...', 'connecting');
+    peer.reconnect();
+  });
+}
+
+function attachCallEvents(call){
+  currentCall = call;
+  setStatus('Connecting...', 'connecting');
+
+  call.on('stream', remoteStream => {
+    remoteVideo.srcObject = remoteStream;
+    remotePlaceholder.style.display = 'none';
+    setStatus('Connected', 'live');
+  });
+
+  call.on('close', endCallUI);
+  call.on('error', endCallUI);
+}
+
+function endCallUI(){
+  remoteVideo.srcObject = null;
+  remotePlaceholder.style.display = 'block';
+  currentCall = null;
+  setStatus('Ready', 'live');
+}
+
+callBtn.addEventListener('click', () => {
+  const remoteId = remoteIdInput.value.trim();
+  if(!remoteId) return;
+  const call = peer.call(remoteId, localStream);
+  attachCallEvents(call);
+});
+
+document.getElementById('acceptBtn').addEventListener('click', () => {
+  incomingBanner.classList.remove('show');
+  incomingCallObj.answer(localStream);
+  attachCallEvents(incomingCallObj);
+});
+
+document.getElementById('rejectBtn').addEventListener('click', () => {
+  incomingBanner.classList.remove('show');
+  if(incomingCallObj) incomingCallObj.close();
+  incomingCallObj = null;
+});
+
+endBtn.addEventListener('click', () => {
+  if(currentCall) currentCall.close();
+  endCallUI();
+});
+
+muteBtn.addEventListener('click', () => {
+  isMuted = !isMuted;
+  localStream.getAudioTracks().forEach(t => t.enabled = !isMuted);
+  muteBtn.textContent = isMuted ? '🔇' : '🎤';
+  muteBtn.classList.toggle('off', isMuted);
+});
+
+camBtn.addEventListener('click', () => {
+  isCamOff = !isCamOff;
+  localStream.getVideoTracks().forEach(t => t.enabled = !isCamOff);
+  camBtn.textContent = isCamOff ? '📵' : '📷';
+  camBtn.classList.toggle('off', isCamOff);
+  localOffOverlay.style.display = isCamOff ? 'flex' : 'none';
+  localVideo.style.display = isCamOff ? 'none' : 'block';
+});
+
+copyBtn.addEventListener('click', () => {
+  navigator.clipboard.writeText(myIdEl.textContent).then(()=>{
+    copyBtn.textContent = '✓';
+    setTimeout(()=> copyBtn.textContent = '⧉', 1200);
+  });
+});
+
+shareBtn.addEventListener('click', () => {
+  const id = myIdEl.textContent;
+  const text = `Mera Video Call ID: ${id}`;
+  if(navigator.share){
+    navigator.share({ text }).catch(()=>{});
+  } else {
+    window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+  }
+});
+
+init();
+</script>
+
+</body>
+</html>

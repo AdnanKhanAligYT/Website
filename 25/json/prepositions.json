@@ -1,0 +1,47 @@
+[
+  {
+    "title": "Prepositions",
+    "icon": "fas fa-map-signs",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> Prepositions are words that show the relationship of a noun or pronoun to another word, indicating position, direction, time, or manner.<br><strong>Hindi:</strong> Sambandh suchak shabd wo shabd hote hain jo sangya ya sarvanam ka doosre shabd ke saath sambandh darshate hain, sthan, disha, samay, ya tareeka batate hain.</p><p>They link elements in a sentence to clarify relationships.<br>Ye vakya ke tatvon ko jodkar sambandh spasht karte hain.</p><div class='popup-example'><strong>Example:</strong> The book is <strong>on</strong> the table.<br><strong>Hindi:</strong> Kitaab <strong>mez par</strong> hai.</div>"
+  },
+  {
+    "title": "Types of Prepositions",
+    "icon": "fas fa-list-ul",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> Prepositions are categorized by their function: time, place, direction, manner, and others.<br><strong>Hindi:</strong> Sambandh suchak shabd apne karya ke adhaar par vibhajit hote hain: samay, sthan, disha, tareeka, aur anya.</p><h3>Main Types</h3><ul><li><strong>Time:</strong> Indicate when something happens (e.g., at, on, in).</li><li><strong>Place:</strong> Show location or position (e.g., in, on, at).</li><li><strong>Direction:</strong> Indicate movement or destination (e.g., to, towards, into).</li><li><strong>Manner:</strong> Show how something is done (e.g., with, by).</li><li><strong>Other:</strong> Indicate cause, purpose, or association (e.g., for, of).</li></ul><div class='popup-example'><strong>Example:</strong> She arrived <strong>at</strong> noon (time), sits <strong>on</strong> the chair (place), and walked <strong>to</strong> the park (direction).<br><strong>Hindi:</strong> Woh dopahar <strong>mein</strong> aayi (samay), kursi <strong>par</strong> baithi (sthan), aur park <strong>tak</strong> chali (disha).</div>"
+  },
+  {
+    "title": "Prepositions of Time",
+    "icon": "fas fa-clock",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Prepositions of time indicate when something happens, such as specific times, days, or periods.<br><strong>Hindi:</strong> Samay ke sambandh suchak shabd batate hain ki koi ghatna kab hoti hai, jaise vishesh samay, din, ya avadhi.</p><h3>Common Prepositions</h3><ul><li><strong>At:</strong> Specific times (e.g., at 5 p.m.).</li><li><strong>On:</strong> Days or dates (e.g., on Monday).</li><li><strong>In:</strong> Longer periods (e.g., in January, in 2023).</li></ul><div class='popup-example'><strong>Example:</strong> We meet <strong>at</strong> midnight <strong>on</strong> Friday <strong>in</strong> summer.<br><strong>Hindi:</strong> Hum <strong>mein</strong> adhi raat <strong>ko</strong> Shukravaar <strong>par</strong> garmi <strong>mein</strong> milte hain.</div>"
+  },
+  {
+    "title": "Prepositions of Place",
+    "icon": "fas fa-map-marker-alt",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Prepositions of place show where something is located or positioned.<br><strong>Hindi:</strong> Sthan ke sambandh suchak shabd batate hain ki koi cheez kahan sthit hai ya rakhi hai.</p><h3>Common Prepositions</h3><ul><li><strong>At:</strong> Specific points (e.g., at the door).</li><li><strong>On:</strong> Surfaces or public transport (e.g., on the table).</li><li><strong>In:</strong> Enclosed spaces or larger areas (e.g., in the room).</li></ul><div class='popup-example'><strong>Example:</strong> The cat is <strong>in</strong> the box, <strong>on</strong> the mat, or <strong>at</strong> the window.<br><strong>Hindi:</strong> Billi <strong>mein</strong> dibbe <strong>mein</strong>, <strong>par</strong> chatai <strong>par</strong>, ya khidki <strong>ke paas</strong> hai.</div>"
+  },
+  {
+    "title": "Prepositions of Direction",
+    "icon": "fas fa-arrow-right",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Prepositions of direction indicate movement toward a place or destination.<br><strong>Hindi:</strong> Disha ke sambandh suchak shabd kisi sthan ya gantavya ki taraf gati darshate hain.</p><h3>Common Prepositions</h3><ul><li><strong>To:</strong> Toward a destination (e.g., to school).</li><li><strong>Towards:</strong> In the direction of (e.g., towards the park).</li><li><strong>Into:</strong> Movement inside (e.g., into the house).</li></ul><div class='popup-example'><strong>Example:</strong> She walked <strong>to</strong> the store and ran <strong>towards</strong> the park.<br><strong>Hindi:</strong> Woh dukaan <strong>tak</strong> chali aur park <strong>ki or</strong> daudi.</div>"
+  },
+  {
+    "title": "Prepositions of Manner",
+    "icon": "fas fa-running",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Prepositions of manner show how an action is performed.<br><strong>Hindi:</strong> Tareeke ke sambandh suchak shabd batate hain ki koi karya kaise kiya gaya.</p><h3>Common Prepositions</h3><ul><li><strong>With:</strong> Using a tool or manner (e.g., with a pen).</li><li><strong>By:</strong> Method or means (e.g., by car).</li></ul><div class='popup-example'><strong>Example:</strong> He wrote <strong>with</strong> a pencil <strong>by</strong> hand.<br><strong>Hindi:</strong> Usne pencil <strong>se</strong> haath <strong>se</strong> likha.</div>"
+  },
+  {
+    "title": "Other Prepositions",
+    "icon": "fas fa-ellipsis-h",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Prepositions like 'for,' 'of,' 'about,' and 'from' indicate purpose, possession, topic, or origin.<br><strong>Hindi:</strong> Sambandh suchak shabd jaise 'ke liye,' 'ka,' 'ke bare mein,' aur 'se' uddeshya, swaamitva, vishay, ya utpatti darshate hain.</p><div class='popup-example'><strong>Example:</strong> This gift is <strong>for</strong> you, <strong>from</strong> John, <strong>about</strong> love.<br><strong>Hindi:</strong> Yeh uphaar <strong>ke liye</strong> tumhare, John <strong>se</strong>, pyar <strong>ke bare mein</strong> hai.</div>"
+  },
+  {
+    "title": "Prepositional Phrases",
+    "icon": "fas fa-layer-group",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> A prepositional phrase consists of a preposition, its object, and any modifiers, acting as an adjective or adverb.<br><strong>Hindi:</strong> Sambandh suchak vakyansh mein ek sambandh suchak shabd, uska karma, aur koi sanshodhak hote hain, jo visheshan ya kriya visheshan ke roop mein kaam karte hain.</p><h3>Use</h3><p>Provides additional details about time, place, or manner.<br>Samay, sthan, ya tareeke ke bare mein atirikt jankari deta hai.</p><div class='popup-example'><strong>Example:</strong> She sat <strong>on the wooden bench</strong>.<br><strong>Hindi:</strong> Woh <strong>lakdi ki bench par</strong> baithi.</div>"
+  },
+  {
+    "title": "Common Challenges with Prepositions",
+    "icon": "fas fa-exclamation-triangle",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> Prepositions can be tricky due to exceptions and context-specific usage (e.g., 'in' vs. 'on' for time/place). Some verbs require specific prepositions.<br><strong>Hindi:</strong> Sambandh suchak shabd mushkil ho sakte hain kyunki unke apvad aur sandarbh-vishesh prayog hote hain (jaise, 'mein' banam 'par'). Kuch kriyayen vishesh sambandh suchak mangti hain.</p><div class='popup-example'><strong>Example:</strong> Depend <strong>on</strong> (not 'in'). Arrive <strong>at</strong> a place, but <strong>in</strong> a city.<br><strong>Hindi:</strong> Nirbhar <strong>par</strong> (nahi 'mein'). Sthan <strong>par</strong> pahunchna, lekin shehar <strong>mein</strong>.</div>"
+  }
+]

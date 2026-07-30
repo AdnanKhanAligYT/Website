@@ -1,0 +1,1605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saiema Mansoor Public School - Syllabus Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 10px;
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            animation: float 20s linear infinite;
+            opacity: 0.3;
+        }
+        
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(-40px, -40px) rotate(360deg); }
+        }
+        
+        .logo-container {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border: 4px solid #a855f7;
+        }
+        
+        .school-logo {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            font-weight: 800;
+            text-shadow: 0 3px 5px rgba(0, 0, 0, 0.3);
+            letter-spacing: -0.5px;
+        }
+        
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.4;
+        }
+        
+        .syllabus-title {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 10px 20px;
+            border-radius: 40px;
+            display: inline-flex;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Controls Section */
+        .controls-section {
+            padding: 20px 15px;
+            background: white;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        .filters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .filter-group label {
+            font-weight: 600;
+            color: #4f46e5;
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .filter-select {
+            padding: 12px 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            background: white;
+            color: #6b7280;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%234f46e5' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 15px center;
+            background-size: 14px;
+            padding-right: 40px;
+        }
+        
+        .filter-select:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        
+        .filter-select:hover {
+            border-color: #a855f7;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            box-shadow: 0 3px 10px rgba(79, 70, 229, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #4b5563;
+            border: 1px solid #d1d5db;
+        }
+        
+        .btn-secondary:hover {
+            background: #e5e7eb;
+            transform: translateY(-3px);
+        }
+        
+        /* Syllabus Container */
+        .syllabus-container {
+            padding: 20px 15px;
+            background: #f9fafb;
+            min-height: 400px;
+        }
+        
+        .chapter-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .chapter-card {
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+        }
+        
+        .chapter-card:hover {
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+            transform: translateY(-2px);
+        }
+        
+        .chapter-header {
+            padding: 18px 20px;
+            background: white;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #1f2937;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .chapter-header:hover {
+            background: #f8fafc;
+        }
+        
+        .chapter-header::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .chapter-header:hover::after {
+            transform: scaleX(1);
+        }
+        
+        .chapter-title {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
+            flex: 1;
+        }
+        
+        @media (min-width: 481px) {
+            .chapter-title {
+                flex-direction: row;
+                align-items: center;
+                gap: 15px;
+            }
+        }
+        
+        .class-badge {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            min-width: 60px;
+            text-align: center;
+            white-space: nowrap;
+        }
+        
+        .chapter-name {
+            flex: 1;
+            word-break: break-word;
+        }
+        
+        .toggle-icon {
+            color: #4f46e5;
+            font-size: 1.1rem;
+            transition: transform 0.3s ease;
+            min-width: 20px;
+        }
+        
+        .chapter-content {
+            display: none;
+            padding: 20px;
+            background: #f8fafc;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .chapter-content.active {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .syllabus-items {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .syllabus-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .syllabus-item-header {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+        
+        @media (min-width: 481px) {
+            .syllabus-item-header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+        
+        .subject-badge {
+            background: #10b981;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .exam-badge {
+            background: #f59e0b;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 16px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .syllabus-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+        
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .detail-label {
+            font-size: 0.8rem;
+            color: #6b7280;
+            font-weight: 500;
+        }
+        
+        .detail-value {
+            font-size: 0.95rem;
+            color: #1f2937;
+            font-weight: 600;
+            word-break: break-word;
+        }
+        
+        .resource-links {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        @media (min-width: 481px) {
+            .resource-links {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+        }
+        
+        .resource-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            background: #f8fafc;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #4b5563;
+            font-weight: 500;
+            font-size: 0.85rem;
+            border: 1px solid #e5e7eb;
+            transition: all 0.3s ease;
+            text-align: center;
+            justify-content: center;
+            flex: 1;
+            min-width: 0;
+        }
+        
+        @media (min-width: 481px) {
+            .resource-link {
+                flex: 0 1 auto;
+                min-width: 140px;
+            }
+        }
+        
+        .resource-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .resource-link.pdf {
+            background: #fef2f2;
+            color: #dc2626;
+            border-color: #fecaca;
+        }
+        
+        .resource-link.pdf:hover {
+            background: #fee2e2;
+        }
+        
+        .resource-link.youtube {
+            background: #fef2f2;
+            color: #dc2626;
+            border-color: #fecaca;
+        }
+        
+        .resource-link.youtube:hover {
+            background: #fee2e2;
+        }
+        
+        .resource-link i {
+            font-size: 1rem;
+        }
+        
+        .links-container {
+            margin-top: 15px;
+        }
+        
+        .links-section {
+            margin-bottom: 15px;
+        }
+        
+        .links-section h4 {
+            font-size: 0.9rem;
+            color: #4b5563;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        @media (min-width: 481px) {
+            .links-list {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+        }
+        
+        .link-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 10px;
+            background: #f3f4f6;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #374151;
+            font-size: 0.8rem;
+            transition: all 0.2s ease;
+            flex: 1;
+            justify-content: center;
+        }
+        
+        @media (min-width: 481px) {
+            .link-item {
+                flex: 0 1 auto;
+            }
+        }
+        
+        .link-item:hover {
+            background: #e5e7eb;
+            transform: translateY(-1px);
+        }
+        
+        .link-item i {
+            font-size: 0.85rem;
+        }
+        
+        .exercise-section {
+            background: #f0f9ff;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            border-left: 4px solid #10b981;
+        }
+        
+        .exercise-title {
+            font-weight: 600;
+            color: #0369a1;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+        }
+        
+        .exercise-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .exercise-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            padding: 6px 0;
+            border-bottom: 1px dashed #cbd5e1;
+        }
+        
+        @media (min-width: 481px) {
+            .exercise-item {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
+        
+        .exercise-item:last-child {
+            border-bottom: none;
+        }
+        
+        /* Loading State */
+        .loading-container {
+            text-align: center;
+            padding: 50px 15px;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e5e7eb;
+            border-top-color: #4f46e5;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading-container h3 {
+            color: #4b5563;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .loading-container p {
+            font-size: 0.9rem;
+        }
+        
+        /* Error State */
+        .error-container {
+            text-align: center;
+            padding: 50px 15px;
+            background: #fef2f2;
+            border-radius: 14px;
+            border: 1px solid #fecaca;
+        }
+        
+        .error-container h3 {
+            color: #dc2626;
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+        
+        .error-container p {
+            font-size: 0.9rem;
+        }
+        
+        /* Empty State */
+        .empty-container {
+            text-align: center;
+            padding: 50px 15px;
+            background: #f8fafc;
+            border-radius: 14px;
+            border: 2px dashed #cbd5e1;
+        }
+        
+        .empty-container h3 {
+            color: #4b5563;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+        
+        .empty-container p {
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #1f2937;
+            color: white;
+            padding: 25px 15px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .footer p {
+            margin-bottom: 12px;
+            color: #d1d5db;
+            line-height: 1.5;
+            font-size: 0.9rem;
+        }
+        
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+            align-items: center;
+        }
+        
+        @media (min-width: 481px) {
+            .contact-info {
+                flex-direction: row;
+                justify-content: center;
+                gap: 25px;
+            }
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #cbd5e1;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .contact-item:hover {
+            color: white;
+        }
+        
+        .copyright {
+            margin-top: 25px;
+            padding-top: 15px;
+            border-top: 1px solid #374151;
+            color: #9ca3af;
+            font-size: 0.85rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.7rem;
+            }
+            
+            .syllabus-title {
+                font-size: 1.1rem;
+                padding: 8px 16px;
+            }
+            
+            .syllabus-details {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            body {
+                padding: 20px;
+            }
+            
+            .header {
+                padding: 30px 40px;
+            }
+            
+            .header h1 {
+                font-size: 2.8rem;
+                margin-bottom: 10px;
+            }
+            
+            .header p {
+                font-size: 1.2rem;
+            }
+            
+            .logo-container {
+                width: 100px;
+                height: 100px;
+                margin-bottom: 20px;
+            }
+            
+            .school-logo {
+                width: 70px;
+                height: 70px;
+            }
+            
+            .syllabus-title {
+                font-size: 1.5rem;
+                padding: 12px 30px;
+                margin-top: 20px;
+            }
+            
+            .controls-section {
+                padding: 30px 40px;
+            }
+            
+            .filters-grid {
+                gap: 20px;
+                margin-bottom: 25px;
+            }
+            
+            .filter-group label {
+                font-size: 1rem;
+            }
+            
+            .filter-select {
+                padding: 14px 18px;
+                font-size: 1rem;
+                padding-right: 45px;
+            }
+            
+            .syllabus-container {
+                padding: 30px 40px;
+            }
+            
+            .chapter-grid {
+                gap: 20px;
+            }
+            
+            .chapter-card {
+                border-radius: 16px;
+            }
+            
+            .chapter-header {
+                padding: 22px 30px;
+                font-size: 1.2rem;
+            }
+            
+            .chapter-content {
+                padding: 30px;
+            }
+            
+            .syllabus-items {
+                gap: 20px;
+            }
+            
+            .syllabus-item {
+                padding: 20px;
+            }
+            
+            .resource-links {
+                gap: 15px;
+            }
+            
+            .resource-link {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+            
+            .footer {
+                padding: 30px 40px;
+            }
+        }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            
+            .main-container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+            
+            .action-buttons,
+            .btn,
+            .toggle-icon,
+            .resource-links,
+            .link-item {
+                display: none !important;
+            }
+            
+            .chapter-content {
+                display: block !important;
+            }
+            
+            .chapter-header {
+                border-bottom: 2px solid #4f46e5;
+            }
+            
+            .footer {
+                background: white;
+                color: black;
+                border-top: 2px solid #4f46e5;
+            }
+            
+            .contact-item {
+                color: black;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo-container">
+                <img src="images/smps_logo.jpg" alt="School Logo" class="school-logo">
+            </div>
+            <h1>Saiema Mansoor Public School</h1>
+            <p>Excellence in Education </p>
+            <div class="syllabus-title">
+                <i class="fas fa-book-open"></i>
+                Exam Syllabus Portal
+            </div>
+        </div>
+
+        <!-- Controls Section -->
+        <div class="controls-section">
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <label for="classFilter">
+                        <i class="fas fa-graduation-cap"></i>
+                        Class:
+                    </label>
+                    <select id="classFilter" class="filter-select" onchange="applyFilters()">
+                        <option value="">-- All Classes --</option>
+                        <!-- Will be populated by JavaScript -->
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="subjectFilter">
+                        <i class="fas fa-book"></i>
+                        Subject:
+                    </label>
+                    <select id="subjectFilter" class="filter-select" onchange="applyFilters()">
+                        <option value="">-- All Subjects --</option>
+                        <!-- Will be populated by JavaScript -->
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="examFilter">
+                        <i class="fas fa-file-alt"></i>
+                        Exam:
+                    </label>
+                    <select id="examFilter" class="filter-select" onchange="applyFilters()">
+                        <option value="">-- All Exams --</option>
+                        <!-- Will be populated by JavaScript -->
+                    </select>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button class="btn btn-secondary" onclick="downloadPDF()">
+                    <i class="fas fa-download"></i>
+                    Download PDF
+                </button>
+                <button class="btn btn-secondary" onclick="clearFilters()">
+                    <i class="fas fa-times"></i>
+                    Clear Filters
+                </button>
+            </div>
+        </div>
+
+        <!-- Syllabus Container -->
+        <div class="syllabus-container">
+            <div id="syllabusContent" class="chapter-grid">
+                <div class="loading-container">
+                    <div class="spinner"></div>
+                    <h3>Loading Syllabus Data...</h3>
+                    <p>Please wait while we fetch the latest syllabus information</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <div class="footer-content">
+                <p>© 2023 Saiema Mansoor Public School. All Rights Reserved.</p>
+                <p>This syllabus portal provides comprehensive exam preparation materials for students and teachers.</p>
+                
+                <div class="contact-info">
+                    <a href="https://maps.google.com/?q=Main Campus, Education City, Mumbai" class="contact-item" target="_blank">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Main Campus, Education City, Mumbai</span>
+                    </a>
+                    <a href="tel:+917275126421" class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>+91 72751 26421</span>
+                    </a>
+                    <a href="mailto:info@smps.edu.in" class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>info@smps.edu.in</span>
+                    </a>
+                </div>
+                
+                <div class="copyright">
+                    Designed for academic excellence and efficient learning
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // API Configuration
+        const API_URL = "https://opensheet.elk.sh/1FUpqRyVWcQZGK8bPuXEd12f-4xU7h6M9VUHlG4rMlnw/Syllabus";
+        let syllabusData = [];
+        let groupedChapters = {};
+
+        // Initialize on page load
+        window.onload = function() {
+            loadSyllabusData();
+        };
+
+        // Apply filters automatically when any dropdown changes
+        function applyFilters() {
+            renderSyllabus();
+        }
+
+        // Load syllabus data from API
+        async function loadSyllabusData() {
+            try {
+                const response = await fetch(API_URL);
+                if (!response.ok) throw new Error('Failed to fetch data');
+                
+                const data = await response.json();
+                
+                // Filter out invalid rows (ignore Chapter_Number column)
+                syllabusData = data.filter(row => 
+                    row.Chapter_Name && row.Chapter_Name.trim() !== '' &&
+                    row.Class && row.Class.trim() !== '' &&
+                    row.Subject && row.Subject.trim() !== ''
+                );
+                
+                // Sort by date (newest first)
+                syllabusData.sort((a, b) => {
+                    const dateA = new Date(a.Date || 0);
+                    const dateB = new Date(b.Date || 0);
+                    return dateB - dateA;
+                });
+                
+                initializeFilters();
+                groupChaptersByClass();
+                renderSyllabus(); // Show all data initially
+                
+            } catch (error) {
+                console.error('Error loading syllabus data:', error);
+                showErrorState();
+            }
+        }
+
+        // Initialize filter dropdowns
+        function initializeFilters() {
+            const classFilter = document.getElementById('classFilter');
+            const subjectFilter = document.getElementById('subjectFilter');
+            const examFilter = document.getElementById('examFilter');
+            
+            // Clear existing options except the first one
+            while (classFilter.options.length > 1) classFilter.remove(1);
+            while (subjectFilter.options.length > 1) subjectFilter.remove(1);
+            while (examFilter.options.length > 1) examFilter.remove(1);
+            
+            // Get unique classes and sort them
+            const classes = [...new Set(syllabusData.map(row => row.Class))];
+            const classOrder = ['12th', '11th', '10th', '9th', '8th', '7th', '6th', '5th', '4th', '3rd', '2nd', '1st', 'UKG', 'LKG', 'PLAYWAY'];
+            
+            classes.sort((a, b) => {
+                const indexA = classOrder.indexOf(a);
+                const indexB = classOrder.indexOf(b);
+                if (indexA === -1 && indexB === -1) return 0;
+                if (indexA === -1) return 1;
+                if (indexB === -1) return -1;
+                return indexA - indexB;
+            });
+            
+            // Populate class filter
+            classes.forEach(className => {
+                if (className && className.trim() !== '') {
+                    const option = document.createElement('option');
+                    option.value = className;
+                    option.textContent = className;
+                    classFilter.appendChild(option);
+                }
+            });
+            
+            // Get unique subjects
+            const subjects = [...new Set(syllabusData.map(row => row.Subject))].filter(s => s && s.trim() !== '');
+            subjects.sort();
+            subjects.forEach(subject => {
+                const option = document.createElement('option');
+                option.value = subject;
+                option.textContent = subject;
+                subjectFilter.appendChild(option);
+            });
+            
+            // Get unique exams from data
+            const exams = [...new Set(syllabusData.map(row => row.Exam))].filter(exam => exam && exam.trim() !== '');
+            exams.sort();
+            exams.forEach(exam => {
+                const option = document.createElement('option');
+                option.value = exam;
+                option.textContent = exam;
+                examFilter.appendChild(option);
+            });
+        }
+
+        // Group chapters by class and name
+        function groupChaptersByClass() {
+            groupedChapters = {};
+            
+            syllabusData.forEach(row => {
+                const key = `${row.Class}||${row.Chapter_Name}`;
+                
+                if (!groupedChapters[key]) {
+                    groupedChapters[key] = [];
+                }
+                
+                groupedChapters[key].push(row);
+            });
+        }
+
+        // Render syllabus based on filters
+        function renderSyllabus() {
+            const classFilter = document.getElementById('classFilter').value;
+            const subjectFilter = document.getElementById('subjectFilter').value;
+            const examFilter = document.getElementById('examFilter').value;
+            const container = document.getElementById('syllabusContent');
+            
+            // Clear container
+            container.innerHTML = '';
+            
+            // If no data yet
+            if (Object.keys(groupedChapters).length === 0) {
+                container.innerHTML = `
+                    <div class="loading-container">
+                        <div class="spinner"></div>
+                        <h3>Loading Syllabus Data...</h3>
+                        <p>Please wait while we fetch the latest syllabus information</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            let hasMatchingChapters = false;
+            let chaptersHTML = '';
+            
+            // Iterate through grouped chapters
+            Object.keys(groupedChapters).forEach(key => {
+                const [className, chapterName] = key.split('||');
+                const rows = groupedChapters[key];
+                
+                // Apply filters cumulatively
+                let filteredRows = rows;
+                
+                // Filter by class if selected
+                if (classFilter) {
+                    filteredRows = filteredRows.filter(row => row.Class === classFilter);
+                }
+                
+                // Filter by subject if selected
+                if (subjectFilter) {
+                    filteredRows = filteredRows.filter(row => row.Subject === subjectFilter);
+                }
+                
+                // Filter by exam if selected
+                if (examFilter) {
+                    filteredRows = filteredRows.filter(row => row.Exam === examFilter);
+                }
+                
+                if (filteredRows.length === 0) return;
+                
+                hasMatchingChapters = true;
+                
+                // Generate chapter HTML
+                chaptersHTML += `
+                    <div class="chapter-card">
+                        <div class="chapter-header" onclick="toggleChapter(this)">
+                            <div class="chapter-title">
+                                <span class="class-badge">${className}</span>
+                                <span class="chapter-name">${chapterName}</span>
+                            </div>
+                            <span class="toggle-icon">▼</span>
+                        </div>
+                        <div class="chapter-content">
+                            <div class="syllabus-items">
+                                ${filteredRows.map(row => renderSyllabusItem(row)).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // Show appropriate message
+            if (!hasMatchingChapters) {
+                container.innerHTML = `
+                    <div class="empty-container">
+                        <i class="fas fa-search" style="font-size: 2.5rem; color: #9ca3af; margin-bottom: 15px;"></i>
+                        <h3>No Matching Chapters Found</h3>
+                        <p>Try adjusting your filters or select different criteria.</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = chaptersHTML;
+            }
+        }
+
+        // Helper function to parse and clean links
+        function parseLinks(linksString) {
+            if (!linksString) return [];
+            
+            // Split by semicolon and clean up
+            const links = linksString.split(';')
+                .map(link => link.trim())
+                .filter(link => link && link !== '')
+                .filter(link => {
+                    // Remove common unwanted patterns
+                    const unwantedPatterns = [
+                        'NOT GIVEN',
+                        'NOT GIVEN YET',
+                        'NOT PROVIDED',
+                        'NA',
+                        'N/A',
+                        'NULL',
+                        'TBA',
+                        'TBD',
+                        'COMING SOON'
+                    ];
+                    return !unwantedPatterns.some(pattern => 
+                        link.toUpperCase().includes(pattern)
+                    );
+                });
+            
+            return links;
+        }
+
+        // Render individual syllabus item
+        function renderSyllabusItem(row) {
+            const exercise = row.Exercise || '';
+            const qFrom = row.Q_From || '';
+            const qTo = row.Q_To || '';
+            const filesLinks = row.Files_Links || '';
+            const ytLinks = row.YT_Links || '';
+            
+            // Parse links
+            const pdfLinks = parseLinks(filesLinks);
+            const youtubeLinks = parseLinks(ytLinks);
+            
+            // Generate exercise HTML
+            let exerciseHTML = '';
+            
+            if (exercise && exercise.includes(';')) {
+                // Multiple exercises
+                const exercises = exercise.split(';').map(e => e.trim()).filter(e => e);
+                const qFromArray = qFrom.split(';').map(q => q.trim()).filter(q => q);
+                const qToArray = qTo.split(';').map(q => q.trim()).filter(q => q);
+                
+                exerciseHTML = '<div class="exercise-section">';
+                exerciseHTML += '<div class="exercise-title"><i class="fas fa-list-check"></i> Exercises</div>';
+                exerciseHTML += '<div class="exercise-list">';
+                
+                exercises.forEach((ex, index) => {
+                    const fromQ = qFromArray[index] || '';
+                    const toQ = qToArray[index] || '';
+                    
+                    if (fromQ && toQ) {
+                        exerciseHTML += `
+                            <div class="exercise-item">
+                                <span>Exercise ${ex} (Questions ${fromQ}-${toQ})</span>
+                            </div>
+                        `;
+                    } else if (fromQ) {
+                        exerciseHTML += `
+                            <div class="exercise-item">
+                                <span>Exercise ${ex} (Question ${fromQ})</span>
+                            </div>
+                        `;
+                    } else {
+                        exerciseHTML += `
+                            <div class="exercise-item">
+                                <span>Exercise ${ex}</span>
+                            </div>
+                        `;
+                    }
+                });
+                
+                exerciseHTML += '</div></div>';
+            } else if (exercise) {
+                // Single exercise
+                let exerciseText = `Exercise ${exercise}`;
+                if (qFrom && qTo) {
+                    exerciseText += ` (Questions ${qFrom}-${qTo})`;
+                } else if (qFrom) {
+                    exerciseText += ` (Question ${qFrom})`;
+                }
+                
+                exerciseHTML = `
+                    <div class="exercise-section">
+                        <div class="exercise-title"><i class="fas fa-list-check"></i> Exercise</div>
+                        <div class="exercise-list">
+                            <div class="exercise-item">
+                                <span>${exerciseText}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            // Generate resource links HTML (ALWAYS show all links)
+            let resourcesHTML = '';
+            let hasPDF = pdfLinks.length > 0;
+            let hasYouTube = youtubeLinks.length > 0;
+            
+            if (hasPDF || hasYouTube) {
+                resourcesHTML = '<div class="links-container">';
+                
+                // PDF Links
+                if (hasPDF) {
+                    resourcesHTML += `
+                        <div class="links-section">
+                            <h4><i class="fas fa-file-pdf"></i> Study Materials</h4>
+                            <div class="links-list">
+                    `;
+                    
+                    pdfLinks.forEach((link, index) => {
+                        let displayText = `Material ${index + 1}`;
+                        // Try to extract a better display text from URL
+                        if (link.includes('/')) {
+                            const parts = link.split('/');
+                            const lastPart = parts[parts.length - 1];
+                            if (lastPart && lastPart.includes('.')) {
+                                displayText = lastPart.split('.')[0].replace(/_/g, ' ').replace(/-/g, ' ');
+                                if (displayText.length > 30) {
+                                    displayText = displayText.substring(0, 30) + '...';
+                                }
+                            }
+                        }
+                        
+                        resourcesHTML += `
+                            <a href="${link}" target="_blank" class="link-item">
+                                <i class="fas fa-external-link-alt"></i>
+                                ${displayText}
+                            </a>
+                        `;
+                    });
+                    
+                    resourcesHTML += '</div></div>';
+                }
+                
+                // YouTube Links
+                if (hasYouTube) {
+                    resourcesHTML += `
+                        <div class="links-section">
+                            <h4><i class="fab fa-youtube"></i> Video Lessons</h4>
+                            <div class="links-list">
+                    `;
+                    
+                    youtubeLinks.forEach((link, index) => {
+                        let displayText = `Video ${index + 1}`;
+                        // Try to extract video title or ID from YouTube URL
+                        if (link.includes('youtu.be/')) {
+                            const videoId = link.split('youtu.be/')[1];
+                            displayText = `Video (${videoId.substring(0, 8)}...)`;
+                        } else if (link.includes('youtube.com/watch?v=')) {
+                            const videoId = link.split('v=')[1]?.split('&')[0];
+                            displayText = `Video (${videoId?.substring(0, 8) || 'Watch'}...)`;
+                        }
+                        
+                        resourcesHTML += `
+                            <a href="${link}" target="_blank" class="link-item">
+                                <i class="fas fa-external-link-alt"></i>
+                                ${displayText}
+                            </a>
+                        `;
+                    });
+                    
+                    resourcesHTML += '</div></div>';
+                }
+                
+                resourcesHTML += '</div>';
+            }
+            
+            // Generate quick resource buttons (always shown)
+            let quickResourcesHTML = '';
+            if (hasPDF || hasYouTube) {
+                quickResourcesHTML = '<div class="resource-links">';
+                
+                if (hasPDF) {
+                    quickResourcesHTML += `
+                        <a href="${pdfLinks[0]}" target="_blank" class="resource-link pdf">
+                            <i class="fas fa-file-pdf"></i>
+                            View Study Material
+                        </a>
+                    `;
+                }
+                
+                if (hasYouTube) {
+                    quickResourcesHTML += `
+                        <a href="${youtubeLinks[0]}" target="_blank" class="resource-link youtube">
+                            <i class="fab fa-youtube"></i>
+                            Watch Video Lesson
+                        </a>
+                    `;
+                }
+                
+                quickResourcesHTML += '</div>';
+            }
+            
+            return `
+                <div class="syllabus-item">
+                    <div class="syllabus-item-header">
+                        <span class="subject-badge">${row.Subject || 'N/A'}</span>
+                        <span class="exam-badge">${row.Exam || 'N/A'}</span>
+                    </div>
+                    
+                    <div class="syllabus-details">
+                        ${row.Marks_Weightage && row.Marks_Weightage.trim() !== '' ? `
+                        <div class="detail-item">
+                            <span class="detail-label">Marks Weightage</span>
+                            <span class="detail-value">${row.Marks_Weightage}</span>
+                        </div>
+                        ` : ''}
+                        ${row.Important_Topic && row.Important_Topic.trim() !== '' ? `
+                        <div class="detail-item">
+                            <span class="detail-label">Important Topics</span>
+                            <span class="detail-value">${row.Important_Topic}</span>
+                        </div>
+                        ` : ''}
+                    </div>
+                    
+                    ${quickResourcesHTML}
+                    ${resourcesHTML}
+                    ${exerciseHTML}
+                </div>
+            `;
+        }
+
+        // Toggle chapter expansion
+        function toggleChapter(element) {
+            const content = element.nextElementSibling;
+            const icon = element.querySelector('.toggle-icon');
+            
+            if (content.classList.contains('active')) {
+                content.classList.remove('active');
+                icon.textContent = '▼';
+            } else {
+                content.classList.add('active');
+                icon.textContent = '▲';
+            }
+        }
+
+        // Download PDF without empty cells and with exercises in one line
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF('p', 'mm', 'a4');
+            
+            // School Header
+            doc.setFontSize(22);
+            doc.setTextColor(79, 70, 229);
+            doc.setFont('helvetica', 'bold');
+            doc.text("Saiema Mansoor Public School", 105, 20, { align: 'center' });
+            
+            doc.setFontSize(16);
+            doc.setTextColor(0, 0, 0);
+            doc.setFont('helvetica', 'normal');
+            doc.text("Exam Syllabus Report", 105, 30, { align: 'center' });
+            
+            // Filter Information
+            const classFilter = document.getElementById('classFilter').value;
+            const subjectFilter = document.getElementById('subjectFilter').value;
+            const examFilter = document.getElementById('examFilter').value;
+            
+            let filterText = 'Showing: ';
+            if (classFilter) filterText += `Class ${classFilter} `;
+            if (subjectFilter) filterText += `Subject ${subjectFilter} `;
+            if (examFilter) filterText += `Exam ${examFilter}`;
+            
+            doc.setFontSize(10);
+            doc.setTextColor(100, 100, 100);
+            doc.text(filterText, 105, 38, { align: 'center' });
+            
+            // Generation Date
+            doc.text(`Generated on: ${new Date().toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            })}`, 105, 44, { align: 'center' });
+            
+            // Add syllabus content
+            let yPosition = 60;
+            const pageWidth = doc.internal.pageSize.width;
+            const margin = 20;
+            const contentWidth = pageWidth - 2 * margin;
+            
+            doc.setFontSize(12);
+            doc.setTextColor(0, 0, 0);
+            doc.setFont('helvetica', 'bold');
+            
+            // Get visible chapters
+            const chapters = document.querySelectorAll('.chapter-card');
+            
+            if (chapters.length === 0) {
+                doc.setFontSize(14);
+                doc.setTextColor(150, 150, 150);
+                doc.text("No syllabus data to export", 105, 100, { align: 'center' });
+                doc.save("SMPS_Syllabus_Export.pdf");
+                return;
+            }
+            
+            chapters.forEach((chapter, index) => {
+                // Check if we need a new page
+                if (yPosition > 270) {
+                    doc.addPage();
+                    yPosition = 20;
+                }
+                
+                const header = chapter.querySelector('.chapter-header');
+                const className = header.querySelector('.class-badge').textContent;
+                const chapterName = header.querySelector('.chapter-name').textContent;
+                
+                // Add chapter title
+                doc.setFontSize(14);
+                doc.setTextColor(79, 70, 229);
+                doc.text(`${className} - ${chapterName}`, margin, yPosition);
+                yPosition += 10;
+                
+                // Get syllabus items
+                const syllabusItems = chapter.querySelectorAll('.syllabus-item');
+                
+                syllabusItems.forEach(item => {
+                    if (yPosition > 270) {
+                        doc.addPage();
+                        yPosition = 20;
+                    }
+                    
+                    const subject = item.querySelector('.subject-badge').textContent;
+                    const exam = item.querySelector('.exam-badge').textContent;
+                    
+                    // Add subject and exam
+                    doc.setFontSize(11);
+                    doc.setTextColor(0, 0, 0);
+                    doc.setFont('helvetica', 'bold');
+                    doc.text(`Subject: ${subject}`, margin, yPosition);
+                    doc.text(`Exam: ${exam}`, margin + 80, yPosition);
+                    yPosition += 8;
+                    
+                    // Add details (only if they have values)
+                    const details = item.querySelectorAll('.detail-item');
+                    details.forEach(detail => {
+                        const label = detail.querySelector('.detail-label').textContent;
+                        const value = detail.querySelector('.detail-value').textContent;
+                        
+                        // Skip empty values
+                        if (value === 'N/A' || value.trim() === '') return;
+                        
+                        if (yPosition > 270) {
+                            doc.addPage();
+                            yPosition = 20;
+                        }
+                        
+                        doc.setFontSize(10);
+                        doc.setFont('helvetica', 'normal');
+                        doc.text(`${label}: ${value}`, margin, yPosition);
+                        yPosition += 6;
+                    });
+                    
+                    // Add exercises if present
+                    const exerciseSection = item.querySelector('.exercise-section');
+                    if (exerciseSection) {
+                        if (yPosition > 270) {
+                            doc.addPage();
+                            yPosition = 20;
+                        }
+                        
+                        doc.setFontSize(10);
+                        doc.setFont('helvetica', 'bold');
+                        doc.text('Exercises:', margin, yPosition);
+                        yPosition += 6;
+                        
+                        const exercises = exerciseSection.querySelectorAll('.exercise-item');
+                        exercises.forEach(exercise => {
+                            if (yPosition > 270) {
+                                doc.addPage();
+                                yPosition = 20;
+                            }
+                            
+                            const text = exercise.textContent.trim();
+                            doc.setFontSize(9);
+                            doc.setFont('helvetica', 'normal');
+                            doc.text(`• ${text}`, margin + 5, yPosition);
+                            yPosition += 5;
+                        });
+                    }
+                    
+                    yPosition += 10;
+                });
+                
+                yPosition += 5;
+            });
+            
+            // Add page numbers
+            const totalPages = doc.internal.getNumberOfPages();
+            for (let i = 1; i <= totalPages; i++) {
+                doc.setPage(i);
+                doc.setFontSize(8);
+                doc.setTextColor(150, 150, 150);
+                doc.text(`Page ${i} of ${totalPages}`, pageWidth - margin, 290, { align: 'right' });
+            }
+            
+            // Save PDF
+            const classText = classFilter ? `_${classFilter}` : '';
+            const subjectText = subjectFilter ? `_${subjectFilter}` : '';
+            const examText = examFilter ? `_${examFilter}` : '';
+            const fileName = `SMPS_Syllabus${classText}${subjectText}${examText}_${new Date().toISOString().slice(0, 10)}.pdf`;
+            doc.save(fileName);
+        }
+
+        // Clear all filters
+        function clearFilters() {
+            document.getElementById('classFilter').value = "";
+            document.getElementById('subjectFilter').value = "";
+            document.getElementById('examFilter').value = "";
+            renderSyllabus();
+        }
+
+        // Show error state
+        function showErrorState() {
+            const container = document.getElementById('syllabusContent');
+            container.innerHTML = `
+                <div class="error-container">
+                    <i class="fas fa-exclamation-triangle" style="font-size: 2.5rem; color: #dc2626; margin-bottom: 15px;"></i>
+                    <h3>Error Loading Syllabus Data</h3>
+                    <p>Unable to connect to the syllabus database. Please try again later or contact support.</p>
+                    <button class="btn btn-primary" onclick="loadSyllabusData()" style="margin-top: 20px;">
+                        <i class="fas fa-sync-alt"></i> Retry Loading
+                    </button>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activities - Saiema Mansoor Public School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* School Header */
+        .school-header {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            text-align: center;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .school-header img {
+            height: 60px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .school-header img:hover {
+            transform: scale(1.1);
+        }
+
+        .school-header span {
+            color: #1a237e;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .page-title {
+            color: white;
+            font-size: 36px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .page-subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 18px;
+        }
+
+        /* Filters Section */
+        .filters-section {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        .filters-title {
+            color: #1a237e;
+            margin-bottom: 20px;
+            font-size: 22px;
+            text-align: center;
+        }
+
+        .class-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .class-btn {
+            background: #f0f2ff;
+            border: 2px solid #667eea;
+            color: #1a237e;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            min-width: 100px;
+        }
+
+        .class-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .class-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+
+        /* Activities Grid */
+        .activities-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .section-title {
+            color: #1a237e;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .activity-count {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 14px;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .activity-card {
+            background: #f8f9ff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e0e4ff;
+            cursor: pointer;
+        }
+
+        .activity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-color: #667eea;
+        }
+
+        .activity-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+        }
+
+        .activity-class {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .activity-class i {
+            font-size: 12px;
+        }
+
+        .activity-date {
+            font-size: 12px;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .activity-body {
+            padding: 20px;
+        }
+
+        .activity-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #1a237e;
+            margin-bottom: 15px;
+            min-height: 50px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .activity-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .activity-link:hover {
+            background: linear-gradient(135deg, #3d8b40 0%, #1b5e20 100%);
+            transform: translateY(-2px);
+        }
+
+        .activity-link i {
+            font-size: 16px;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            text-align: center;
+            padding: 50px;
+            grid-column: 1 / -1;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* No Results */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            grid-column: 1 / -1;
+        }
+
+        .no-results-icon {
+            font-size: 60px;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        .no-results-text {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .no-results-subtext {
+            color: #999;
+            font-size: 14px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(3px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 25px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            right: 15px;
+            top: 10px;
+            font-size: 28px;
+            font-weight: bold;
+            color: #999;
+            cursor: pointer;
+            transition: color 0.3s;
+            z-index: 1001;
+        }
+
+        .close-btn:hover {
+            color: #333;
+        }
+
+        .modal-title {
+            color: #1a237e;
+            font-size: 22px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #667eea;
+            padding-right: 30px;
+        }
+
+        /* Video Player */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .activity-detail {
+            margin-bottom: 15px;
+        }
+
+        .activity-detail-label {
+            font-weight: bold;
+            color: #1a237e;
+            margin-bottom: 5px;
+        }
+
+        .activity-detail-value {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .open-link-btn {
+            background: linear-gradient(135deg, #4CAF50 0%, #2E7D32 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            width: 100%;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .open-link-btn:hover {
+            background: linear-gradient(135deg, #3d8b40 0%, #1b5e20 100%);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            padding: 15px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            body { padding: 10px; }
+            .school-header { padding: 15px; flex-direction: column; }
+            .school-header img { height: 50px; }
+            .school-header span { font-size: 18px; }
+            .page-title { font-size: 28px; }
+            .class-btn { padding: 8px 16px; font-size: 14px; }
+            .activities-grid { grid-template-columns: 1fr; }
+            .section-title { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- School Header -->
+        <div class="school-header">
+            <img src="images/smps_logo.jpg" alt="SMPS Logo" onclick="window.location.href='index.html'">
+            <span>Saiema Mansoor Public School, Parsara Hathras</span>
+        </div>
+
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">School Activities</h1>
+            <p class="page-subtitle">View all activities and events by class</p>
+        </div>
+
+        <!-- Filters Section -->
+        <div class="filters-section">
+            <h2 class="filters-title">Select Class</h2>
+            <div class="class-buttons" id="classButtons">
+                <div class="loading-spinner" style="padding: 20px;">
+                    <div class="spinner" style="width: 40px; height: 40px;"></div>
+                    <p>Loading classes...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activities Section -->
+        <div class="activities-section" id="activitiesSection" style="display: none;">
+            <div class="section-header">
+                <h2 class="section-title">
+                    <i class="fas fa-video"></i>
+                    <span id="selectedClassTitle">All Activities</span>
+                </h2>
+                <span class="activity-count" id="activityCount">0 activities</span>
+            </div>
+            <div class="activities-grid" id="activitiesGrid">
+                <div class="loading-spinner">
+                    <div class="spinner"></div>
+                    <p>Loading activities...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activity Detail Modal -->
+        <div id="activityModal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn" onclick="closeModal()">&times;</span>
+                <h2 class="modal-title" id="modalTitle">Activity Details</h2>
+                <div id="modalContent"></div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2023 Saiema Mansoor Public School, Parsara Hathras. All rights reserved.</p>
+            <p>Activities Dashboard</p>
+        </div>
+    </div>
+
+    <script>
+        // ==============================================================
+        //                      CONFIGURATION
+        // ==============================================================
+        const SHEET_URL = "https://opensheet.elk.sh/1KOl4unW-bZvghag-MCBQx36z_aaDlecWpUfIt2anQKE/Activity";
+        
+        // Icons for different classes
+        const CLASS_ICONS = {
+            "PLAYWAY": "fas fa-child",
+            "LKG": "fas fa-smile",
+            "UKG": "fas fa-smile",
+            "1st": "fas fa-star",
+            "2nd": "fas fa-star",
+            "3rd": "fas fa-star",
+            "4th": "fas fa-star",
+            "5th": "fas fa-star",
+            "6th": "fas fa-user-graduate",
+            "7th": "fas fa-user-graduate",
+            "8th": "fas fa-user-graduate",
+            "9th": "fas fa-user-graduate",
+            "10th": "fas fa-user-graduate",
+            "11th": "fas fa-user-graduate",
+            "12th": "fas fa-user-graduate"
+        };
+
+        // Global variables
+        let allActivities = [];
+        let availableClasses = [];
+        let selectedClass = 'all';
+
+        // DOM Elements
+        const classButtons = document.getElementById('classButtons');
+        const activitiesSection = document.getElementById('activitiesSection');
+        const activitiesGrid = document.getElementById('activitiesGrid');
+        const selectedClassTitle = document.getElementById('selectedClassTitle');
+        const activityCount = document.getElementById('activityCount');
+        const activityModal = document.getElementById('activityModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalContent = document.getElementById('modalContent');
+
+        // Modal stack
+        let modalStack = [];
+
+        // ==============================================================
+        //                      UTILITY FUNCTIONS
+        // ==============================================================
+        function openModal(modalElement) {
+            if (modalElement) {
+                modalElement.style.display = 'block';
+                modalStack.push(modalElement);
+            }
+        }
+
+        function closeModal() {
+            if (modalStack.length > 0) {
+                const lastModal = modalStack.pop();
+                lastModal.style.display = 'none';
+            }
+        }
+
+        window.onclick = function(event) {
+            if (modalStack.length > 0) {
+                const topModal = modalStack[modalStack.length - 1];
+                if (event.target === topModal) {
+                    closeModal();
+                }
+            }
+        };
+
+        function formatDate(dateString) {
+            if (!dateString) return "Unknown date";
+            try {
+                const date = new Date(dateString);
+                return date.toLocaleDateString('en-US', { 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                });
+            } catch {
+                return dateString;
+            }
+        }
+
+        function extractYouTubeId(url) {
+            if (!url) return null;
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
+        }
+
+        // ==============================================================
+        //                      DATA LOADING
+        // ==============================================================
+        async function loadActivities() {
+            try {
+                const response = await fetch(SHEET_URL);
+                if (!response.ok) throw new Error('Failed to fetch');
+                const data = await response.json();
+                
+                // Filter out invalid entries
+                allActivities = data.filter(item => 
+                    item.Class && 
+                    item["Activity Name"] && 
+                    item.Link
+                );
+                
+                // Extract unique classes
+                const classesSet = new Set();
+                allActivities.forEach(item => {
+                    if (item.Class) classesSet.add(item.Class.trim());
+                });
+                availableClasses = Array.from(classesSet).sort((a, b) => {
+                    // Custom sort for class order
+                    const order = {
+                        'PLAYWAY': 1, 'LKG': 2, 'UKG': 3,
+                        '1st': 4, '2nd': 5, '3rd': 6, '4th': 7, '5th': 8,
+                        '6th': 9, '7th': 10, '8th': 11, '9th': 12,
+                        '10th': 13, '11th': 14, '12th': 15
+                    };
+                    return (order[a] || 99) - (order[b] || 99);
+                });
+                
+                createClassButtons();
+                showActivities('all');
+            } catch (error) {
+                console.error('Error loading activities:', error);
+                classButtons.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-exclamation-triangle no-results-icon"></i>
+                        <div class="no-results-text">Error loading activities</div>
+                        <div class="no-results-subtext">Please try again later</div>
+                        <button onclick="loadActivities()" style="margin-top:15px; padding:8px 20px; background:#667eea; color:white; border:none; border-radius:5px; cursor:pointer;">
+                            <i class="fas fa-redo"></i> Retry
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        function createClassButtons() {
+            classButtons.innerHTML = '';
+            
+            // Add "All Classes" button
+            const allBtn = document.createElement('button');
+            allBtn.className = 'class-btn' + (selectedClass === 'all' ? ' active' : '');
+            allBtn.innerHTML = '<i class="fas fa-globe"></i> All Classes';
+            allBtn.onclick = () => selectClass('all');
+            classButtons.appendChild(allBtn);
+            
+            // Add buttons for each class
+            availableClasses.forEach(className => {
+                const btn = document.createElement('button');
+                btn.className = 'class-btn' + (selectedClass === className ? ' active' : '');
+                btn.innerHTML = `<i class="${CLASS_ICONS[className] || 'fas fa-school'}"></i> ${className}`;
+                btn.onclick = () => selectClass(className);
+                classButtons.appendChild(btn);
+            });
+        }
+
+        function selectClass(className) {
+            selectedClass = className;
+            
+            // Update active state
+            document.querySelectorAll('.class-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.innerHTML.includes(className === 'all' ? 'All Classes' : className)) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            showActivities(className);
+        }
+
+        function showActivities(className) {
+            let filteredActivities = [];
+            if (className === 'all') {
+                filteredActivities = [...allActivities];
+            } else {
+                filteredActivities = allActivities.filter(item => item.Class === className);
+            }
+            
+            // Sort by date (newest first)
+            filteredActivities.sort((a, b) => {
+                const dateA = a.Date ? new Date(a.Date) : new Date(0);
+                const dateB = b.Date ? new Date(b.Date) : new Date(0);
+                return dateB - dateA;
+            });
+            
+            // Update title and count
+            selectedClassTitle.textContent = className === 'all' ? 'All Activities' : `${className} Activities`;
+            activityCount.textContent = `${filteredActivities.length} ${filteredActivities.length === 1 ? 'activity' : 'activities'}`;
+            
+            // Show section
+            activitiesSection.style.display = 'block';
+            
+            // Display activities
+            displayActivities(filteredActivities);
+        }
+
+        function displayActivities(activities) {
+            if (activities.length === 0) {
+                activitiesGrid.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-video-slash no-results-icon"></i>
+                        <div class="no-results-text">No activities found</div>
+                        <div class="no-results-subtext">Check back later for new activities</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            activitiesGrid.innerHTML = activities.map(activity => {
+                const date = formatDate(activity.Date);
+                const className = activity.Class || 'N/A';
+                const activityName = activity["Activity Name"] || "Unnamed Activity";
+                const link = activity.Link || "#";
+                const videoId = extractYouTubeId(link);
+                
+                return `
+                    <div class="activity-card" onclick="showActivityDetails('${className}', '${activityName.replace(/'/g, "\\'")}', '${date}', '${link}', '${videoId || ''}')">
+                        <div class="activity-header">
+                            <div class="activity-class">
+                                <i class="${CLASS_ICONS[className] || 'fas fa-school'}"></i>
+                                Class ${className}
+                            </div>
+                            <div class="activity-date">
+                                <i class="fas fa-calendar-alt"></i>
+                                ${date}
+                            </div>
+                        </div>
+                        <div class="activity-body">
+                            <div class="activity-name">${activityName}</div>
+                            <a href="${link}" target="_blank" class="activity-link" onclick="event.stopPropagation()">
+                                <i class="fas fa-play"></i> Watch Activity
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function showActivityDetails(className, activityName, date, link, videoId) {
+            modalTitle.textContent = activityName;
+            
+            let videoHtml = '';
+            if (videoId) {
+                videoHtml = `
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/${videoId}" allowfullscreen></iframe>
+                    </div>
+                `;
+            }
+            
+            modalContent.innerHTML = `
+                ${videoHtml}
+                <div class="activity-detail">
+                    <div class="activity-detail-label">Class</div>
+                    <div class="activity-detail-value"><i class="${CLASS_ICONS[className] || 'fas fa-school'}"></i> ${className}</div>
+                </div>
+                <div class="activity-detail">
+                    <div class="activity-detail-label">Date</div>
+                    <div class="activity-detail-value"><i class="fas fa-calendar-alt"></i> ${date}</div>
+                </div>
+                <div class="activity-detail">
+                    <div class="activity-detail-label">Activity Name</div>
+                    <div class="activity-detail-value">${activityName}</div>
+                </div>
+                <div class="activity-detail">
+                    <div class="activity-detail-label">Link</div>
+                    <div class="activity-detail-value" style="word-break: break-all;">${link}</div>
+                </div>
+                <button class="open-link-btn" onclick="window.open('${link}', '_blank')">
+                    <i class="fas fa-external-link-alt"></i> Open in YouTube
+                </button>
+            `;
+            
+            openModal(activityModal);
+        }
+
+        // ==============================================================
+        //                      INITIALIZATION
+        // ==============================================================
+        document.addEventListener('DOMContentLoaded', loadActivities);
+    </script>
+</body>
+</html>

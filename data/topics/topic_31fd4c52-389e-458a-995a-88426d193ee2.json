@@ -1,0 +1,29 @@
+{
+    "id": "31fd4c52-389e-458a-995a-88426d193ee2",
+    "subjectId": "bbba02a2-49b4-4bf6-9b4b-014fa555e3d6",
+    "name": "Question:  By selling 8 items, a shopkeeper makes a profit equal to the selling price of 2 items. What is the profit percentage?  Hindi: 8 वस्तुओं को बेचने पर एक दुकानदार को 2 वस्तुओं के विक्रय मूल्य के बराबर लाभ होता है। दुकानदार का लाभ प्रतिशत कितना है?",
+    "description": "Trick:\n\nमान लो 1 वस्तु का SP = ₹1\n\nतो 8 वस्तुओं का SP = ₹8\n\nProfit = 2 वस्तुओं का SP\n       = ₹2\n\nअब,\n\nCP = SP - Profit\n   = 8 - 2\n   = ₹6\n\nProfit % = (Profit / CP) × 100\n         = (2 / 6) × 100\n         = 33⅓%\n\nAnswer = 33⅓%\n\nYaad Rakhne Ki Line:\n\n\"8 becha, 2 ka profit mila,\nSP se profit ghata diya,\nJo bacha wahi CP hua,\nProfit/CP × 100 kiya,\n33⅓% answer aaya.\"",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "b01e2d17-2c6a-44ce-8cec-c0a652a60815",
+            "date": "2026-06-17",
+            "time": "2026-06-17 18:02",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "cf15e9b5-b5b9-4e2a-b336-4dba201d16ca",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-17 17:47",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

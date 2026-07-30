@@ -1,0 +1,36 @@
+{
+    "id": "77cb8961-70db-40cf-b5a1-e7b68e5f89fb",
+    "subjectId": "38fe1eb2-f38f-4dc6-9e65-8711d6af8f11",
+    "name": "वर्णों की संख्या",
+    "description": "1. स्वर – 13\n\n2. व्यंजन – 33\n\n3. कुल वर्ण – 46\nKamta prasad guru ke anusar 44",
+    "status": "Revision",
+    "completeDate": "2026-06-15",
+    "createdAt": "2026-06-07",
+    "updatedAt": "2026-06-22 04:25:00",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "93cee427-9605-4e78-a8df-31b622f71cf2",
+            "date": "2026-06-15",
+            "time": "2026-06-15 10:07",
+            "note": "Auto: 7 din baad revision scheduled",
+            "type": "auto-revision"
+        },
+        {
+            "id": "e81b5a03-b2da-46d4-998f-5829e984655d",
+            "date": "2026-06-15",
+            "time": "2026-06-15 20:41",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "16aba06f-30e2-4712-bbf5-b4c9c9fd7798",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "links": [],
+    "pdfs": []
+}

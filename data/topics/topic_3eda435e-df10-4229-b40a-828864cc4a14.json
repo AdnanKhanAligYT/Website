@@ -1,0 +1,29 @@
+{
+    "id": "3eda435e-df10-4229-b40a-828864cc4a14",
+    "subjectId": "594ab60f-da93-4cf7-91da-12a1ae3fb73e",
+    "name": "समेकन सिद्धान्त (Consolidation Theory)",
+    "description": "प्रतिपादक (Proponent):\nमूल रूप से गेस्टाल्ट मनोवैज्ञानिकों तथा म्यूलर (Müller) से संबंधित माना जाता है।\n\nमुख्य विचार:\n• सीखने के बाद स्मृति-चिह्न (Memory Trace/Engram) को मस्तिष्क में स्थिर होने के लिए समय चाहिए।\n• इस स्थिरीकरण की प्रक्रिया को समेकन (Consolidation) कहते हैं।\n• यदि सीखने के तुरंत बाद व्यवधान (Interference) आ जाए तो सीखी हुई सामग्री भूलने की संभावना बढ़ जाती है।\n• विश्राम और नींद समेकन में सहायता करते हैं।\n\nCTET/UPTET हेतु एक पंक्ति:\n\"सीखी हुई सामग्री को स्थायी स्मृति में बदलने की प्रक्रिया को समेकन (Consolidation) कहते हैं।\"\n\nट्रिक:\nसीखा + स्थिर = समेकन\n(नींद और विश्राम → स्मृति मजबूत)",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "9456edce-6f03-4424-89eb-c87191384b82",
+            "date": "2026-06-17",
+            "time": "2026-06-17 12:43",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "11492ac5-7fe3-47c5-be4b-1874ec84471c",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-17 12:42",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

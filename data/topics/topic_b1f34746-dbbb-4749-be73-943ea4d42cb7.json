@@ -1,0 +1,36 @@
+{
+    "id": "b1f34746-dbbb-4749-be73-943ea4d42cb7",
+    "subjectId": "38fe1eb2-f38f-4dc6-9e65-8711d6af8f11",
+    "name": "उत्पत्ति के आधार पर स्वर का वर्गीकरण",
+    "description": "उत्पत्ति के आधार पर स्वरों का वर्गीकरण\n\n1. मूल स्वर – अ, इ, उ, ऋ\n\n2. संधि स्वर\n\n   (क) दीर्घ स्वर\n   आ = अ + अ\n   ई = इ + इ\n   ऊ = उ + उ\n\n   (ख) संयुक्त स्वर\n   ए = अ + इ\n   ऐ = अ + ए\n   ओ = अ + उ\n   औ = अ + ओ",
+    "status": "Revision",
+    "completeDate": "2026-06-21",
+    "createdAt": "2026-06-07",
+    "updatedAt": "2026-07-01 08:50:46",
+    "revisionHistory": [
+        {
+            "id": "a279cb26-0813-47a9-a314-cd725e27c418",
+            "date": "2026-06-21",
+            "time": "2026-06-21 01:15:28",
+            "note": "Auto: 7 din baad revision scheduled",
+            "type": "auto-revision"
+        },
+        {
+            "id": "11fd26e1-99a4-44f5-a06d-c22c9e11adec",
+            "date": "2026-06-21",
+            "time": "2026-06-21 09:53:02",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "e96731b0-a6e1-4332-8151-a52a89beb7a0",
+            "date": "2026-07-01",
+            "time": "2026-07-01 08:50:46",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "images": [],
+    "links": [],
+    "pdfs": []
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Question Tags",
+    "icon": "fas fa-question",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> Question tags are short questions added to the end of a statement to confirm or seek agreement, often using an auxiliary verb and pronoun.<br><strong>Hindi:</strong> Question tags chhote prashn hote hain jo vakya ke ant mein jode jate hain taaki pushti ya sahmati maangi jaye, aksar sahayak kriya aur sarvanam ke saath.</p><p>They turn a statement into a question or emphasize agreement.<br>Ye ek vakya ko prashn mein badalte hain ya sahmati par zor dete hain.</p><div class='popup-example'><strong>Example:</strong> She is coming, <strong>isn't she?</strong><br><strong>Hindi:</strong> Woh aa rahi hai, <strong>hai na?</strong></div>"
+  },
+  {
+    "title": "Structure of Question Tags",
+    "icon": "fas fa-cogs",
+    "content": "<h3>Rules</h3><p><strong>English:</strong> A question tag consists of an auxiliary verb (or main verb 'be') and a pronoun matching the subject. If the statement is positive, the tag is negative, and vice versa.<br><strong>Hindi:</strong> Question tag mein sahayak kriya (ya mukhya kriya 'be') aur karta se milta-julta sarvanam hota hai. Agar vakya sakaratmak hai, to tag nakaaratmak hota hai, aur iske vipreet.</p><h3>Structure</h3><p><strong>Auxiliary Verb (opposite polarity) + Subject Pronoun</strong></p><div class='popup-example'><strong>Example:</strong> You are tired, <strong>aren't you?</strong><br><strong>Hindi:</strong> Tum thak gaye ho, <strong>hai na?</strong></div>"
+  },
+  {
+    "title": "Positive Statement with Negative Tag",
+    "icon": "fas fa-plus-minus",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Used when the main statement is positive, expecting confirmation or agreement.<br><strong>Hindi:</strong> Jab mukhya vakya sakaratmak ho, to pushti ya sahmati ke liye prayog hota hai.</p><h3>Structure</h3><p><strong>Positive Statement + Negative Auxiliary + Subject Pronoun</strong></p><div class='popup-example'><strong>Example:</strong> He plays football, <strong>doesn't he?</strong><br><strong>Hindi:</strong> Woh football khelta hai, <strong>hai na?</strong></div>"
+  },
+  {
+    "title": "Negative Statement with Positive Tag",
+    "icon": "fas fa-minus-circle",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Used when the main statement is negative, seeking confirmation or clarification.<br><strong>Hindi:</strong> Jab mukhya vakya nakaaratmak ho, to pushti ya spashtikaran ke liye prayog hota hai.</p><h3>Structure</h3><p><strong>Negative Statement + Positive Auxiliary + Subject Pronoun</strong></p><div class='popup-example'><strong>Example:</strong> She didn't go, <strong>did she?</strong><br><strong>Hindi:</strong> Woh nahi gayi, <strong>gayin na?</strong></div>"
+  },
+  {
+    "title": "Question Tags with Different Tenses",
+    "icon": "fas fa-clock",
+    "content": "<h3>Explanation</h3><p><strong Héctor: The auxiliary verb in the question tag matches the tense and verb of the main statement.<br><strong>Hindi:</strong> Question tag mein sahayak kriya mukhya vakya ke tense aur kriya se milti hai.</p><h3>Examples by Tense</h3><ul><li><strong>Present Simple:</strong> You know him, <strong>don't you?</strong><br>Hindi: Tum use jaante ho, <strong>hai na?</strong></li><li><strong>Past Simple:</strong> They left early, <strong>didn't they?</strong><br>Hindi: Ve jaldi chale gaye, <strong>hai na?</strong></li><li><strong>Present Perfect:</strong> She has finished, <strong>hasn't she?</strong><br>Hindi: Usne kaam pura kar liya, <strong>hai na?</strong></li><li><strong>Future Simple:</strong> He will come, <strong>won't he?</strong><br>Hindi: Woh aayega, <strong>hai na?</strong></li></ul><div class='popup-example'><strong>Example (Present Continuous):</strong> They are studying, <strong>aren't they?</strong><br><strong>Hindi:</strong> Ve padh rahe hain, <strong>hai na?</strong></div>"
+  },
+  {
+    "title": "Special Cases in Question Tags",
+    "icon": "fas fa-star",
+    "content": "<h3>Explanation</h3><p><strong>English:</strong> Some statements require specific tags: 1) 'I am' uses 'aren't I?', 2) Imperatives use 'will you?', 3) 'Let's' uses 'shall we?', 4) No auxiliary in simple present/past uses 'do/does/did'.<br><strong>Hindi:</strong> Kuch vakyas mein vishesh tags lagte hain: 1) 'I am' ke liye 'aren't I?', 2) Aadesh ke liye 'will you?', 3) 'Let's' ke liye 'shall we?', 4) Simple present/past mein bina sahayak kriya ke 'do/does/did' ka prayog.</p><div class='popup-example'><strong>Examples:</strong><ul><li>I am late, <strong>aren't I?</strong><br>Hindi: Main der se hoon, <strong>hai na?</strong></li><li>Open the door, <strong>will you?</strong><br>Hindi: Darwaza kholo, <strong>karoge?</strong></li><li>Let's go, <strong>shall we?</strong><br>Hindi: Chalo, <strong>chalein?</strong></li></ul></div>"
+  },
+  {
+    "title": "Uses of Question Tags",
+    "icon": "fas fa-info-circle",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Question tags are used to: 1) Seek confirmation, 2) Express doubt or surprise, 3) Engage in conversation, 4) Soften statements.<br><strong>Hindi:</strong> Question tags ka prayog hota hai: 1) Pushti mangne ke liye, 2) Sanshay ya ashcharya vyakt karne ke liye, 3) Baat-cheet mein shamil karne ke liye, 4) Vakya ko naram banane ke liye.</p><div class='popup-example'><strong>Example:</strong> You can drive, <strong>can't you?</strong> (Seeking confirmation)<br><strong>Hindi:</strong> Tum car chala sakte ho, <strong>hai na?</strong> (Pushti ke liye)</div>"
+  }
+]

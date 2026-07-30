@@ -1,0 +1,47 @@
+[
+  {
+    "title": "Parts of Speech",
+    "icon": "fas fa-language",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> Parts of speech are the categories of words based on their function in a sentence.<br><strong>Hindi:</strong> Parts of speech shabdon ke wo varg hote hain jo vakya mein unke karya ke adhaar par banaye jate hain.</p><p>There are eight main parts: <strong>Noun, Pronoun, Verb, Adjective, Adverb, Preposition, Conjunction, Interjection</strong>.<br>Aath mukhya prakar hote hain: <strong>Sangya, Sarvanam, Kriya, Visheshan, Kriya Visheshan, Sambandh Suchak, Samuchchay Bodhak, Vismayadibodhak</strong>.</p><div class='popup-example'><strong>Example:</strong> <strong>Wow!</strong> The <strong>cat</strong> <strong>quickly</strong> <strong>jumped</strong> <strong>on</strong> the <strong>table</strong>.<br><strong>Hindi:</strong> <strong>Arre!</strong> <strong>Billi</strong> <strong>jaldi se</strong> <strong>mez par</strong> <strong>koodi</strong>.</div>"
+  },
+  {
+    "title": "Noun",
+    "icon": "fas fa-book",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> A noun is a word that names a person, place, thing, or idea.<br><strong>Hindi:</strong> Sangya ek aisa shabd hai jo kisi vyakti, sthan, vastu, ya vichar ka naam batata hai.</p><h3>Use</h3><p>Used as the subject or object in a sentence.<br>Vakya mein karta ya karma ke roop mein prayog hota hai.</p><div class='popup-example'><strong>Example:</strong> The <strong>dog</strong> barked at the <strong>stranger</strong>.<br><strong>Hindi:</strong> <strong>Kutta</strong> <strong>ajnabi</strong> par bhounka.</div>"
+  },
+  {
+    "title": "Pronoun",
+    "icon": "fas fa-user",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> A pronoun is a word used in place of a noun to avoid repetition.<br><strong>Hindi:</strong> Sarvanam ek aisa shabd hai jo sangya ke sthan par dohraav se bachne ke liye prayog hota hai.</p><h3>Use</h3><p>Replaces nouns to make sentences less repetitive.<br>Sangya ke dohraav ko kam karne ke liye.</p><div class='popup-example'><strong>Example:</strong> <strong>She</strong> is reading <strong>her</strong> book.<br><strong>Hindi:</strong> <strong>Woh</strong> <strong>apni</strong> kitaab padh rahi hai.</div>"
+  },
+  {
+    "title": "Verb",
+    "icon": "fas fa-running",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> A verb expresses an action, occurrence, or state of being.<br><strong>Hindi:</strong> Kriya ek aisa shabd hai jo karya, ghatna, ya sthiti ko vyakt karta hai.</p><h3>Use</h3><p>Shows what the subject does or is.<br>Karta kya karta hai ya kaisa hai yeh batata hai.</p><div class='popup-example'><strong>Example:</strong> They <strong>run</strong> every morning.<br><strong>Hindi:</strong> Ve har subah <strong>daudte</strong> hain.</div>"
+  },
+  {
+    "title": "Adjective",
+    "icon": "fas fa-paint-brush",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> An adjective describes or modifies a noun, indicating its quality, quantity, or extent.<br><strong>Hindi:</strong> Visheshan ek shabd hai jo sangya ka varnan ya sanshodhan karta hai, uski gunvatta, sankhya, ya pariman ko batata hai.</p><h3>Use</h3><p>Adds detail to nouns.<br>Sangya mein vivaran jodta hai.</p><div class='popup-example'><strong>Example:</strong> The <strong>beautiful</strong> garden bloomed.<br><strong>Hindi:</strong> <strong>Sundar</strong> baagh khila.</div>"
+  },
+  {
+    "title": "Adverb",
+    "icon": "fas fa-bolt",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> An adverb modifies a verb, adjective, or another adverb, indicating manner, time, place, or degree.<br><strong>Hindi:</strong> Kriya visheshan ek shabd hai jo kriya, visheshan, ya doosre kriya visheshan ko sanshodhit karta hai, tareeka, samay, sthan, ya pariman batata hai.</p><h3>Use</h3><p>Describes how, when, where, or to what extent an action occurs.<br>Karya kaise, kab, kahan, ya kis had tak hota hai yeh batata hai.</p><div class='popup-example'><strong>Example:</strong> She sings <strong>beautifully</strong>.<br><strong>Hindi:</strong> Woh <strong>sundar roop se</strong> gaati hai.</div>"
+  },
+  {
+    "title": "Preposition",
+    "icon": "fas fa-map-signs",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> A preposition shows the relationship of a noun or pronoun to another word.<br><strong>Hindi:</strong> Sambandh suchak ek shabd hai jo sangya ya sarvanam ka doosre shabd se sambandh batata hai.</p><h3>Use</h3><p>Indicates location, time, or direction.<br>Sthan, samay, ya disha batata hai.</p><div class='popup-example'><strong>Example:</strong> The book is <strong>on</strong> the table.<br><strong>Hindi:</strong> Kitaab <strong>mez par</strong> hai.</div>"
+  },
+  {
+    "title": "Conjunction",
+    "icon": "fas fa-link",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> A conjunction connects words, phrases, or clauses.<br><strong>Hindi:</strong> Samuchchay bodhak ek shabd hai jo shabd, vakyansh, ya vakya ko jodta hai.</p><h3>Use</h3><p>Joins parts of a sentence to show relationships.<br>Vakya ke bhagon ko jodkar sambandh batata hai.</p><div class='popup-example'><strong>Example:</strong> I wanted to go, <strong>but</strong> it was raining.<br><strong>Hindi:</strong> Main jaana chahta tha, <strong>lekin</strong> baarish ho rahi thi.</div>"
+  },
+  {
+    "title": "Interjection",
+    "icon": "fas fa-exclamation",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> An interjection is a word or phrase that expresses sudden emotion or reaction.<br><strong>Hindi:</strong> Vismayadibodhak ek shabd ya vakyansh hai jo achanak bhavna ya prativikriya vyakt karta hai.</p><h3>Use</h3><p>Used to express feelings like surprise, joy, or pain.<br>Bhavna jaise ashcharya, khushi, ya dard vyakt karne ke liye.</p><div class='popup-example'><strong>Example:</strong> <strong>Ouch!</strong> That hurt.<br><strong>Hindi:</strong> <strong>Aah!</strong> Yeh dardnak hai.</div>"
+  }
+]

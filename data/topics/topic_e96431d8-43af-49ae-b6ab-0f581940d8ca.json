@@ -1,0 +1,36 @@
+{
+    "id": "e96431d8-43af-49ae-b6ab-0f581940d8ca",
+    "subjectId": "b07f5264-5928-4d06-8577-46ed17bd59f5",
+    "name": "INTERROGATIVE SENTENCE → Question puchhna",
+    "description": "1. What is your name?\n2. Where do you live?\n3. Are you ready?\n4. Why are you late?\n5. Did she complete her homework?\n6. When will the train arrive?\n7. Can you help me?\n8. Who broke the window?\n9. How old are you?\n10. Is he your brother?\n11. What are you doing now?\n12. Have they reached home?\n13. Which book do you want?\n14. Why is the baby crying?\n15. Do you like tea?\n16. Shall we go outside?\n17. Who is standing at the door?\n18. Was the movie interesting?\n19. How can I solve this question?\n20. Did you attend the meeting?",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "createdAt": "2026-06-08 18:43",
+    "updatedAt": "2026-06-22 04:25:00",
+    "revisionHistory": [
+        {
+            "id": "7c01a93e-002c-4ff7-97d1-67b362f3a78f",
+            "date": "2026-06-15",
+            "time": "2026-06-15 10:06",
+            "note": "Auto: 7 din baad revision scheduled",
+            "type": "auto-revision"
+        },
+        {
+            "id": "38582b38-de28-4087-85e2-0a594a776913",
+            "date": "2026-06-17",
+            "time": "2026-06-17 09:03",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "0db2e799-6619-4825-ab00-5a4c72072bcd",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "links": [],
+    "pdfs": []
+}

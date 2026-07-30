@@ -1,0 +1,29 @@
+{
+    "id": "c78b124f-5264-420c-bdd0-8ad2f0b8f664",
+    "subjectId": "bbba02a2-49b4-4bf6-9b4b-014fa555e3d6",
+    "name": "Parallelogram Area Formula",
+    "description": "Area = Base × Height\n\nA = b × h",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "dd039a42-c0b4-4986-9052-6268c2b65c12",
+            "date": "2026-06-17",
+            "time": "2026-06-17 18:23",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "8235442f-572c-44f3-bf36-c16afd296af9",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-17 18:16",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

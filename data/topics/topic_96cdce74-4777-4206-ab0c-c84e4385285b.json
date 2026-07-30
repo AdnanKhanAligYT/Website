@@ -1,0 +1,29 @@
+{
+    "id": "96cdce74-4777-4206-ab0c-c84e4385285b",
+    "subjectId": "594ab60f-da93-4cf7-91da-12a1ae3fb73e",
+    "name": "अभिप्रेरणा चक्र (Motivation Cycle)",
+    "description": "📚 अभिप्रेरणा चक्र (Motivation Cycle)\n\nआवश्यकता (Need)\n      ↓\nचालक / प्रणोद (Drive)\n      ↓\nउद्दीपन / प्रोत्साहन (Incentive)\n      ↓\nलक्ष्य प्राप्ति\n      ↓\nसंतुष्टि\n\n💡 ट्रिक :\n\"आवश्यकता से चालक,\nचालक से उद्दीपन\"\n\nया\n\n\"आ-चा-उ\"\n(आवश्यकता → चालक → उद्दीपन)\n\n━━━━━━━━━━━━━━━━━━\n\nQ. अभिप्रेरणा चक्र का सही क्रम क्या है?\nAns. आवश्यकता → चालक → उद्दीपन\n\nQ. चालक (Drive) का जन्म मुख्य रूप से किससे होता है?\nAns. आवश्यकता से\n\nQ. भूख किसका उदाहरण है?\nAns. चालक (Drive)\n\nQ. भोजन किसका उदाहरण है?\nAns. उद्दीपन (Incentive)",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "cb1a017c-1625-40a5-9ec7-5338200afa41",
+            "date": "2026-06-17",
+            "time": "2026-06-17 22:42",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "8477bf43-b3bd-40b7-8256-e2e1bb9f21d8",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-17 21:15",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

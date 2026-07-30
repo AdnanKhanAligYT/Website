@@ -1,0 +1,36 @@
+{
+    "id": "a80c451b-9393-4fb1-aeec-528465dc12f7",
+    "subjectId": "b07f5264-5928-4d06-8577-46ed17bd59f5",
+    "name": "ASSERTIVE / DECLARATIVE SENTENCE → Statement / Information dena",
+    "description": "1. He is my best friend.\n2. I live in Lucknow.\n3. She studies in class ten.\n4. The sun rises in the east.\n5. We play cricket every evening.\n6. My father works in an office.\n7. They are watching television.\n8. The train arrived on time.\n9. I like Mathematics.\n10. The baby is sleeping.\n11. Birds fly in the sky.\n12. Rahul completed his homework.\n13. The shop is closed today.\n14. Water boils at 100°C.\n15. My sister sings beautifully.\n16. The teacher explained the lesson clearly.\n17. We visited Delhi last year.\n18. The students are preparing for exams.\n19. Honesty is the best policy.\n20. The flowers smell sweet.",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "createdAt": "2026-06-08 18:42",
+    "updatedAt": "2026-06-22 04:25:00",
+    "revisionHistory": [
+        {
+            "id": "e9718882-0216-4e43-a086-7c56ff6ba224",
+            "date": "2026-06-15",
+            "time": "2026-06-15 10:06",
+            "note": "Auto: 7 din baad revision scheduled",
+            "type": "auto-revision"
+        },
+        {
+            "id": "f27ac41b-03fd-43e7-9de9-72255c50aa61",
+            "date": "2026-06-17",
+            "time": "2026-06-17 09:03",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "39be0220-b5d5-47f5-b1ef-590d3e8d2429",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "links": [],
+    "pdfs": []
+}

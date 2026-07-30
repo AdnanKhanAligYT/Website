@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Test: Grammar Proficiency",
+    "icon": "fas fa-pen-alt",
+    "content": "<h3>Section A: Parts of Speech</h3><p>Identify the part of speech for the underlined word: 'She quickly ran to the store.'</p><p>Options: a) noun b) verb c) adverb d) adjective</p><div class='popup-answer'><strong>Answer:</strong> c) adverb</div>"
+  },
+  {
+    "title": "Test: Reading Comprehension",
+    "icon": "fas fa-book",
+    "content": "<h3>Section B: Read & Answer</h3><p>Read the short paragraph and answer: What is the main idea?</p><p>Answer: The paragraph explains the importance of daily reading habits for language improvement.</p><div class='popup-answer'><strong>Answer:</strong> Daily reading aids language improvement.</div>"
+  },
+  {
+    "title": "Test: Vocabulary in Context",
+    "icon": "fas fa-language",
+    "content": "<h3>Section C: Contextual Meaning</h3><p>Choose the best meaning for the word in context: 'dominant' in the sentence: 'The dominant theme of the novel is resilience.'</p><ul><li>a) weak</li><li>b) controlling</li><li>c) secondary</li><li>d) dominant</li></ul><div class='popup-answer'><strong>Answer:</strong> d) dominant</div>"
+  },
+  {
+    "title": "Test: Writing Skill",
+    "icon": "fas fa-writing",
+    "content": "<h3>Section D: Short Essay</h3><p>Write 120–150 words on: 'My favorite hobby and why it helps me learn English.'</p><div class='popup-answer'><strong>Guideline:</strong> Include introduction, two body points, and a conclusion. Check grammar and vocabulary usage.</div>"
+  }
+]

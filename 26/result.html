@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMPS Student Portal</title>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- jsPDF Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-blue: #1e40af;
+            --secondary-blue: #3b82f6;
+            --light-blue: #60a5fa;
+            --very-light-blue: #dbeafe;
+            --white: #ffffff;
+            --light-gray: #f8fafc;
+            --dark-gray: #64748b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --border-radius: 12px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            min-height: 100vh;
+            color: #1e293b;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        .app-header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px 20px;
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            border-radius: var(--border-radius);
+            color: var(--white);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #60a5fa, #93c5fd, #60a5fa);
+        }
+
+        .app-header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .app-header h2 {
+            font-size: 1.3rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        /* Portal Card */
+        .portal-card {
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 40px;
+            max-width: 500px;
+            margin: 0 auto 40px;
+            position: relative;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.3s ease;
+        }
+
+        .portal-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .portal-card-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .portal-icon {
+            margin-bottom: 25px;
+        }
+
+        .portal-icon img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 5px solid var(--very-light-blue);
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+        }
+
+        .portal-card h3 {
+            font-size: 1.8rem;
+            color: var(--primary-blue);
+            margin-bottom: 10px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .portal-card p {
+            color: var(--dark-gray);
+            margin-bottom: 30px;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        /* Input Groups */
+        .input-group {
+            width: 100%;
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary-blue);
+            font-size: 0.95rem;
+        }
+
+        .input-group > div {
+            position: relative;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-blue);
+            font-size: 1.1rem;
+        }
+
+        .input-group select,
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: 'Poppins', sans-serif;
+            transition: all 0.3s;
+            background: var(--white);
+            color: #1e293b;
+        }
+
+        .input-group select:focus,
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--secondary-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .input-group select {
+            appearance: none;
+            cursor: pointer;
+        }
+
+        /* Primary Button */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            margin-top: 10px;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 4px 6px rgba(30, 64, 175, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(30, 64, 175, 0.25);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        /* Footer Note */
+        .footer-note {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 25px;
+            padding: 15px;
+            background: var(--very-light-blue);
+            border-radius: 8px;
+            width: 100%;
+            font-size: 0.9rem;
+            color: var(--primary-blue);
+        }
+
+        .footer-note i {
+            font-size: 1.2rem;
+        }
+
+        /* Result/Profile Screens */
+        .result-screen,
+        .profile-card {
+            display: none;
+            background: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 30px;
+            margin-bottom: 40px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .back-btn,
+        .download-pdf-btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .back-btn {
+            background: var(--very-light-blue);
+            color: var(--primary-blue);
+            border: 1px solid var(--light-blue);
+        }
+
+        .back-btn:hover {
+            background: var(--light-blue);
+            color: white;
+        }
+
+        .download-pdf-btn {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 6px rgba(30, 64, 175, 0.2);
+        }
+
+        .download-pdf-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(30, 64, 175, 0.25);
+        }
+
+        /* Result Content */
+        .result-header-content {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .result-header-content h1 {
+            color: var(--primary-blue);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            margin: 15px 0 5px;
+        }
+
+        .result-header-content h2 {
+            color: var(--dark-gray);
+            font-size: 1.2rem;
+            font-weight: 400;
+        }
+
+        .result-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid var(--very-light-blue);
+            object-fit: cover;
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.2);
+        }
+
+        .student-info {
+            background: var(--very-light-blue);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .student-info p {
+            margin-bottom: 0;
+            color: #1e293b;
+        }
+
+        .student-info b {
+            color: var(--primary-blue);
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            color: var(--primary-blue);
+            font-weight: 600;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Table Styles */
+        .table-container {
+            overflow-x: auto;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .marks-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+        }
+
+        .marks-table th {
+            background: var(--primary-blue);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .marks-table td {
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+            color: #1e293b;
+        }
+
+        .marks-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        .marks-table tr:hover {
+            background: var(--very-light-blue);
+        }
+
+        /* Percentage Classes */
+        .excellent {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .good {
+            color: var(--secondary-blue);
+            font-weight: 600;
+        }
+
+        .average {
+            color: var(--warning);
+            font-weight: 600;
+        }
+
+        .poor {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        /* Topper Section */
+        .topper {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 30px;
+            color: #854d0e;
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: 1px solid #fbbf24;
+        }
+
+        .topper i {
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+
+        /* Preboard Link */
+        .preboard-link {
+            color: var(--primary-blue);
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .preboard-link:hover {
+            color: var(--secondary-blue);
+        }
+
+        /* Loading Spinner */
+        .loading {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            z-index: 9999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid var(--very-light-blue);
+            border-top: 5px solid var(--primary-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading p {
+            color: var(--primary-blue);
+            font-size: 1.2rem;
+            font-weight: 500;
+        }
+
+        /* Alert Styles */
+        .alert {
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            animation: slideIn 0.3s ease;
+            font-weight: 500;
+        }
+
+        .alert-warning {
+            background: #fef3c7;
+            color: #92400e;
+            border: 1px solid #fbbf24;
+        }
+
+        .alert-error {
+            background: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #f87171;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: var(--dark-gray);
+            font-size: 0.9rem;
+            margin-top: 40px;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .app-header h1 {
+                font-size: 2rem;
+            }
+            
+            .app-header h2 {
+                font-size: 1.1rem;
+            }
+            
+            .portal-card {
+                padding: 30px 20px;
+            }
+            
+            .result-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: stretch;
+            }
+            
+            .back-btn,
+            .download-pdf-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .marks-table th,
+            .marks-table td {
+                padding: 10px 8px;
+                font-size: 0.9rem;
+            }
+            
+            .student-info {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .app-header {
+                padding: 20px 15px;
+            }
+            
+            .app-header h1 {
+                font-size: 1.7rem;
+            }
+            
+            .portal-icon img {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="app-header">
+            <h1>Saiema Mansoor Public School</h1>
+            <h2>Student Portal - Academic Results & Preboard Marks</h2>
+        </header>
+        
+        <!-- Main Portal Card -->
+        <div class="portal-card" id="mainPortal">
+            <div class="portal-card-inner">
+                <div class="portal-icon">
+                    <img src="https://adnansmps.free.nf/wp-content/uploads/2026/03/smps_logo.jpg" alt="SMPS Logo" id="schoolLogo" onerror="this.src='https://via.placeholder.com/120x120/1e40af/ffffff?text=SMPS'">
+                </div>
+                <h3>Student Portal</h3>
+                <p>View your academic results and preboard marks</p>
+                
+                <div class="input-group">
+                    <label for="portalType">Select Portal Type</label>
+                    <div style="position: relative;">
+                        <i class="fas fa-list"></i>
+                        <select id="portalType">
+                            <option value="1to12">Result 1st to 12th</option>
+                            <option value="preboard">Preboard Marks (10th & 12th)</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="admInput">Admission Number</label>
+                    <div style="position: relative;">
+                        <i class="fas fa-id-card"></i>
+                        <input type="text" id="admInput" placeholder="Enter Admission Number" autocomplete="off">
+                    </div>
+                </div>
+                
+                <!-- Session input field removed as per requirement -->
+                
+                <button id="proceedBtn" class="btn-primary">
+                    <i class="fas fa-arrow-right"></i> Proceed
+                </button>
+                
+                <div class="footer-note">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Please enter your admission number carefully</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Result Screen for 1st to 12th -->
+        <div class="result-screen" id="resultScreen1to12">
+            <div class="result-container">
+                <div class="result-header">
+                    <button class="back-btn" id="backFromResult1to12">
+                        <i class="fas fa-arrow-left"></i> Back to Portal
+                    </button>
+                    <button class="download-pdf-btn" id="downloadResultPdfBtn">
+                        <i class="fas fa-download"></i> Download Result PDF
+                    </button>
+                </div>
+                <div class="result-content" id="resultArea1to12">
+                    <!-- Result content will be loaded here -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- Preboard Screen -->
+        <div class="result-screen" id="preboardScreen">
+            <div class="result-header">
+                <button class="back-btn" id="backFromPreboard">
+                    <i class="fas fa-arrow-left"></i> Back to Portal
+                </button>
+                <button class="download-pdf-btn" id="downloadPreboardPdfBtn">
+                    <i class="fas fa-download"></i> Download Preboard PDF
+                </button>
+            </div>
+            <div class="result-content" id="preboardArea">
+                <!-- Preboard content will be loaded here -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Fetching your information...</p>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 Saiema Mansoor Public School. All rights reserved.</p>
+    </div>
+
+    <script>
+        // ===== GLOBAL VARIABLES =====
+        const BASE_SPREADSHEET_ID = '1KOl4unW-bZvghag-MCBQx36z_aaDlecWpUfIt2anQKE'; // Using the provided ID
+        const SHEET_PREFIX = `https://opensheet.elk.sh/${BASE_SPREADSHEET_ID}`; // Base URL without sheet name
+        
+        let currentStudentData = null; // Will hold { name, admissionNo, class, allRecords[], groupedSubjects }
+        let currentResultType = null;
+        let topperData = null;
+        let marksDataForPDF = null; // For 1to12 PDF
+        let preboardMarksData = null; // For preboard PDF
+
+        // ===== HELPER: Get session from date string (m/d/yyyy) =====
+        function getSessionFromDate(dateStr) {
+            if (!dateStr) return null;
+            // Parse m/d/yyyy
+            const parts = dateStr.split('/');
+            if (parts.length !== 3) return null;
+            const month = parseInt(parts[0], 10);
+            const day = parseInt(parts[1], 10);
+            const year = parseInt(parts[2], 10);
+            
+            if (isNaN(month) || isNaN(day) || isNaN(year)) return null;
+            
+            // Create date object (month is 0-indexed in JS)
+            const date = new Date(year, month - 1, day);
+            if (isNaN(date.getTime())) return null;
+            
+            const y = date.getFullYear();
+            const m = date.getMonth() + 1; // 1-12
+            
+            // Session runs April 1 to March 31
+            if (m >= 4) { // April to December
+                return `${y}-${(y+1).toString().slice(-2)}`;
+            } else { // January to March
+                return `${y-1}-${y.toString().slice(-2)}`;
+            }
+        }
+
+        // ===== INITIALIZATION =====
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set up event listeners
+            document.getElementById('backFromResult1to12').onclick = () => {
+                document.getElementById('resultScreen1to12').style.display = 'none';
+                document.getElementById('mainPortal').style.display = 'block';
+            };
+            
+            document.getElementById('backFromPreboard').onclick = () => {
+                document.getElementById('preboardScreen').style.display = 'none';
+                document.getElementById('mainPortal').style.display = 'block';
+            };
+            
+            // Main portal functionality
+            document.getElementById('proceedBtn').onclick = fetchData;
+            
+            // PDF download buttons
+            document.getElementById('downloadResultPdfBtn').onclick = downloadResultPDF;
+            document.getElementById('downloadPreboardPdfBtn').onclick = downloadPreboardPDF;
+            
+            // Enable pressing Enter key to submit
+            document.getElementById('admInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') fetchData();
+            });
+            
+            // Session input removed, no listener needed
+        });
+
+        // ===== MAIN FETCH FUNCTION =====
+        async function fetchData() {
+            const portalType = document.getElementById('portalType').value;
+            const adm = document.getElementById('admInput').value.trim();
+            
+            if (!adm) {
+                showAlert('Please enter Admission No.', 'warning');
+                return;
+            }
+            
+            // Show loading spinner
+            document.getElementById('loading').style.display = 'flex';
+            
+            try {
+                currentResultType = portalType;
+                
+                if (portalType === '1to12') {
+                    await fetchResult1to12(adm);
+                } else if (portalType === 'preboard') {
+                    await fetchPreboardMarks(adm);
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                showAlert('Failed to fetch data. Please try again later.', 'error');
+            } finally {
+                // Hide loading spinner
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+
+        // ===== FETCH AND PROCESS 1to12 RESULT =====
+        async function fetchResult1to12(adm) {
+            try {
+                // Step 1: Fetch all possible sheet names? We need to find the correct session.
+                // We'll attempt to fetch from the last few years? Better: we can try common sessions.
+                // Since we don't know session, we need to find the sheet that contains data for this adm with status submit.
+                // Approach: Try to fetch from current year session (dynamically determined based on today's date) and fallback.
+                // But according to requirement, session is derived from Date column of rows. So we need to scan sheets.
+                // For simplicity, we'll try the current session based on today's date first, and if not found, try previous.
+                // However, to strictly follow spec: session is determined from Date of rows. That means we might need to check all sheets.
+                // But that's inefficient. Given typical usage, we'll try current and previous session.
+                
+                const today = new Date();
+                const currentSessionFromToday = getSessionFromDate(`${today.getMonth()+1}/${today.getDate()}/${today.getFullYear()}`);
+                
+                // We'll attempt sheets: currentSession, previous session
+                const sessionsToTry = [currentSessionFromToday];
+                // Add previous session (e.g., if current is 2025-26, previous is 2024-25)
+                if (currentSessionFromToday) {
+                    const parts = currentSessionFromToday.split('-');
+                    const start = parseInt(parts[0], 10);
+                    const prev = `${start-1}-${(start).toString().slice(-2)}`;
+                    sessionsToTry.push(prev);
+                }
+                
+                let allRows = [];
+                let usedSession = null;
+                
+                for (let session of sessionsToTry) {
+                    if (!session) continue;
+                    const sheetUrl = `${SHEET_PREFIX}/${session}`;
+                    try {
+                        const res = await fetch(sheetUrl);
+                        if (!res.ok) continue;
+                        const data = await res.json();
+                        // Filter rows for this admission number
+                        const rows = data.filter(row => row['Admission No'] === adm);
+                        if (rows.length > 0) {
+                            // We found a sheet with this admission number. Now we need to filter by Status='submit' and extract dates to confirm session?
+                            // Actually spec: session is from Date column, but sheet name should match that session.
+                            // We'll trust that sheet name is correct. But we must also ensure that the Date column matches the sheet session? Not necessary.
+                            // We'll just use the sheet data.
+                            allRows = rows;
+                            usedSession = session;
+                            break;
+                        }
+                    } catch (e) {
+                        console.warn(`Sheet ${session} not accessible`, e);
+                    }
+                }
+                
+                if (allRows.length === 0) {
+                    showAlert('No records found for this Admission Number.', 'error');
+                    return;
+                }
+                
+                // Filter only submit status
+                const submitRows = allRows.filter(row => 
+                    row['Status'] && row['Status'].toLowerCase() === 'submit'
+                );
+                
+                if (submitRows.length === 0) {
+                    showAlert('Your result is not yet published (Status not submit).', 'error');
+                    return;
+                }
+                
+                // Extract student info from first row
+                const firstRow = submitRows[0];
+                const studentInfo = {
+                    name: firstRow['Student Name'] || 'N/A',
+                    admissionNo: adm,
+                    class: firstRow['Class'] || 'N/A',
+                    session: usedSession
+                };
+                
+                // Group by Subject and Exam Category
+                const subjectsMap = {}; // key: subject, value: { PT1: marks, SA1: marks, PT2: marks, SA2: marks, maxMarks: { PT1: max, SA1: max, ... } }
+                const examCategories = ['PT1', 'SA1', 'PT2', 'SA2'];
+                
+                submitRows.forEach(row => {
+                    const subject = row['Subject'];
+                    const examCat = row['Exam Category'];
+                    const marks = parseFloat(row['Marks']);
+                    const maxMarks = parseFloat(row['MaxMarks']);
+                    
+                    if (!subject || !examCat || isNaN(marks) || isNaN(maxMarks)) return;
+                    
+                    if (!subjectsMap[subject]) {
+                        subjectsMap[subject] = {
+                            PT1: null, SA1: null, PT2: null, SA2: null,
+                            maxPT1: null, maxSA1: null, maxPT2: null, maxSA2: null
+                        };
+                    }
+                    
+                    // Store marks and max marks
+                    if (examCat === 'PT1') {
+                        subjectsMap[subject].PT1 = marks;
+                        subjectsMap[subject].maxPT1 = maxMarks;
+                    } else if (examCat === 'SA1') {
+                        subjectsMap[subject].SA1 = marks;
+                        subjectsMap[subject].maxSA1 = maxMarks;
+                    } else if (examCat === 'PT2') {
+                        subjectsMap[subject].PT2 = marks;
+                        subjectsMap[subject].maxPT2 = maxMarks;
+                    } else if (examCat === 'SA2') {
+                        subjectsMap[subject].SA2 = marks;
+                        subjectsMap[subject].maxSA2 = maxMarks;
+                    }
+                });
+                
+                // Prepare data structures for display and PDF
+                const availableTests = [];
+                if (Object.values(subjectsMap).some(s => s.PT1 !== null)) availableTests.push('PT1');
+                if (Object.values(subjectsMap).some(s => s.SA1 !== null)) availableTests.push('SA1');
+                if (Object.values(subjectsMap).some(s => s.PT2 !== null)) availableTests.push('PT2');
+                if (Object.values(subjectsMap).some(s => s.SA2 !== null)) availableTests.push('SA2');
+                
+                const subjectsForDisplay = [];
+                let totalOverallMarks = 0;
+                let totalOverallMax = 0;
+                
+                for (let [subject, exams] of Object.entries(subjectsMap)) {
+                    let subjectTotal = 0;
+                    let subjectMax = 0;
+                    
+                    // Sum marks and max for available exams
+                    if (exams.PT1 !== null) { subjectTotal += exams.PT1; subjectMax += exams.maxPT1; }
+                    if (exams.SA1 !== null) { subjectTotal += exams.SA1; subjectMax += exams.maxSA1; }
+                    if (exams.PT2 !== null) { subjectTotal += exams.PT2; subjectMax += exams.maxPT2; }
+                    if (exams.SA2 !== null) { subjectTotal += exams.SA2; subjectMax += exams.maxSA2; }
+                    
+                    const percentage = subjectMax > 0 ? (subjectTotal / subjectMax) * 100 : 0;
+                    
+                    subjectsForDisplay.push({
+                        name: subject,
+                        PT1: exams.PT1,
+                        SA1: exams.SA1,
+                        PT2: exams.PT2,
+                        SA2: exams.SA2,
+                        maxPT1: exams.maxPT1,
+                        maxSA1: exams.maxSA1,
+                        maxPT2: exams.maxPT2,
+                        maxSA2: exams.maxSA2,
+                        total: subjectTotal,
+                        max: subjectMax,
+                        percentage: percentage
+                    });
+                    
+                    totalOverallMarks += subjectTotal;
+                    totalOverallMax += subjectMax;
+                }
+                
+                const overallPercentage = totalOverallMax > 0 ? (totalOverallMarks / totalOverallMax) * 100 : 0;
+                
+                // Store for PDF and later use
+                currentStudentData = {
+                    ...studentInfo,
+                    subjects: subjectsForDisplay,
+                    availableTests: availableTests,
+                    totalMarks: totalOverallMarks,
+                    totalMax: totalOverallMax,
+                    overallPercentage: overallPercentage
+                };
+                
+                marksDataForPDF = {
+                    studentInfo: studentInfo,
+                    subjects: subjectsForDisplay,
+                    availableTests: availableTests,
+                    totalMarks: totalOverallMarks,
+                    totalMax: totalOverallMax,
+                    overallPercentage: overallPercentage
+                };
+                
+                // Calculate topper (optional, simplified: use same sheet data)
+                // For topper, we need all submit rows from the same session? We'll compute from all rows in same sheet.
+                // Fetch all submit rows from the same session to determine topper.
+                const allSheetUrl = `${SHEET_PREFIX}/${usedSession}`;
+                const allRes = await fetch(allSheetUrl);
+                const allSheetData = await allRes.json();
+                const allSubmitRows = allSheetData.filter(row => row['Status'] && row['Status'].toLowerCase() === 'submit');
+                
+                // Group by admission number to calculate percentages
+                const studentAgg = {};
+                allSubmitRows.forEach(row => {
+                    const admNo = row['Admission No'];
+                    if (!admNo) return;
+                    if (!studentAgg[admNo]) {
+                        studentAgg[admNo] = { total: 0, max: 0, name: row['Student Name'] || admNo };
+                    }
+                    const marks = parseFloat(row['Marks']);
+                    const maxMarks = parseFloat(row['MaxMarks']);
+                    if (!isNaN(marks) && !isNaN(maxMarks)) {
+                        studentAgg[admNo].total += marks;
+                        studentAgg[admNo].max += maxMarks;
+                    }
+                });
+                
+                let topper = { percent: 0, name: '', adm: '' };
+                for (let [admNo, data] of Object.entries(studentAgg)) {
+                    const p = data.max > 0 ? (data.total / data.max) * 100 : 0;
+                    if (p > topper.percent) {
+                        topper = { percent: p, name: data.name, adm: admNo };
+                    }
+                }
+                topperData = topper;
+                marksDataForPDF.topper = topper;
+                
+                // Render the result
+                renderResult1to12();
+                
+            } catch (error) {
+                console.error('Error in fetchResult1to12:', error);
+                throw error;
+            }
+        }
+
+        // ===== RENDER 1to12 RESULT =====
+        function renderResult1to12() {
+            document.getElementById('mainPortal').style.display = 'none';
+            document.getElementById('resultScreen1to12').style.display = 'block';
+            
+            const student = currentStudentData;
+            const isTopper = (topperData.adm === student.admissionNo);
+            const studentClass = student.class.toString();
+            const isTenthOrTwelfth = studentClass.includes('10') || studentClass.includes('12');
+            
+            // Student photo URL
+            const studentPhotoUrl = `https://adnansmps.free.nf/wp-content/uploads/2026/03/${student.admissionNo}.jpg`;
+            
+            // Build table headers based on available tests
+            const headerMap = { 'PT1': 'PT1', 'SA1': 'SA1', 'PT2': 'PT2', 'SA2': 'SA2' };
+            const testHeaders = student.availableTests.map(test => `<th>${headerMap[test] || test}</th>`).join('');
+            
+            // Build table rows
+            const tableRows = [];
+            student.subjects.forEach(sub => {
+                let row = `<tr><td>${sub.name}</td>`;
+                
+                // PT1 cell
+                if (student.availableTests.includes('PT1')) {
+                    const val = sub.PT1 !== null ? sub.PT1 : '-';
+                    const perc = (sub.PT1 !== null && sub.maxPT1) ? (sub.PT1 / sub.maxPT1) * 100 : 0;
+                    let cls = '';
+                    if (perc >= 80) cls = 'excellent';
+                    else if (perc >= 60) cls = 'good';
+                    else if (perc >= 40) cls = 'average';
+                    else if (perc > 0) cls = 'poor';
+                    row += `<td class="${cls}">${val}</td>`;
+                }
+                // SA1 cell
+                if (student.availableTests.includes('SA1')) {
+                    const val = sub.SA1 !== null ? sub.SA1 : '-';
+                    const perc = (sub.SA1 !== null && sub.maxSA1) ? (sub.SA1 / sub.maxSA1) * 100 : 0;
+                    let cls = '';
+                    if (perc >= 80) cls = 'excellent';
+                    else if (perc >= 60) cls = 'good';
+                    else if (perc >= 40) cls = 'average';
+                    else if (perc > 0) cls = 'poor';
+                    row += `<td class="${cls}">${val}</td>`;
+                }
+                // PT2 cell
+                if (student.availableTests.includes('PT2')) {
+                    const val = sub.PT2 !== null ? sub.PT2 : '-';
+                    const perc = (sub.PT2 !== null && sub.maxPT2) ? (sub.PT2 / sub.maxPT2) * 100 : 0;
+                    let cls = '';
+                    if (perc >= 80) cls = 'excellent';
+                    else if (perc >= 60) cls = 'good';
+                    else if (perc >= 40) cls = 'average';
+                    else if (perc > 0) cls = 'poor';
+                    row += `<td class="${cls}">${val}</td>`;
+                }
+                // SA2 cell (special for 10/12)
+                if (student.availableTests.includes('SA2')) {
+                    const val = sub.SA2 !== null ? sub.SA2 : '-';
+                    const perc = (sub.SA2 !== null && sub.maxSA2) ? (sub.SA2 / sub.maxSA2) * 100 : 0;
+                    let cls = '';
+                    if (perc >= 80) cls = 'excellent';
+                    else if (perc >= 60) cls = 'good';
+                    else if (perc >= 40) cls = 'average';
+                    else if (perc > 0) cls = 'poor';
+                    
+                    if (isTenthOrTwelfth && sub.SA2 !== null) {
+                        row += `<td><span class="preboard-link" onclick="showPreboardFromResult()">${val}</span></td>`;
+                    } else {
+                        row += `<td class="${cls}">${val}</td>`;
+                    }
+                }
+                
+                // Total and Percentage columns
+                const totalStr = `${sub.total}/${sub.max}`;
+                let percClass = '';
+                if (sub.percentage >= 80) percClass = 'excellent';
+                else if (sub.percentage >= 60) percClass = 'good';
+                else if (sub.percentage >= 40) percClass = 'average';
+                else percClass = 'poor';
+                row += `<td>${totalStr}</td><td class="${percClass}">${sub.percentage.toFixed(2)}%</td></tr>`;
+                
+                tableRows.push(row);
+            });
+            
+            const overallPerc = student.overallPercentage;
+            let overallClass = '';
+            if (overallPerc >= 80) overallClass = 'excellent';
+            else if (overallPerc >= 60) overallClass = 'good';
+            else if (overallPerc >= 40) overallClass = 'average';
+            else overallClass = 'poor';
+            
+            const topperHtml = isTopper 
+                ? `<div class="topper"><i class="fas fa-trophy"></i> School Topper with ${overallPerc.toFixed(2)}%</div>` 
+                : `<div class="student-info"><p><i class="fas fa-crown"></i> <b>School Topper:</b> ${topperData.name} (${topperData.adm}) - ${topperData.percent.toFixed(2)}%</p></div>`;
+            
+            const resultHTML = `
+                <div class="result-header-content">
+                    <img src="${studentPhotoUrl}" 
+                         alt="Student Photo" 
+                         class="result-logo" 
+                         onerror="this.src='https://via.placeholder.com/100x100/1e40af/ffffff?text=Student'">
+                    <h1>Saiema Mansoor Public School</h1>
+                    <h2>Academic Report Card - Session: ${student.session}</h2>
+                </div>
+                
+                <div class="student-info">
+                    <p><b>Admission No.:</b> ${student.admissionNo}</p>
+                    <p><b>Name:</b> ${student.name}</p>
+                    <p><b>Class:</b> ${student.class}</p>
+                </div>
+                
+                ${isTenthOrTwelfth ? `
+                    <div class="student-info" style="background: #eff6ff; margin-top: 20px;">
+                        <p><i class="fas fa-info-circle" style="color: #1e40af;"></i> <b>Note for ${student.class} students:</b> SA-2 marks are treated as Preboard marks. Click on SA-2 marks to view Preboard Result.</p>
+                    </div>
+                ` : ''}
+                
+                <div class="section-title">Subject-wise Marks</div>
+                <div class="table-container">
+                    <table class="marks-table">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                ${testHeaders}
+                                <th>Total</th>
+                                <th>%</th>
+                            </tr>
+                        </thead>
+                        <tbody>${tableRows.join('')}</tbody>
+                    </table>
+                </div>
+                
+                <div class="section-title">Overall Result</div>
+                <div class="student-info">
+                    <p><b>Total Marks Obtained:</b> ${student.totalMarks}</p>
+                    <p><b>Maximum Marks:</b> ${student.totalMax}</p>
+                    <p><b>Overall Percentage:</b> <span class="${overallClass}">${overallPerc.toFixed(2)}%</span></p>
+                </div>
+                
+                ${topperHtml}
+            `;
+            
+            document.getElementById('resultArea1to12').innerHTML = resultHTML;
+        }
+
+        // ===== PREBOARD FUNCTIONS =====
+        async function fetchPreboardMarks(adm) {
+            // Similar to fetchResult1to12 but only SA2 rows and only for 10/12
+            try {
+                const today = new Date();
+                const currentSessionFromToday = getSessionFromDate(`${today.getMonth()+1}/${today.getDate()}/${today.getFullYear()}`);
+                const sessionsToTry = [currentSessionFromToday];
+                if (currentSessionFromToday) {
+                    const parts = currentSessionFromToday.split('-');
+                    const start = parseInt(parts[0], 10);
+                    const prev = `${start-1}-${(start).toString().slice(-2)}`;
+                    sessionsToTry.push(prev);
+                }
+                
+                let allRows = [];
+                let usedSession = null;
+                
+                for (let session of sessionsToTry) {
+                    if (!session) continue;
+                    const sheetUrl = `${SHEET_PREFIX}/${session}`;
+                    try {
+                        const res = await fetch(sheetUrl);
+                        if (!res.ok) continue;
+                        const data = await res.json();
+                        const rows = data.filter(row => row['Admission No'] === adm);
+                        if (rows.length > 0) {
+                            allRows = rows;
+                            usedSession = session;
+                            break;
+                        }
+                    } catch (e) {}
+                }
+                
+                if (allRows.length === 0) {
+                    showAlert('No records found for this Admission Number.', 'error');
+                    return;
+                }
+                
+                // Filter submit and exam category SA2
+                const sa2Rows = allRows.filter(row => 
+                    row['Status'] && row['Status'].toLowerCase() === 'submit' && row['Exam Category'] === 'SA2'
+                );
+                
+                if (sa2Rows.length === 0) {
+                    showAlert('No preboard (SA2) marks found for this student.', 'error');
+                    return;
+                }
+                
+                const firstRow = sa2Rows[0];
+                const studentClass = firstRow['Class'] || '';
+                if (!studentClass.includes('10') && !studentClass.includes('12')) {
+                    showAlert('Preboard marks are only available for 10th and 12th class students.', 'error');
+                    return;
+                }
+                
+                const studentInfo = {
+                    name: firstRow['Student Name'] || 'N/A',
+                    admissionNo: adm,
+                    class: studentClass,
+                    session: usedSession
+                };
+                
+                const subjects = [];
+                let totalMarks = 0, totalMax = 0;
+                
+                sa2Rows.forEach(row => {
+                    const subject = row['Subject'];
+                    const marks = parseFloat(row['Marks']);
+                    const maxMarks = parseFloat(row['MaxMarks']);
+                    if (!subject || isNaN(marks) || isNaN(maxMarks)) return;
+                    
+                    const percentage = maxMarks > 0 ? (marks / maxMarks) * 100 : 0;
+                    subjects.push({
+                        name: subject,
+                        marks: marks,
+                        maxMarks: maxMarks,
+                        percentage: percentage
+                    });
+                    totalMarks += marks;
+                    totalMax += maxMarks;
+                });
+                
+                const overallPercentage = totalMax > 0 ? (totalMarks / totalMax) * 100 : 0;
+                
+                preboardMarksData = {
+                    studentInfo: studentInfo,
+                    subjects: subjects,
+                    totalMarks: totalMarks,
+                    maxMarks: totalMax,
+                    overallPercentage: overallPercentage
+                };
+                
+                renderPreboardMarks();
+                
+            } catch (error) {
+                console.error('Error fetching preboard:', error);
+                throw error;
+            }
+        }
+
+        function renderPreboardMarks() {
+            document.getElementById('mainPortal').style.display = 'none';
+            document.getElementById('preboardScreen').style.display = 'block';
+            
+            const data = preboardMarksData;
+            const student = data.studentInfo;
+            
+            const studentPhotoUrl = `https://adnansmps.free.nf/wp-content/uploads/2026/03/${student.admissionNo}.jpg`;
+            
+            let tableRows = '';
+            data.subjects.forEach(sub => {
+                let percClass = '';
+                if (sub.percentage >= 80) percClass = 'excellent';
+                else if (sub.percentage >= 60) percClass = 'good';
+                else if (sub.percentage >= 40) percClass = 'average';
+                else percClass = 'poor';
+                
+                tableRows += `
+                    <tr>
+                        <td>${sub.name}</td>
+                        <td>${sub.marks}</td>
+                        <td>${sub.maxMarks}</td>
+                        <td class="${percClass}">${sub.percentage.toFixed(2)}%</td>
+                    </tr>
+                `;
+            });
+            
+            let overallClass = '';
+            if (data.overallPercentage >= 80) overallClass = 'excellent';
+            else if (data.overallPercentage >= 60) overallClass = 'good';
+            else if (data.overallPercentage >= 40) overallClass = 'average';
+            else overallClass = 'poor';
+            
+            const preboardHTML = `
+                <div class="result-header-content">
+                    <img src="${studentPhotoUrl}" 
+                         alt="Student Photo" 
+                         class="result-logo" 
+                         onerror="this.src='https://via.placeholder.com/100x100/1e40af/ffffff?text=Student'">
+                    <h1>Saiema Mansoor Public School</h1>
+                    <h2>Preboard Examination - Session: ${student.session}</h2>
+                </div>
+                
+                <div class="student-info">
+                    <p><b>Admission No.:</b> ${student.admissionNo}</p>
+                    <p><b>Name:</b> ${student.name}</p>
+                    <p><b>Class:</b> ${student.class}</p>
+                </div>
+                
+                <div class="section-title">Preboard Marks (SA2)</div>
+                <div class="table-container">
+                    <table class="marks-table">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Marks Obtained</th>
+                                <th>Maximum Marks</th>
+                                <th>Percentage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${tableRows}
+                            <tr style="background: #f0f9ff; font-weight: 600;">
+                                <td><b>TOTAL</b></td>
+                                <td><b>${data.totalMarks}</b></td>
+                                <td><b>${data.maxMarks}</b></td>
+                                <td class="${overallClass}"><b>${data.overallPercentage.toFixed(2)}%</b></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="section-title">Preboard Result Summary</div>
+                <div class="student-info">
+                    <p><b>Total Marks Obtained:</b> ${data.totalMarks}</p>
+                    <p><b>Maximum Marks:</b> ${data.maxMarks}</p>
+                    <p><b>Overall Percentage:</b> <span class="${overallClass}">${data.overallPercentage.toFixed(2)}%</span></p>
+                </div>
+            `;
+            
+            document.getElementById('preboardArea').innerHTML = preboardHTML;
+        }
+
+        function showPreboardFromResult() {
+            if (currentStudentData) {
+                fetchPreboardMarks(currentStudentData.admissionNo);
+            }
+        }
+
+        // ===== PDF DOWNLOAD FUNCTIONS (keep existing but adapt to new data structures) =====
+        function downloadResultPDF() {
+            if (!marksDataForPDF || !marksDataForPDF.subjects || marksDataForPDF.subjects.length === 0) {
+                showAlert('No student data available to download. Please fetch your result first.', 'error');
+                return;
+            }
+            
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                doc.setProperties({
+                    title: `Result - ${marksDataForPDF.studentInfo.name}`,
+                    subject: 'Academic Report Card',
+                    author: 'Saiema Mansoor Public School',
+                    keywords: 'result, marks, report card',
+                    creator: 'SMPS Student Portal'
+                });
+                
+                doc.setFontSize(20);
+                doc.setFont('helvetica', 'bold');
+                doc.text('Saiema Mansoor Public School', 105, 20, { align: 'center' });
+                doc.setFontSize(16);
+                doc.text('Academic Report Card', 105, 30, { align: 'center' });
+                doc.setFontSize(12);
+                doc.setFont('helvetica', 'normal');
+                doc.text(`Session: ${marksDataForPDF.studentInfo.session}`, 105, 38, { align: 'center' });
+                
+                doc.setFontSize(11);
+                doc.text(`Admission No.: ${marksDataForPDF.studentInfo.admissionNo}`, 20, 50);
+                doc.text(`Name: ${marksDataForPDF.studentInfo.name}`, 20, 57);
+                doc.text(`Class: ${marksDataForPDF.studentInfo.class}`, 20, 64);
+                doc.text(`Date: ${new Date().toLocaleDateString()}`, 120, 50);
+                
+                let y = 75;
+                
+                const tableHeaders = ['Subject', ...marksDataForPDF.availableTests, 'Total', 'Percentage'];
+                
+                const tableData = [];
+                marksDataForPDF.subjects.forEach(sub => {
+                    const row = [sub.name];
+                    marksDataForPDF.availableTests.forEach(test => {
+                        const val = sub[test] !== null ? sub[test] : '-';
+                        row.push(val.toString());
+                    });
+                    row.push(`${sub.total}/${sub.max}`);
+                    row.push(`${sub.percentage.toFixed(2)}%`);
+                    tableData.push(row);
+                });
+                
+                const emptyCells = marksDataForPDF.availableTests.map(() => '');
+                tableData.push(['TOTAL', ...emptyCells, `${marksDataForPDF.totalMarks}/${marksDataForPDF.totalMax}`, `${marksDataForPDF.overallPercentage.toFixed(2)}%`]);
+                
+                doc.autoTable({
+                    startY: y,
+                    head: [tableHeaders],
+                    body: tableData,
+                    theme: 'grid',
+                    headStyles: { fillColor: [30, 64, 175], textColor: 255, fontStyle: 'bold', fontSize: 10 },
+                    bodyStyles: { fontSize: 9, halign: 'center' },
+                    margin: { left: 20, right: 20 },
+                    styles: { fontSize: 9, cellPadding: 4, overflow: 'linebreak' }
+                });
+                
+                y = doc.lastAutoTable.finalY + 15;
+                doc.setFontSize(12);
+                doc.setFont('helvetica', 'bold');
+                doc.text('Overall Result', 20, y);
+                doc.setFontSize(10);
+                doc.setFont('helvetica', 'normal');
+                doc.text(`Total Marks Obtained: ${marksDataForPDF.totalMarks}`, 25, y + 10);
+                doc.text(`Maximum Marks: ${marksDataForPDF.totalMax}`, 25, y + 17);
+                doc.setFont('helvetica', 'bold');
+                doc.text(`Overall Percentage: ${marksDataForPDF.overallPercentage.toFixed(2)}%`, 25, y + 24);
+                
+                if (marksDataForPDF.topper) {
+                    y += 35;
+                    doc.setFontSize(10);
+                    doc.setFont('helvetica', 'normal');
+                    doc.text(`School Topper: ${marksDataForPDF.topper.name} (${marksDataForPDF.topper.adm})`, 20, y);
+                    doc.text(`Topper Percentage: ${marksDataForPDF.topper.percent.toFixed(2)}%`, 20, y + 7);
+                }
+                
+                const pageHeight = doc.internal.pageSize.height;
+                doc.setFontSize(8);
+                doc.setTextColor(128, 128, 128);
+                doc.text('Generated by SMPS Student Portal', 105, pageHeight - 15, { align: 'center' });
+                doc.text(`Generated on: ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`, 105, pageHeight - 10, { align: 'center' });
+                
+                const fileName = `SMPS_Result_${marksDataForPDF.studentInfo.admissionNo}_${marksDataForPDF.studentInfo.name.replace(/\s+/g, '_')}.pdf`;
+                doc.save(fileName);
+                
+            } catch (error) {
+                console.error('Error generating PDF:', error);
+                showAlert('Error generating PDF. Please try again.', 'error');
+            }
+        }
+
+        function downloadPreboardPDF() {
+            if (!preboardMarksData || !preboardMarksData.subjects || preboardMarksData.subjects.length === 0) {
+                showAlert('No preboard data available to download.', 'error');
+                return;
+            }
+            
+            try {
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF();
+                
+                doc.setProperties({
+                    title: `Preboard Result - ${preboardMarksData.studentInfo.name}`,
+                    subject: 'Preboard Examination Result',
+                    author: 'Saiema Mansoor Public School',
+                    keywords: 'preboard, examination, result',
+                    creator: 'SMPS Student Portal'
+                });
+                
+                doc.setFontSize(20);
+                doc.setFont('helvetica', 'bold');
+                doc.text('Saiema Mansoor Public School', 105, 20, { align: 'center' });
+                doc.setFontSize(16);
+                doc.text('Preboard Examination Result', 105, 30, { align: 'center' });
+                doc.setFontSize(12);
+                doc.setFont('helvetica', 'normal');
+                doc.text(`Session: ${preboardMarksData.studentInfo.session}`, 105, 38, { align: 'center' });
+                
+                doc.setFontSize(11);
+                doc.text(`Admission No.: ${preboardMarksData.studentInfo.admissionNo}`, 20, 50);
+                doc.text(`Name: ${preboardMarksData.studentInfo.name}`, 20, 57);
+                doc.text(`Class: ${preboardMarksData.studentInfo.class}`, 20, 64);
+                doc.text(`Date: ${new Date().toLocaleDateString()}`, 120, 50);
+                
+                let y = 75;
+                
+                const tableHeaders = ['Subject', 'Marks Obtained', 'Max Marks', 'Percentage'];
+                const tableData = preboardMarksData.subjects.map(sub => [
+                    sub.name, `${sub.marks}`, `${sub.maxMarks}`, `${sub.percentage.toFixed(2)}%`
+                ]);
+                tableData.push(['TOTAL', `${preboardMarksData.totalMarks}`, `${preboardMarksData.maxMarks}`, `${preboardMarksData.overallPercentage.toFixed(2)}%`]);
+                
+                doc.autoTable({
+                    startY: y,
+                    head: [tableHeaders],
+                    body: tableData,
+                    theme: 'grid',
+                    headStyles: { fillColor: [30, 64, 175], textColor: 255, fontStyle: 'bold', fontSize: 10 },
+                    bodyStyles: { fontSize: 9, halign: 'center' },
+                    margin: { left: 20, right: 20 },
+                    styles: { fontSize: 9, cellPadding: 4 }
+                });
+                
+                y = doc.lastAutoTable.finalY + 15;
+                doc.setFontSize(12);
+                doc.setFont('helvetica', 'bold');
+                doc.text('Preboard Result Summary', 20, y);
+                doc.setFontSize(10);
+                doc.setFont('helvetica', 'normal');
+                doc.text(`Total Marks Obtained: ${preboardMarksData.totalMarks}`, 25, y + 10);
+                doc.text(`Maximum Marks: ${preboardMarksData.maxMarks}`, 25, y + 17);
+                doc.setFont('helvetica', 'bold');
+                doc.text(`Overall Percentage: ${preboardMarksData.overallPercentage.toFixed(2)}%`, 25, y + 24);
+                
+                const pageHeight = doc.internal.pageSize.height;
+                doc.setFontSize(8);
+                doc.setTextColor(128, 128, 128);
+                doc.text('Generated by SMPS Student Portal', 105, pageHeight - 15, { align: 'center' });
+                doc.text(`Generated on: ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}`, 105, pageHeight - 10, { align: 'center' });
+                
+                const fileName = `SMPS_Preboard_${preboardMarksData.studentInfo.admissionNo}_${preboardMarksData.studentInfo.name.replace(/\s+/g, '_')}.pdf`;
+                doc.save(fileName);
+                
+            } catch (error) {
+                console.error('Error generating Preboard PDF:', error);
+                showAlert('Error generating Preboard PDF. Please try again.', 'error');
+            }
+        }
+
+        function showAlert(message, type) {
+            document.getElementById('loading').style.display = 'none';
+            
+            const existingAlerts = document.querySelectorAll('.alert');
+            existingAlerts.forEach(alert => alert.remove());
+            
+            const alert = document.createElement('div');
+            alert.className = `alert alert-${type}`;
+            alert.innerHTML = `<i class="fas fa-${type === 'error' ? 'exclamation-triangle' : 'exclamation-circle'}"></i> ${message}`;
+            
+            document.querySelector('.portal-card-inner').prepend(alert);
+            
+            setTimeout(() => {
+                alert.style.opacity = '0';
+                setTimeout(() => alert.remove(), 300);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

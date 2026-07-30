@@ -1,0 +1,29 @@
+{
+    "id": "f9e8b746-d99d-4394-8e04-86e4ad8821f2",
+    "subjectId": "bbba02a2-49b4-4bf6-9b4b-014fa555e3d6",
+    "name": "CENTROID (केन्द्रक) – COMPLETE NOTES",
+    "description": "🔺 \nDefinition:\nTriangle ki teenon medians jis point par milti hain,\nuse Centroid (G) kehte hain.\n\nCentroid = G\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n1. IMPORTANT PROPERTY\n\nCentroid median ko 2 : 1 ke ratio mein divide karta hai.\n\nVertex → G : G → Midpoint\n      = 2 : 1\n\nYaad Rakho:\n\nTop se Centroid = 2 Part\nCentroid se Base = 1 Part\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n2. MEDIAN KYA HOTI HAI?\n\nVertex ko opposite side ke midpoint se milane wali line\nMedian kehlati hai.\n\nTriangle mein total 3 medians hoti hain.\n\nInhi 3 medians ka intersection point\nCentroid hota hai.\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n3. DISTANCE FORMULA\n\nAgar median ki length = m ho\n\nVertex se Centroid tak distance\n\n= 2m/3\n\nCentroid se Midpoint tak distance\n\n= m/3\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n4. COORDINATE GEOMETRY FORMULA\n\nA(x₁,y₁)\nB(x₂,y₂)\nC(x₃,y₃)\n\nCentroid G\n\n= ((x₁+x₂+x₃)/3 ,\n   (y₁+y₂+y₃)/3)\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n5. EXAMPLE\n\nA(1,2)\nB(4,5)\nC(7,8)\n\nG = ((1+4+7)/3 ,\n     (2+5+8)/3)\n\n  = (12/3 , 15/3)\n\n  = (4,5)\n\nAnswer = (4,5)\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n6. MCQ TRICKS\n\nQ. Centroid kis ratio mein median ko divide karta hai?\n\nAns → 2 : 1\n\nQ. Vertex se Centroid tak kitna part?\n\nAns → 2 Part\n\nQ. Centroid se Midpoint tak kitna part?\n\nAns → 1 Part\n\nQ. Triangle ki kitni medians hoti hain?\n\nAns → 3\n\nQ. Medians ka intersection point?\n\nAns → Centroid\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n7. YAAD RAKHNE KI LINE\n\n\"Median mile teenon yaar,\nCentroid baithe beech bazaar,\nDo hissa upar, ek hissa neeche,\n2:1 ratio yaad rahe hamesha.\"\n\n━━━━━━━━━━━━━━━━━━━━━━\n\n8. ONE-LINE REVISION\n\nCentroid = Intersection of Medians\n\nRatio = 2 : 1\n\nVertex → G = 2/3 Median\n\nG → Midpoint = 1/3 Median\n\nCoordinates of G\n\n= ((x₁+x₂+x₃)/3 ,\n   (y₁+y₂+y₃)/3)",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "c1bcca23-e379-43cc-89fa-f8ba4c0cf4fb",
+            "date": "2026-06-17",
+            "time": "2026-06-17 20:18",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "379b7e21-87f9-467a-a046-3c1de5166203",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-17 20:18",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

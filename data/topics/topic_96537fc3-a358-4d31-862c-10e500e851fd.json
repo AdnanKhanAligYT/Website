@@ -1,0 +1,36 @@
+{
+    "id": "96537fc3-a358-4d31-862c-10e500e851fd",
+    "subjectId": "b07f5264-5928-4d06-8577-46ed17bd59f5",
+    "name": "EXCLAMATORY SENTENCE → Strong feeling / emotion dikhana",
+    "description": "1. What a beautiful flower!\n2. How wonderful this place is!\n3. What a brilliant idea!\n4. How fast he runs!\n5. What an amazing performance!\n6. How lucky you are!\n7. What a huge building!\n8. How sweet the baby looks!\n9. What a terrible accident!\n10. How cold the weather is!\n11. What a lovely painting!\n12. How beautifully she sings!\n13. What an exciting match!\n14. How foolish I was!\n15. What a pleasant surprise!\n16. How bright the stars are!\n17. What a difficult question!\n18. How nicely they decorated the hall!\n19. What a brave soldier he is!\n20. How delicious this food tastes!",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "createdAt": "2026-06-08 18:46",
+    "updatedAt": "2026-06-22 04:25:00",
+    "revisionHistory": [
+        {
+            "id": "a2b9df2e-9f1f-44a4-a17f-49b9a72d9886",
+            "date": "2026-06-15",
+            "time": "2026-06-15 10:06",
+            "note": "Auto: 7 din baad revision scheduled",
+            "type": "auto-revision"
+        },
+        {
+            "id": "0d00dff8-b850-464b-b0f3-4122cd5f9cda",
+            "date": "2026-06-17",
+            "time": "2026-06-17 09:04",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "03988b01-5c02-48e6-a186-2a8d9be512d2",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "links": [],
+    "pdfs": []
+}

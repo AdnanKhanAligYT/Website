@@ -1,0 +1,29 @@
+{
+    "id": "4e9ac8cf-e4ca-4543-b5a0-3e218f93a1a2",
+    "subjectId": "349b6112-ad37-421c-ac23-0cedcbf7e23b",
+    "name": "If two plane mirrors are placed parallel to each other, the number of images formed of an object kept between them is:",
+    "description": "Question:\n\nIf two plane mirrors are placed parallel to each other,\nthe number of images formed of an object kept between them is:\n\n(a) Infinite\n(b) Zero\n(c) One\n(d) Two\n\nAnswer: (a) Infinite (अनंत) ✅\n\nFormula:\n\nNumber of Images (n)\n\nn = (360°/θ) - 1\n\nWhere θ = angle between mirrors\n\nSpecial Case:\n\nθ = 0° (Parallel Mirrors)\n\nn = (360/0) - 1\n\n⇒ ∞ (Infinite)\n\nHence,\nTwo parallel plane mirrors produce infinite images.\n\nTRICK:\n\n\"Mirror hue Parallel,\nImages hue Eternal.\"\n\nYaad Rakho:\n\n0° → Infinite Images\n\n60° → 5 Images\n\n90° → 3 Images\n\n120° → 2 Images\n\n180° → 1 Image\n\nOne-Line Exam Trick:\n\n\"Parallel Mirrors = Infinite Images\"",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "495ad696-ef10-4403-b0b9-4cf1060bd3d6",
+            "date": "2026-06-17",
+            "time": "2026-06-17 20:31",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "c72de28e-591d-468f-a90c-95d73c48f507",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-17 20:30",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}

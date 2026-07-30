@@ -1,0 +1,82 @@
+[
+  {
+    "title": "Tenses",
+    "icon": "fas fa-clock",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> Tenses are the forms of verbs that show the time of an action.<br><strong>Hindi:</strong> Tense verb ka wo form hota hai jo action ke time ko batata hai.</p><p>There are three main types: <strong>Past, Present, and Future</strong>.<br>Teen mukhya prakar hote hain: <strong>Past, Present, aur Future</strong>.</p><h3>Har Tense ki 4 Forms</h3><ul><li><strong>Simple:</strong> Basic action (e.g., I play) — साधारण क्रिया</li><li><strong>Continuous/Progressive:</strong> Ongoing action (e.g., I am playing) — जारी क्रिया</li><li><strong>Perfect:</strong> Completed action (e.g., I have played) — पूर्ण क्रिया</li><li><strong>Perfect Continuous:</strong> Past se chalta aa raha ongoing action (e.g., I have been playing) — चलती आ रही क्रिया</li></ul><div class='popup-example'><strong>Example:</strong> Future Continuous Tense - \"Tomorrow, I <strong>will be working</strong> on this project.\"<br><strong>Hindi:</strong> कल मैं इस प्रोजेक्ट पर <strong>काम कर रहा होऊंगा</strong>.</div>"
+  },
+  {
+    "title": "Present Tense",
+    "icon": "fas fa-sun",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> Shows actions happening now or regularly.<br><strong>Hindi:</strong> Jo kriya abhi ho rahi ho ya niyamit roop se hoti ho.</p>"
+  },
+  {
+    "title": "Simple Present Tense",
+    "icon": "fas fa-play-circle",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Used for habits, routines, and universal truths.<br><strong>Hindi:</strong> Aadat, daily routine, aur universal truth batane ke liye.</p><h3>Structure</h3><p><strong>Subject + V1 (s/es) + Object</strong></p><div class='popup-example'><strong>Example:</strong> He <strong>plays</strong> football every day.<br><strong>Hindi:</strong> वह रोज़ फुटबॉल <strong>खेलता है</strong>.</div>"
+  },
+  {
+    "title": "Present Continuous Tense",
+    "icon": "fas fa-spinner",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Used for actions happening right now.<br><strong>Hindi:</strong> Jo kriya abhi ke abhi ho rahi ho.</p><h3>Structure</h3><p><strong>Subject + is/am/are + V1 + ing + Object</strong></p><div class='popup-example'><strong>Example:</strong> She <strong>is reading</strong> a book now.<br><strong>Hindi:</strong> वह अभी एक किताब <strong>पढ़ रही है</strong>.</div>"
+  },
+  {
+    "title": "Present Perfect Tense",
+    "icon": "fas fa-check-circle",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Used to show completed actions with present relevance.<br><strong>Hindi:</strong> Jo kriya abhi tak poori ho chuki ho aur iska asar abhi bhi ho.</p><h3>Structure</h3><p><strong>Subject + has/have + V3 + Object</strong></p><div class='popup-example'><strong>Example:</strong> They <strong>have finished</strong> their homework.<br><strong>Hindi:</strong> उन्होंने अपना होमवर्क <strong>पूरा कर लिया है</strong>.</div>"
+  },
+  {
+    "title": "Present Perfect Continuous Tense",
+    "icon": "fas fa-hourglass-half",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Shows action continuing from past till now.<br><strong>Hindi:</strong> Jo kriya past se shuru hui aur abhi tak chal rahi ho.</p><h3>Structure</h3><p><strong>Subject + has/have been + V1 + ing + Object + since/for + Time</strong></p><div class='popup-example'><strong>Example:</strong> I <strong>have been studying</strong> for two hours.<br><strong>Hindi:</strong> मैं दो घंटे से <strong>पढ़ रहा हूँ</strong>.</div>"
+  },
+  {
+    "title": "Past Tense",
+    "icon": "fas fa-history",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> Shows actions that happened in the past.<br><strong>Hindi:</strong> Jo kriya pehle ho chuki ho.</p>"
+  },
+  {
+    "title": "Simple Past Tense",
+    "icon": "fas fa-play",
+    "content": "<h3>Use</h3><p><strong>English:</strong> To show an action completed in the past.<br><strong>Hindi:</strong> Jo kriya past mein poori ho gayi ho.</p><h3>Structure</h3><p><strong>Subject + V2 + Object</strong></p><div class='popup-example'><strong>Example:</strong> He <strong>went</strong> to school yesterday.<br><strong>Hindi:</strong> वह कल स्कूल <strong>गया था</strong>.</div>"
+  },
+  {
+    "title": "Past Continuous Tense",
+    "icon": "fas fa-sync-alt",
+    "content": "<h3>Use</h3><p><strong>English:</strong> For actions that were happening at a certain time in the past.<br><strong>Hindi:</strong> Jo kriya past ke kisi samay par chal rahi thi.</p><h3>Structure</h3><p><strong>Subject + was/were + V1 + ing + Object</strong></p><div class='popup-example'><strong>Example:</strong> They <strong>were playing</strong> cricket in the evening.<br><strong>Hindi:</strong> वे शाम को क्रिकेट <strong>खेल रहे थे</strong>.</div>"
+  },
+  {
+    "title": "Past Perfect Tense",
+    "icon": "fas fa-clipboard-check",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Used to show the first of two past actions.<br><strong>Hindi:</strong> Do past actions mein se pehle hone wali kriya dikhane ke liye.</p><h3>Structure</h3><p><strong>Subject + had + V3 + Object</strong></p><div class='popup-example'><strong>Example:</strong> He <strong>had left</strong> before I arrived.<br><strong>Hindi:</strong> मेरे पहुँचने से पहले वह <strong>जा चुका था</strong>.</div>"
+  },
+  {
+    "title": "Past Perfect Continuous Tense",
+    "icon": "fas fa-hourglass-end",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Action that was going on for some time before another past event.<br><strong>Hindi:</strong> Jo kriya kisi doosri past kriya se pehle tak chal rahi thi.</p><h3>Structure</h3><p><strong>Subject + had been + V1 + ing + Object + since/for + Time</strong></p><div class='popup-example'><strong>Example:</strong> She <strong>had been working</strong> there for five years.<br><strong>Hindi:</strong> वह वहाँ पाँच साल से <strong>काम कर रही थी</strong>.</div>"
+  },
+  {
+    "title": "Future Tense",
+    "icon": "fas fa-rocket",
+    "content": "<h3>Definition</h3><p><strong>English:</strong> Shows actions that will happen in the future.<br><strong>Hindi:</strong> Jo kriya bhavishya mein hone wali ho.</p>"
+  },
+  {
+    "title": "Simple Future Tense",
+    "icon": "fas fa-forward",
+    "content": "<h3>Use</h3><p><strong>English:</strong> To express actions that will happen later.<br><strong>Hindi:</strong> Jo kriya aane wale samay mein hogi.</p><h3>Structure</h3><p><strong>Subject + will/shall + V1 + Object</strong></p><div class='popup-example'><strong>Example:</strong> I <strong>will call</strong> you tomorrow.<br><strong>Hindi:</strong> मैं तुम्हें कल <strong>कॉल करूँगा</strong>.</div>"
+  },
+  {
+    "title": "Future Continuous Tense",
+    "icon": "fas fa-stream",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Shows action that will be in progress at a future time.<br><strong>Hindi:</strong> Jo kriya future ke kisi samay par chal rahi hogi.</p><h3>Structure</h3><p><strong>Subject + will be + V1 + ing + Object</strong></p><div class='popup-example'><strong>Example:</strong> This time tomorrow, I <strong>will be traveling</strong> to Delhi.<br><strong>Hindi:</strong> कल इसी समय मैं दिल्ली <strong>जा रहा होऊँगा</strong>.</div>"
+  },
+  {
+    "title": "Future Perfect Tense",
+    "icon": "fas fa-flag-checkered",
+    "content": "<h3>Use</h3><p><strong>English:</strong> To show an action that will be completed before a future time.<br><strong>Hindi:</strong> Jo kriya future ke kisi samay se pehle poori ho chuki hogi.</p><h3>Structure</h3><p><strong>Subject + will have + V3 + Object</strong></p><div class='popup-example'><strong>Example:</strong> By next week, he <strong>will have finished</strong> the project.<br><strong>Hindi:</strong> अगले हफ़्ते तक वह प्रोजेक्ट <strong>पूरा कर चुका होगा</strong>.</div>"
+  },
+  {
+    "title": "Future Perfect Continuous Tense",
+    "icon": "fas fa-infinity",
+    "content": "<h3>Use</h3><p><strong>English:</strong> Shows action that will continue for some time up to a future point.<br><strong>Hindi:</strong> Jo kriya future ke kisi nirdharit samay tak chal rahi hogi.</p><h3>Structure</h3><p><strong>Subject + will have been + V1 + ing + Object + since/for + Time</strong></p><div class='popup-example'><strong>Example:</strong> By 2026, I <strong>will have been teaching</strong> for ten years.<br><strong>Hindi:</strong> 2026 तक मैं दस साल से <strong>पढ़ा रहा होऊँगा</strong>.</div>"
+  }
+]

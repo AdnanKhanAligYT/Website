@@ -1,0 +1,29 @@
+{
+    "id": "841cdaaa-a393-4ff7-af0e-f446d1261011",
+    "subjectId": "349b6112-ad37-421c-ac23-0cedcbf7e23b",
+    "name": "Wavelength of Rays",
+    "description": "Question:\nWhich of the following electromagnetic waves has the shortest wavelength?\n\n(a) Gamma rays\n(b) Infrared rays\n(c) Ultraviolet rays\n(d) Radio waves\n\nAnswer: (a) Gamma Rays ✅\n\nTRICK:\n\nElectromagnetic Spectrum\n(Longest λ → Shortest λ)\n\nRadio → Microwave → Infrared → Visible → UV → X-ray → Gamma\n\nYaad Karne Ki Trick:\n\n\"Raju Mama Inke Vahan Upar Xtra Gaye\"\n\nR = Radio\nM = Microwave\nI = Infrared\nV = Visible\nU = Ultraviolet\nX = X-ray\nG = Gamma\n\nImportant:\n\nWavelength (λ):\nRadio > Microwave > Infrared > Visible > UV > X-ray > Gamma\n\nFrequency (ν):\nGamma > X-ray > UV > Visible > Infrared > Microwave > Radio\n\nEnergy:\nGamma > X-ray > UV > Visible > Infrared > Microwave > Radio\n\nOne-Line Trick:\n\n\"Gamma ki Wavelength sabse kam,\nFrequency aur Energy sabse zyada.\"",
+    "status": "Revision",
+    "completeDate": "2026-06-17",
+    "images": [],
+    "revisionHistory": [
+        {
+            "id": "6168460b-3597-401c-9414-a176a0608601",
+            "date": "2026-06-17",
+            "time": "2026-06-17 20:31",
+            "note": "✅ Topic complete kiya",
+            "type": "complete"
+        },
+        {
+            "id": "33532670-64fa-40f4-ad93-1ecb8e9f1ab0",
+            "date": "2026-06-22",
+            "time": "2026-06-22 04:25:00",
+            "note": "Auto: 48 ghante (2 din) baad revision scheduled",
+            "type": "auto-revision"
+        }
+    ],
+    "createdAt": "2026-06-17 20:27",
+    "updatedAt": "2026-06-22 04:25:00",
+    "links": [],
+    "pdfs": []
+}
